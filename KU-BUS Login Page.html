@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginHome</title>
+    <style>
+        .LoginPage{
+            background: linear-gradient(90deg, darkred 50%, rgb(255,219,88) 50%);
+            width: 320px;
+            height: 500px;
+            margin: auto;
+            padding: 10px 0px;
+        }
+        .KU_logo>img{
+            width: 120px;
+            height: 120px;
+
+            margin: auto;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .Login{
+            background-color: rgb(255, 250, 238);
+            width: 320px; 
+            height: 500px;
+            /*Login이라는 div를 가운데 위치로 오게하는 역할*/  
+            margin: auto;                
+            /*Login div내부의 배치*/
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+            }
+        .Login>h1{
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: -2px;
+        }
+        .Login>h2{
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .LoginField>input {
+            width: 200px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+        #LoginSubmit{
+            background-color: darkred;
+            color:white;
+            width: 200px;
+            height: 28px;
+            border: 0px;
+            text-margin:
+        }
+        #LoginSubmit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
+
+    </style>
+</head>
+
+<body>
+    <div class="LoginPage">
+        <div class="Login">
+            <div class="KU_logo">
+                <img src ="https://www.smartku.net/wp-content/uploads/2021/05/emblem_01.gif">
+            </div>
+            <h1>고려대 배리어프리 <br>카풀 프로젝트</h1>
+            <h2>KUBF PROJECT</h2>
+
+            <div class="LoginField">
+                <input id="Username" type="text" maxlength="20" placeholder="아이디 ID" required> <br>
+                <input id="Password" type="password" maxlength="20" placeholder="비밀번호 PASSWORD" required> <br>
+                <input id="LoginSubmit" type="submit" value="submit">
+                <!--maxlength는 아이디랑 비밀번호 20자 이상 아니게 설정해놓은 것, required는 써야지만 넘어갈 수 있음-->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
