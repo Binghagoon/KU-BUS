@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Driver_Alarm</title>
+    <title>Driver Alarm</title>
     <style>
         .DriverNoticeHome {
             background-color: white;
@@ -97,12 +97,20 @@
             border-top: 0px;
             background-color: white;
         }
+        /*위내용을 Map Design.js에 병합 */
+        /* TBDCSS */
     </style>
+    <script>
+        function MyAlarm(text, from){
+            /*from이 text메세지를 보냈는것을 AlarmContents에 출력 */
+            // TBDJS
+        }
+    </script>
 </head>
 
 <body>
-    <div class="DriverNoticeHome">
-        <div class="Notice">
+    <div class="Main">
+        <div class="MainPrefix">
             <div class="Alarm">
                 <div class="AlarmImage"></div>
                 <div class="AlarmContents">
@@ -112,10 +120,12 @@
             </div>
         </div>
         <div class="MainSuffix">
-            <button id="ReservationHome">예약내역</button>
-            <button id="MapHome">지도</button>
-            <button id="NoticeHome">알림</button>
-            <button id="MyInfoHome">내 정보</button>
+                <button id="ReservationHome" onclick="GotoReservation()">예약내역</button>
+                <button id="MapHome" onclick="GotoMap()">지도</button>
+                <button id="NoticeHome" class="select" onclick="GotoAlarm()">알림</button>
+                <button id="MyInfoHome" onclick="GotoMyPage()">내 정보</button>
+
+                <script type="text/javascript" src="buttonMove.js"></script>
         </div>
     </div>
 </body>
