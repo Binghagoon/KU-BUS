@@ -12,13 +12,14 @@
     width: 320px;
     height: 470px;
     border: 1px solid gray;
+    margin: auto;
 }
 .Mycar{
     width: 40px;
     height: 40px;
     border: 2px solid darkgray;
     display: block;
-    background-image: url('고대 로고/emblem/emblem_02.gif');
+    background-image: url('Korea Univ. Logo/emblem/emblem_02.gif');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -27,7 +28,7 @@
     height: 40px;
     border: 2px solid darkgray;
     display: block;
-    background-image: url('고대 로고/emblem/emblem_02.gif');
+    background-image: url('Korea Univ. Logo/emblem/emblem_02.gif');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -39,6 +40,7 @@
     margin: auto;
     text-align: center;
     text-decoration: none;
+    width: 320px;
 }
 .MainSuffix>button {
     display: block;

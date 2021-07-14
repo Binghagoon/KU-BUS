@@ -6,6 +6,9 @@
             내 정보
         </title>
         <style>
+            .MainPrefix{
+                margin:auto;
+            }
             .DriverMyInfoHome {
                 background-color: white;
                 width: 320px;
@@ -185,6 +188,7 @@
                 filter: opacity(0.5) drop-shadow(0 0 0 darkred);
             }
         </style>
+
         <script>
             function MyInfoset(name, nikname, studentNumber, disability, mobilePhoneAddress, major){
                     /* TBDJS */
@@ -195,26 +199,26 @@
     </head>
     <body>
         <div class="Main" id="id">
-            <div class="DriverMyInfoHome">
-                <div class="Profile">
-                    <h5 class="CarInfo"> 12가3456 카니발</h5>
-                    <div class="ProfileImage"></div>
-                    <h5 class="Name">김기사 님</h5>
-                    <p class="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
-                </div>
-                <div class="toggle">
-                    <input type="checkbox">
-                    <label for="" class="onbtn">On</label>
-                    <label for="" class="ofbtn">Off</label>
-                </div>
-                <div class="Settings">
-                    <div class="EditProfile">프로필 편집</div>
-                    <div class="JobHistory">이용 내역</div>
-                    <div class="Logout">로그아웃</div>
-                </div>
-            </div>
-
             <div class="MainPrefix">
+                    <div class="DriverMyInfoHome">
+                        <div class="Profile">
+                            <h5 class="CarInfo"> 12가3456 카니발</h5>
+                            <div class="ProfileImage"></div>
+                            <h5 class="Name">김기사 님</h5>
+                            <p class="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
+                        </div>
+                        <div class="toggle">
+                            <input type="checkbox">
+                            <label for="" class="onbtn">On</label>
+                            <label for="" class="ofbtn">Off</label>
+                        </div>
+                        <div class="Settings">
+                            <div class="EditProfile">프로필 편집</div>
+                            <div class="JobHistory">이용 내역</div>
+                            <div class="Logout">로그아웃</div>
+                        </div>
+                    </div>
+        
                 <div class="Personality">
                         <div id="PersonInfo" class="Name"> </div>
                         <div id="PersonInfo"class="Nikname"> </div>
