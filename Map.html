@@ -1,0 +1,49 @@
+<html>
+<button id="get_location">어디서 참여하고 있지요?</button>
+<div id="set_location"></div>
+<div id="map" style="width: 500px; height: 400px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8f10783e28a229ec564c1502b8b3c4d3"></script>
+<script>
+    jQuery("#get_location").click(function () {
+        get_geo();
+    });
+    function successCallback(position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        jQuery("#set_location").html('latitude : ' + lat + ', longitude : ' + lng);
+        var container = document.getElementById('map');
+        var options = {
+            center: new kakao.maps.LatLng(lat, lng),
+            level: 3
+        };
+        var map = new kakao.maps.Map(container, options);
+        /*  var markerPosition = new kakao.maps.LatLng(lat,lng);
+          var marker = new kakao.maps.Marker({
+            position: markerPosition
+          });
+          marker.setMap(map); */
+        var iwContent = "함께하는 스마트캠퍼스 프로젝트가 시작된 곳입니다.";
+        var iwPosition = new kakao.maps.LatLng(lat, lng);
+        var iwRemoveable = true;
+        var infowindow = new kakao.maps.InfoWindow({
+            map: map,
+            position: iwPosition,
+            content: iwContent,
+            removable: iwRemoveable
+        });
+    }
+    function errorCallback() {
+        alert('현재 위치를 가져올 수 없습니다.');
+    }
+    function get_geo() {
+        if (!!navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+            alert("현재 위치를 가져올 수 없습니다.");
+        }
+    }
+
+    // 일단 건들지 말기!!! ms가 나중에 함
+</script>
+
+</html>

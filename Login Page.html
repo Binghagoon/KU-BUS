@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginHome</title>
+    <style>
+
+        #LoginPage{
+            background: linear-gradient(90deg, darkred 50%, rgb(255,219,88) 50%);
+            width: 320px;
+            height: 450px;
+            margin: auto;
+            padding: 10px 0px;
+        }
+        #KU_logo>img{
+            width: 120px;
+            height: 120px;
+
+            margin: auto;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #Login{
+            background-color: rgb(255, 250, 238);
+            width: 320px; 
+            height: 450px;
+            /*Login이라는 div를 가운데 위치로 오게하는 역할*/  
+            margin: auto;                
+            /*Login div내부의 배치*/
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+            }
+        #Login>h1{
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: -2px;
+        }
+        #Login>h2{
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        #LoginField>input {
+            width: 200px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+        #LoginSubmit{           /* 버튼 id디자인 분리하기 TBDCSS*/
+            background-color: darkred;
+            color:white;
+            width: 200px;
+            height: 28px;
+            border: 0px;
+        }
+        #LoginSubmit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
+
+    </style>
+    <link rel="stylesheet" href="Login Design.css">
+    <script>
+        function IDSubmit(){
+            /* ID와 Password를 DB에 제시해서 로그인하는 함수 그리고 PageChange를 호출*/
+            /* TBDJS */
+        }
+
+        var Position  = {  //사용자 타입의 ENUM
+            STUDENT: 1,
+            DRIVER: 2,
+            ADMIN: 3,
+            ETC: 4
+        }
+
+        function PageChange(position){      // position은 Position 타입이라고 생각하자.
+        // position에 따라 현재 페이지를 전환
+        // TBDJS
+        }
+        function IDFind(){
+
+        }
+        function SignUp(){
+
+        }
+        function Etc(){
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="LoginPage">
+        <div id="Login">
+            <div id="KU_logo">
+                <img src ="Korea Univ. Logo/emblem/emblem_01.gif">
+            </div>
+            <h1>고려대 배리어프리 <div class="br">카풀 프로젝트</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
+            <h2>KUBF PROJECT</h2>
+
+            <div id="LoginField">
+                <input id="Username" type="text" maxlength="20" placeholder="아이디 ID" required> <br>
+                <input id="Password" type="password" maxlength="20" placeholder="비밀번호 PASSWORD" required> <br>
+                <input id="LoginSubmit" type="submit" value="submit" onclick="IDSubmit()" class="button">
+                <!--maxlength는 아이디랑 비밀번호 20자 이상 아니게 설정해놓은 것, required는 써야지만 넘어갈 수 있음-->
+            </div>
+            <div>
+                <tr id="LoginSuffix">
+                    <td><button class="button" onclick="IDFind()">아이디/패스워드 찾기</button></td>
+                    <td><button class="button" onclick="SignUp()">회원가입</button></td>
+                    <td><button class="button" onclick="Etc()">그외</button></td>
+                </tr>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
