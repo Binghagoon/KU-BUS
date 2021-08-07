@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>LoginHome</title>
     <style>
 
@@ -65,13 +66,7 @@
         #LoginSubmit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
 
     </style>
-    <link rel="stylesheet" href="Login Design.css">
     <script>
-        function IDSubmit(){
-            /* ID와 Password를 DB에 제시해서 로그인하는 함수 그리고 PageChange를 호출*/
-            /* TBDJS */
-        }
-
         var Position  = {  //사용자 타입의 ENUM
             STUDENT: 1,
             DRIVER: 2,
@@ -80,9 +75,29 @@
         }
 
         function PageChange(position){      // position은 Position 타입이라고 생각하자.
-        // position에 따라 현재 페이지를 전환
-        // TBDJS
+            if(position == Position.DRIVER){
+
+            } else if(position == Position.STUDENT){
+            }
+            window.location.href= "./Frame.html";
         }
+
+        function IDSubmit(id, pw){
+            if(id == "Driver"){
+                PageChange(Position.DRIVER);
+            } else if (id=="Student"){
+                PageChange(Position.STUDENT);
+            }
+            debugger;
+        }
+
+
+        $(document).ready(function(){
+
+            $("#LoginSubmit").click(function(){
+            IDSubmit($("#Username").val(),$("#Password").val())
+            });
+        });
         function IDFind(){
 
         }
