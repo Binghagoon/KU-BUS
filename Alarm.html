@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Driver Alarm</title>
     <style>
         .DriverNoticeHome {
@@ -213,20 +214,32 @@
         }
     </style>
     <script>
-        function MyAlarm(text, from){
-            /*from이 text메세지를 보냈는것을 AlarmContents에 출력 */
-            // TBDJS
-        }
+        $(document).ready(function(){
+            var htm = $("#Alarms").html();
+            var spl;
+            spl = htm.split("+");
+            var temp= spl[0].split("hidden");
+            spl[0] = temp[0] +temp[1];
+            function MyAlarm(text, from){
+                var message= spl[0] + from + spl[1] + text + spl[2];
+                debugger;
+                $("#Alarms").html($("#Alarms").html()+ message);
+
+            }
+            
+            MyAlarm("hello", "Me");
+        });
+
     </script>
 </head>
 
 <body>
-    <div class="Alarms">
-        <div class="Alarm">
-            <div class="AlarmImage"></div>
-            <div class="AlarmContents">
-                <h2 class="Alarmer">장애학습지원센터</h2>
-                <h3 class="AlarmTitle">공지가 등록되었습니다</h3>
+    <div id="Alarms">
+        <div id="Alarm" hidden>
+            <div id="AlarmImage"></div>
+            <div id="AlarmContents">
+                <h2 id="Alarmer">+</h2>
+                <h3 id="AlarmTitle">+</h3>
             </div>
         </div>
     </div>
