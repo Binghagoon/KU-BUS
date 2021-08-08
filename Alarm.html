@@ -214,18 +214,18 @@
         }
     </style>
     <script>
+        var spl;
+        function MyAlarm(text, from){
+            var message= spl[0] + from + spl[1] + text + spl[2];
+            debugger;
+            $("#Alarms").html($("#Alarms").html()+ message);
+
+        }
         $(document).ready(function(){
             var htm = $("#Alarms").html();
-            var spl;
             spl = htm.split("+");
             var temp= spl[0].split("hidden");
             spl[0] = temp[0] +temp[1];
-            function MyAlarm(text, from){
-                var message= spl[0] + from + spl[1] + text + spl[2];
-                debugger;
-                $("#Alarms").html($("#Alarms").html()+ message);
-
-            }
             
             MyAlarm("hello", "Me");
         });
