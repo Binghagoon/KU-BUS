@@ -83,12 +83,28 @@
         }
 
         function IDSubmit(id, pw){
+            debugger;
+            $.ajax({
+                url: "13.125.229.209",
+                type: "GET",
+                username: "smartku",
+                password: "**",
+                error: function(a, b, c){
+                    alert("failed");
+                },
+                success: function(a, b, c){
+                    alert("successed");
+                }
+            });
+
+            /*
             if(id == "Driver"){
                 PageChange(Position.DRIVER);
             } else if (id=="Student"){
                 PageChange(Position.STUDENT);
             }
-            debugger;
+            */
+            //debugger;
         }
 
 
