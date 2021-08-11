@@ -5,25 +5,42 @@
 -->
 <html>
     <head>
-
+        <style>
+            ul {
+                list-style: none;
+                padding-left: 0px;
+            }
+        </style>
     </head>
+
     <body>
-        <button id="Edit_Profile" onclick="Edit_Profile()">프로필 편집</button>
-        <button id="See_History" onclick="See_History()">운행내역 보기</button>
-        <button id="Log_Out" onclick="Log_Out()">로그아웃</button>
+        <!-- 기사님 정보를 불러오는 부분 -->
+        <fieldset>
+
+        </fieldset>
+
+        <!-- 여러 세부 메뉴를 불러오는 부분 -->
+        <fieldset>
+            <ul>
+                <li><button id="Edit_Profile" onclick="Edit_Profile()">프로필 편집</button></li>
+                <li><button id="See_History" onclick="See_History()">운행내역 보기</button></li>
+                <li><button id="Log_Out" onclick="Log_Out()">로그아웃</button></li>
+            </ul>
+        </fieldset>
     </body>
     
     <script>
+        // 버튼 클릭 시 연결할 링크는 추후에 결정
         function Edit_Profile() {
-
+            window.open('');
         }
 
         function See_History() {
-
+            window.open('');
         }
 
         function Log_Out() {
-
+            window.open('');
         }
     </script>
 </html>
