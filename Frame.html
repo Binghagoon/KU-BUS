@@ -6,10 +6,54 @@
     <style>
             
     .select{
-        /*선택된항목을 다른 버튼과 다르게*/
-        /*TBDCSS*/
-    }
-        /* TBDCSS ms;과거한거 붙여서 진행하면 될듯.*/
+        color: darkred;
+            border-top: 0px;
+            background-color: white;
+            border-top: 3px solid darkred;
+        }
+
+    .select>img {
+            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+            filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+        }
+        /* class말고 id를 쓴 이유가 뭔가요? 일단 제가 짠 코드에서는 id랑 class 구분을 이용(id 쓰면 class로 처리 된것 보다 우선해서 적용되어 처리)하는데 일단 대충 형식 맞춰서 작성하긴 했습니다만..*/
+    .MainSuffix {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            
+            margin: auto;
+
+            text-align: center;
+            text-decoration: none;
+
+            box-shadow: 0px -3px 20px -3px gray;
+        }
+
+    .MainSuffix>button {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* 아마 내용물 위아래중앙으로 정렬*/
+            align-items: center;
+            /* 내용물 좌우 가운데 정렬*/
+
+            margin: auto;
+            width: 80px;
+            height: 50px;
+            border: 1px gray;
+            padding-top: 2px;
+            background-color: white;
+
+            font-size: 6px;
+        }
+
+    .MainSuffix>button>img {
+            margin-bottom: 2px;
+            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
+            filter: opacity(0.5) drop-shadow(0 0 0 gray);
+            }
+        
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -21,7 +65,7 @@
 
             </iframe>
         </div>
-        <div id="FrameSuffix">
+        <div id="FrameSuffix">//이름을 MainSuffix 로 바꿔도 되나요??
             <button id="ReservationHome" onclick="GotoReservation()">예약내역</button>
             <button id="MapHome" onclick="GotoMap()">지도</button>
             <button id="NoticeHome" onclick="GotoAlarm()">알림</button>
