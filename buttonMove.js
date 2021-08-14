@@ -1,6 +1,6 @@
 var ifr =  document.getElementById("Iframe");
 var buttonParent = document.getElementById("FrameSuffix");
-var now = 4;
+var now = 2;
 
 function ChangeSelectClass(to){
     $("div#FrameSuffix Button:nth-child(" + to +")").addClass("select");
@@ -19,7 +19,7 @@ function GotoMap(){
 
 }
 function GotoMyPage(){
-    ifr.src = "My Page.html";
+    ifr.src = "My Page-Driver.html";
     ChangeSelectClass(4);
 
 }
