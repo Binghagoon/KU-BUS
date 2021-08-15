@@ -31,8 +31,7 @@ function PageChange(position){
 
     } else if(position == "STUDENT"){
     }
-    window.location.href= "./Frame.html";
-    updateURLParameter("./Frame.html", "role", position);
+    window.location.href=updateURLParameter("./Frame.html", "role", position);
 }
 
 function IDSubmit(id, pw){
