@@ -18,7 +18,7 @@ function IDSubmit(id, pw){
     
     pw = sha3_256(pw);
     $.ajax({
-        url: "./php/phpconex.php",
+        url: "./php/idget.php",
         type: "POST",
         data: {
             id:id,
