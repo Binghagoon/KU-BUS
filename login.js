@@ -18,7 +18,7 @@ function IDSubmit(id, pw){
     
     pw = sha3_256(pw);
     $.ajax({
-        url: "http:/smartku.bingha.me/php/phpconex.php",
+        url: "./php/phpconex.php",
         type: "POST",
         data: {
             id:id,
@@ -27,8 +27,9 @@ function IDSubmit(id, pw){
         error: function(a, b, c){
             alert("failed");
         },
-        success: function(a, b, c){
-            alert("successed");
+        success: function(data, status, xhr){
+            alert(data);
+            //PageChange();
         }
     });
 
