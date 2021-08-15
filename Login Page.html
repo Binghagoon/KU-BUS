@@ -69,48 +69,6 @@
     <script src="./sha3.js"></script>
     <script src="./login.js"></script>
     <script>
-        var Position  = {  //사용자 타입의 ENUM
-            STUDENT: 1,
-            DRIVER: 2,
-            ADMIN: 3,
-            ETC: 4
-        }
-
-        function PageChange(position){      // position은 Position 타입이라고 생각하자.
-            if(position == Position.DRIVER){
-
-            } else if(position == Position.STUDENT){
-            }
-            window.location.href= "./Frame.html";
-        }
-
-        function IDSubmit(id, pw){
-            $.ajax({
-                url: "./php/idget.php",
-                type: "GET",
-		data:{
-			id:id,
-			pw:pw
-		},
-                error: function(a, b, c){
-                    alert("code" + a.status+ "\n" + a.responseText + "\n" + "thrown error is " + b + "\nerror"+ c);
-                },
-                success: function(a){
-                    alert("successed");
-                    alert(a);
-                }
-            });
-
-            /*
-            if(id == "Driver"){
-                PageChange(Position.DRIVER);
-            } else if (id=="Student"){
-                PageChange(Position.STUDENT);
-            }
-            */
-            //debugger;
-        }
-
 
         $(document).ready(function(){
 
