@@ -6,12 +6,33 @@ var Position  = {  //사용자 타입의 ENUM
     ETC: 4
 }
 
-function PageChange(position){      // position은 Position 타입이라고 생각하자.
-    if(position == Position.DRIVER){
+function updateURLParameter(url, param, paramVal){
+    var newAdditionalURL = "";
+    var tempArray = url.split("?");
+    var baseURL = tempArray[0];
+    var additionalURL = tempArray[1];
+    var temp = "";
+    if (additionalURL) {
+        tempArray = additionalURL.split("&");
+        for (var i=0; i<tempArray.length; i++){
+            if(tempArray[i].split('=')[0] != param){
+                newAdditionalURL += temp + tempArray[i];
+                temp = "&";
+            }
+        }
+    }
 
-    } else if(position == Position.STUDENT){
+    var rows_txt = temp + "" + param + "=" + paramVal;
+    return baseURL + "?" + newAdditionalURL + rows_txt;
+}
+
+function PageChange(position){  
+    if(position == "DRIVER"){
+
+    } else if(position == "STUDENT"){
     }
     window.location.href= "./Frame.html";
+    updateURLParameter("./Frame.html", "role", position);
 }
 
 function IDSubmit(id, pw){
@@ -28,8 +49,7 @@ function IDSubmit(id, pw){
             alert("failed");
         },
         success: function(data, status, xhr){
-            alert(data);
-            //PageChange();
+            PageChange(data);
         }
     });
 
