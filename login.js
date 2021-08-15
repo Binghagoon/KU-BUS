@@ -16,9 +16,9 @@ function PageChange(position){      // position은 Position 타입이라고 생�
 
 function IDSubmit(id, pw){
     
-    //pw = sha3_256(pw);
+    pw = sha3_256(pw);
     $.ajax({
-        url: "http:/smartku.bingha.me/php/idget.php",
+        url: "http:/smartku.bingha.me/php/phpconex.php",
         type: "POST",
         data: {
             id:id,
