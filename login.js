@@ -38,7 +38,7 @@ function IDSubmit(id, pw){
     
     pw = sha3_256(pw);
     $.ajax({
-        url: "./php/idget.php",
+        url: "http://smartku.bingha.me/php/sample.php",
         type: "POST",
         data: {
             id:id,
