@@ -36,9 +36,9 @@ function PageChange(position){
 
 function IDSubmit(id, pw){
     
-    pw = sha3_256(pw);
+    pw = sha3_256(pw);  //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
     $.ajax({
-        url: "http://smartku.bingha.me/php/sample.php",
+        url: "http://smartku.bingha.me/php/sample.php",     //"STUDENT"를 불러오는 php 실제론 idget.php를 쓰면 로그인이 가능함
         type: "POST",
         data: {
             id:id,
