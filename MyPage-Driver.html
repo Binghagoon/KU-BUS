@@ -1,34 +1,226 @@
 <!DOCTYPE html>
-<!--
-    pdf 2페이지 3을 구현(프레임은 이미 Frame.html에 구현되어 있음)
--->
-<html>
-    <head>
-        <style>
-            ul {
-                list-style: none;
-                padding-left: 0px;
-            }
-        </style>
-    </head>
+<html lang="en">
 
-    <body>
-        <!-- 기사님 정보를 불러오는 부분 -->
-        <fieldset>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver_MyInfo</title>
 
-        </fieldset>
+    <style>
+        #DriverMyInfoHome {
+            background-color: white;
+            width: 320px;
+            height: 470px;
 
-        <!-- 여러 세부 메뉴를 불러오는 부분 -->
-        <fieldset>
-            <ul>
-                <li><button id="Edit_Profile" onclick="Edit_Profile()">프로필 편집</button></li>
-                <li><button id="See_History" onclick="See_History()">운행내역 보기</button></li>
-                <li><button id="Log_Out" onclick="Log_Out()">로그아웃</button></li>
-            </ul>
-        </fieldset>
-    </body>
-    
+            display: flex;
+            flex-direction: column;
+            /*div를 가운데 위치로 오게하는 역할*/
+            margin: auto;
+
+            box-shadow: 0px 0px 20px -3px gray;
+        }
+
+        #Profile {
+            background-color: darkred;
+            width: 320px;
+            height: 200px;
+            padding-bottom: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #ProfileImage {
+            width: 50px;
+            height: 50px;
+            box-shadow: 0px 0px 5px 0px darkgray;
+            border-radius: 50px;
+            margin-top: 5px;
+            display: block;
+            background-color: white;
+            /*
+            background-image: url('고대 로고/emblem/emblem_02.gif');
+            background-repeat: no-repeat;
+            background-size: cover;*/
+        }
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            vertical-align: middle;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            display: none;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #f32121;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #f32121;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .onoff>p {
+            margin: 0px;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+
+        #Settings {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Settings>div {
+            width: 280px;
+            height: 25px;
+            padding: 5px 10px;
+
+            margin-bottom: 5px;
+
+            font-size: 12px;
+            border: solid gray;
+            border-radius: 10px;
+        }
+
+        #MainSuffix {
+            width: 320px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            margin: auto;
+
+            text-align: center;
+            text-decoration: none;
+
+            box-shadow: 0px -3px 20px -3px gray;
+        }
+
+        #MainSuffix>button {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* 아마 내용물 위아래중앙으로 정렬*/
+            align-items: center;
+            /* 내용물 좌우 가운데 정렬*/
+
+            margin: auto;
+            width: 80px;
+            height: 50px;
+            border: 1px gray;
+            padding-top: 2px;
+            background-color: white;
+
+            font-size: 6px;
+        }
+
+        #MainSuffix>button>img {
+            margin-bottom: 2px;
+            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
+            filter: opacity(0.5) drop-shadow(0 0 0 gray);
+        }
+
+        #DriverMyInfoHome {
+            color: darkred;
+            border-top: 0px;
+            background-color: white;
+            border-top: 3px solid darkred;
+        }
+
+        #DriverMyInfoHome>img {
+            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+            filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+        }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id="DriverMyInfoHome">
+        <div id="Profile">
+            <h5 id="CarInfo"> 12가3456 카니발</h5>
+            <div id="ProfileImage"></div>
+            <h5 id="Name">김기사 님</h5>
+            <p id="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
+        </div>
+        <div id="toggle">
+            <input type="checkbox">
+            <label for="" id="onbtn">On</label>
+            <label for="" id="ofbtn">Off</label>
+        </div>
+        <div id="Settings">
+            <div id="EditProfile">프로필 편집</div>
+            <div id="JobHistory">이용 내역</div>
+            <div id="Logout">로그아웃</div>
+        </div>
+    </div>
+    <div id="MainSuffix">
+        <button id="ReservationHome"><img src='clipboard.png' width=25px;>예약 내역</button>
+        <button id="MapHome"><img src='location.png' width=27px;>지도</button>
+        <button id="NoticeHome"><img src='alarm.png' width=25px;>알림</button>
+        <button id="MyInfoHome"><img src='user.png' width=25px;>내 정보</button>
+    </div>
     <script>
+        var check = $("input[type='checkbox']");
+        check.click(function () {
+            $("p").toggle();
+        });
         // 버튼 클릭 시 연결할 링크는 추후에 결정
         function Edit_Profile() {
             window.open('');
@@ -42,4 +234,6 @@
             window.open('');
         }
     </script>
+</body>
+
 </html>
