@@ -19,7 +19,7 @@ function GotoMap(){
 
 }
 function GotoMyPage(){
-    ifr.src = "My Page-Driver.html";
+    ifr.src = "MyPage-Driver.html";
     ChangeSelectClass(4);
 
 }
