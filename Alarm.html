@@ -214,20 +214,23 @@
         }
     </style>
     <script>
+        var htm;
         var spl;
-        function MyAlarm(text, from){
-            var message= spl[0] + from + spl[1] + text + spl[2];
+        function MyAlarm(text, from, img){
+            var message= spl[0] + spl[1] + spl[2] + from + spl[3] + text + spl[4];
             debugger;
+            $("#Alarms").append(message);
             $("#Alarms").html($("#Alarms").html()+ message);
+            if(img){
+
+            }
 
         }
         
         $(document).ready(function(){
-            var htm = $("#Alarms").html();
+            htm = $("#AlarmsTemplete").html();
             spl = htm.split("+");
-            var temp= spl[0].split("hidden");
-            spl[0] = temp[0] +temp[1];
-            
+
             MyAlarm("hello", "Me");
         });
 
@@ -235,13 +238,16 @@
 </head>
 
 <body>
-    <div id="Alarms">
-        <div id="Alarm" hidden>
-            <div id="AlarmImage"></div>
+    <div id="AlarmTemplete" hidden>
+        <div id="Alarm">
+            <div id="AlarmImage">+</div>
             <div id="AlarmContents">
                 <h2 id="Alarmer">+</h2>
                 <h3 id="AlarmTitle">+</h3>
             </div>
+
+    </div>
+    <div id="Alarms">
         </div>
     </div>
 </body>
