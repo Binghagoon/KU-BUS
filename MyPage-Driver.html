@@ -176,7 +176,7 @@
         }
 
         #DriverMyInfoHome {
-            color: darkred;
+            /*color: darkred;*/
             border-top: 0px;
             background-color: white;
             border-top: 3px solid darkred;
@@ -187,16 +187,38 @@
             filter: opacity(0.5) drop-shadow(0 0 0 darkred);
         }
     </style>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="src/JQuery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#toggle > input[type='checkbox']").click(function () {
+                $("#ConditionMessage").toggle();
+            });
+            Edit_Profile("장기사", "123가4567 카니발");
+        })
+        
+        // 버튼 클릭 시 연결할 링크는 추후에 결정
+        function Edit_Profile(name, carInfo) {
+            $("#CarInfo").text(carInfo);
+            $("#Name").text(name  + " 님");
+        }
+
+        function See_History() {
+            window.open('');
+        }
+
+        function Log_Out() {
+            window.open('');
+        }
+    </script>
 
 </head>
 
 <body>
     <div id="DriverMyInfoHome">
         <div id="Profile">
-            <h5 id="CarInfo"> 12가3456 카니발</h5>
+            <h5 id="CarInfo"></h5>
             <div id="ProfileImage"></div>
-            <h5 id="Name">김기사 님</h5>
+            <h5 id="Name"></h5>
             <p id="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
         </div>
         <div id="toggle">
@@ -210,30 +232,6 @@
             <div id="Logout">로그아웃</div>
         </div>
     </div>
-    <div id="MainSuffix">
-        <button id="ReservationHome"><img src='clipboard.png' width=25px;>예약 내역</button>
-        <button id="MapHome"><img src='location.png' width=27px;>지도</button>
-        <button id="NoticeHome"><img src='alarm.png' width=25px;>알림</button>
-        <button id="MyInfoHome"><img src='user.png' width=25px;>내 정보</button>
-    </div>
-    <script>
-        var check = $("input[type='checkbox']");
-        check.click(function () {
-            $("p").toggle();
-        });
-        // 버튼 클릭 시 연결할 링크는 추후에 결정
-        function Edit_Profile() {
-            window.open('');
-        }
-
-        function See_History() {
-            window.open('');
-        }
-
-        function Log_Out() {
-            window.open('');
-        }
-    </script>
 </body>
 
 </html>
