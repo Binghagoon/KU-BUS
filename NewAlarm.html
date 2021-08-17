@@ -3,36 +3,39 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <style>
+            table{
+                border: 1px;
+            }
+        </style>
     </head>
-    <style>
-    </style>
     <body>
         <div id="NewCall">
             <head>  새로운 요청이 들어왔습니다 </head>
             <div id="Picture"></div>
-            <button id="accept" onclick="Gotoaccept()">수락</button>
-            <button id="reject" onclick="Gotoreject()">거절</button>
+            <button id="Accept" onclick="Gotoaccept()">수락</button>
+            <button id="Reject" onclick="Gotoreject()">거절</button>
         </div>
 
-        <table border = "1" id = "customerdetail">
+        <table id = "RequesterDetail">
             <tr >
-                <td>요청자 id : </td>
+                <td id="RequesterID">요청자 id : </td>
             </tr>
 
             <tr>
-                <td>요청 시간 :</td>
+                <td id="RequestTime">요청 시간 :</td>
             </tr>
 
             <tr>
-                <td> 현위치 : </td>
+                <td id="RequesterPosition"> 현위치 : </td>
             </tr>
 
             <tr>
-                <td> 목적지 : </td>
+                <td id="RequesterDestination"> 목적지 : </td>
             </tr>
 
             <tr>
-                <td>동승자 여부 :</td>
+                <td id="CarFull">동승자 여부 :</td>
             </tr>
         </table>
     </body>
