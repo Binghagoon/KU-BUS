@@ -216,22 +216,21 @@
     <script>
         var htm;
         var spl;
+        var alarmcount =0;
         function MyAlarm(text, from, img){
-            var message= spl[0] + spl[1] + spl[2] + from + spl[3] + text + spl[4];
-            debugger;
+            var message= spl[0] + alarmcount + spl[1] + img + spl[2] + from + spl[3] + text + spl[4];
             $("#Alarms").append(message);
-            $("#Alarms").html($("#Alarms").html()+ message);
-            if(img){
-
-            }
+            alarmcount++;
+            //$("#Alarms").html($("#Alarms").html()+ message);
 
         }
         
         $(document).ready(function(){
-            htm = $("#AlarmsTemplete").html();
+            htm = $("#AlarmTemplete").html();
             spl = htm.split("+");
 
             MyAlarm("hello", "Me");
+            //MyAlarm("hell", "Me");
         });
 
     </script>
@@ -239,16 +238,16 @@
 
 <body>
     <div id="AlarmTemplete" hidden>
-        <div id="Alarm">
-            <div id="AlarmImage">+</div>
+        <div id="Alarm+">
+            <div id="AlarmImage" src="+"></div>
             <div id="AlarmContents">
                 <h2 id="Alarmer">+</h2>
                 <h3 id="AlarmTitle">+</h3>
             </div>
 
+        </div>
     </div>
     <div id="Alarms">
-        </div>
     </div>
 </body>
 

@@ -33,6 +33,7 @@
             function successCallback(position) {
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
+                var markers = [];
                 //Anam station
                     lat = 37.586232954034564;
                     lng = 127.02928291766814;
@@ -95,6 +96,7 @@
                             title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                             image : markerImage // 마커 이미지 
                         });
+                        markers.push(marker);
                     });
 
             }
