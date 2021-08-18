@@ -1,6 +1,15 @@
-var ifr =  document.getElementById("Iframe");
-var buttonParent = document.getElementById("FrameSuffix");
+var ifr;
+var buttonParent;
 var now = 2;
+
+$(function(){
+    ifr =  $("#Iframe");
+    buttonParent = $("FrameSuffix");
+    $("#ReservationHome").on("click",GotoReservation);
+    $("#MapHome").on("click",GotoMap);
+    $("#NoticeHome").on("click",GotoAlarm);
+    $("#MyInfoHome").on("click",GotoMyPage);
+});
 
 function ChangeSelectClass(to){
     $("div#FrameSuffix Button:nth-child(" + to +")").addClass("select");
@@ -10,22 +19,21 @@ function ChangeSelectClass(to){
 }
 
 function GotoReservation(){
-    ifr.src = "Reservation.html";
+    ifr.attr("src", "Reservation-Driver.html");
     ChangeSelectClass(1);
 }
 function GotoMap(){
-    ifr.src = "Map.html";
+    ifr.attr("src", "Map.html");
     ChangeSelectClass(2);
 
 }
 function GotoMyPage(){
-    ifr.src = "MyPage-Driver.html";
+    ifr.attr("src", "MyPage-Driver.html");
     ChangeSelectClass(4);
 
 }
 function GotoAlarm(){
-    ifr.src = "Alarm.html";
+    ifr.attr("src", "Alarm.html");
     ChangeSelectClass(3);
 }
 /* Frame의 동적움직임을 정의 */
-//TBDJS ms;버튼 클릭한 디자인을 현재 클릭한 버튼에 적용을 하기  힌트: 클래스에 select를 잘 활용하기!
