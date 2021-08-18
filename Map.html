@@ -1,16 +1,25 @@
 <html>
     <head>
         <style>
-            #set_location{
-                visibility: hidden;
+            #SetLcation{
+                display: none;
+            }
+            #GetLocation{
+                display: none;
+            }
+            #Map{
+                width: 100%;
+                height: 100%;
             }
         </style>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
         <script src="src/JQuery.js"></script>
         <script>
             var recordList;
+            var map
             $(document).ready(function(){
                 get_geo();
+                RecordPositionGet();
             });
             function get_geo() {
                 if (!!navigator.geolocation) {
@@ -24,13 +33,17 @@
             function successCallback(position) {
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
+                //Anam station
+                    lat = 37.586232954034564;
+                    lng = 127.02928291766814;
+                //end
                 $("#set_location").html('latitude : ' + lat + ', longitude : ' + lng);
-                var container = document.getElementById('map');
+                var container = document.getElementById('Map');
                 var options = {
                     center: new kakao.maps.LatLng(lat, lng),
                     level: 3
                 };
-                var map = new kakao.maps.Map(container, options);
+                map = new kakao.maps.Map(container, options);
                 /*  var markerPosition = new kakao.maps.LatLng(lat,lng);
                     var marker = new kakao.maps.Marker({
                     position: markerPosition
@@ -51,23 +64,46 @@
             }
             function RecordPositionGet(){
                 $.ajax({
-                    url: "http://smartku.bingha.me/record-position-get.php",
+                    url: "http://smartku.bingha.me/php/record-position-get.php",
                     type: "GET",
-                    error: function(){
+                    error:function(request,status,error){
+                        //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                         alert("record position get error");
                     },
                     success: function(data, status, xhr){
-                        recordList = JSON.parse(data);
-                        //TBDJS
+                        MapPinWithRecord(data);
                     }
                 })
+            }
+            function MapPinWithRecord(data){
+                    recordList = JSON.parse(data);
+                    //TBDJS with kakao api
+                    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+                    recordList.forEach(function(value, index){
+                        //refernce with https://apis.map.kakao.com/web/sample/multipleMarkerImage/
+
+                        // 마커 이미지의 이미지 크기 입니다
+                        var imageSize = new kakao.maps.Size(24, 35); 
+                        
+                        // 마커 이미지를 생성합니다    
+                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+                        // 마커를 생성합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map, // 마커를 표시할 지도
+                            position: new kakao.maps.LatLng(value.lat,value.lon), // 마커를 표시할 위치
+                            title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                            image : markerImage // 마커 이미지 
+                        });
+                    });
+
             }
         </script>
     </head>
 
     <body>
-        <button id="get_location">어디서 참여하고 있지요?</button>
-        <div id="set_location"></div>
-        <div id="map" style="width: 500px; height: 400px;"></div>
+        <button id="GetLocation">어디서 참여하고 있지요?</button>
+        <div id="SetLocation"></div>
+        <div id="Map"></div>
     </body>
 </html>
