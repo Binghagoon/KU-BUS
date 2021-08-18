@@ -1,13 +1,16 @@
 <html>
     <head>
-
+        <style>
+            #set_location{
+                visibility: hidden;
+            }
+        </style>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
         <script src="src/JQuery.js"></script>
         <script>
+            var recordList;
             $(document).ready(function(){
-                $("#get_location").click(function(){
                 get_geo();
-                });
             });
             function get_geo() {
                 if (!!navigator.geolocation) {
@@ -33,7 +36,7 @@
                     position: markerPosition
                     });
                     marker.setMap(map); */
-                var iwContent = "함께하는 스마트캠퍼스 프로젝트가 시작된 곳입니다.";
+                var iwContent = "현재 있는 위치.";
                 var iwPosition = new kakao.maps.LatLng(lat, lng);
                 var iwRemoveable = true;
                 var infowindow = new kakao.maps.InfoWindow({
@@ -46,7 +49,19 @@
             function errorCallback() {
                 alert('현재 위치를 가져올 수 없습니다.');
             }
-        // 일단 건들지 말기!!! ms가 나중에 함
+            function RecordPositionGet(){
+                $.ajax({
+                    url: "http://smartku.bingha.me/record-position-get.php",
+                    type: "GET",
+                    error: function(){
+                        alert("record position get error");
+                    },
+                    success: function(data, status, xhr){
+                        recordList = JSON.parse(data);
+                        //TBDJS
+                    }
+                })
+            }
         </script>
     </head>
 
