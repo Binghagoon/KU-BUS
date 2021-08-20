@@ -6,8 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Driver_MyInfo</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap" rel="stylesheet">
+    
     <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+        }
         #DriverMyInfoHome {
             background-color: white;
             width: 320px;
@@ -47,76 +53,6 @@
             background-size: cover;*/
         }
 
-        /* The switch - the box around the slider */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            vertical-align: middle;
-        }
-
-        /* Hide default HTML checkbox */
-        .switch input {
-            display: none;
-        }
-
-        /* The slider */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked+.slider {
-            background-color: #f32121;
-        }
-
-        input:focus+.slider {
-            box-shadow: 0 0 1px #f32121;
-        }
-
-        input:checked+.slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
-        .onoff>p {
-            margin: 0px;
-            display: inline-block;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-
         #Settings {
             width: 320px;
             display: flex;
@@ -136,45 +72,6 @@
             border-radius: 10px;
         }
 
-        #MainSuffix {
-            width: 320px;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-
-            margin: auto;
-
-            text-align: center;
-            text-decoration: none;
-
-            box-shadow: 0px -3px 20px -3px gray;
-        }
-
-        #MainSuffix>button {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            /* 아마 내용물 위아래중앙으로 정렬*/
-            align-items: center;
-            /* 내용물 좌우 가운데 정렬*/
-
-            margin: auto;
-            width: 80px;
-            height: 50px;
-            border: 1px gray;
-            padding-top: 2px;
-            background-color: white;
-
-            font-size: 6px;
-        }
-
-        #MainSuffix>button>img {
-            margin-bottom: 2px;
-            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
-            filter: opacity(0.5) drop-shadow(0 0 0 gray);
-        }
-
         #DriverMyInfoHome {
             /*color: darkred;*/
             border-top: 0px;
@@ -189,17 +86,14 @@
     </style>
     <script type="text/javascript" src="src/JQuery.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#toggle > input[type='checkbox']").click(function () {
-                $("#ConditionMessage").toggle();
-            });
+        $(document).ready(function () {
             Edit_Profile("장기사", "123가4567 카니발");
         })
-        
+
         // 버튼 클릭 시 연결할 링크는 추후에 결정
         function Edit_Profile(name, carInfo) {
             $("#CarInfo").text(carInfo);
-            $("#Name").text(name  + " 님");
+            $("#Name").text(name + " 님");
         }
 
         function See_History() {
@@ -220,12 +114,13 @@
             <div id="ProfileImage"></div>
             <h5 id="Name"></h5>
             <p id="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
+            <div id="toggle">
+                <input type="checkbox">
+                <label for="" id="onbtn">On</label>
+                <label for="" id="ofbtn">Off</label>
+            </div>
         </div>
-        <div id="toggle">
-            <input type="checkbox">
-            <label for="" id="onbtn">On</label>
-            <label for="" id="ofbtn">Off</label>
-        </div>
+
         <div id="Settings">
             <div id="EditProfile">프로필 편집</div>
             <div id="JobHistory">이용 내역</div>
