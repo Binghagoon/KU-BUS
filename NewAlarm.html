@@ -1,21 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+
     <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        html,body{width: 100%; height: 100%; margin: 0;}
+
+        #NewCall {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            position: relative; top: 10vh;
+        }
+        #NewCall>h1{
+            font-size: 20px;
+        }
+
+        #Picture {
+            font-size: 100px;
+            color: darkred;
+            margin-bottom: 20px;
+        }
+
+        #Response {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #Response>button {
+            width: 72px;
+            height: 36px;
+            border-radius: 7px;
+            border: 1.5px solid darkred;
+            margin: 5px;
+            letter-spacing: 1px;
+        }
+
+        #accept {
+            background-color: darkred;
+            color: white;
+        }
+
+        #reject {
+            background-color: white;
+            color: darkred;
+        }
     </style>
-    <body>
-        <div id="NewCall">
-            <head>  새로운 요청이 들어왔습니다 </head>
-            <div id="Picture"></div>
+    <script src="https://kit.fontawesome.com/83496dc54d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="NewCall">
+        <h1> 새로운 요청이 들어왔습니다 </h1>
+        <div id="Picture"><i class="fas fa-map-marker-alt"></i></div>
+        <div id="Response">
             <button id="accept" onclick="Gotoaccept()">수락</button>
             <button id="reject" onclick="Gotoreject()">거절</button>
         </div>
-
-        <table border = "1" id = "customerdetail">
-            <tr >
+        <table id="customerdetail">
+            <tr>
                 <td>요청자 id : </td>
             </tr>
 
@@ -35,5 +93,7 @@
                 <td>동승자 여부 :</td>
             </tr>
         </table>
-    </body>
+    </div>
+</body>
+
 </html>
