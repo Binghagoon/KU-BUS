@@ -228,6 +228,21 @@
         $(document).ready(function(){
             htm = $("#AlarmTemplete").html();
             spl = htm.split("+");
+            $.ajax({
+                url:"http://smartku.bingha.me/php/alarm-sample.php",
+                type:"GET",
+                data: {
+                    id:id
+                },
+                error: function(jqXHR, textstatus, errorthrown){
+                    alert("Error");
+                },
+                success: function(data, status, xhr){
+                    data.forEach(element => {
+                        MyAlarm(element.data, element.name);
+                    });
+                }
+            })
 
             MyAlarm("hello", "Me");
             //MyAlarm("hell", "Me");
