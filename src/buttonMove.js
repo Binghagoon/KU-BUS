@@ -19,7 +19,7 @@ $(function(){
 
 function Click(to){
     var src = pages[to] + ".html";
-    if(to == 1 || to == 2){
+    if(to == 1 || to == 4){
         src = pre[arg["role"]] + "/" + src;
     }
     ifr.attr("src", src);
