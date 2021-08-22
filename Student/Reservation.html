@@ -46,11 +46,32 @@
             display : inline-block;
         }
     </style>
+    <script src="../src/JQuery.js"></script>
+    <script>
+
+        circles = [];
+        [1,2,3].forEach((index) => circles.push($("circle" + index)));
+        $(document).ready(function(){
+            $("#button").click(function(){
+                    //TBDJS
+            });
+            circles[0].click(function(){
+                    //TBDJS
+            });
+            circles[1].click(function(){
+                    //TBDJS
+            });
+            circles[2].click(function(){
+                    //TBDJS
+            });
+        });
+
+    </script>
     <body>
         <div id = "all">
             <div id="header">
                 <input type="text" value="목적지를 입력하세요">
-                <input type="button" value="확인">
+                <input id="button" type="button" value="확인">
             </div>
             <div id="main">
                 <h2>즐겨찾기</h2>

@@ -82,44 +82,59 @@
         }*/
         </style>
 
-        <script>
+    <script src="../src/JQuery.js"></script>
+    <script>
+            var query = [];
             function ReservationIncome(id, nlo, mp, restime, rlo, dst, carfull){
-                //TBD JS 08.17 for lim please reference Edit_Profile() on MyPage-Driver 
+                var arg = [id, nlo, mp, restime, rlo, dst, carfull];
+                var i;
+                for(i =0; i <arguments.length; i++){
+                    query[i].text(query[i].text() + arg[i]);
+                }
             }
 
             $(document).ready(function(){
-
+                query =[
+                    $("#Caller_id"),
+                    $("#CallerPositionButton"),
+                    $("#CallerPhoneButton"),
+                    $("#ResTime"),
+                    $("#ResPosition"),
+                    $("#Destination"),
+                    $("#Carfull")
+                ];
+                ReservationIncome("1","2","3","4","5","6","7");
             });
         
         </script>
 
     </head>
     <body>
-        <div class="CallList">
-            <table class="CallRequest">
-                <tr class="CallerTemplate">
-                    <td class="CallerID">
-                        <div class="ProfileImage"></div>
-                        <div class="Caller_id">요청자 id</div>
-                        <div class="CallerPP">
-                            <button class="CallerPositionButton" href="#">위치</button>
-                            <button class="CallerPhoneButton" href="#">전화</button>
+        <div id="CallList">
+            <table id="CallRequest">
+                <tr id="CallerTemplate">
+                    <td id="CallerID">
+                        <div id="ProfileImage"></div>
+                        <div id="Caller_id">요청자 id: </div>
+                        <div id="CallerPP">
+                            <button id="CallerPositionButton" href="#">위치: </button>
+                            <button id="CallerPhoneButton" href="#">전화: </button>
                         </div>
                     </td>
                     <td> 
-                        <table class="CallerDetail">
-                            <tr><td>
+                        <table id="CallerDetail">
+                            <tr><td id="ResTime">
                                 호출 예약 시간: 
-                            </tr></td>
-                            <tr><td>
-                                    탑승위치:
-                            </tr></td>
-                            <tr><td>
-                                    목적지:
-                            </tr></td>
-                            <tr><td>
-                                    동승자 유무:
-                            </tr></td>
+                            </td></tr>
+                            <tr><td id="ResPosition">
+                                탑승위치:
+                            </td></tr>
+                            <tr><td id="Destination">
+                                목적지:
+                            </td></tr>
+                            <tr><td id="Carfull">
+                                동승자 유무:
+                            </td></tr>
                         </table>
                     </td>
                 </tr>
