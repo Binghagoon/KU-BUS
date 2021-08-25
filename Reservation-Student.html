@@ -1,25 +1,151 @@
 <!DOCTYPE html>
-<!--
-    pdf 4페이지 2를 구현(프레임은 이미 Frame.html에 구현되어 있음), 각 div에 2-*)을 구현.
-    TBDHTML
--->
-<html>
-    <head>
+<html lang="en">
 
-    </head>
-    <body>
-        <div>   <!-- 호출 클릭시TBDHTML-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
 
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        html,
+        body {
+            /*width: 100%;
+            height: 100%;*/
+            margin: 0;
+        }
+
+        #header {
+            height: 50px;
+            flex: 1;
+            margin: 10px 20px;
+
+            text-align: center;
+            display: flex;
+
+            box-shadow: 0px 0px 10px 0px darkgray;
+            border-radius: 15px;
+        }
+
+        #destination {
+            flex-grow: 1;
+            margin-right: 0;
+            font-size: 20px;
+
+            border: none;
+            border-radius: 15px;
+        }
+
+        #search {
+            flex-basis: 10%;
+            flex-shrink: 0;
+            margin-left: 0;
+            font-size: 20px;
+
+            background-color: darkred;
+            color:white;
+            border: none;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        #main {
+            border: 3px  gray;
+            padding: 10px 0px;
+            margin: 0px 20px;
+        }
+        .submain{
+            margin-bottom: 10px;
+        }
+        .submain>h3{
+            font-size: 20px;
+            margin: 10px 20px;
+        }
+        .group {
+            border: 3px  darkred;
+
+            padding: 0px 10px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .circle {
+            background-color: whitesmoke;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+
+            margin: 0px 20px;
+            font-size: 14px;
+
+            text-align: center;
+            line-height: 100px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <script src="../src/JQuery.js"></script>
+    <script>
+
+        circles = [];
+        [1, 2, 3].forEach((index) => circles.push($("circle" + index)));
+        $(document).ready(function () {
+            $("#button").click(function () {
+                //TBDJS
+            });
+            circles[0].click(function () {
+                //TBDJS
+            });
+            circles[1].click(function () {
+                //TBDJS
+            });
+            circles[2].click(function () {
+                //TBDJS
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="header">
+        <input id="destination" type="text" placeholder="  목적지를 입력하세요">
+        <input id="search" type="button" value="검색">
+    </div>
+    <div id="main">
+        <div class="submain">
+            <h3>즐겨찾기</h3>
+            <div class="group">
+                <div class="circle"> <a href="*">공학관 </div></a>
+                <div class="circle"> <a href="*">신공학관</a> </div>
+                <div class="circle"> <a href="*">아산이학관</a> </div>
+                <div class="circle"> <a href="*">추가</a> </div>
+            </div>
         </div>
-        <div>   <!-- 목적지 클릭시 나타나는 ui TBDHTML-->
-
+        <div class="submain">
+            <h3>최근 방문한 장소</h3>
+            <div class="group">
+                <div class="circle"> <a href="*">공학관</a> </div>
+                <div class="circle"> <a href="*">신공학관</a> </div>
+                <div class="circle"> <a href="*">아산이학관</a> </div>
+            </div>
         </div>
-        <div>   <!-- 호출시 나타나는 ui TBDHTML-->
+    </div>
+</body>
 
-        </div>
-        <div>   <!-- 배정완료시 나타나는 ui TBDHTML-->
-
-        </div>
-
-    </body>
-</html> 
+</html>
