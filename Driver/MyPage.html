@@ -14,23 +14,13 @@
         *{
             font-family: 'Noto Sans KR', sans-serif;
         }
-        #DriverMyInfoHome {
-            background-color: white;
-            width: 320px;
-            height: 470px;
-
-            display: flex;
-            flex-direction: column;
-            /*div를 가운데 위치로 오게하는 역할*/
-            margin: auto;
-
-            box-shadow: 0px 0px 20px -3px gray;
-        }
+        
+        html, body, #DriverMyInfoHome {width: 100%; height: 100%; margin: 0;}
 
         #Profile {
-            background-color: darkred;
-            width: 320px;
-            height: 200px;
+            background-color: wheat;
+            width: 100vmin;
+            height: 100vmin;
             padding-bottom: 20px;
 
             display: flex;
@@ -39,50 +29,49 @@
             align-items: center;
         }
 
-        #ProfileImage {
-            width: 50px;
-            height: 50px;
-            box-shadow: 0px 0px 5px 0px darkgray;
-            border-radius: 50px;
-            margin-top: 5px;
-            display: block;
-            background-color: white;
-            /*
-            background-image: url('고대 로고/emblem/emblem_02.gif');
+        #ProfileImage{
+            width: 30vmin; height: 30vmin;
+            border-radius: 180px;
+            box-shadow: 0px 0px 10px 0px darkgray;
+            background-image: url('emblem.gif');
             background-repeat: no-repeat;
-            background-size: cover;*/
+            background-size: cover;
         }
 
-        #Settings {
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        #CarInfo{
+            font-size: 14px; font-weight: bold;
+            margin-top:24px; margin-bottom: 0px;
         }
 
-        #Settings>div {
-            width: 280px;
-            height: 25px;
-            padding: 5px 10px;
-
-            margin-bottom: 5px;
-
-            font-size: 12px;
-            border: solid gray;
-            border-radius: 10px;
+        #Name{
+            font-size: 18px; font-weight: bold;
+            margin:0px;
+        }
+        #ConditionMessage{
+            width: 86%; max-height: 20vh;
+            text-align: center;
         }
 
-        #DriverMyInfoHome {
-            /*color: darkred;*/
-            border-top: 0px;
-            background-color: white;
-            border-top: 3px solid darkred;
+        #Settings{
+            z-index: 1;
+            list-style: none;
+            padding: 0px 30px;
         }
 
-        #DriverMyInfoHome>img {
-            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
-            filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+        #Settings>li{
+            padding: 15px 0px;
         }
+
+        a {
+            text-decoration: none;
+            color:black;
+        }
+
+        @media screen and (min-width: 1024px) {
+            #DriverMyInfoHome{display: flex;}
+            #Settings {
+                height: 100vmin;}}
+
     </style>
     <script type="text/javascript" src="src/JQuery.js"></script>
     <script>
@@ -104,12 +93,13 @@
                 }
             })
             Edit_Profile("장기사", "123가4567 카니발");
+
         })
 
         // 버튼 클릭 시 연결할 링크는 추후에 결정
         function Edit_Profile(name, carInfo) {
             $("#CarInfo").text(carInfo);
-            $("#Name").text(name + " 님");
+            $("#Name").text(name + " 기사님");
         }
 
         function See_History() {
@@ -126,22 +116,18 @@
 <body>
     <div id="DriverMyInfoHome">
         <div id="Profile">
-            <h5 id="CarInfo"></h5>
             <div id="ProfileImage"></div>
+            <h5 id="CarInfo"></h5>
             <h5 id="Name"></h5>
             <p id="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
-            <div id="toggle">
-                <input type="checkbox">
-                <label for="" id="onbtn">On</label>
-                <label for="" id="ofbtn">Off</label>
-            </div>
         </div>
 
-        <div id="Settings">
-            <div id="EditProfile">프로필 편집</div>
-            <div id="JobHistory">이용 내역</div>
-            <div id="Logout">로그아웃</div>
-        </div>
+        <ul id="Settings">
+            <li id="OperationState"><a href="">운행 상태</a></li>
+            <li id="EditProfile"><a href="">프로필 편집</a></li>
+            <li id="JobHistory"><a href="">이용 내역</a></li> 
+            <li id="Logout"><a href="">로그아웃</a></li>
+        </ul>
     </div>
 </body>
 
