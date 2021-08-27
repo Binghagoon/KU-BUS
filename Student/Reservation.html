@@ -153,6 +153,16 @@
         circles = [];
         [1, 2, 3].forEach((index) => circles.push($("circle" + index)));
         $(document).ready(function () {
+            $.ajax({
+                url: "http://smartku.bingha.me/php/record-position-get.php",
+                type: "GET",
+                error:function(request,status,error){
+                    alert("record position get error");
+                },
+                success: function(data, status, xhr){       //data:{ num, lat, lon, name }  num:array num, name: position number; Korean, how to access datas like date["name"].
+                    //TBDJS for han
+                }
+    }       )
             $("#button").click(function () {
                 //TBDJS
             });
