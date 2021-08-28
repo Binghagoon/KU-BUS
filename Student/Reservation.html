@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<!-- 2-0 -->
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -141,6 +143,10 @@
             line-height: 100px;
             color: black;
         }
+        
+        .template{
+            display: none;
+        }
 
         a {
             text-decoration: none;
@@ -160,7 +166,12 @@
                     alert("record position get error");
                 },
                 success: function(data, status, xhr){       //data:{ num, lat, lon, name }  num:array num, name: position number; Korean, how to access datas like date["name"].
-                    //TBDJS for han
+                    var dom = $(".template");
+                    var i = 1;
+                    for(i = 1; i<dom.length; i++){
+
+                    }
+                //TBDJS for han
                 }
     }       )
             $("#button").click(function () {
@@ -194,6 +205,9 @@
                 <a class="plus" href="*"> + </a>
             </div>
             <div class="group">
+                
+                <a class="circle template" href="*">공학관</a>
+
                 <a class="circle" href="*">공학관</a>
                 <a class="circle" href="*">신공학관</a>
                 <a class="circle" href="*">아산이학관</a>
