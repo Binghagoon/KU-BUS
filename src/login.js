@@ -44,7 +44,7 @@ function IDSubmit(id, pw){
             id:id,
             pw:pw
         },
-        error: function(a, b, c){
+        error: function(jqXHR, textStatus, errorThrown){
             alert("failed");
         },
         success: function(data, status, xhr){

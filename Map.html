@@ -16,6 +16,26 @@
             $(document).ready(function(){
                 get_geo();
                 RecordPositionGet();
+                $("#ReservationButton").click(function(){
+                        //TBDJS
+                        $.ajax({
+                            url: "http://smartku.bingha.me/php/reservation-post.php",
+                            type: "POST",
+                            data: {
+                                fromlat: mylat,
+                                fromlng: mylng,
+                                tolat: $("#ButtonLatitude").val(),
+                                tolng: $("#ButtonLongtitude").val(),
+                                id: token
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                alert("failed");
+                            },
+                            success: function(data, status, xhr){
+                                //move to 2-2
+                            }
+                        });
+                });
             });
         </script>
     </head>
@@ -24,6 +44,8 @@
         <div id="InfowindowTemplete" class="templete">
             <div id="PositionName"></div>
             <button id="ReservationButton"> 이자리에서 예약</button>
+            <div id="ButtonLatitude" class="templete"></div>
+            <div id="ButtonLongtitude" class="templete" ></div>
         </div>
         <button id="GetLocation" class="templete">어디서 참여하고 있지요?</button>
         <div id="SetLocation" class="templete"></div>

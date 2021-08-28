@@ -9,6 +9,7 @@ $(function(){
     });
 });
 
+var mylat, mylng;
 function get_geo() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -21,6 +22,8 @@ function get_geo() {
 function successCallback(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
+    mylat = lat;
+    mylng = lng;
     //Anam station
         lat = 37.586232954034564;
         lng = 127.02928291766814;
@@ -89,7 +92,9 @@ function MapPinWithRecord(data){
         });
         markers.push(marker);
         kakao.maps.event.addListener(marker, 'click', function() {
-            $("#PositionName").html(marker["Fb"])
+            $("#PositionName").html(value.name)
+            $("#ButtonLatitude").html(value.lat.toString());
+            $("#ButtonLongtitude").html(value.lon.toString());
             iwContent = $("#InfowindowTemplete").html();
             var infowindow = new kakao.maps.InfoWindow({
                 content : iwContent,
@@ -98,18 +103,4 @@ function MapPinWithRecord(data){
             infowindow.open(map, marker); 
         });
     });
-    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    // 인포윈도우를 생성합니다
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(markers[1], 'click', function() {
-        $("#PositionName").html(markers[1]["Fb"])
-        iwContent = $("#InfowindowTemplete").html();
-        var infowindow = new kakao.maps.InfoWindow({
-            content : iwContent,
-            removable : iwRemoveable
-        });    
-        // 마커 위에 인포윈도우를 표시합니다
-        infowindow.open(map, markers[1]);
-    });
-
 }
