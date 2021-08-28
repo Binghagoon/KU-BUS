@@ -2,7 +2,8 @@
 var recordList;
 var map
 var markers = [];
-var mylat, mylng;
+var fromlat, fromlng;
+var tolat, tolng;
 function get_geo() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -11,12 +12,35 @@ function get_geo() {
     }
 }
 
+$(document).ready(function(){
+    $("#ReservationButton").click(function(){
+        //TBDJS
+        $.ajax({
+            url: "http://smartku.bingha.me/php/reservation-post.php",
+            type: "POST",
+            data: {
+                "fromlat" : fromlat,
+                "fromlng" : fromlng,
+                "tolat" : tolat,
+                "tolng" : tolng,
+                "id" : params["token"]
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("failed");
+            },
+            success: function(data, status, xhr){
+                window.location.href ="Student/Reservation.html";
+            }
+        });
+    });
+})
+
 
 function successCallback(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
-    mylat = lat;
-    mylng = lng;
+    fromlat = lat;
+    fromlng = lng;
     //Anam station
         lat = 37.586232954034564;
         lng = 127.02928291766814;
@@ -86,14 +110,16 @@ function MapPinWithRecord(data){
         markers.push(marker);
         kakao.maps.event.addListener(marker, 'click', function() {
             $("#PositionName").html(value.name)
-            $("#ButtonLatitude").html(value.lat.toString());
-            $("#ButtonLongtitude").html(value.lon.toString());
+
+            tolat = value.lat;
+            fromlat = value.lon;
             iwContent = $("#InfowindowTemplete").html();
             var infowindow = new kakao.maps.InfoWindow({
                 content : iwContent,
                 removable : iwRemoveable
             });   
             infowindow.open(map, marker); 
+            
         });
     });
 }
