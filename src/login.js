@@ -5,7 +5,9 @@ var Position  = {  //사용자 타입의 ENUM
     ADMIN: 3,
     ETC: 4
 }
-
+/**
+ * http://stackoverflow.com/a/10997390/11236
+ */
 function updateURLParameter(url, param, paramVal){
     var newAdditionalURL = "";
     var tempArray = url.split("?");
@@ -26,19 +28,23 @@ function updateURLParameter(url, param, paramVal){
     return baseURL + "?" + newAdditionalURL + rows_txt;
 }
 
-function PageChange(position){  
-    if(position == "DRIVER"){
+function PageChange(position){  //position = {id: String, name: String, no: Int}
+    if(position["name"] == "DRIVER"){
 
-    } else if(position == "STUDENT"){
+    } else if(position["name"] == "STUDENT"){
+
     }
-    window.location.href=updateURLParameter("./Frame.html", "role", position);
+    position["name"] = position["name"].toUpperCase();
+    var url = updateURLParameter("./Frame.html", "role", position["name"]);
+    url = updateURLParameter(url, "id", position["id"] );
+    window.location.href=url;
 }
 
 function IDSubmit(id, pw){
     
     pw = sha3_256(pw);  //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
     $.ajax({
-        url: "http://smartku.bingha.me/php/sample.php",     //"STUDENT"를 불러오는 php 실제론 idget.php를 쓰면 로그인이 가능함
+        url: "http://smartku.bingha.me/php/idget-test.php",     //"STUDENT"를 불러오는 php 실제론 idget.php를 쓰면 로그인이 가능함
         type: "POST",
         data: {
             id:id,
@@ -48,7 +54,7 @@ function IDSubmit(id, pw){
             alert("failed");
         },
         success: function(data, status, xhr){
-            PageChange(data);
+            PageChange( JSON.parse(data));
         }
     });
 

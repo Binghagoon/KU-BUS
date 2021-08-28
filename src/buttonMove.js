@@ -15,6 +15,7 @@ $(function(){
     buttons[2].on("click",() => Click(2));
     buttons[3].on("click",() => Click(3));
     buttons[4].on("click",() => Click(4));
+    ifr.attr("src", "./Map.html" + window.location.search)
 });
 
 function Click(to){
@@ -22,7 +23,7 @@ function Click(to){
     if(to == 1 || to == 4){
         src = pre[arg["role"]] + "/" + src;
     }
-    ifr.attr("src", src);
+    ifr.attr("src", src + window.location.search);
     buttons[to].addClass("select");
     buttons[now].removeClass("select");
     now = to;
