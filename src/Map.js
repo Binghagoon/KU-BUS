@@ -2,6 +2,13 @@
 var recordList;
 var map
 var markers = [];
+
+$(function(){
+    $("#ReservationButton").on("click", function(){
+            //TBDJS
+    });
+});
+
 function get_geo() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);

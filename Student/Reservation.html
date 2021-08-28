@@ -50,18 +50,17 @@
     <script>
 
         circles = [];
-        [1,2,3].forEach((index) => circles.push($("circle" + index)));
         $(document).ready(function(){
+        [1,2,3].forEach((index) => {
+            var circle = $("circle" + index);
+            circles.push(circle);
+            circle.click(function(){
+                alert(circle.val() + "를 출발지로 지정하시겠습니까")
+
+            });
+
+        });
             $("#button").click(function(){
-                    //TBDJS
-            });
-            circles[0].click(function(){
-                    //TBDJS
-            });
-            circles[1].click(function(){
-                    //TBDJS
-            });
-            circles[2].click(function(){
                     //TBDJS
             });
         });
@@ -82,6 +81,9 @@
         </div>
         <div id="submain">
             최근 방문한 장소
+            <table>
+                <!-- TBDHTML-->
+            </table>
         </div>
     </body>
 </html>
