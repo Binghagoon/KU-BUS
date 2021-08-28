@@ -22,13 +22,17 @@
                             url: "http://smartku.bingha.me/php/reservation-post.php",
                             type: "POST",
                             data: {
-                                //TBD
+                                fromlat: mylat,
+                                fromlng: mylng,
+                                tolat: $("#ButtonLatitude").val(),
+                                tolng: $("#ButtonLongtitude").val(),
+                                id: token
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 alert("failed");
                             },
                             success: function(data, status, xhr){
-                                //TBD
+                                //move to 2-2
                             }
                         });
                 });

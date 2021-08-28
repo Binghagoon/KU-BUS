@@ -2,6 +2,7 @@
 var recordList;
 var map
 var markers = [];
+var mylat, mylng;
 function get_geo() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -14,6 +15,8 @@ function get_geo() {
 function successCallback(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
+    mylat = lat;
+    mylng = lng;
     //Anam station
         lat = 37.586232954034564;
         lng = 127.02928291766814;
