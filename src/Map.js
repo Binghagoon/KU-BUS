@@ -4,6 +4,8 @@ var map
 var markers = [];
 var fromlat, fromlng;
 var tolat, tolng;
+var fromclicked = false,
+    toclicked = false;
 function get_geo() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -14,7 +16,6 @@ function get_geo() {
 
 $(document).ready(function(){
     $("#ReservationButton").click(function(){
-        //TBDJS
         $.ajax({
             url: "http://smartku.bingha.me/php/reservation-post.php",
             type: "POST",
@@ -29,7 +30,7 @@ $(document).ready(function(){
                 alert("failed");
             },
             success: function(data, status, xhr){
-                window.location.href ="Student/Reservation.html";
+                window.location.href ="Student/Reservation-calling.html";
             }
         });
     });
@@ -91,6 +92,8 @@ function MapPinWithRecord(data){
 
     recordList = JSON.parse(data);
     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    var bluepin = "./src/img/blue-map-pin.png";
+    var redpin =  "./src/img/red-map-pin.png";
     recordList.forEach(function(value, index){
         //refernce with https://apis.map.kakao.com/web/sample/multipleMarkerImage/
 
@@ -109,16 +112,30 @@ function MapPinWithRecord(data){
         });
         markers.push(marker);
         kakao.maps.event.addListener(marker, 'click', function() {
-            $("#PositionName").html(value.name)
+            
+            var infowindowopen = function(status){
+                $("#PositionName").html(value.name + status)
 
-            tolat = value.lat;
-            fromlat = value.lon;
-            iwContent = $("#InfowindowTemplete").html();
-            var infowindow = new kakao.maps.InfoWindow({
-                content : iwContent,
-                removable : iwRemoveable
-            });   
-            infowindow.open(map, marker); 
+                iwContent = $("#InfowindowTemplete").html();
+                var infowindow = new kakao.maps.InfoWindow({
+                    content : iwContent,
+                    removable : iwRemoveable
+                });   
+                infowindow.open(map, marker); 
+            };
+
+            if(!fromclicked){
+                fromlat = value.lat;
+                fromlng = value.lon;
+                infowindowopen("from");
+                fromclicked = true;
+            }
+            else if(!toclicked){
+                tolat = value.lat;
+                tolng = value.lon;
+                infowindowopen("to");
+                toclicked = true;
+            }
             
         });
     });
