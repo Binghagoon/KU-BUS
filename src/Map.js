@@ -30,7 +30,7 @@ $(document).ready(function(){
                 alert("failed");
             },
             success: function(data, status, xhr){
-                window.location.href ="Student/Reservation-calling.html";
+                window.location.href ="Student/Reservation-calling.html?" + window.location.search;
             }
         });
     });

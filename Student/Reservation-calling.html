@@ -43,6 +43,29 @@
             }
     
         </style>
+        <script src="../src/JQuery.js"></script>
+        <script>
+            var parse;
+            $(document).ready(function(){
+                var param = new URLSearchParams(window.location.search);
+                $.ajax({
+                    url: "http://smartku.bingha.me/php/reservation-get.php",     //"STUDENT"를 불러오는 php 실제론 idget.php를 쓰면 로그인이 가능함
+                    type: "GET",
+                    data: {
+                        "id":param.get("id")
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("failed");
+                    },
+                    success: function(data, status, xhr){
+                        parse = JSON.parse(data);
+                        $("#Departure").html($("#Departure").html() + parse["tolat"].toString() + parse["tolng"].toString());
+                        $("#Arrival").html( $("#Arrival").html() + parse["tolat"].toString() + parse["tolng"].toString());
+                    }
+                });
+            });
+
+        </script>
     </head>
     <body>
         <div id="After_Calling_Driver">
