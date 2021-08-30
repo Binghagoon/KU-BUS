@@ -49,7 +49,7 @@
             $(document).ready(function(){
                 var param = new URLSearchParams(window.location.search);
                 $.ajax({
-                    url: "http://smartku.bingha.me/php/reservation-get.php",     //"STUDENT"를 불러오는 php 실제론 idget.php를 쓰면 로그인이 가능함
+                    url: "http://smartku.bingha.me/php/reservation-get.php",
                     type: "GET",
                     data: {
                         "id":param.get("id")
