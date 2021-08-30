@@ -6,10 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoginHome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap" rel="stylesheet">
+    
     <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+        }
 
         #LoginPage{
-            background: linear-gradient(90deg, darkred 50%, rgb(255,219,88) 50%);
+            background: linear-gradient(90deg, #8C0000 50%, #CCC2A3  50%);
             width: 320px;
             height: 450px;
             margin: auto;
@@ -27,7 +34,7 @@
             align-items: center;
         }
         #Login{
-            background-color: rgb(255, 250, 238);
+            background-color: white;
             width: 320px; 
             height: 450px;
             /*Login이라는 div를 가운데 위치로 오게하는 역할*/  
@@ -56,7 +63,7 @@
             margin-bottom: 5px;
         }
         #LoginSubmit{           /* 버튼 id디자인 분리하기 TBDCSS*/
-            background-color: darkred;
+            background-color: #8C0000;
             color:white;
             width: 200px;
             height: 28px;
@@ -86,8 +93,8 @@
             <div id="KU_logo">
                 <img src ="Korea Univ. Logo/emblem/emblem_01.gif">
             </div>
-            <h1>고려대 배리어프리 <div class="br">카풀 프로젝트</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
-            <h2>KUBF PROJECT</h2>
+            <h1>고려대 배리어프리 카풀 <div class="br"> KUBUS</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
+            <h2>이동지원차량서비스</h2>
 
             <div id="LoginField">
                 <input id="Username" type="text" maxlength="20" placeholder="아이디 ID" required> <br>
