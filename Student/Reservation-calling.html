@@ -52,6 +52,7 @@
                     url: "http://smartku.bingha.me/php/reservation-get.php",
                     type: "GET",
                     data: {
+                        "isStudent" : 1,
                         "id":param.get("id")
                     },
                     error: function(jqXHR, textStatus, errorThrown){
@@ -61,9 +62,49 @@
                         parse = JSON.parse(data);
                         $("#Departure").html($("#Departure").html() + parse["tolat"].toString() + parse["tolng"].toString());
                         $("#Arrival").html( $("#Arrival").html() + parse["tolat"].toString() + parse["tolng"].toString());
+                        setInterval(() => checkReservation(), 1000);
                     }
                 });
             });
+            function ChackReservation(){
+                $.ajax({
+                    url: "http://smartku.bingha.me/php/reservation-get.php",
+                    type: "GET",
+                    data: {
+                        "isStudent" : 1,
+                        "id":param.get("id")
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("failed");
+                    },
+                    success: function(data, status, xhr){
+                        parse = JSON.parse(data);
+                        if(parse["driver_id"] != null){
+                            SuccessReservation();
+                        }
+                    }
+                });
+            }
+
+            function SuccessReservation(){
+                //TBDJS
+            }
+            function CancelReservation(){
+                $.ajax({
+                    url: "http://smartku.bingha.me/php/reservation-post.php",
+                    type: "GET",
+                    data: {
+                        "isStudent" : 1,
+                        "id":param.get("id")
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("failed");
+                    },
+                    success: function(data, status, xhr){
+                        parse = JSON.parse(data);
+                    }
+                });
+            }
 
         </script>
     </head>
