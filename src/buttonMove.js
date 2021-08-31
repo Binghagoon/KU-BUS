@@ -3,7 +3,6 @@ var buttonParent;
 var now = 2;
 var buttons = [];
 var pages = [];
-var pre =
 
 $(function(){
     ifr =  $("#Iframe");
