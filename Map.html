@@ -1,58 +1,43 @@
 <html>
     <head>
-
+        <style>
+            #Map{
+                width: 100%;
+                height: 100%;
+            }
+            .template{
+                display: none;
+            }
+        </style>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
         <script src="src/JQuery.js"></script>
         <script>
+            var param, params
             $(document).ready(function(){
-                $("#get_location").click(function(){
                 get_geo();
-                });
-            });
-            function get_geo() {
-                if (!!navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-                } else {
-                    alert("현재 위치를 가져올 수 없습니다.");
+                //if(arg["role"] == "STUDENT") 
+                RecordPositionGet();
+                param = new URLSearchParams(window.location.search);
+                params={
+                    "role": param.get("role"),
+                    "token": param.get("id")      //will be used hash function(AES)
                 }
-            }
-
-
-            function successCallback(position) {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                $("#set_location").html('latitude : ' + lat + ', longitude : ' + lng);
-                var container = document.getElementById('map');
-                var options = {
-                    center: new kakao.maps.LatLng(lat, lng),
-                    level: 3
-                };
-                var map = new kakao.maps.Map(container, options);
-                /*  var markerPosition = new kakao.maps.LatLng(lat,lng);
-                    var marker = new kakao.maps.Marker({
-                    position: markerPosition
-                    });
-                    marker.setMap(map); */
-                var iwContent = "함께하는 스마트캠퍼스 프로젝트가 시작된 곳입니다.";
-                var iwPosition = new kakao.maps.LatLng(lat, lng);
-                var iwRemoveable = true;
-                var infowindow = new kakao.maps.InfoWindow({
-                    map: map,
-                    position: iwPosition,
-                    content: iwContent,
-                    removable: iwRemoveable
-                });
-            }
-            function errorCallback() {
-                alert('현재 위치를 가져올 수 없습니다.');
-            }
-        // 일단 건들지 말기!!! ms가 나중에 함
+            });
         </script>
+        <script src="src/Map.js"></script>
     </head>
 
     <body>
-        <button id="get_location">어디서 참여하고 있지요?</button>
-        <div id="set_location"></div>
-        <div id="map" style="width: 500px; height: 400px;"></div>
+        <div id="InfowindowTemplete" class="template">
+            <div id="PositionName"></div>
+            <div id="ButtonLatitude" class="template"></div>
+            <div id="ButtonLongtitude" class="template" ></div>
+        </div>
+        <button id="GetLocation" class="template">어디서 참여하고 있지요?</button>
+        <div id="SetLocation" class="template"></div>
+        <div id="Map"></div>
+        <div id="menu">
+            <button id="ReservationButton"> 이자리에서 예약</button>
+        </div>
     </body>
 </html>

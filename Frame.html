@@ -1,116 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 고려대 카풀 프로젝트</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
-        rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 고려대 카풀 프로젝트</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+            rel="stylesheet">
 
-    <style>
-        *{
-            font-family: 'Noto Sans KR', sans-serif;
-        }
+        <style>
+            *{
+                font-family: 'Noto Sans KR', sans-serif;
+            }
 
-        html,body {
-            margin: 0;
-            margin-right: 2px;
-            height: 100%
-        }
+            html,body {
+                margin: 0;
+                margin-right: 2px;
+                height: 100%
+            }
 
-        .select {
-            color: #8C0000;
-            border-top: 0px;
-            background-color: white;
-            border-top: 3px solid #8C0000;
-        }
+            .select {
+                color: darkred;
+                border-top: 0px;
+                background-color: white;
+                border-top: 3px solid darkred;
+            }
 
-        .select>img {
-            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 #8C0000);
-            filter: opacity(0.5) drop-shadow(0 0 0 #8C0000);
-        }
+            .select>img {
+                -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+                filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+            }
 
-        #Frame {
-            width: 100%;
-            height: 100%;
-        }
+            #Frame {
+                width: 100%;
+                height: 100%;
+            }
 
-        /*오래 해멘 이유: FramePrefix에는 100% 적용 안함.. 하..쩄든 해결..*/
-        #Iframe {
-            width: 100%;
-            height: 92vh;
-            border: solid black;
-            overflow-y: scroll;
-        }
+            /*오래 해멘 이유: FramePrefix에는 100% 적용 안함.. 하..쩄든 해결..*/
+            #Iframe {
+                width: 100%;
+                height: 92vh;
+                border: solid black;
+                overflow-y: scroll;
+            }
 
-        #FrameSuffix {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
+            #FrameSuffix {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
 
-            margin: auto;
+                margin: auto;
 
-            text-align: center;
-            text-decoration: none;
+                text-align: center;
+                text-decoration: none;
 
-            box-shadow: 0px -3px 20px -3px gray;
-        }
+                box-shadow: 0px -3px 20px -3px gray;
+            }
 
-        #FrameSuffix>button {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            /* 아마 내용물 위아래중앙으로 정렬*/
-            align-items: center;
-            /* 내용물 좌우 가운데 정렬*/
+            #FrameSuffix>button {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                /* 아마 내용물 위아래중앙으로 정렬*/
+                align-items: center;
+                /* 내용물 좌우 가운데 정렬*/
 
-            margin: auto;
-            width: 25vw;
-            height: 50px;
-            border: 1px gray;
-            padding-top: 2px;
-            background-color: white;
+                margin: auto;
+                width: 25vw;
+                height: 50px;
+                border: 1px gray;
+                padding-top: 2px;
+                background-color: white;
 
-            font-size: 16px;
-        }
+                font-size: 16px;
+            }
 
-        #FrameSuffix>button>img {
-            margin-bottom: 2px;
-            -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
-            filter: opacity(0.5) drop-shadow(0 0 0 gray);
-        }
-    </style>
-    <script src="src/getQuery.js"></script>
-    <script>
-        var stat = get_query();  //arg[role] = 'STUDENT'||'DRIVER'
-    </script>
-</head>
+            #FrameSuffix>button>img {
+                margin-bottom: 2px;
+                -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
+                filter: opacity(0.5) drop-shadow(0 0 0 gray);
+            }
+        </style>
+        <script src="src/getQuery.js"></script>
+        <script src="src/JQuery.js"></script>
+        <script>
+            var arg = get_query();  //arg["role"] = "STUDENT"||"DRIVER"
+        </script>
+        <script src="src/buttonMove.js"></script>
+    </head>
 
-<body>
-    <div id="Frame">
-        <div id="FramePrefix">
-            <iframe id="Iframe" class="iframe" src="./Map.html" scrolling="no">
+    <body>
+        <div id="Frame">
+            <div id="FramePrefix">
+                <iframe id="Iframe" class="iframe" src="./Map.html" scrolling="no">
 
-            </iframe>
+                </iframe>
+            </div>
+            <div id="FrameSuffix">
+                <button id="ReservationHome">예약내역</button>
+                <button id="MapHome" class="select">지도</button>
+                <button id="NoticeHome">알림</button>
+                <button id="MyInfoHome">내 정보</button>
+
+            </div>
         </div>
-        <div id="FrameSuffix">
-            <button id="ReservationHome" onclick="GotoReservation()">예약내역</button>
-            <button id="MapHome" class="select" onclick="GotoMap()">지도</button>
-            <button id="NoticeHome" onclick="GotoAlarm()">알림</button>
-            <button id="MyInfoHome" onclick="GotoMyPage()">내 정보</button>
-            <script type="text/javascript" src="buttonMove.js"></script>
-
-        </div>
-    </div>
-</body>
+    </body>
+</html>
 
 <!-- 
-    
 -->
