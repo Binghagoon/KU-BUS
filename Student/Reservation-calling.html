@@ -65,6 +65,7 @@
                         setInterval(() => checkReservation(), 1000);
                     }
                 });
+                $("#Cancel_Reservation").click(CancelReservation);
             });
             function ChackReservation(){
                 $.ajax({
@@ -102,6 +103,7 @@
                     },
                     success: function(data, status, xhr){
                         parse = JSON.parse(data);
+                        //TBDJS
                     }
                 });
             }
