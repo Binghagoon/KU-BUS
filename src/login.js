@@ -22,7 +22,7 @@ function IDSubmit(id, pw){
     
     pw = sha3_256(pw);  //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
     $.ajax({
-        url: "http://smartku.bingha.me/php/idget-test.php",     //"STUDENT"를 불러오는 php 실제론 idget.php를 쓰면 로그인이 가능함
+        url: "http://smartku.bingha.me/php/idget.php",
         type: "POST",
         data: {
             id:id,
