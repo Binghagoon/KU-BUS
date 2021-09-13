@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- 5page 0 -->
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            
+        </style>
+        <script src="../src/JQuery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#Calling").on("click", function(){
+                    parent.$("iframe").attr("src", "./Student/Seat List.html");
+                });
+                
+                $("#Reservation").on("click", function(){
+                    parent.alert("아직은 지원하지 않는 기능입니다.");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="Calling">호출하기</button>
+        <button id="Reservation">예약하기</button>
+    </body>
+</html>

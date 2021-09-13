@@ -20,14 +20,12 @@ function get_geo() {
 
 
 function successCallback(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
+    var arg = get_query();
+    var lat = arg["latitude"];
+    var lng = arg["longitude"];
     mylat = lat;
     mylng = lng;
-    //Anam station
-        lat = 37.586232954034564;
-        lng = 127.02928291766814;
-    //end
+
     $("#set_location").html('latitude : ' + lat + ', longitude : ' + lng);
     var container = document.getElementById('Map');
     var options = {
