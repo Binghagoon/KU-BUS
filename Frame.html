@@ -91,6 +91,14 @@
         <script src="src/JQuery.js"></script>
         <script>
             var arg = get_query();  //arg["role"] = "STUDENT"||"DRIVER"
+            var firstPage ={
+                undefined:"./Student/Firstpage.html",
+                "STUDENT":"./Student/Firstpage.html",
+                "DRIVER":"./Map.html"
+            };
+            $(document).ready(function(){
+                $("#Iframe").attr("src",firstPage[arg["role"]]);
+            });
         </script>
         <script src="src/buttonMove.js"></script>
     </head>
