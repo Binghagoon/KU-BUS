@@ -10,6 +10,10 @@ $(function(){
 });
 
 var mylat, mylng;
+var fromlat, fromlng;
+var tolat, tolng;
+var fromclicked = false,
+    toclicked = false;
 function get_geo() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -18,6 +22,28 @@ function get_geo() {
     }
 }
 
+$(document).ready(function(){
+    $("#ReservationButton").click(function(){
+        $.ajax({
+            url: "http://smartku.bingha.me/php/reservation-post.php",
+            type: "POST",
+            data: {
+                "fromlat" : fromlat,
+                "fromlng" : fromlng,
+                "tolat" : tolat,
+                "tolng" : tolng,
+                "id" : params["token"]
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("failed");
+            },
+            success: function(data, status, xhr){
+                window.location.href ="Student/Reservation-calling.html?" + window.location.search;
+            }
+        });
+    });
+})
+
 
 function successCallback(position) {
     var arg = get_query();
@@ -25,7 +51,13 @@ function successCallback(position) {
     var lng = arg["longitude"];
     mylat = lat;
     mylng = lng;
-
+    fromlat = lat;
+    fromlng = lng;
+    //To Be cleared 09.14 TBDJS
+    //Anam station
+        lat = 37.586232954034564;
+        lng = 127.02928291766814;
+    //end
     $("#set_location").html('latitude : ' + lat + ', longitude : ' + lng);
     var container = document.getElementById('Map');
     var options = {
@@ -72,6 +104,8 @@ function MapPinWithRecord(data){
 
     recordList = JSON.parse(data);
     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    var bluepin = "./src/img/blue-map-pin.png";
+    var redpin =  "./src/img/red-map-pin.png";
     recordList.forEach(function(value, index){
         //refernce with https://apis.map.kakao.com/web/sample/multipleMarkerImage/
 
@@ -90,15 +124,31 @@ function MapPinWithRecord(data){
         });
         markers.push(marker);
         kakao.maps.event.addListener(marker, 'click', function() {
-            $("#PositionName").html(value.name)
-            $("#ButtonLatitude").html(value.lat.toString());
-            $("#ButtonLongtitude").html(value.lon.toString());
-            iwContent = $("#InfowindowTemplete").html();
-            var infowindow = new kakao.maps.InfoWindow({
-                content : iwContent,
-                removable : iwRemoveable
-            });   
-            infowindow.open(map, marker); 
+            
+            var infowindowopen = function(status){
+                $("#PositionName").html(value.name + status)
+
+                iwContent = $("#InfowindowTemplete").html();
+                var infowindow = new kakao.maps.InfoWindow({
+                    content : iwContent,
+                    removable : iwRemoveable
+                });   
+                infowindow.open(map, marker); 
+            };
+
+            if(!fromclicked){
+                fromlat = value.lat;
+                fromlng = value.lon;
+                infowindowopen("from");
+                fromclicked = true;
+            }
+            else if(!toclicked){
+                tolat = value.lat;
+                tolng = value.lon;
+                infowindowopen("to");
+                toclicked = true;
+            }
+            
         });
     });
 }

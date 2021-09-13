@@ -8,20 +8,30 @@
     <title>Driver_MyInfo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+
     <style>
-        *{
+        * {
             font-family: 'Noto Sans KR', sans-serif;
         }
-        
-        html, body, #DriverMyInfoHome {width: 100%; height: 100%; margin: 0;}
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-color: #CCC2A3;
+        }
 
         #Profile {
-            background-color: wheat;
-            width: 100vmin;
+            background-color: white;
+            box-shadow: 0px 0px 20px 0px rgb(110, 110, 110);
+            width: 100%;
             height: 100vmin;
-            padding-bottom: 20px;
 
             display: flex;
             flex-direction: column;
@@ -29,8 +39,9 @@
             align-items: center;
         }
 
-        #ProfileImage{
-            width: 30vmin; height: 30vmin;
+        #ProfileImage {
+            width: 30vmin;
+            height: 30vmin;
             border-radius: 180px;
             box-shadow: 0px 0px 10px 0px darkgray;
             background-image: url('emblem.gif');
@@ -38,40 +49,63 @@
             background-size: cover;
         }
 
-        #CarInfo{
-            font-size: 14px; font-weight: bold;
-            margin-top:24px; margin-bottom: 0px;
+        #CarInfo {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 24px;
+            margin-bottom: 0px;
+            color: #8C0000;
         }
 
-        #Name{
-            font-size: 18px; font-weight: bold;
-            margin:0px;
+        #Name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0px;
         }
-        #ConditionMessage{
-            width: 86%; max-height: 20vh;
+
+        #ConditionMessage {
+            width: 86%;
+            max-height: 20vh;
             text-align: center;
         }
 
-        #Settings{
+        #Settings {
             z-index: 1;
             list-style: none;
-            padding: 0px 30px;
+            background-color: white;
+
+            height: 400px;/**/
+
+            margin: 20px;
+            padding: 0;
+
+            position: relative;
+            top: -50px;
+
+            border-radius: 15px;
+            border:solid 1px darkgray;
+            box-shadow: 0px 0px 5px 0px darkgray;
         }
 
-        #Settings>li{
-            padding: 15px 0px;
+        #Settings>li {
+            padding: 20px;
+            border-bottom: solid 1px gray;
         }
 
         a {
             text-decoration: none;
-            color:black;
+            color: black;
         }
 
         @media screen and (min-width: 1024px) {
-            #DriverMyInfoHome{display: flex;}
-            #Settings {
-                height: 100vmin;}}
+            body {
+                display: flex;
+            }
 
+            #Settings {
+                height: 100vmin;
+            }
+        }
     </style>
     <script type="text/javascript" src="src/JQuery.js"></script>
     <script>
@@ -114,21 +148,18 @@
 </head>
 
 <body>
-    <div id="DriverMyInfoHome">
-        <div id="Profile">
-            <div id="ProfileImage"></div>
-            <h5 id="CarInfo"></h5>
-            <h5 id="Name"></h5>
-            <p id="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
-        </div>
-
-        <ul id="Settings">
-            <li id="OperationState"><a href="">운행 상태</a></li>
-            <li id="EditProfile"><a href="">프로필 편집</a></li>
-            <li id="JobHistory"><a href="">이용 내역</a></li> 
-            <li id="Logout"><a href="">로그아웃</a></li>
-        </ul>
+    <div id="Profile">
+        <div id="ProfileImage"></div>
+        <h5 id="CarInfo"></h5>
+        <h5 id="Name"></h5>
+        <p id="ConditionMessage">매일 12시 반부터 1시 반까지는 점심시간입니다 :)</p>
     </div>
+    <ul id="Settings">
+        <li id="OperationState"><a href="">운행 상태</a></li>
+        <li id="EditProfile"><a href="">프로필 편집</a></li>
+        <li id="JobHistory"><a href="">이용 내역</a></li>
+        <li id="Logout"><a href="">로그아웃</a></li>
+    </ul>
 </body>
 
 </html>
