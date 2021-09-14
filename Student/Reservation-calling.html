@@ -44,6 +44,7 @@
     
         </style>
         <script src="../src/JQuery.js"></script>
+        <script src="../src/getQuery.js"></script>
         <script>
             var parse;
             $(document).ready(function(){
@@ -60,12 +61,31 @@
                     },
                     success: function(data, status, xhr){
                         parse = JSON.parse(data);
-                        $("#Departure").html($("#Departure").html() + parse["tolat"].toString() + parse["tolng"].toString());
-                        $("#Arrival").html( $("#Arrival").html() + parse["tolat"].toString() + parse["tolng"].toString());
+                        var qur = get_query();
+                        var dep =  $("#Departure > h4");
+                        var arr = $("#Arrival > h4");
+                        dep.html(dep.html() + qur["from"]);
+                        arr.html( arr.html() + qur["to"]);
                         setInterval(() => checkReservation(), 1000);
                     }
                 });
-                $("#Cancel_Reservation").click(CancelReservation);
+                $("#Cancel_Reservation").click(function(){
+                    $.ajax({
+                        url: "http://smartku.bingha.me/php/reservation-post.php",
+                        type: "GET",
+                        data: {
+                            "isStudent" : 1,
+                            "id":param.get("id")
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            alert("failed");
+                        },
+                        success: function(data, status, xhr){
+                            parse = JSON.parse(data);
+                            //TBDJS
+                        }
+                    });
+                });
             });
             function ChackReservation(){
                 $.ajax({
@@ -91,21 +111,6 @@
                 //TBDJS
             }
             function CancelReservation(){
-                $.ajax({
-                    url: "http://smartku.bingha.me/php/reservation-post.php",
-                    type: "GET",
-                    data: {
-                        "isStudent" : 1,
-                        "id":param.get("id")
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        alert("failed");
-                    },
-                    success: function(data, status, xhr){
-                        parse = JSON.parse(data);
-                        //TBDJS
-                    }
-                });
             }
 
         </script>
@@ -128,9 +133,7 @@
                 </div>
             </div>
             <h4>예약이 완료되면<br>알림 메시지를 보내드립니다.</h4>
-            <div id="Cancel_Reservation">
-                <h3>호출 취소</h3>
-            </div>
+                <button id="Cancel_Reservation">호출 취소</button>
         </div>
     </body>
 </html>
