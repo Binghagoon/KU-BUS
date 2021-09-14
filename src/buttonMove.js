@@ -3,6 +3,11 @@ var buttonParent;
 var now = 2;
 var buttons = [];
 var pages = [];
+var firstPage ={
+    undefined:"./Student/Firstpage.html",
+    "STUDENT":"./Student/Firstpage.html",
+    "DRIVER":"./Map.html"
+};
 
 $(function(){
     ifr =  $("#Iframe");
@@ -14,7 +19,7 @@ $(function(){
     buttons[2].on("click",() => Click(2));
     buttons[3].on("click",() => Click(3));
     buttons[4].on("click",() => Click(4));
-    ifr.attr("src", "./Map.html" + window.location.search)
+    ifr.attr("src",firstPage[arg["role"]] + window.location.search);        //frame's first page
 });
 
 function Click(to){
