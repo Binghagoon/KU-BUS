@@ -14,7 +14,7 @@ var fromlat, fromlng;
 var tolat, tolng;
 var fromclicked = false,
     toclicked = false;
-function get_geo() {
+function StartMap() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     } else {
