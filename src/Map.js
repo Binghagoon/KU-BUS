@@ -3,15 +3,18 @@ var recordList;
 var map
 var markers = [];
 
-$(function(){
-    $("#ReservationButton").on("click", function(){
-            //TBDJS
-    });
-});
 
 var mylat, mylng;
-var fromlat, fromlng;
-var tolat, tolng;
+var from={
+    "lat": Intl,
+    "lng": Intl,
+    "name": String
+};
+var to={
+    "lat": Intl,
+    "lng": Intl,
+    "name": String
+};
 var fromclicked = false,
     toclicked = false;
 function StartMap() {
@@ -23,22 +26,22 @@ function StartMap() {
 }
 
 $(document).ready(function(){
-    $("#ReservationButton").click(function(){
+    $("#ReservationButton").on("click", function(){
         $.ajax({
             url: "http://smartku.bingha.me/php/reservation-post.php",
             type: "POST",
             data: {
-                "fromlat" : fromlat,
-                "fromlng" : fromlng,
-                "tolat" : tolat,
-                "tolng" : tolng,
-                "id" : params["token"]
+                "fromlat" : from["lat"],
+                "fromlng" : from["lng"],
+                "tolat" : to["lat"],
+                "tolng" : to["lng"],
+                "id" : params["id"]
             },
             error: function(jqXHR, textStatus, errorThrown){
                 alert("failed");
             },
             success: function(data, status, xhr){
-                window.location.href ="Student/Reservation-calling.html?" + window.location.search;
+                window.location.href ="Student/Reservation-calling.html?" + window.location.search + "&from=" + from["name"] + "&to=" + to["name"];
             }
         });
     });
@@ -51,8 +54,8 @@ function successCallback(position) {
     var lng = arg["longitude"];
     mylat = lat;
     mylng = lng;
-    fromlat = lat;
-    fromlng = lng;
+    from["lat"] = lat;
+    from["lng"] = lng;
     //To Be cleared 09.14 TBDJS
     //Anam station
         lat = 37.586232954034564;
@@ -137,14 +140,16 @@ function MapPinWithRecord(data){
             };
 
             if(!fromclicked){
-                fromlat = value.lat;
-                fromlng = value.lon;
+                from["lat"] = value.lat;
+                from["lng"] = value.lon;
+                from["name"] = value.name;
                 infowindowopen("from");
                 fromclicked = true;
             }
             else if(!toclicked){
-                tolat = value.lat;
-                tolng = value.lon;
+                to["lat"] = value.lat;
+                to["lng"] = value.lon;
+                to["name"] = value.name;
                 infowindowopen("to");
                 toclicked = true;
             }
