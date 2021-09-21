@@ -15,27 +15,34 @@ function PageChange(position){  //position = {id: String, name: String, no: Int}
     position["name"] = position["name"].toUpperCase();
     var url = updateURLParameter("./Frame.html", "role", position["name"]);
     url = updateURLParameter(url, "id", position["id"] );
+    if(position["debugging"] == "true") url = updateURLParameter(url, "debugging", position["debugging"]);
     window.location.href=url;
 }
 
 function IDSubmit(id, pw){
     
     pw = sha3_256(pw);  //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
-    $.ajax({
-        url: "http://smartku.bingha.me/php/idget.php",
-        type: "POST",
-        data: {
-            id:id,
-            pw:pw
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            alert("failed");
-        },
-        success: function(data, status, xhr){
-            PageChange( JSON.parse(data));
-        }
-    });
+    if(!debugging){
+        $.ajax({
+            url: "http://smartku.bingha.me/php/idget.php",
+            type: "POST",
+            data: {
+                id:id,
+                pw:pw,
+                type:"id"
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("failed");
+            },
+            success: function(data, status, xhr){
+                PageChange( JSON.parse(data));
+            }
+        });
 
+    }else{
+        var student = { id:"asdf", name:"student", no:"1", debugging:"true"}
+        PageChange(student);
+    }
     /*
     if(id == "Driver"){
         PageChange(Position.DRIVER);

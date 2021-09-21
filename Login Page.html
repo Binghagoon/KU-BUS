@@ -77,12 +77,20 @@
     <script src="src/urlParameter.js"></script>
     <script src="src/login.js"></script>
     <script>
-
+        debugging = false;
         $(document).ready(function(){
 
             $("#LoginSubmit").click(function(){
                
                 IDSubmit($("#Username").val(),$("#Password").val())
+            });
+            $("#Debug").click(function(){
+                debugging = !debugging;
+                if(debugging){
+                    $("#Debug").html("Debugging");
+                }else{
+                    $("#Debug").html("Not Debugging");
+                }
             });
         });
     </script>
@@ -105,9 +113,9 @@
             </div>
             <div>
                 <tr id="LoginSuffix">
-                    <td><button class="button" onclick="IDFind()">아이디/패스워드 찾기</button></td>
-                    <td><button class="button" onclick="SignUp()">회원가입</button></td>
-                    <td><button class="button" onclick="Etc()">그외</button></td>
+                    <td><button id="IDFind" class="button" onclick="IDFind()">아이디/패스워드 찾기</button></td>
+                    <td><button id="Signup" class="button" onclick="SignUp()">회원가입</button></td>
+                    <td><button id="Debug" class="button" onclick="Etc()">그외</button></td>
                 </tr>
             </div>
         </div>

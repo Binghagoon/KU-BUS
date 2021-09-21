@@ -88,17 +88,24 @@ function errorCallback() {
 }
 
 function RecordPositionGet(){
-    $.ajax({
-        url: "http://smartku.bingha.me/php/record-position-get.php",
-        type: "GET",
-        error:function(request,status,error){
-            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            alert("record position get error");
-        },
-        success: function(data, status, xhr){
+    if(!debugging){
+        $.ajax({
+            url: "http://smartku.bingha.me/php/record-position-get.php",
+            type: "GET",
+            error:function(request,status,error){
+                //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                alert("record position get error");
+            },
+            success: function(data, status, xhr){
+                MapPinWithRecord(data);
+            }
+        });
+
+    } else{
+        $.getJSON("recordPosition.json",function(data){
             MapPinWithRecord(data);
-        }
-    })
+        })
+    }
 }
 
 function MapPinWithRecord(data){
