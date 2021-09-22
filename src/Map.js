@@ -103,7 +103,7 @@ function RecordPositionGet(){
 
     } else{
         $.ajax({
-            url: "http://localhost:8080/src/recordPosition.json",
+            url: window.location.origin + "/src/recordPosition.json",
             error:function(request,status,error){
                 alert("record position get error");
             },
@@ -124,8 +124,8 @@ function MapPinWithRecord(data){
         recordList = data;
     }
     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    var bluepin = "./src/img/blue-map-pin.png";
-    var redpin =  "./src/img/red-map-pin.png";
+    var bluepin = window.location.origin + "/src/img/blue-map-pin.png";
+    var redpin =  window.location.origin + "/src/img/red-map-pin.png";
 
     
 
@@ -160,19 +160,33 @@ function MapPinWithRecord(data){
                 });   
                 infowindow.open(map, marker); 
             };
+            var MarkerImageChange = function(what){
+                var markerurl;
+                if(what =="Blue"){
+                    markerurl = bluepin;
+                } else if (what == "Red"){
+                    markerurl = redpin;
+                } else{
+                    console.log("fail an argument");
+                }
+                marker.setImage(new kakao.maps.MarkerImage(markerurl, imageSize));
+            };
 
-            if(!fromclicked){
+            if(!fromclicked){           //지도에서 출발지 선택할때
                 from["lat"] = value.lat;
-                from["lng"] = value.lon;
+                from["lng"] = value.lng;
                 from["name"] = value.name;
                 infowindowopen("from");
+                $("#MapStartOrDest").html("도착지");
+                MarkerImageChange("Blue");
                 fromclicked = true;
             }
-            else if(!toclicked){
+            else if(!toclicked){          //지도에서 도착지 선택할때
                 to["lat"] = value.lat;
-                to["lng"] = value.lon;
+                to["lng"] = value.lng;
                 to["name"] = value.name;
-                infowindowopen("to");
+                infowindowopen("to");;
+                MarkerImageChange("Red");
                 toclicked = true;
             }
             
