@@ -15,22 +15,20 @@
         <script src="src/Map.js"></script>
         <script>
             var param, params
+            param = new URLSearchParams(window.location.search);
+            params={
+                "role": param.get("role"),
+                "id": param.get("id"),      //will be used hash function(AES)
+                "seatnum": param.get("seatnum"),
+                "lat": param.get("latitude"),
+                "lng": param.get("longtitude")
+            }
             $(document).ready(function(){
                 StartMap();
                 //if(arg["role"] == "STUDENT") 
                 RecordPositionGet();
-                param = new URLSearchParams(window.location.search);
-                params={
-                    "role": param.get("role"),
-                    "id": param.get("id"),      //will be used hash function(AES)
-                    "seatnum": param.get("seatnum"),
-                    "lat": param.get("latitude"),
-                    "lng": param.get("longtitude"),
-                    "debugging": param.get("debugging")
-                }
             });
         </script>
-        <script src="src/Map.js"></script>
     </head>
 
     <body>

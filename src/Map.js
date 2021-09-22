@@ -88,7 +88,7 @@ function errorCallback() {
 }
 
 function RecordPositionGet(){
-    if(!debugging){
+    if(!top.debugging){
         $.ajax({
             url: "http://smartku.bingha.me/php/record-position-get.php",
             type: "GET",
@@ -102,20 +102,34 @@ function RecordPositionGet(){
         });
 
     } else{
-        $.getJSON("recordPosition.json",function(data){
-            MapPinWithRecord(data);
-        })
+        $.ajax({
+            url: "http://localhost:8080/src/recordPosition.json",
+            error:function(request,status,error){
+                alert("record position get error");
+            },
+            success:function(data){
+                MapPinWithRecord(data);
+            }
+        });
     }
 }
 
 function MapPinWithRecord(data){
     var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    if(typeof(data) == "string"){
+        recordList = JSON.parse(data);
 
-    recordList = JSON.parse(data);
+    } else{
+        recordList = data;
+    }
     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
     var bluepin = "./src/img/blue-map-pin.png";
     var redpin =  "./src/img/red-map-pin.png";
+
+    
+
+
     recordList.forEach(function(value, index){
         //refernce with https://apis.map.kakao.com/web/sample/multipleMarkerImage/
 
@@ -128,11 +142,12 @@ function MapPinWithRecord(data){
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
             map: map, // 마커를 표시할 지도
-            position: new kakao.maps.LatLng(value.lat,value.lon), // 마커를 표시할 위치
+            position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
             title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image : markerImage // 마커 이미지 
         });
         markers.push(marker);
+        marker.setMap(map);
         kakao.maps.event.addListener(marker, 'click', function() {
             
             var infowindowopen = function(status){
