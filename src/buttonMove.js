@@ -19,13 +19,13 @@ $(function(){
     buttons[2].on("click",() => Click(2));
     buttons[3].on("click",() => Click(3));
     buttons[4].on("click",() => Click(4));
-    ifr.attr("src",firstPage[arg["role"]] + window.location.search);        //frame's first page
+    ifr.attr("src",firstPage[args["role"]]);        //frame's first page
 });
 
 function Click(to){
     var src = pages[to] + ".html";
     if(to == 1 || to == 4){
-        src = pre[arg["role"]] + "/" + src;
+        src = pre[args["role"]] + "/" + src;
     }
     ifr.attr("src", src + window.location.search);
     buttons[to].addClass("select");

@@ -35,13 +35,13 @@ $(document).ready(function(){
                 "fromlng" : from["lng"],
                 "tolat" : to["lat"],
                 "tolng" : to["lng"],
-                "id" : params["id"]
+                "id" : top.args["id"]
             },
             error: function(jqXHR, textStatus, errorThrown){
                 alert("failed");
             },
             success: function(data, status, xhr){
-                window.location.href ="Student/Reservation-calling.html?" + window.location.search + "&from=" + from["name"] + "&to=" + to["name"];
+                window.location.href ="Student/Reservation-calling.html";
             }
         });
     });
@@ -49,9 +49,9 @@ $(document).ready(function(){
 
 
 function successCallback(position) {
-    var arg = get_query();
-    var lat = arg["latitude"];
-    var lng = arg["longitude"];
+    var args = top.args;
+    var lat = args["latitude"];
+    var lng = args["longitude"];
     mylat = lat;
     mylng = lng;
     from["lat"] = lat;
@@ -188,6 +188,9 @@ function MapPinWithRecord(data){
                 infowindowopen("to");;
                 MarkerImageChange("Red");
                 toclicked = true;
+            }
+            else{
+                console.log("Too many click");
             }
             
         });
