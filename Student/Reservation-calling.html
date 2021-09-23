@@ -72,6 +72,7 @@
                     });
                 });
             });
+
             function PrintData(fromName, toName){
                 var dep =  $("#Departure > h4");
                 var arr = $("#Arrival > h4");
@@ -105,7 +106,9 @@
             }
 
             function SuccessReservation(){
-                //TBDJS
+                top.args["stat"] ="wating";
+                // To be add argument
+                window.location.href = "ConfirmReservation.html"
             }
             function CancelReservation(){
             }
