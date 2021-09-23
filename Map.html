@@ -16,10 +16,20 @@
         <script src="src/JQuery.js"></script>
         <script src="src/Map.js"></script>
         <script>
+            var stat = top.args["stat"];
+            var role = top.args["role"];
             $(document).ready(function(){
                 StartMap();
-                //if(top.args["role"] == "STUDENT") 
-                RecordPositionGet();
+                if(role == "STUDENT"){
+                    if(stat == "reserving"){
+                        RecordPositionGet();
+
+                    } else if (stat == "wating") {
+                        setInterval(DriverPositionGet, 1000);
+                    }
+                } else if(role == "DRIVER"){
+
+                }
             });
         </script>
     </head>
