@@ -19,7 +19,7 @@ var fromclicked = false,
     toclicked = false;
 function StartMap() {
     if (!!navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        navigator.geolocation.getCurrentPosition(successCallback, ()=>alert('현재 위치를 가져올 수 없습니다.'));
     } else {
         alert("현재 위치를 가져올 수 없습니다.");
     }
@@ -91,9 +91,6 @@ function successCallback(position) {
         content: iwContent,
         removable: iwRemoveable
     });
-}
-function errorCallback() {
-    alert('현재 위치를 가져올 수 없습니다.');
 }
 
 function RecordPositionGet(){
