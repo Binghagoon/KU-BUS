@@ -78,6 +78,7 @@
     <script src="src/login.js"></script>
     <script>
         var debugging = false;
+        var isStudent = true;
         $(document).ready(function(){
 
             $("#LoginSubmit").click(function(){
@@ -94,9 +95,15 @@
                 debugging = !debugging;
                 if(debugging){
                     $("#Debug").html("Debugging");
+                    $("#Class").show();
                 }else{
                     $("#Debug").html("Not Debugging");
+                    $("#Class").hide();
                 }
+            });
+            $("#Class").click(function(){
+                isStudent = !isStudent;
+                $("#Class").html(isStudent ? "학생": "기사");
             });
         });
     </script>
@@ -122,6 +129,7 @@
                     <td><button id="IDFind" class="button">아이디/패스워드 찾기</button></td>
                     <td><button id="Signup" class="button">회원가입</button></td>
                     <td><button id="Debug" class="button">그외</button></td>
+                    <td><button id="Class" class="button" hidden>학생</button></td>
                 </tr>
             </div>
         </div>

@@ -41,7 +41,9 @@ function IDSubmit(id, pw){
 
     }else{
         var student = { id:"asdf", name:"student", no:"1", debugging:"true"}
-        PageChange(student);
+        var driver = { id:"asdf", name:"driver", no:"1", debugging:"true"}
+        var val = isStudent ? student: driver;
+        PageChange(val);
     }
     /*
     if(id == "Driver"){
