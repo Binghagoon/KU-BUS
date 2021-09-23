@@ -48,27 +48,12 @@
         <script>
             var parse;
             $(document).ready(function(){
-                var param = new URLSearchParams(window.location.search);
-                $.ajax({
-                    url: "http://smartku.bingha.me/php/reservation-get.php",
-                    type: "GET",
-                    data: {
-                        "isStudent" : 1,
-                        "id":param.get("id")
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        alert("failed");
-                    },
-                    success: function(data, status, xhr){
-                        parse = JSON.parse(data);
-                        var qur = get_query();
-                        var dep =  $("#Departure > h4");
-                        var arr = $("#Arrival > h4");
-                        dep.html(dep.html() + qur["from"]);
-                        arr.html( arr.html() + qur["to"]);
-                        setInterval(() => checkReservation(), 1000);
-                    }
-                });
+                PrintData(top.args["from"]["name"],top.args["to"]["name"]);
+                if(!top.debugging){
+                    setInterval(() => checkReservation(), 1000);
+                } else {
+                    setInterval(()=> SuccessReservation(), 1000);
+                }
                 $("#Cancel_Reservation").click(function(){
                     $.ajax({
                         url: "http://smartku.bingha.me/php/reservation-post.php",
@@ -87,24 +72,36 @@
                     });
                 });
             });
+            function PrintData(fromName, toName){
+                var dep =  $("#Departure > h4");
+                var arr = $("#Arrival > h4");
+                dep.html( dep.html() + fromName);
+                arr.html( arr.html() + toName);
+            }
+
             function ChackReservation(){
-                $.ajax({
-                    url: "http://smartku.bingha.me/php/reservation-get.php",
-                    type: "GET",
-                    data: {
-                        "isStudent" : 1,
-                        "id":param.get("id")
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        alert("failed");
-                    },
-                    success: function(data, status, xhr){
-                        parse = JSON.parse(data);
-                        if(parse["driver_id"] != null){
-                            SuccessReservation();
+                if(!top.debugging){
+                    $.ajax({
+                        url: "http://smartku.bingha.me/php/reservation-get.php",
+                        type: "GET",
+                        data: {
+                            "isStudent" : 1,
+                            "id":param.get("id")
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            alert("failed");
+                        },
+                        success: function(data, status, xhr){
+                            parse = JSON.parse(data);
+                            if(parse["driver_id"] != null){
+                                SuccessReservation();
+                            }
                         }
-                    }
-                });
+                    });
+
+                } else {
+
+                }
             }
 
             function SuccessReservation(){
