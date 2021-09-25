@@ -2,46 +2,70 @@
 var recordList;
 var map
 var markers = [];
-var fromlat, fromlng;
-var tolat, tolng;
+
+
+var mylat, mylng;
+var from={
+    "lat": Intl,
+    "lng": Intl,
+    "name": String
+};
+var to={
+    "lat": Intl,
+    "lng": Intl,
+    "name": String
+};
 var fromclicked = false,
     toclicked = false;
-function get_geo() {
+function StartMap() {
     if (!!navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        navigator.geolocation.getCurrentPosition(successCallback, ()=>alert('현재 위치를 가져올 수 없습니다.'));
     } else {
         alert("현재 위치를 가져올 수 없습니다.");
     }
 }
 
 $(document).ready(function(){
-    $("#ReservationButton").click(function(){
-        $.ajax({
-            url: "http://smartku.bingha.me/php/reservation-post.php",
-            type: "POST",
-            data: {
-                "fromlat" : fromlat,
-                "fromlng" : fromlng,
-                "tolat" : tolat,
-                "tolng" : tolng,
-                "id" : params["token"]
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                alert("failed");
-            },
-            success: function(data, status, xhr){
-                window.location.href ="Student/Reservation-calling.html?" + window.location.search;
-            }
-        });
+    $("#ReservationButton").on("click", function(){
+        if(!top.debugging){
+            $.ajax({
+                url: "http://smartku.bingha.me/php/reservation-post.php",
+                type: "POST",
+                data: {
+                    "fromlat" : from["lat"],
+                    "fromlng" : from["lng"],
+                    "tolat" : to["lat"],
+                    "tolng" : to["lng"],
+                    "id" : top.args["id"]
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("failed");
+                },
+                success: function(data, status, xhr){
+                    top.args["from"] = from;
+                    top.args["to"] = to;
+                    window.location.href ="Student/Reservation-calling.html";
+                }
+            });
+        } else {
+            top.args["from"] = from;
+            top.args["to"] = to;
+            window.location.href ="Student/Reservation-calling.html";
+        }
     });
 })
 
 
 function successCallback(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    fromlat = lat;
-    fromlng = lng;
+//    var args = top.args;
+    var coord = position["coords"];
+    var lat = coord["latitude"];
+    var lng = coord["longitude"];
+//    mylat = lat;
+//    mylng = lng;
+//    from["lat"] = lat;
+//    from["lng"] = lng;
+    //To Be cleared 09.14 TBDJS
     //Anam station
         lat = 37.586232954034564;
         lng = 127.02928291766814;
@@ -68,32 +92,50 @@ function successCallback(position) {
         removable: iwRemoveable
     });
 }
-function errorCallback() {
-    alert('현재 위치를 가져올 수 없습니다.');
-}
 
 function RecordPositionGet(){
-    $.ajax({
-        url: "http://smartku.bingha.me/php/record-position-get.php",
-        type: "GET",
-        error:function(request,status,error){
-            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            alert("record position get error");
-        },
-        success: function(data, status, xhr){
-            MapPinWithRecord(data);
-        }
-    })
+    if(!top.debugging){
+        $.ajax({
+            url: "http://smartku.bingha.me/php/record-position-get.php",
+            type: "GET",
+            error:function(request,status,error){
+                //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                alert("record position get error");
+            },
+            success: function(data, status, xhr){
+                MapPinWithRecord(data);
+            }
+        });
+
+    } else{
+        $.ajax({
+            url: window.location.origin + "/src/recordPosition.json",
+            error:function(request,status,error){
+                alert("record position get error");
+            },
+            success:function(data){
+                MapPinWithRecord(data);
+            }
+        });
+    }
 }
 
 function MapPinWithRecord(data){
     var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    if(typeof(data) == "string"){
+        recordList = JSON.parse(data);
 
-    recordList = JSON.parse(data);
+    } else{
+        recordList = data;
+    }
     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    var bluepin = "./src/img/blue-map-pin.png";
-    var redpin =  "./src/img/red-map-pin.png";
+    var bluepin = window.location.origin + "/src/img/blue-map-pin.png";
+    var redpin =  window.location.origin + "/src/img/red-map-pin.png";
+
+    
+
+
     recordList.forEach(function(value, index){
         //refernce with https://apis.map.kakao.com/web/sample/multipleMarkerImage/
 
@@ -106,11 +148,12 @@ function MapPinWithRecord(data){
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
             map: map, // 마커를 표시할 지도
-            position: new kakao.maps.LatLng(value.lat,value.lon), // 마커를 표시할 위치
+            position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
             title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image : markerImage // 마커 이미지 
         });
         markers.push(marker);
+        marker.setMap(map);
         kakao.maps.event.addListener(marker, 'click', function() {
             
             var infowindowopen = function(status){
@@ -123,18 +166,37 @@ function MapPinWithRecord(data){
                 });   
                 infowindow.open(map, marker); 
             };
+            var MarkerImageChange = function(what){
+                var markerurl;
+                if(what =="Blue"){
+                    markerurl = bluepin;
+                } else if (what == "Red"){
+                    markerurl = redpin;
+                } else{
+                    console.log("fail an argument");
+                }
+                marker.setImage(new kakao.maps.MarkerImage(markerurl, imageSize));
+            };
 
-            if(!fromclicked){
-                fromlat = value.lat;
-                fromlng = value.lon;
+            if(!fromclicked){           //지도에서 출발지 선택할때
+                from["lat"] = value.lat;
+                from["lng"] = value.lng;
+                from["name"] = value.name;
                 infowindowopen("from");
+                $("#MapStartOrDest").html("도착지");
+                MarkerImageChange("Blue");
                 fromclicked = true;
             }
-            else if(!toclicked){
-                tolat = value.lat;
-                tolng = value.lon;
-                infowindowopen("to");
+            else if(!toclicked){          //지도에서 도착지 선택할때
+                to["lat"] = value.lat;
+                to["lng"] = value.lng;
+                to["name"] = value.name;
+                infowindowopen("to");;
+                MarkerImageChange("Red");
                 toclicked = true;
+            }
+            else{
+                console.log("Too many click");
             }
             
         });

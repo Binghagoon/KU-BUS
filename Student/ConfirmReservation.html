@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device - width, initial - scale = 1.0">
+        <title>5페이지 6번</title>
+        <style>
+        </style>
+        <script src="../src/JQuery.js"></script>
+        <script>
+            $(document).ready(function(){
+                PrintDarta("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+            });
+            function PrintData(from, dest, date, time, name, mp, email){
+                //TBDJS for han
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>예약정보 확인하기</h1>
+        <div id="Reservation_Information">
+            <h3>선택된 위치 정보</h3>
+            <div>
+                <p>출발지: </p>
+                <p>도착지: </p>
+                <p>예약일: </p>
+                <p>픽업 시간대: </p>
+            </div>
+            <form action = "">
+                <fieldset>
+                    <legend>세부 정보 입력란</legend>
+                    <label>신청자명:</label><br>
+                    <input type="text" id="User_Name" size="20" autofocus placeholder="이름을 입력하세요." required><br><br>
+                    <label>연락처(모바일):</label><br>
+                    <input type="text" id="User_Phone_Number" size="20" placeholder="전화번호를 입력하세요." required><br><br>
+                    <label>신청자 이메일:</label><br>
+                    <input type="text" id="User_Email_Address" size="20" placeholder="이메일을 입력하세요." required><br><br>
+                    <button type="Submit">예약 신청</button><br>
+                    <button type="Cancel">뒤로 가기</button>
+                </fieldset>
+            </form>
+        </div>
+        <script>
+
+        </script>
+    </body>
+</html>

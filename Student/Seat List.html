@@ -1,0 +1,88 @@
+    
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            .header{
+                text-align: center;
+            }
+            .alltable{
+                border : 1px solid gray;
+                width : 300px;
+                padding : 30px;
+                margin: auto;
+            }
+            .chair{
+                padding : 20px;
+            }
+        </style>
+        <script src="../src/JQuery.js"></script>
+        <script>
+            $(document).ready(function(){
+                //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
+                //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
+                $(".chair.selectable").on("click",function(){
+                    var v = $(".chair.selectable").attr("id");
+                    var par = {
+                        "three":3,
+                        "four":4,
+                        "five":5,
+                        "six":6
+                    }
+                    ChairClicked(par[v]);
+                });
+                $(".chair.unselectable").on("click", ()=> alert('해당 좌석은 선택할 수 없습니다'));
+            });
+
+            function ChairClicked(num){
+                alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
+
+                if (!!navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        //Anam station
+                            lat = 37.586232954034564;
+                            lng = 127.02928291766814;
+                        //end
+                        parent.$("iframe").attr("src", "./Map.html?seatnum=" + num + '&latitude=' + lat + '&longitude=' + lng);
+                        
+                    }, ()=>alert('현재 위치를 가져올 수 없습니다.'));
+                } else {
+                    alert("현재 위치를 가져올 수 없습니다.");
+                }
+            }
+
+            function renderTR(target, idValueArr) {
+                var tr = document.getElementById(target);
+                tr.innerHTML = ''
+                for (var index in idValueArr) {
+                    var value = idValueArr[index][0]
+                    var id = idValueArr[index][1]
+                    tr.innerHTML += '<td><input type="submit" value="' + value + '" id="' + id + '" onclick="touch()"/> </td>';
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <table class = "alltable">
+                <tr>
+                    <td><input type="submit" value="운전자" class="chair unselectable" id = "driver"></td>
+                    <td><input type="submit" value = "조수석" class="chair unselectable" id = "supporter"></td>
+                </tr>
+                <tr id="target-tr1">
+                    <td><input type="submit" value="3번" class="chair selectable" id="three"></td>
+                    <td><input type="submit" value="4번" class="chair selectable" id="four"></td>
+                </tr>
+                <tr id="target-tr2">
+                    <td><input type="submit" value="5번" class="chair selectable" id="five"></td>
+                    <td><input type="submit" value="6번" class="chair selectable" id="six"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

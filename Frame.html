@@ -90,7 +90,10 @@
         <script src="src/getQuery.js"></script>
         <script src="src/JQuery.js"></script>
         <script>
-            var arg = get_query();  //arg["role"] = "STUDENT"||"DRIVER"
+            var args = get_query();  //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
+            args["stat"] = "reserving";
+            var debugging = args["debugging"];
+            
         </script>
         <script src="src/buttonMove.js"></script>
     </head>
