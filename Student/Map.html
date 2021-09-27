@@ -13,22 +13,18 @@
             }
         </style>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-        <script src="src/JQuery.js"></script>
-        <script src="src/Map.js"></script>
+        <script src="../src/JQuery.js"></script>
+        <script src="../src/Map.js"></script>
         <script>
             var stat = top.args["stat"];
             var role = top.args["role"];
             $(document).ready(function(){
                 StartMap();
-                if(role == "STUDENT"){
-                    if(stat == "reserving"){
-                        RecordPositionGet();
+                if(stat == "reserving"){
+                    RecordPositionGet();
 
-                    } else if (stat == "wating") {
-                        setInterval(DriverPositionGet, 1000);
-                    }
-                } else if(role == "DRIVER"){
-
+                } else if (stat == "wating") {
+                    setInterval(DriverPositionGet, 1000);
                 }
             });
         </script>
