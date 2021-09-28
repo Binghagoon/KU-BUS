@@ -19,34 +19,12 @@
             var stat = top.args["stat"];
             var role = top.args["role"];
             $(document).ready(function(){
-                $("#ReservationButton").on("click", function(){
-                    if(!top.debugging){
-                        $.ajax({
-                            url: "http://smartku.bingha.me/php/reservation-post.php",
-                            type: "POST",
-                            data: {
-                                "fromlat" : from["lat"],
-                                "fromlng" : from["lng"],
-                                "tolat" : to["lat"],
-                                "tolng" : to["lng"],
-                                "id" : top.args["id"]
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                alert("failed");
-                            },
-                            success: function(data, status, xhr){
-                                top.args["from"] = from;
-                                top.args["to"] = to;
-                                window.location.href ="Reservation-calling.html";
-                            }
-                        });
-                    } else {
-                        top.args["from"] = from;
-                        top.args["to"] = to;
-                        window.location.href ="Reservation-calling.html";
-                    }
+                $("#NextButton").on("click", function(){
+                    top.args["from"] = from;
+                    top.args["to"] = to;
+                    window.location.href ="ConfirmReservation.html";
                 });
-                
+
                 StartMap();
                 if(stat == "reserving"){
                     RecordPositionGet();
@@ -71,7 +49,7 @@
         </div>
         <div id="Map"></div>
         <div id="menu">
-            <button id="ReservationButton"> 이자리에서 예약</button>
+            <button id="NextButton"> 다음</button>
         </div>
     </body>
 </html>

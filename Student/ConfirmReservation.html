@@ -9,7 +9,33 @@
         <script src="../src/JQuery.js"></script>
         <script>
             $(document).ready(function(){
-                PrintDarta("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+                var from = top.args["from"];
+                var to = top.args["to"];
+                PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+                $("#Submit").on("click", function(){
+                    if(!top.debugging){
+                        $.ajax({
+                            url: "http://smartku.bingha.me/php/reservation-post.php",
+                            type: "POST",
+                            data: {
+                                "fromlat" : from["lat"],
+                                "fromlng" : from["lng"],
+                                "tolat" : to["lat"],
+                                "tolng" : to["lng"],
+                                "id" : top.args["id"]
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                alert("failed");
+                            },
+                            success: function(data, status, xhr){
+                                window.location.href ="Reservation-calling.html";
+                            }
+                        });
+                    } else {
+                        window.location.href ="Reservation-calling.html";  
+                    }
+
+                });
             });
             function PrintData(from, dest, date, time, name, mp, email){
                 //TBDJS for han
@@ -31,12 +57,12 @@
                 <fieldset>
                     <legend>세부 정보 입력란</legend>
                     <label>신청자명:</label><br>
-                    <input type="text" id="User_Name" size="20" autofocus placeholder="이름을 입력하세요." required><br><br>
+                    <input type="text" id="User_Name" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
                     <label>연락처(모바일):</label><br>
-                    <input type="text" id="User_Phone_Number" size="20" placeholder="전화번호를 입력하세요." required><br><br>
+                    <input type="text" id="User_Phone_Number" size="20" placeholder="전화번호를 입력하세요."><br><br>
                     <label>신청자 이메일:</label><br>
-                    <input type="text" id="User_Email_Address" size="20" placeholder="이메일을 입력하세요." required><br><br>
-                    <button type="Submit">예약 신청</button><br>
+                    <input type="text" id="User_Email_Address" size="20" placeholder="이메일을 입력하세요."><br><br>
+                    <button type="Submit" id="Submit">예약 신청</button><br>
                     <button type="Cancel">뒤로 가기</button>
                 </fieldset>
             </form>
