@@ -25,37 +25,6 @@ function StartMap() {
     }
 }
 
-$(document).ready(function(){
-    $("#ReservationButton").on("click", function(){
-        if(!top.debugging){
-            $.ajax({
-                url: "http://smartku.bingha.me/php/reservation-post.php",
-                type: "POST",
-                data: {
-                    "fromlat" : from["lat"],
-                    "fromlng" : from["lng"],
-                    "tolat" : to["lat"],
-                    "tolng" : to["lng"],
-                    "id" : top.args["id"]
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    alert("failed");
-                },
-                success: function(data, status, xhr){
-                    top.args["from"] = from;
-                    top.args["to"] = to;
-                    window.location.href ="Student/Reservation-calling.html";
-                }
-            });
-        } else {
-            top.args["from"] = from;
-            top.args["to"] = to;
-            window.location.href ="Student/Reservation-calling.html";
-        }
-    });
-})
-
-
 function successCallback(position) {
 //    var args = top.args;
     var coord = position["coords"];
