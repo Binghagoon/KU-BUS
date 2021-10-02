@@ -16,6 +16,7 @@ function PageChange(position){  //position = {id: String, name: String, no: Int}
     var url = updateURLParameter("./Frame.html", "role", position["role"]);
     url = updateURLParameter(url, "id", position["id"] );
     if(position["debugging"] == "true") url = updateURLParameter(url, "debugging", position["debugging"]);
+    console.log("Move to Frame");
     window.location.href=url;
 }
 

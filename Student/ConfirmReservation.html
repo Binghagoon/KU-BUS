@@ -26,10 +26,12 @@
                                 alert("failed");
                             },
                             success: function(data, status, xhr){
+                                console.log("move to Reservation-calling.html");
                                 window.location.href ="Reservation-calling.html";
                             }
                         });
                     } else {
+                        console.log("move to Reservation-calling.html");
                         window.location.href ="Reservation-calling.html";
                     }
                     return false;
