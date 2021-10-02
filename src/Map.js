@@ -65,7 +65,7 @@ function successCallback(position) {
 function RecordPositionGet(){
     if(!top.debugging){
         $.ajax({
-            url: "http://localhost:3000/record-position",
+            url: "http://smartku.bingha.me/node/record-position",
             type: "GET",
             error:function(request,status,error){
                 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
