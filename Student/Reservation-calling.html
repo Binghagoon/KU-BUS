@@ -50,7 +50,7 @@
             $(document).ready(function(){
                 PrintData(top.args["from"]["name"],top.args["to"]["name"]);
                 if(!top.debugging){
-                    setInterval(() => checkReservation(), 1000);
+                    setInterval(() => ChackReservation(), 1000);
                 } else {
                     setInterval(()=> SuccessReservation(), 1000);
                 }
@@ -82,19 +82,18 @@
 
             function ChackReservation(){
                 if(!top.debugging){
+                    var args = top.args;
                     $.ajax({
-                        url: "http://smartku.bingha.me/php/reservation-get.php",
+                        url: "http://localhost:3000/my-reservation-get",
                         type: "GET",
                         data: {
-                            "isStudent" : 1,
-                            "id":param.get("id")
+                            "id":args["id"],
                         },
                         error: function(jqXHR, textStatus, errorThrown){
                             alert("failed");
                         },
                         success: function(data, status, xhr){
-                            parse = JSON.parse(data);
-                            if(parse["driver_id"] != null){
+                            if(data["responcer_no"] != null){
                                 SuccessReservation();
                             }
                         }
@@ -108,6 +107,7 @@
             function SuccessReservation(){
                 top.args["stat"] ="wating";
                 // To be add argument
+                Console.log("Move to Assignment-Complete");
                 window.location.href = "Assignment-Complete.html"
             }
             function CancelReservation(){
