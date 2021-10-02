@@ -13,10 +13,23 @@
         <script>
             $(document).ready(function(){
                 StartMap();
+                if(top.debugging){
+                    $("#Map").height("80%");
+                    $("#Debugging").show();
+                    $("#Button").on("click", function(){
+                        window.location.href = "NewAlarm.html";
+                        return false;
+                    });
+                }
+
+                
             });
         </script>
     </head>
     <body>
         <div id="Map"></div>
+        <div id="Debugging" hidden>
+            <button id="Button">호출 받기</button>
+        </div>
     </body>
 </html>
