@@ -10,18 +10,17 @@
             $(document).ready(function(){
                 var from = top.args["from"];
                 var to = top.args["to"];
-                PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+                //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+                PrintData(from['name'], to["name"], undefined, undefined, undefined, undefined, undefined)
                 $("#Submit").on("click", function(){
                     if(!top.debugging){
                         $.ajax({
-                            url: "http://smartku.bingha.me/php/reservation-post.php",
+                            url: "http://localhost:3000/reservation-post",
                             type: "POST",
                             data: {
-                                "fromlat" : from["lat"],
-                                "fromlng" : from["lng"],
-                                "tolat" : to["lat"],
-                                "tolng" : to["lng"],
-                                "id" : top.args["id"]
+                                'now_place_no': from['no'],
+                                'to_place_no': to['no'],
+                                'id':top.args['id'],
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 alert("failed");
@@ -38,7 +37,13 @@
                 });
             });
             function PrintData(from, dest, date, time, name, mp, email){
-                //TBDJS for han
+                $("#From").html($("#From").html() + from);
+                $("#Dest").html($("#Dest").html() + dest);
+                $("#Date").html($("#Date").html() + date);
+                $("#PickupTime").html($("#PickupTime").html() + time);
+                $("#UserName").val(name);
+                $("#UserPhoneNumber").val(mp);
+                $("#UserEmailAddress").val(email);
             }
         </script>
 
@@ -48,27 +53,24 @@
         <div id="Reservation_Information">
             <h3>선택된 위치 정보</h3>
             <div>
-                <p>출발지: </p>
-                <p>도착지: </p>
-                <p>예약일: </p>
-                <p>픽업 시간대: </p>
+                <p id="From">출발지: </p>
+                <p id="Dest">도착지: </p>
+                <p id="Date">예약일: </p>
+                <p id="PiickupTime">픽업 시간대: </p>
             </div>
             <form action = "">
                 <fieldset>
                     <legend>세부 정보 입력란</legend>
                     <label>신청자명:</label><br>
-                    <input type="text" id="User_Name" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
+                    <input type="text" id="UserName" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
                     <label>연락처(모바일):</label><br>
-                    <input type="text" id="User_Phone_Number" size="20" placeholder="전화번호를 입력하세요."><br><br>
+                    <input type="text" id="UserPhoneNumber" size="20" placeholder="전화번호를 입력하세요."><br><br>
                     <label>신청자 이메일:</label><br>
-                    <input type="text" id="User_Email_Address" size="20" placeholder="이메일을 입력하세요."><br><br>
+                    <input type="text" id="UserEmailAddress" size="20" placeholder="이메일을 입력하세요."><br><br>
                     <button type="Submit" id="Submit">예약 신청</button><br>
                     <button type="Cancel">뒤로 가기</button>
                 </fieldset>
             </form>
         </div>
-        <script>
-
-        </script>
     </body>
 </html>

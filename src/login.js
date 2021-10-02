@@ -13,7 +13,7 @@ function PageChange(position){  //position = {id: String, name: String, no: Int}
 
     }
     position["name"] = position["name"].toUpperCase();
-    var url = updateURLParameter("./Frame.html", "role", position["name"]);
+    var url = updateURLParameter("./Frame.html", "role", position["role"]);
     url = updateURLParameter(url, "id", position["id"] );
     if(position["debugging"] == "true") url = updateURLParameter(url, "debugging", position["debugging"]);
     window.location.href=url;
@@ -24,18 +24,17 @@ function IDSubmit(id, pw){
     pw = sha3_256(pw);  //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
     if(!debugging){
         $.ajax({
-            url: "http://smartku.bingha.me/php/idget.php",
-            type: "POST",
+            url: "http://localhost:3000/id-get",
+            type: "GET",
             data: {
                 id:id,
-                pw:pw,
-                type:"id"
+                pw:pw
             },
             error: function(jqXHR, textStatus, errorThrown){
                 alert("failed");
             },
             success: function(data, status, xhr){
-                PageChange( JSON.parse(data));
+                PageChange(data);
             }
         });
 

@@ -65,7 +65,7 @@ function successCallback(position) {
 function RecordPositionGet(){
     if(!top.debugging){
         $.ajax({
-            url: "http://smartku.bingha.me/php/record-position-get.php",
+            url: "http://localhost:3000/record-position",
             type: "GET",
             error:function(request,status,error){
                 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -148,18 +148,14 @@ function MapPinWithRecord(data){
             };
 
             if(!fromclicked){           //지도에서 출발지 선택할때
-                from["lat"] = value.lat;
-                from["lng"] = value.lng;
-                from["name"] = value.name;
+                from = value;
                 infowindowopen("from");
                 $("#MapStartOrDest").html("도착지");
                 MarkerImageChange("Blue");
                 fromclicked = true;
             }
             else if(!toclicked){          //지도에서 도착지 선택할때
-                to["lat"] = value.lat;
-                to["lng"] = value.lng;
-                to["name"] = value.name;
+                to = value;
                 infowindowopen("to");;
                 MarkerImageChange("Red");
                 toclicked = true;
