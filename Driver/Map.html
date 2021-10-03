@@ -13,18 +13,35 @@
         <script>
             $(document).ready(function(){
                 StartMap();
+                setInterval(ChackReservation, 1000);
                 if(top.debugging){
                     $("#Map").height("80%");
                     $("#Debugging").show();
                     $("#Button").on("click", function(){
-                        console.log("Move to NewAlarm");
-                        window.location.href = "NewAlarm.html";
+                        MoveToNew();
                         return false;
                     });
-                }
-
-                
+                }                
             });
+            function ChackReservation(){
+                $.ajax({
+                    url: 'http://smartku.bingha.me/node/no-driver-request',
+                    type: 'GET',
+                    data:{},
+                    error: function (jqxhr,textStatus, errorThrown){
+                        console.log("Reservation Get Error");
+                    },
+                    success:function (data, textStatus, jqxhr){
+                        if(data.length != 0)
+                            MoveToNew(data);
+                    },
+                });
+            }
+            function MoveToNew(data){
+                console.log("Move to NewAlarm");
+                window.location.href = "NewAlarm.html";
+
+            }
         </script>
     </head>
     <body>
