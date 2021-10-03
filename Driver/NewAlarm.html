@@ -68,6 +68,12 @@
         $(document).ready(function(){
             PrintDarta("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
         });
+        $("#Accept").on("click",function(){
+
+        });
+        $("#Reject").on("click",function(){
+
+        });
         function PrintData(id, date, from, dest){
             //TBDJS for lim
         }
@@ -79,8 +85,8 @@
         <h1> 새로운 요청이 들어왔습니다 </h1>
         <div id="Picture"><i class="fas fa-map-marker-alt"></i></div>
         <div id="Response">
-            <button id="accept" onclick="Gotoaccept()">수락</button>
-            <button id="reject" onclick="Gotoreject()">거절</button>
+            <button id="Accept">수락</button>
+            <button id="Reject">거절</button>
         </div>
         <table id="customerdetail">
             <tr>
