@@ -46,8 +46,11 @@
             justify-content: center;
             align-items: center;
 
-            margin: 70px auto 0px auto;
+            margin: 0px auto;
+            position: relative;
+            top: 70px;
         }
+
         #BusSelect{
             width: 160px; height: 32px;
             background-color: violet;
@@ -73,7 +76,25 @@
         }
         
         #legend{
-            /*TBD CSS*/
+            margin: 25px 0px;
+        }
+        .color{
+            width: 16px; height: 16px; 
+        }
+
+        #ImpossibleColor{
+            background-color: #CCC2A3;
+        }
+        #ReservedColor{
+            background-color: #E7E5E8;
+        }
+        #PossibleColor{
+            background-color: #8C0000;
+        }
+        .SeatCondition{
+            font-size: 11px;
+            text-align: left;
+            padding: 0px 5px;
         }
 
         .next {
@@ -91,9 +112,7 @@
 
             color: white;
             font-size: 20px;
-            text-align: left;    
-
-            border-radius: 5px;        
+            text-align: left;          
         }
 
         .arrow{
@@ -171,7 +190,20 @@
                 <td><input type="submit" value="6번" class="chair selectable" id="six"></td>
             </tr>
         </table>
-        <div id="legend"></div>
+        <table id="legend">
+            <tr>
+                <td class="color" id="ImpossibleColor"></td>
+                <td class="SeatCondition">예약 불가능 좌석</td>
+            </tr>
+            <tr>
+                <td class="color" id="ReservedColor"></td>
+                <td class="SeatCondition">이미 예약된 좌석</td>
+            </tr>
+            <tr>
+                <td class="color" id="PossibleColor"></td>
+                <td class="SeatCondition">예약 가능 좌석</td>
+            </tr>
+        </table>
         <div id="HelperSelect">
             <input type="checkbox" id="Helper" value="help"><label for="Helper"> 도우미가 탑승합니다.</label>
         </div>

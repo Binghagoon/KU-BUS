@@ -1,48 +1,153 @@
 <!DOCTYPE html>
-<html lang = "ko">
-    <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width = device - width, initial - scale = 1.0">
-        <title>5페이지 6번</title>
-        <style>
-        </style>
-        <script src="../src/JQuery.js"></script>
-        <script>
-            $(document).ready(function(){
-                PrintDarta("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
-            });
-            function PrintData(from, dest, date, time, name, mp, email){
-                //TBDJS for han
-            }
-        </script>
+<html lang="en">
 
-    </head>
-    <body>
-        <h1>예약정보 확인하기</h1>
-        <div id="Reservation_Information">
-            <h3>선택된 위치 정보</h3>
-            <div>
-                <p>출발지: </p>
-                <p>도착지: </p>
-                <p>예약일: </p>
-                <p>픽업 시간대: </p>
-            </div>
-            <form action = "">
-                <fieldset>
-                    <legend>세부 정보 입력란</legend>
-                    <label>신청자명:</label><br>
-                    <input type="text" id="User_Name" size="20" autofocus placeholder="이름을 입력하세요." required><br><br>
-                    <label>연락처(모바일):</label><br>
-                    <input type="text" id="User_Phone_Number" size="20" placeholder="전화번호를 입력하세요." required><br><br>
-                    <label>신청자 이메일:</label><br>
-                    <input type="text" id="User_Email_Address" size="20" placeholder="이메일을 입력하세요." required><br><br>
-                    <button type="Submit">예약 신청</button><br>
-                    <button type="Cancel">뒤로 가기</button>
-                </fieldset>
-            </form>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5페이지 6번</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+    <style media="screen">
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        #header {
+            padding-left: 10px;
+            padding: 5px 10px 5px 18px;
+
+            background-color: white;
+            color: #8C0000;
+            font-size: 20px;
+            font-weight: bold;
+
+            box-shadow: 0px 0px 10px 0px black;
+
+            position: fixed;
+            top: 0px;
+            width: 100%;
+        }
+
+        #contents {
+            text-align: left;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            margin: 0px auto;
+            position: relative;
+            top: 70px;
+        }
+
+        h3 {
+            color: #8C0000;
+            font-size: 18px;
+            font-weight: bold;
+
+            padding: 0px 10px 0px 24px;
+            margin: 0px;
+        }
+
+        p {
+            margin: 8px 0px;
+        }
+
+        #timeplace {
+            padding: 0px 10px 0px 30px;
+        }
+
+        #detail {
+            margin: 0px 30px;
+        }
+
+        input{
+            width: 260px;
+        }
+
+        #buttons {
+            flex-wrap: wrap;
+
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+
+            margin: 10px 0px;
+        }
+
+        button {
+            width: 300px;
+            height: 40px;
+
+            box-shadow: 0px 0px 5px 0px darkgrey;
+
+            margin: 2px 5px;
+
+            border: none;
+            padding: 0px;
+        }
+        #submission{
+            background-color: #8C0000;
+            color: white;
+        }
+        #goback{
+            background-color: white;
+            color: #8C0000;
+            border:solid 3px #8C0000;
+        }
+
+    </style>
+    <script src="../src/JQuery.js"></script>
+    <script>
+        $(document).ready(function () {
+            PrintDarta("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+        });
+        function PrintData(from, dest, date, time, name, mp, email) {
+            //TBDJS for han
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="header"> 예약정보 확인하기 </div>
+    <div id="contents">
+        <h3>선택된 위치 정보</h3>
+        <div id="timeplace">
+            <p>출발지: </p>
+            <p>도착지: </p>
+            <p>예약일: </p>
+            <p>픽업 시간대: </p>
         </div>
-        <script>
+        <form action="">
+            <fieldset id="detail">
+                <legend>세부 정보 입력란</legend>
+                <label>신청자명:</label><br>
+                <input type="text" id="User_Name" size="20" autofocus placeholder="이름을 입력하세요." required><br><br>
+                <label>연락처(모바일):</label><br>
+                <input type="text" id="User_Phone_Number" size="20" placeholder="전화번호를 입력하세요." required><br><br>
+                <label>신청자 이메일:</label><br>
+                <input type="text" id="User_Email_Address" size="20" placeholder="이메일을 입력하세요." required><br><br>
+            </fieldset>
+            <div id="buttons">
+                <button id="submission" type="Submit">예약 신청</button>
+                <button id="goback" type="Cancel">뒤로 가기</button>
+            </div>
+        </form>
+    </div>
+    <script>
 
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>
