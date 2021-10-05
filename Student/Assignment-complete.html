@@ -11,7 +11,7 @@
     <script>
         $(document).ready(function(){
             StartMap();
-            $("#Cancel_Reservation_02").on("click", function(){
+            $("#CancelReservation").on("click", function(){
                 $.ajax({
                     url: "http://smartku.bingha.me/reservation-delete",
                     data:{
@@ -76,13 +76,13 @@
 
     </style>
     <body>
-        <div id="After_Assigning_Driver">
+        <div id="AfterAssigningDriver">
             <div id="Map">
 
             </div>
 
-            <div id="Real_Time_Information">
-                <div id="Minute_Left">
+            <div id="RealTimeInformation">
+                <div id="MinuteLeft">
                     <h4>기사님께서 이동 중이십니다. (%분 후 도착)</h4>
                 </div>
 
@@ -94,21 +94,21 @@
 
                 </div>
 
-                <div id="Car_Information">
+                <div id="CarInformation">
                     <h4>차량: %호차</h4>
                 </div>
             </div>
 
             <div id="Control">
-                <div id="Make_a_Call">
+                <div id="MakeCall">
                     <h3>전화하기</h3>
                 </div>
     
-                <div id="Send_a_Message">
+                <div id="SendMessage">
                     <h3>메시지 보내기</h3>
                 </div>
     
-                <div id="Cancel_Reservation_02">
+                <div id="CancelReservation">
                     <h3>취소하기</h3>
                 </div>
             </div>
