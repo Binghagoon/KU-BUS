@@ -65,8 +65,11 @@
     <script src="https://kit.fontawesome.com/83496dc54d.js" crossorigin="anonymous"></script>
     <script src="../src/JQuery.js"></script>
     <script>
+        var data;
         $(document).ready(function(){
-            PrintData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
+            //PrintData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
+            data = top.args["reqData"]; //ex: {name: 'asdf', time: '2021-10-03T11:32:40.000Z', now_name: '우당교양관', to_name: '정경대학과 타이거 프라자 사이'}
+            PrintData(data["name"], data["time"], data["now_name"], data["to_name"], null);
         });
         $("#Accept").on("click",function(){
 
@@ -74,8 +77,13 @@
         $("#Reject").on("click",function(){
 
         });
-        function PrintData(id, date, from, dest){
-            //TBDJS for lim
+        function PrintData(id, date, from, dest, carFull){
+            var td = $("#StudentDetail td");
+            td[0].append(id);
+            td[1].append(date);
+            td[2].append(from);
+            td[3].append(dest);
+            td[4].append(carFull);
         }
     </script>
 </head>
@@ -88,7 +96,7 @@
             <button id="Accept">수락</button>
             <button id="Reject">거절</button>
         </div>
-        <table id="customerdetail">
+        <table id="StudentDetail">
             <tr>
                 <td>요청자 이름 : </td>
             </tr>
