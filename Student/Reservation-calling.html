@@ -54,21 +54,28 @@
                 } else {
                     setInterval(()=> SuccessReservation(), 1000);
                 }
-                $("#Cancel_Reservation").click(function(){
+                $("#CancelReservation").click(function(){
                     $.ajax({
-                        url: "http://smartku.bingha.me/php/reservation-post.php",
-                        type: "GET",
-                        data: {
-                            "isStudent" : 1,
-                            "id":param.get("id")
+                        url: "http://smartku.bingha.me/node/reservation-delete",
+                        type:"POST",
+                        data:{
+                            "id": top.args["id"],
                         },
                         error: function(jqXHR, textStatus, errorThrown){
-                            alert("failed");
+                            console.log("Error");
+                            return false;
                         },
-                        success: function(data, status, xhr){
-                            parse = JSON.parse(data);
-                            //TBDJS
-                        }
+                        success: function(data, textStatus, jqXHR){
+                            console.log("Move to ConfirmReservation");
+                            window.location.href = "ConfirmReservation.html";
+                        },
+                        complete: function(jqXHR, textStatus){
+                            console.log("Complete");
+                        },
+                    })
+                    .done((data)=>{
+                        console.log("Done");
+                        console.log(data);
                     });
                 });
             });
