@@ -11,6 +11,21 @@
     <script>
         $(document).ready(function(){
             StartMap();
+            $("#Cancel_Reservation_02").on("click", function(){
+                $.ajax({
+                    url: "http://smartku.bingha.me/reservation-delete",
+                    data:{
+                        "id": top.args["id"],
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log("Error");
+                    },
+                    success: function(data, textStatus, jqXHR){
+                        console.log("Move to ConfirmReservation");
+                        window.location.href = "ConfirmReservation";
+                    }
+                })
+            })
         })
     </script>
     <style>
