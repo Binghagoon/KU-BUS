@@ -100,6 +100,7 @@
                             alert("failed");
                         },
                         success: function(data, status, xhr){
+                            if(data) data = data[0];
                             if(data["responcer_no"] != null){
                                 SuccessReservation();
                             }
@@ -114,7 +115,7 @@
             function SuccessReservation(){
                 top.args["stat"] ="wating";
                 // To be add argument
-                Console.log("Move to Assignment-Complete");
+                console.log("Move to Assignment-Complete");
                 window.location.href = "Assignment-Complete.html"
             }
             function CancelReservation(){
