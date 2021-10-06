@@ -70,12 +70,26 @@
             //PrintData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
             data = top.args["reqData"]; //ex: {name: 'asdf', time: '2021-10-03T11:32:40.000Z', now_name: '우당교양관', to_name: '정경대학과 타이거 프라자 사이'}
             PrintData(data["name"], data["time"], data["now_name"], data["to_name"], null);
-        });
-        $("#Accept").on("click",function(){
+            $("#Accept").on("click",function(){
+                $.ajax({
+                    url: "http://smartku.bingha.me/node/driver-select-request",
+                    type: "POST",
+                    data:{
+                        "responcer_id": top.args["id"],
+                        "requester_id": top.args["reqData"]["id"]
+                    },
+                    error: function(jqXHR, textstatus, errorthrown){
+                    },
+                    success: function(data, status, xhr){
+                        alert("Success");
+                        //TBD
+                    }
+                })
 
-        });
-        $("#Reject").on("click",function(){
+            });
+            $("#Reject").on("click",function(){
 
+            });
         });
         function PrintData(id, date, from, dest, carFull){
             var td = $("#StudentDetail td");
