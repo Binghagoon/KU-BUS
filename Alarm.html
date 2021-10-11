@@ -217,20 +217,8 @@
         }
     </style>
     <script>
-        var htm;
-        var spl;
-        var alarmcount =0;
-        function MyAlarm(text, from, img){
-            var message= spl[0] + alarmcount + spl[1] + img + spl[2] + from + spl[3] + text + spl[4];
-            $("#Alarms").append(message);
-            alarmcount++;
-            //$("#Alarms").html($("#Alarms").html()+ message);
-
-        }
         
         $(document).ready(function(){
-            htm = $("#AlarmTemplete").html();
-            spl = htm.split("+");
             $.ajax({
                 url:"http://smartku.bingha.me/php/alarm-sample.php",
                 type:"GET",
@@ -246,9 +234,6 @@
                     });
                 }
             })
-
-            MyAlarm("hello", "Me");
-            //MyAlarm("hell", "Me");
         });
 
     </script>
