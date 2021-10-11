@@ -13,7 +13,7 @@
         
         $(document).ready(function(){
             $.ajax({
-                url:"http://smartku.bingha.me/php/alarm-sample.php",
+                url: top.debugging ? "../src/alarmSample.json" : "http://smartku.bingha.me/node/alarm",
                 type:"GET",
                 data: {
                     id:id
@@ -22,9 +22,7 @@
                     alert("Error");
                 },
                 success: function(data, status, xhr){
-                    data.forEach(element => {
-                        MyAlarm(element.data, element.name);
-                    });
+                    //sj should be done here TBDJS
                 }
             })
         });
