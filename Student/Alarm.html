@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="src/JQuery.js"></script>
+    <script src="../src/JQuery.js"></script>
     <title>Driver Alarm</title>
     <link rel="stylesheet" type="text/css" href="../src/Alarm.css">
     <script>
@@ -15,7 +15,7 @@
                 url: top.debugging ? "../src/alarmSample.json" : "http://smartku.bingha.me/node/alarm",
                 type:"GET",
                 data: {
-                    id:id
+                    id:top.args["id"]
                 },
                 error: function(jqXHR, textstatus, errorthrown){
                     alert("Error");
