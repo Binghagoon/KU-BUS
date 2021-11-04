@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script src="src/JQuery.js"></script>
+        <script>
+            var params =  new URLSearchParams(window.location.search);
+
+            $.ajax({
+                url:"https://kauth.kakao.com/oauth/token",
+                type:"POST",
+                data: {
+                    grant_type: "authorization_code",
+                    client_id: "f0d540b36132f5297ab997d121a5c838",
+                    redirect_uri: "http://localhost:8080/KakaoLoginAuth.html",
+                    code: params.get("code"),
+                },
+                error: function(jqXHR, textstatus, errorthrown){
+                    alert("Error on login");
+                },
+                success: function(data, status, xhr){
+                    //bake_cookie("data", data);
+                    document.cookie = JSON.stringify(data);
+                    //alert("Sucess");
+                    window.location.href = "http://localhost:8080/KakaoLogin.html";
+                },
+            });
+            /// ref. with https://www.codegrepper.com/code-examples/javascript/save+object+to+cookie+javascript
+                function bake_cookie(name, value) {
+                    var cookie = [name, '=', JSON.stringify(value), '; domain=.', window.location.host.toString(), '; path=/;'].join('');
+                    document.cookie = cookie;
+                }
+            /// end ref.
+
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+</html>
