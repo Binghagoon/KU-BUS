@@ -2,4 +2,4 @@ etc
 test.html
 debug.log
 .vscode/
-src/keys,js
+src/keys.js
