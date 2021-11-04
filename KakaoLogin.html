@@ -118,7 +118,8 @@
             // 아래는 데모를 위한 UI 코드입니다.
             function displayToken() {
                 //const token = getCookie('authorize-access-token')
-                var cookie = JSON.parse(document.cookie);   //example: {access_token: 'ssKO9Ai7cRhA6YNoy7omYfZXms-FgqPTSpBUpQopcSEAAAF86oxbpQ', token_type: 'bearer', refresh_token: 'D4exsl7xtcJF0DY2e76maBfrRJVMv6NDR9v_aQopcSEAAAF86oxbpA', expires_in: 21599, scope: 'account_email profile_image profile_nickname'}
+                var cookie = JSON.parse(document.cookie);   //example: cookie = {access_token: 'ssKO9Ai7cRhA6YNoy7omYfZXms-FgqPTSpBUpQopcSEAAAF86oxbpQ', token_type: 'bearer', refresh_token: 'D4exsl7xtcJF0DY2e76maBfrRJVMv6NDR9v_aQopcSEAAAF86oxbpA', expires_in: 21599, scope: 'account_email profile_image profile_nickname'}
+                //TBD it is not general using of cookie
                 var token = cookie['access_token'];
                 if(token) {
                     Kakao.Auth.setAccessToken(token)
