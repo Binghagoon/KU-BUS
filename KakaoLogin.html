@@ -79,21 +79,32 @@
     <script>
         var debugging = false;
         var isStudent = true;
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('d2481bf8dd089370ad295dd73d94a65a');
         $(document).ready(function(){
             ////define button function
-                $("#EmbedLogin").click(function(){
-                    window.location.href = "./Login Page.html";
-                })
-                $("#Debug").click(function(){
-                    debugging = !debugging;
-                    if(debugging){
-                        $("#Debug").html("Debugging");
-                        $("#Class").show();
-                    }else{
-                        $("#Debug").html("Not Debugging");
-                        $("#Class").hide();
-                    }
-                });
+            $("#EmbedLogin").click(function(){
+                window.location.href = "./Login Page.html";
+            })
+            $("#Debug").click(function(){
+                debugging = !debugging;
+                if(debugging){
+                    $("#Debug").html("Debugging");
+                    $("#Class").show();
+                    $.cookie("Debugging", debugging);
+                }else{
+                    $("#Debug").html("Not Debugging");
+                    $("#Class").hide();
+                    $.cookie("Debugging", debugging);
+                }
+            });
+            $("#Logout").click(() => Kakao.Auth.logout(function(){
+                alert("Logout");
+            }));
+            $("#Class").click(function(){
+                isStudent = !isStudent;
+                $("#Class").html(isStudent ? "학생": "기사");
+            });
                 $("#Class").click(function(){
                     isStudent = !isStudent;
                     $("#Class").html(isStudent ? "학생": "기사");
@@ -105,12 +116,11 @@
                 });
             ////buttonfunction end
 
-            // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-            Kakao.init('d2481bf8dd089370ad295dd73d94a65a');
+            //displayToken();
 
             
             // SDK 초기화 여부를 판단합니다.
-            console.log(Kakao.isInitialized());
+            console.log(Kakao.isInitialized()? "Kakao API is Initialized.":"Kakao API isn't Initialized.");
 
             var cookie = $.cookie();
             var token = cookie['access_token'];
@@ -133,13 +143,15 @@
             console.log("Successfully Sign in via Kakao API");
             var role = data["role"];
             $.cookie("role", role);
-            var href;
+            var iframeHref;
             if(role =="STUDENT"){
-                href = "./Student/Map.html"
+                iframeHref = "./Student/Map.html"
             } else if (role == "DRIVER"){
-                href = "./Driver/Map.html"
+                iframeHref = "./Driver/Map.html"
             }
-            window.location.href = href;
+            $.cookie("iframeHref", iframeHref);
+
+            window.location.href = "./Frame.html";
         }
 
         function KUBUSSignin(responce){
@@ -218,6 +230,7 @@
             <div>
                 <tr id="LoginSuffix">
                     <td><button id="EmbedLogin" class="button">카카오 계정이 없으면!</button></td>
+                    <td><button id="Logout" class="button">로그아웃</button></td>
                     <td><button id="Debug" class="button">그외</button></td>
                     <td><button id="Class" class="button" hidden>학생</button></td>
                 </tr>
