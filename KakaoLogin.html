@@ -129,22 +129,33 @@
             }
             
         });
+        function SigninAfter(data){
+            console.log("Successfully Sign in via Kakao API");
+            var role = data["role"];
+            $.cookie("role", role);
+            var href;
+            if(role =="STUDENT"){
+                href = "./Student/Map.html"
+            } else if (role == "DRIVER"){
+                href = "./Driver/Map.html"
+            }
+            window.location.href = href;
+        }
 
         function KUBUSSignin(responce){
             $.ajax({
-                url: "./src/sign-in.json", //"http://smartku.bingha.me/node/sign-in",
+                url: "./src/json/sign-in-register.json", //"http://smartku.bingha.me/node/sign-in",
                 type:"GET",
                 data: responce,
                 error: function(jqXHR, textstatus, errorthrown){
                     alert("Error");
                 },
                 success: function(data, status, xhr){
-                    if(data[0]['notRegestered']){       //"[0]" will be deleted for live work
+                    if( data['notRegestered']){     //If user are not regisetered, sign up.
                         KUBUSSignup(data)
                     }
                     else {
-                        console.log("Succefully Sign in");
-                        //TBD redirect Nov. 5 13:48
+                        SigninAfter(data)
                     }
                 }
             });
