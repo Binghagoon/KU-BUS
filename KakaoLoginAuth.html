@@ -1,6 +1,7 @@
 <html>
     <head>
         <script src="src/JQuery.js"></script>
+        <script src="src/jqury.cookie.js"></script>
         <script>
             var params =  new URLSearchParams(window.location.search);
 
@@ -17,18 +18,13 @@
                     alert("Error on login");
                 },
                 success: function(data, status, xhr){
-                    //bake_cookie("data", data);
-                    document.cookie = JSON.stringify(data);
-                    //alert("Sucess");
+                    Object.keys(data).forEach((key)=>{
+                        var value = data[key];
+                        $.cookie(key, value);
+                    });
                     window.location.href = "http://localhost:8080/KakaoLogin.html";
                 },
             });
-            /// ref. with https://www.codegrepper.com/code-examples/javascript/save+object+to+cookie+javascript
-                function bake_cookie(name, value) {
-                    var cookie = [name, '=', JSON.stringify(value), '; domain=.', window.location.host.toString(), '; path=/;'].join('');
-                    document.cookie = cookie;
-                }
-            /// end ref.
 
         </script>
     </head>
