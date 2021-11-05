@@ -1,0 +1,11 @@
+[
+    {
+        "notRegestered": true,
+        "role": null
+    },
+    {
+        "notRegestered": false,
+        "role": "STUDENT"
+    }
+    
+]

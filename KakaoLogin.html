@@ -73,66 +73,118 @@
 
     </style>
     <script src="src/JQuery.js"></script>
-    <script src="src/sha3.js"></script>
-    <script src="src/urlParameter.js"></script>
+    <script src="src/jqury.cookie.js"></script>
     <script src="src/login.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
         var debugging = false;
         var isStudent = true;
         $(document).ready(function(){
-            $("#EmbedLogin").click(function(){
-                window.location.href = "./Login Page.html";
-            })
-            $("#Debug").click(function(){
-                debugging = !debugging;
-                if(debugging){
-                    $("#Debug").html("Debugging");
-                    $("#Class").show();
-                }else{
-                    $("#Debug").html("Not Debugging");
-                    $("#Class").hide();
-                }
-            });
-            $("#Class").click(function(){
-                isStudent = !isStudent;
-                $("#Class").html(isStudent ? "학생": "기사");
-            });
-            $("#LoginWithKakao").click(function(){
-                Kakao.Auth.authorize({
-                    redirectUri: 'http://localhost:8080/KakaoLoginAuth.html'
+            ////define button function
+                $("#EmbedLogin").click(function(){
+                    window.location.href = "./Login Page.html";
+                })
+                $("#Debug").click(function(){
+                    debugging = !debugging;
+                    if(debugging){
+                        $("#Debug").html("Debugging");
+                        $("#Class").show();
+                    }else{
+                        $("#Debug").html("Not Debugging");
+                        $("#Class").hide();
+                    }
                 });
-            });
+                $("#Class").click(function(){
+                    isStudent = !isStudent;
+                    $("#Class").html(isStudent ? "학생": "기사");
+                });
+                $("#LoginWithKakao").click(function(){
+                    Kakao.Auth.authorize({
+                        redirectUri: 'http://localhost:8080/KakaoLoginAuth.html'
+                    });
+                });
+            ////buttonfunction end
 
             // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
             Kakao.init('d2481bf8dd089370ad295dd73d94a65a');
 
+            
             // SDK 초기화 여부를 판단합니다.
             console.log(Kakao.isInitialized());
-                
-            displayToken();
-        });
-            
-        ////ref. with: https://developers.kakao.com/tool/demo/login/login
-        
-            // 아래는 데모를 위한 UI 코드입니다.
-            function displayToken() {
-                //const token = getCookie('authorize-access-token')
-                var cookie = JSON.parse(document.cookie);   //example: cookie = {access_token: 'ssKO9Ai7cRhA6YNoy7omYfZXms-FgqPTSpBUpQopcSEAAAF86oxbpQ', token_type: 'bearer', refresh_token: 'D4exsl7xtcJF0DY2e76maBfrRJVMv6NDR9v_aQopcSEAAAF86oxbpA', expires_in: 21599, scope: 'account_email profile_image profile_nickname'}
-                //TBD it is not general using of cookie
-                var token = cookie['access_token'];
-                if(token) {
-                    Kakao.Auth.setAccessToken(token)
-                    Kakao.Auth.getStatusInfo(({ status }) => {
-                        if(status === 'connected') {
-                        document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
-                        } else {
-                        Kakao.Auth.setAccessToken(null)
-                        }
-                    })
-                }
+
+            var cookie = $.cookie();
+            var token = cookie['access_token'];
+            if(Kakao.isInitialized() && token){
+                Kakao.Auth.setAccessToken(token);
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function(response) {
+                        console.log(response);
+                        KUBUSSignin(response);
+                    },
+                    fail: function(error) {
+                        console.log(error);
+                    }
+                });
             }
-        ////end ref.
+            
+        });
+
+        function KUBUSSignin(responce){
+            $.ajax({
+                url: "./src/sign-in.json", //"http://smartku.bingha.me/node/sign-in",
+                type:"GET",
+                data: responce,
+                error: function(jqXHR, textstatus, errorthrown){
+                    alert("Error");
+                },
+                success: function(data, status, xhr){
+                    if(data[0]['notRegestered']){       //"[0]" will be deleted for live work
+                        KUBUSSignup(data)
+                    }
+                    else {
+                        console.log("Succefully Sign in");
+                        //TBD redirect Nov. 5 13:48
+                    }
+                }
+            });
+        }
+
+        function KUBUSSignup(data){
+            $.ajax({
+                url: "http://smartku.bingha.me/node/sign-up",
+                type:"POST",
+                data: data,
+                error: function(jqXHR, textstatus, errorthrown){
+                    alert("Error on sign up");
+                    //a flow must be stopped here.
+                },
+                success: function(data, status, xhr){
+                    console.log("Succefully Sign up");
+                }
+            });
+        }
+
+        
+        function GetToken(){
+            var params =  new URLSearchParams(window.location.search)
+            Kakao.API.request({
+                url: '/oauth/token',
+                data: {
+                    grant_type: "authorization_code",
+                    client_id: "f0d540b36132f5297ab997d121a5c838",
+                    redirect_uri: "http://localhost:8080/KakaoLogin.html",
+                    code: params.get("code"),
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                fail: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+            
     </script>
 </head>
 
