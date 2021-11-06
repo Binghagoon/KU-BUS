@@ -73,7 +73,7 @@
 
     </style>
     <script src="src/JQuery.js"></script>
-    <script src="src/jqury.cookie.js"></script>
+    <script src="src/jquery.cookie.js"></script>
     <script src="src/login.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
@@ -83,21 +83,21 @@
         Kakao.init('d2481bf8dd089370ad295dd73d94a65a');
         $(document).ready(function(){
             ////define button function
-            $("#EmbedLogin").click(function(){
-                window.location.href = "./Login Page.html";
-            })
-            $("#Debug").click(function(){
-                debugging = !debugging;
-                if(debugging){
-                    $("#Debug").html("Debugging");
-                    $("#Class").show();
-                    $.cookie("Debugging", debugging);
-                }else{
-                    $("#Debug").html("Not Debugging");
-                    $("#Class").hide();
-                    $.cookie("Debugging", debugging);
-                }
-            });
+                $("#EmbedLogin").click(function(){
+                    window.location.href = "./Login Page.html";
+                })
+                $("#Debug").click(function(){
+                    debugging = !debugging;
+                    if(debugging){
+                        $("#Debug").html("Debugging");
+                        $("#Class").show();
+                        $.cookie("Debugging", debugging);
+                    }else{
+                        $("#Debug").html("Not Debugging");
+                        $("#Class").hide();
+                        $.cookie("Debugging", debugging);
+                    }
+                });
             $("#Logout").click(() => Kakao.Auth.logout(function(){
                 alert("Logout");
             }));
@@ -139,10 +139,13 @@
             }
             
         });
-        function SigninAfter(data){
+
+        function SigninAfter(responce, data){
             console.log("Successfully Sign in via Kakao API");
             var role = data["role"];
             $.cookie("role", role);
+            $.cookie("debugging", debugging);
+            $.cookie("id", responce["id"])
             var iframeHref;
             if(role =="STUDENT"){
                 iframeHref = "./Student/Map.html"
@@ -156,18 +159,18 @@
 
         function KUBUSSignin(responce){
             $.ajax({
-                url: "./src/json/sign-in-register.json", //"http://smartku.bingha.me/node/sign-in",
+                url: './src/json/sign-in-register.json', //"http://smartku.bingha.me/node/sign-in",
                 type:"GET",
                 data: responce,
                 error: function(jqXHR, textstatus, errorthrown){
-                    alert("Error");
+                    alert("Error on sign in");
                 },
                 success: function(data, status, xhr){
-                    if( data['notRegestered']){     //If user are not regisetered, sign up.
-                        KUBUSSignup(data)
+                    if( data['notRegistered']){     //If user are not regisetered, sign up.
+                        KUBUSSignup(responce)
                     }
                     else {
-                        SigninAfter(data)
+                        SigninAfter(responce, data)
                     }
                 }
             });
@@ -178,9 +181,11 @@
                 url: "http://smartku.bingha.me/node/sign-up",
                 type:"POST",
                 data: data,
+                beforeSend: function(jqXHR, settings){
+                    alert("KUBUS서비스를 처음이용하시는것 같네요! 서버에 등록해드릴께요!");
+                },
                 error: function(jqXHR, textstatus, errorthrown){
                     alert("Error on sign up");
-                    //a flow must be stopped here.
                 },
                 success: function(data, status, xhr){
                     console.log("Succefully Sign up");
@@ -188,25 +193,6 @@
             });
         }
 
-        
-        function GetToken(){
-            var params =  new URLSearchParams(window.location.search)
-            Kakao.API.request({
-                url: '/oauth/token',
-                data: {
-                    grant_type: "authorization_code",
-                    client_id: "f0d540b36132f5297ab997d121a5c838",
-                    redirect_uri: "http://localhost:8080/KakaoLogin.html",
-                    code: params.get("code"),
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                fail: function(error) {
-                    console.log(error);
-                }
-            });
-        }
             
     </script>
 </head>
