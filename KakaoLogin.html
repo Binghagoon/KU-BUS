@@ -111,7 +111,7 @@
                 });
                 $("#LoginWithKakao").click(function(){
                     Kakao.Auth.authorize({
-                        redirectUri: 'http://localhost:8080/KakaoLoginAuth.html'
+                        redirectUri: window.location.origin + '/KakaoLoginAuth.html'
                     });
                 });
             ////buttonfunction end
