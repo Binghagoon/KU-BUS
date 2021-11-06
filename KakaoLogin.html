@@ -124,16 +124,17 @@
 
             var cookie = $.cookie();
             var token = cookie['access_token'];
-            if(Kakao.isInitialized() && token){
+            if(Kakao.isInitialized() && token && document.referrer.includes('KakaoLoginAuth')){
                 Kakao.Auth.setAccessToken(token);
                 Kakao.API.request({
                     url: '/v2/user/me',
                     success: function(response) {
-                        console.log(response);
+                        //console.log(response);
                         KUBUSSignin(response);
                     },
                     fail: function(error) {
                         console.log(error);
+                        alert(error);
                     }
                 });
             }
