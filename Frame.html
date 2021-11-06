@@ -89,11 +89,34 @@
         </style>
         <script src="src/getQuery.js"></script>
         <script src="src/JQuery.js"></script>
+        <script src="src/jquery.cookie.js"></script>
         <script>
-            var args = get_query();  //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
-            args["stat"] = "reserving";
-            var debugging = args["debugging"];
-            
+            var args, debugging;
+            QueryDataLoad();
+            if(!args)   CookieDataLoad();
+
+            function QueryDataLoad(){       //will be deprecated.
+                console.log("Get data with query.");
+                args = get_query();  //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
+                if(!args['role']){
+                    console.log("Query failed.");
+                    args = false;
+                    return;
+                }
+                args["stat"] = "reserving";
+                debugging = args["debugging"];
+                //if(!args)
+            }
+
+            function CookieDataLoad(){
+                console.log("Get data with cookie.");
+                var cookie = $.cookie();
+                args = {};
+                args["role"] = cookie["role"];
+                args["id"] = cookie["id"];
+                args["stat"] = "reserving";
+                //console.log(cookie);
+            }
         </script>
         <script src="src/buttonMove.js"></script>
     </head>

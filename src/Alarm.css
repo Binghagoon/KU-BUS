@@ -1,0 +1,207 @@
+.DriverNoticeHome {
+    background-color: white;
+    width: 320px;
+    height: 500px;
+    /*div를 가운데 위치로 오게하는 역할*/
+    margin: auto;
+}
+
+.Notice {
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: 470px;
+
+    border: 1px solid gray;
+}
+
+.Alarm {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 70px;
+}
+.Alarm:hover {background-color: rgb(231, 231, 231); }
+
+.AlarmImage{
+    box-shadow: 0px 0px 4px 0px darkgray;
+    width: 48px;
+    height: 48px;
+    border-radius: 48px;
+    margin: 3px 8px 0px 0px;
+
+    background-image: url("고대 로고/emblem/emblem_01.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.AlarmContents{
+    width: 220px;
+    height: 70px;
+    padding: 0px 5px;
+}
+.Alarmer{
+    font-size: 12px;
+    margin-top: 18px;
+    margin-bottom: 0px;
+
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
+}
+.AlarmTitle{
+    font-size: 10px;
+    margin: 3px 0px;
+
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
+}
+
+.MainSuffix {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    top: 80%;
+    margin: auto;
+
+    text-align: center;
+    text-decoration: none;
+}
+
+.MainSuffix>button {
+    display: block;
+    width: 80px;
+    height: 30px;
+    border: 1px solid gray;
+    padding-top: 5px;
+}
+
+#NoticeHome {
+    border-bottom: 5px solid darkred;
+    border-top: 0px;
+    background-color: white;
+}
+.DriverNoticeHome {
+    background-color: white;
+    width: 320px;
+    height: 450px;
+    /*div를 가운데 위치로 오게하는 역할*/
+    margin: auto;
+}
+
+.Notice {
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: 470px;
+
+    box-shadow: 0px 0px 20px -3px gray;
+}
+
+.Alarm {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 70px;
+}
+.Alarm:hover {background-color: rgb(231, 231, 231); }
+
+.AlarmImage{
+    box-shadow: 0px 0px 4px 0px darkgray;
+    width: 48px;
+    height: 48px;
+    border-radius: 48px;
+    margin: 3px 8px 0px 0px;
+
+    background-image: url("Korea Univ. Logo/emblem/emblem_01.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.AlarmContents{
+    width: 220px;
+    height: 70px;
+    padding: 0px 5px;
+}
+.Alarmer{
+    font-size: 12px;
+    margin-top: 18px;
+    margin-bottom: 0px;
+
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
+}
+.AlarmTitle{
+    font-size: 10px;
+    margin: 3px 0px;
+
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
+}
+
+.MainSuffix {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    margin: auto;
+
+    text-align: center;
+    text-decoration: none;
+
+    box-shadow: 0px -3px 20px -3px gray;
+}
+
+.MainSuffix>button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 아마 내용물 위아래중앙으로 정렬*/
+    align-items: center;
+    /* 내용물 좌우 가운데 정렬*/
+
+    margin: auto;
+    width: 80px;
+    height: 50px;
+    border: 1px gray;
+    padding-top: 2px;
+    background-color: white;
+
+    font-size: 6px;
+}
+
+.MainSuffix>button>img {
+    margin-bottom: 2px;
+    -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
+    filter: opacity(0.5) drop-shadow(0 0 0 gray);
+    }
+
+#NoticeHome {
+    color: darkred;
+    border-top: 0px;
+    background-color: white;
+    border-top: 3px solid darkred;
+}
+
+#NoticeHome>img {
+    -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+    filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+}
+.template{
+    display: none;
+}

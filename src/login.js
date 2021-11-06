@@ -40,8 +40,8 @@ function IDSubmit(id, pw){
         });
 
     }else{
-        var student = { id:"asdf", name:"student", no:"1", debugging:"true"}
-        var driver = { id:"asdf", name:"driver", no:"1", debugging:"true"}
+        var student = { role:"STUDENT", id:"asdf", name:"student", no:"1", debugging:"true"}
+        var driver = { role:"DRIVER", id:"asdf", name:"driver", no:"1", debugging:"true"}
         var val = isStudent ? student: driver;
         PageChange(val);
     }

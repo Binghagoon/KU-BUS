@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="src/JQuery.js"></script>
+        <script src="src/jquery.cookie.js"></script>
+        <script>
+            var params =  new URLSearchParams(window.location.search);
+
+            $.ajax({
+                url:"https://kauth.kakao.com/oauth/token",
+                type:"POST",
+                data: {
+                    grant_type: "authorization_code",
+                    client_id: "f0d540b36132f5297ab997d121a5c838",
+                    redirect_uri: "http://localhost:8080/KakaoLoginAuth.html",
+                    code: params.get("code"),
+                },
+                error: function(jqXHR, textstatus, errorthrown){
+                    alert("Error on login");
+                },
+                success: function(data, status, xhr){
+                    Object.keys(data).forEach((key)=>{
+                        var value = data[key];
+                        $.cookie(key, value);
+                    });
+                    window.location.href = "http://localhost:8080/KakaoLogin.html";
+                },
+            });
+
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+</html>

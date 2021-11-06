@@ -24,7 +24,7 @@ $(function(){
 
 function Click(to){
     var src = pages[to] + ".html";
-    if(to == 1 || to == 2 || to == 4){
+    if(to == 1 || to == 2 || to == 3 || to == 4){
         src = pre[args["role"]] + "/" + src;
     }
     ifr.attr("src", src + window.location.search);
