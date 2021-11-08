@@ -4,8 +4,8 @@ var now = 2;
 var buttons = [];
 var pages = [];
 var firstPage ={
-    undefined:"/Student/Firstpage.html",
-    "STUDENT":"/Student/Firstpage.html",
+    undefined:"/Student/FirstPage.html",
+    "STUDENT":"/Student/FirstPage.html",
     "DRIVER":"/Driver/Map.html"
 };
 
