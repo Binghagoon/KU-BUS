@@ -111,7 +111,7 @@
                 });
                 $("#LoginWithKakao").click(function(){
                     Kakao.Auth.authorize({
-                        redirectUri: 'http://localhost:8080/KakaoLoginAuth.html'
+                        redirectUri: window.location.origin + '/KakaoLoginAuth.html'
                     });
                 });
             ////buttonfunction end
@@ -149,13 +149,13 @@
             $.cookie("id", responce["id"])
             var iframeHref;
             if(role =="STUDENT"){
-                iframeHref = "./Student/Map.html"
+                iframeHref = "/Student/Map.html"
             } else if (role == "DRIVER"){
-                iframeHref = "./Driver/Map.html"
+                iframeHref = "/Driver/Map.html"
             }
-            $.cookie("iframeHref", iframeHref);
+            $.cookie("iframeHref", window.location.origin + iframeHref);
 
-            window.location.href = "./Frame.html";
+            window.location.href = window.location.origin + "/Frame.html";
         }
 
         function KUBUSSignin(responce){

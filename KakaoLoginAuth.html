@@ -11,7 +11,7 @@
                 data: {
                     grant_type: "authorization_code",
                     client_id: "f0d540b36132f5297ab997d121a5c838",
-                    redirect_uri: "http://localhost:8080/KakaoLoginAuth.html",
+                    redirect_uri: window.location.origin + "/KakaoLoginAuth.html",
                     code: params.get("code"),
                 },
                 error: function(jqXHR, textstatus, errorthrown){
@@ -22,7 +22,7 @@
                         var value = data[key];
                         $.cookie(key, value);
                     });
-                    window.location.href = "http://localhost:8080/KakaoLogin.html";
+                    window.location.href = window.location.origin + "/KakaoLogin.html";
                 },
             });
 

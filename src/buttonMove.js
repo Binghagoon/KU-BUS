@@ -4,9 +4,9 @@ var now = 2;
 var buttons = [];
 var pages = [];
 var firstPage ={
-    undefined:"./Student/Firstpage.html",
-    "STUDENT":"./Student/Firstpage.html",
-    "DRIVER":"./Driver/Map.html"
+    undefined:"/Student/Firstpage.html",
+    "STUDENT":"/Student/Firstpage.html",
+    "DRIVER":"/Driver/Map.html"
 };
 
 $(function(){
@@ -19,13 +19,13 @@ $(function(){
     buttons[2].on("click",() => Click(2));
     buttons[3].on("click",() => Click(3));
     buttons[4].on("click",() => Click(4));
-    ifr.attr("src",firstPage[args["role"]]);        //frame's first page
+    ifr.attr("src", window.location.origin + firstPage[args["role"]]);        //frame's first page
 });
 
 function Click(to){
     var src = pages[to] + ".html";
     if(to == 1 || to == 2 || to == 3 || to == 4){
-        src = pre[args["role"]] + "/" + src;
+        src = pre[args["role"]] + "/" + src;    //it should be attach window.location.origin, if error is rising then attach it.
     }
     ifr.attr("src", src + window.location.search);
     buttons[to].addClass("select");
