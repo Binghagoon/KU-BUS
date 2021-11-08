@@ -1,13 +1,114 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-    <head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
 
-    </head>
-    <body>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
 
-    </body>
+        body{
+            background-image: url("file:///C:/Users/User/Documents/GitHub/KU-BUS/Korea%20Univ.%20Logo/Image/Student_FirstPage_ash.jpg");
+            background-repeat: no-repeat;
+            background-position: -16px -140px;
+            -webkit-backdrop-filter: opacity(0.9) brightness(0.7);
+            backdrop-filter: opacity(0.9) brightness(0.7);
+        }
+        
+        @media screen and (min-width: 450px) {
+            body {
+                background-size: cover;
+                background-position: 0px -140px;
+            }
+        }
+        .greeting{
+            color: white;
+            padding: 80px 0px 20px;
+            font-size: 18px;
+            margin: 0px 20px
+        }
+        .name{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .backboard{
+            background-color: white;
+            box-shadow: 0px 0px 10px 0px black;
+            width: 100%; height: 436px;
+            position:absolute;
+            bottom: 0px;
+        }
+        table{
+            width: 300px;
+            margin: 20px auto;
+        }
+        tr{
+            text-align: left;
+        }
+        li{
+            width: 300px;
+            margin: 4px auto;
+            font-weight: bold;
+            color: #8C0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="greeting"><span class="name">홍길동 </span>님, 안녕하세요!</div>
+    <div class="backboard">
+        <table class= "major">
+            <tr>
+                <th>학부/학과</th>
+            </tr>
+            <tr>
+                <td>경영학부</td>
+            </tr>
+        </table>
+        <table class= "student_number">
+            <tr>
+                <th>학번</th>
+            </tr>
+            <tr>
+                <td>1905041800</td>
+            </tr>
+        </table>
+        <table class= "phone" >
+            <tr>
+                <th>연락처(모바일)</th>
+            </tr>
+            <tr>
+                <td>010-0000-0000</td>
+            </tr>
+        </table>
+        <table class= "email" >
+            <tr>
+                <th>이메일</th>
+            </tr>
+            <tr>
+                <td>address1004@korea.ac.kr</td>
+            </tr>
+        </table>
+        <ul>
+            <li>문의 안내</li>
+            <li>Application Information</li>
+        </ul>
+    </div>
+</body>
 
 </html>
-
