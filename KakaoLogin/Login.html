@@ -111,7 +111,7 @@
                 });
                 $("#LoginWithKakao").click(function(){
                     Kakao.Auth.authorize({
-                        redirectUri: window.location.origin + '/KakaoLoginAuth.html'
+                        redirectUri: window.location.origin + '/KakaoLogin/Auth.html'
                     });
                 });
             ////buttonfunction end
@@ -124,7 +124,7 @@
 
             var cookie = $.cookie();
             var token = cookie['access_token'];
-            if(Kakao.isInitialized() && token && document.referrer.includes('KakaoLoginAuth')){
+            if(Kakao.isInitialized() && token && document.referrer.includes('Auth')){
                 Kakao.Auth.setAccessToken(token);
                 Kakao.API.request({
                     url: '/v2/user/me',
