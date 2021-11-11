@@ -72,9 +72,9 @@
         #LoginSubmit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
 
     </style>
-    <script src="src/JQuery.js"></script>
-    <script src="src/jquery.cookie.js"></script>
-    <script src="src/login.js"></script>
+    <script src="../src/JQuery.js"></script>
+    <script src="../src/jquery.cookie.js"></script>
+    <script src="../src/login.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
         var debugging = false;
@@ -84,7 +84,7 @@
         $(document).ready(function(){
             ////define button function
                 $("#EmbedLogin").click(function(){
-                    window.location.href = "./Login Page.html";
+                    window.location.href = "../Login Page.html";
                 })
                 $("#Debug").click(function(){
                     debugging = !debugging;
@@ -202,7 +202,7 @@
     <div id="LoginPage">
         <div id="Login">
             <div id="KU_logo">
-                <img src ="Korea Univ. Logo/emblem/emblem_01.gif">
+                <img src ="../Korea Univ. Logo/emblem/emblem_01.gif">
             </div>
             <h1>고려대 배리어프리 카풀 <div class="br"> KUBUS</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
             <h2>이동지원차량서비스</h2>
