@@ -56,7 +56,7 @@
                 }
                 $("#CancelReservation").click(function(){
                     $.ajax({
-                        url: "http://smartku.bingha.me/node/reservation-delete",
+                        url: "https://smartku.bingha.me/node/reservation-delete",
                         type:"POST",
                         data:{
                             "id": top.args["id"],
@@ -91,7 +91,7 @@
                 if(!top.debugging){
                     var args = top.args;
                     $.ajax({
-                        url: "http://smartku.bingha.me/node/my-reservation-get",
+                        url: "https://smartku.bingha.me/node/my-reservation-get",
                         type: "GET",
                         data: {
                             "id":args["id"],
