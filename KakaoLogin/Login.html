@@ -122,8 +122,10 @@
             // SDK 초기화 여부를 판단합니다.
             console.log(Kakao.isInitialized()? "Kakao API is Initialized.":"Kakao API isn't Initialized.");
 
-            var cookie = $.cookie();
-            var token = cookie['access_token'];
+            //var cookie = $.cookie();
+            //var token = cookie['access_token'];
+            var params = new URLSearchParams(window.location.search);
+            var token = params.get('access_token');
             if(Kakao.isInitialized() && token && document.referrer.includes('Auth')){
                 Kakao.Auth.setAccessToken(token);
                 Kakao.API.request({
@@ -133,7 +135,7 @@
                         KUBUSSignin(response);
                     },
                     fail: function(error) {
-                        console.log(error);
+                        console.log(error + "136");
                         alert(error);
                     }
                 });

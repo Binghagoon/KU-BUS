@@ -1,7 +1,6 @@
 <html>
     <head>
         <script src="../src/JQuery.js"></script>
-        <script src="../src/jquery.cookie.js"></script>
         <script>
             var params =  new URLSearchParams(window.location.search);
 
@@ -18,11 +17,11 @@
                     alert("Error on login");
                 },
                 success: function(data, status, xhr){
+                    const Url = new URL(window.location.origin + "/KakaoLogin/Login.html");
                     Object.keys(data).forEach((key)=>{
-                        var value = data[key];
-                        $.cookie(key, value);
+                        Url.searchParams.append(key,data[key]);
                     });
-                    window.location.href = window.location.origin + "/KakaoLogin/Login.html";
+                    window.location.href = Url.href;
                 },
             });
 
