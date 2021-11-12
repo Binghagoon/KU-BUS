@@ -103,7 +103,6 @@
             left: 50%;
             transform: translate(-50%, 0%);
 
-            background-color: #8C0000;
             border: none;
 
             width: 230px;
@@ -113,6 +112,21 @@
             color: white;
             font-size: 20px;
             text-align: left;          
+        }
+        .crimson{
+            background-color: #8C0000;
+        }
+        
+        .unselectable{
+            background-color: wheat;
+            color: black;
+        }
+        .unselected{
+            background-color: #8C0000;
+        }
+        .selected{
+            background-color: gray;
+            color: white;
         }
 
         .arrow{
@@ -128,36 +142,45 @@
         $(document).ready(function () {
             //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
             //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
+            var par = {
+                "three": 3,
+                "four": 4,
+                "five": 5,
+                "six": 6
+            }
+            var num;
             $(".chair.selectable").on("click", function () {
-                var v = $(".chair.selectable").attr("id");
-                var par = {
-                    "three": 3,
-                    "four": 4,
-                    "five": 5,
-                    "six": 6
-                }
-                ChairClicked(par[v]);
+                var thisJquery = $(this)
+                var v = thisJquery.attr("id");
+                num = par[v];
+                ChairClicked(par[v], thisJquery);
             });
             $(".chair.unselectable").on("click", () => alert('해당 좌석은 선택할 수 없습니다'));
+            $("#Next").on("click", function(){
+                if (!!navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        //Anam station
+                        lat = 37.586232954034564;
+                        lng = 127.02928291766814;
+                        //end
+                        parent.$("iframe").attr("src", window.location.origin + "/Student/Map.html?seatnum=" + num + '&latitude=' + lat + '&longitude=' + lng);
+
+                    }, () => alert('현재 위치를 가져올 수 없습니다.'));
+                } else {
+                    alert("현재 위치를 가져올 수 없습니다.");
+                }
+            });
         });
 
-        function ChairClicked(num) {
-            alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
+        function ChairClicked(num, button) {
+            //alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
+            $("#Selected").html($("#Selected").html().replace("seatnum", num));
+            button.removeClass("unselected");
+            button.addClass("selected");
+            $("#Next").addClass("crimson")
 
-            if (!!navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
-                    //Anam station
-                    lat = 37.586232954034564;
-                    lng = 127.02928291766814;
-                    //end
-                    parent.$("iframe").attr("src", window.location.origin + "/Student/Map.html?seatnum=" + num + '&latitude=' + lat + '&longitude=' + lng);
-
-                }, () => alert('현재 위치를 가져올 수 없습니다.'));
-            } else {
-                alert("현재 위치를 가져올 수 없습니다.");
-            }
         }
 
         function renderTR(target, idValueArr) {
@@ -206,10 +229,12 @@
         </table>
         <div id="HelperSelect">
             <input type="checkbox" id="Helper" value="help"><label for="Helper"> 도우미가 탑승합니다.</label>
+            <input type="checkbox" id="AnamStation" ><label> 안암역 </label>
         </div>
+        <div id="Selected" hidden> seatnum번 좌석 선택</div>
     </div>
-    <button class="next"> Next 
-        <img class="arrow" src="file:///C:/Users/User/Documents/GitHub/KU-BUS/Korea%20Univ.%20Logo/Image/right%20arrow.png">
+    <button id="Next" class="next"> Next 
+        <img class="arrow" src="../Korea%20Univ.%20Logo/Image/right%20arrow.png">
     </button>
 </body>
 
