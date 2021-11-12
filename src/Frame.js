@@ -12,8 +12,8 @@ var firstPage ={
 $(function(){
     ifr =  $("#Iframe");
     buttonParent = $("FrameSuffix");
-    buttons = [ undefined , $("#ReservationHome"), $("#MapHome"), $("#NoticeHome"), $("#MyInfoHome") ]
-    pages = [ undefined, "Reservation", "Map", "Alarm", "MyPage" ]
+    buttons = [ undefined , $("#MapHome"), $("#ReservationHome"), $("#NoticeHome"), $("#MyInfoHome") ]
+    pages = [ undefined, "Map", "Reservation", "Alarm", "MyPage" ]
     pre = { "STUDENT" : "Student", "DRIVER" : "Driver"};
     buttons[1].on("click",() => Click(1));
     buttons[2].on("click",() => Click(2));
@@ -23,10 +23,9 @@ $(function(){
 });
 
 function Click(to){
-    var src = pages[to] + ".html";
-    if(to == 1 || to == 2 || to == 3 || to == 4){
-        src = pre[args["role"]] + "/" + src;    //it should be attach window.location.origin, if error is rising then attach it.
-    }
+    var src = pre[args["role"]] + "/" + pages[to] + ".html";
+        src =  + src;    //it should be attach window.location.origin, if error is rising then attach it.
+
     ifr.attr("src", src + window.location.search);
     buttons[to].addClass("select");
     buttons[now].removeClass("select");

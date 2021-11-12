@@ -95,13 +95,18 @@
             QueryDataLoad();
             if(!args)   CookieDataLoad();
 
-            function QueryDataLoad(){       //will be deprecated.
+            function QueryDataLoad(){       //will be deprecated. // but debugingsession needed.
                 console.log("Get data with query.");
                 args = get_query();  //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
                 if(!args['role']){
-                    console.log("Query failed.");
+                    console.log("Query failed. It's normal");
                     args = false;
                     return;
+                }
+                else{
+                    console.log("Please use cookie!");
+                    var e = new Error("Please use cookie!");
+                    console.log(e.stack);
                 }
                 args["stat"] = "reserving";
                 debugging = args["debugging"];
@@ -118,7 +123,7 @@
                 //console.log(cookie);
             }
         </script>
-        <script src="src/buttonMove.js"></script>
+        <script src="src/Frame.js"></script>
     </head>
 
     <body>
@@ -129,8 +134,8 @@
                 </iframe>
             </div>
             <div id="FrameSuffix">
-                <button id="ReservationHome">예약내역</button>
                 <button id="MapHome" class="select">지도</button>
+                <button id="ReservationHome">예약내역</button>
                 <button id="NoticeHome">알림</button>
                 <button id="MyInfoHome">내 정보</button>
 
