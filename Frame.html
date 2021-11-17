@@ -87,40 +87,24 @@
                 filter: opacity(0.5) drop-shadow(0 0 0 gray);
             }
         </style>
-        <script src="src/getQuery.js"></script>
         <script src="src/JQuery.js"></script>
-        <script src="src/jquery.cookie.js"></script>
         <script>
             var args, debugging;
-            QueryDataLoad();
-            if(!args)   CookieDataLoad();
+            var one = 1;
 
-            function QueryDataLoad(){       //will be deprecated. // but debugingsession needed.
+            QueryDataLoad();
+            function QueryDataLoad(){
                 console.log("Get data with query.");
                 args = get_query();  //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
-                if(!args['role']){
-                    console.log("Query failed. It's normal");
-                    args = false;
-                    return;
-                }
-                else{
-                    console.log("Please use cookie!");
-                    var e = new Error("Please use cookie!");
-                    console.log(e.stack);
-                }
+
                 args["stat"] = "reserving";
-                debugging = args["debugging"];
+                debugging = (args["debugging"] === 'true');
                 //if(!args)
             }
+            function get_query(){
+                var sp = new URLSearchParams(window.location.search);
+               return Object.fromEntries(sp);
 
-            function CookieDataLoad(){
-                console.log("Get data with cookie.");
-                var cookie = $.cookie();
-                args = {};
-                args["role"] = cookie["role"];
-                args["id"] = cookie["id"];
-                args["stat"] = "reserving";
-                //console.log(cookie);
             }
         </script>
         <script src="src/Frame.js"></script>
