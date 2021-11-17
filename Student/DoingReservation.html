@@ -47,6 +47,9 @@
         <script src="../src/getQuery.js"></script>
         <script>
             var parse;
+
+            window.onbeforeunload = CancelReservation;
+
             $(document).ready(function(){
                 PrintData(top.args["from"]["name"],top.args["to"]["name"]);
                 if(!top.debugging){
@@ -54,30 +57,7 @@
                 } else {
                     setInterval(()=> SuccessReservation(), 1000);
                 }
-                $("#CancelReservation").click(function(){
-                    $.ajax({
-                        url: "https://smartku.bingha.me/node/reservation-delete",
-                        type:"POST",
-                        data:{
-                            "id": top.args["id"],
-                        },
-                        error: function(jqXHR, textStatus, errorThrown){
-                            console.log("Error");
-                            return false;
-                        },
-                        success: function(data, textStatus, jqXHR){
-                            console.log("Move to ConfirmReservation");
-                            window.location.href = "ConfirmReservation.html";
-                        },
-                        complete: function(jqXHR, textStatus){
-                            console.log("Complete");
-                        },
-                    })
-                    .done((data)=>{
-                        console.log("Done");
-                        console.log(data);
-                    });
-                });
+                $("#CancelReservation").click(CancelReservation);
             });
 
             function PrintData(fromName, toName){
@@ -119,6 +99,21 @@
                 window.location.href = "Assignment-Complete.html"
             }
             function CancelReservation(){
+                $.ajax({
+                    url: "https://smartku.bingha.me/node/reservation-delete",
+                    type:"POST",
+                    data:{
+                        "id": top.args["id"],
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log("Error");
+                        return false;
+                    },
+                    success: function(data, textStatus, jqXHR){
+                        console.log("Move to CallReservation");
+                        window.location.href = "CallReservation.html";
+                    },
+                });
             }
 
         </script>
