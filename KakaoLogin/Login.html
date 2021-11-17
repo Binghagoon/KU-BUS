@@ -77,27 +77,23 @@
     <script src="../src/login.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
-        var debugging = false;
-        var isStudent = true;
         // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('d2481bf8dd089370ad295dd73d94a65a');
         $(document).ready(function(){
-            ////define button function
-                $("#EmbedLogin").click(function(){
-                    window.location.href = "../Login Page.html";
-                })
-                $("#Debug").click(function(){
-                    debugging = !debugging;
-                    if(debugging){
-                        $("#Debug").html("Debugging");
-                        $("#Class").show();
-                        $.cookie("Debugging", debugging);
-                    }else{
-                        $("#Debug").html("Not Debugging");
-                        $("#Class").hide();
-                        $.cookie("Debugging", debugging);
-                    }
-                });
+            $("#EmbedLogin").click(function(){
+                console.log("goto embed login");
+                window.location.href = "../Login Page.html";
+            })
+            $("#Debug").click(function(){
+                debugging = !debugging;
+                if(debugging){
+                    $("#Debug").html("Debugging");
+                    $("#Class").show();
+                }else{
+                    $("#Debug").html("Not Debugging");
+                    $("#Class").hide();
+                }
+            });
             $("#Logout").click(() => Kakao.Auth.logout(function(){
                 alert("Logout");
             }));
@@ -105,98 +101,16 @@
                 isStudent = !isStudent;
                 $("#Class").html(isStudent ? "학생": "기사");
             });
-                $("#Class").click(function(){
-                    isStudent = !isStudent;
-                    $("#Class").html(isStudent ? "학생": "기사");
+            $("#Class").click(function(){
+                isStudent = !isStudent;
+                $("#Class").html(isStudent ? "학생": "기사");
+            });
+            $("#LoginWithKakao").click(function(){
+                Kakao.Auth.authorize({
+                    redirectUri: window.location.origin + '/KakaoLogin/Auth.html'
                 });
-                $("#LoginWithKakao").click(function(){
-                    Kakao.Auth.authorize({
-                        redirectUri: window.location.origin + '/KakaoLogin/Auth.html'
-                    });
-                });
-            ////buttonfunction end
-
-            //displayToken();
-
-            
-            // SDK 초기화 여부를 판단합니다.
-            //console.log(Kakao.isInitialized()? "Kakao API is Initialized.":"Kakao API isn't Initialized.");
-
-            //var cookie = $.cookie();
-            //var token = cookie['access_token'];
-            var params = new URLSearchParams(window.location.search);
-            var token = params.get('access_token');
-            if(Kakao.isInitialized() && token && document.referrer.includes('Auth')){
-                Kakao.Auth.setAccessToken(token);
-                Kakao.API.request({
-                    url: '/v2/user/me',
-                    success: function(response) {
-                        //console.log(response);
-                        KUBUSSignin(response);
-                    },
-                    fail: function(error) {
-                        console.log(error);
-                        alert(error);
-                    }
-                });
-            }
-            
+            });           
         });
-
-        function SigninAfter(responce, data){
-            console.log("Successfully Sign in via Kakao API");
-            var role = data["role"];
-            $.cookie("role", role);
-            $.cookie("debugging", debugging);
-            $.cookie("id", responce["id"])
-            var iframeHref;
-            if(role =="STUDENT"){
-                iframeHref = "/Student/Map.html"
-            } else if (role == "DRIVER"){
-                iframeHref = "/Driver/Map.html"
-            }
-            $.cookie("iframeHref", window.location.origin + iframeHref);
-
-            window.location.href = window.location.origin + "/Frame.html";
-        }
-
-        function KUBUSSignin(responce){
-            $.ajax({
-                url: "https://smartku.bingha.me/node/sign-in",
-                type:"GET",
-                data: responce,
-                error: function(jqXHR, textstatus, errorthrown){
-                    alert("Error on sign in");
-                },
-                success: function(data, status, xhr){
-                    if( data['notRegistered']){     //If user are not regisetered, sign up.
-                        KUBUSSignup(responce)
-                    }
-                    else {
-                        SigninAfter(responce, data)
-                    }
-                }
-            });
-        }
-
-        function KUBUSSignup(data){
-            data['role'] ='STUDENT'
-            $.ajax({
-                url: "http://smartku.bingha.me/node/sign-up",
-                type:"POST",
-                data: data,
-                beforeSend: function(jqXHR, settings){
-                    alert("KUBUS서비스를 처음이용하시는것 같네요! 학생으로 서버에 등록해드릴께요!");
-                },
-                error: function(jqXHR, textstatus, errorthrown){
-                    alert("Error on sign up");
-                },
-                success: function(data, status, xhr){
-                    console.log("Succefully Sign up");
-                }
-            });
-        }
-
             
     </script>
 </head>
