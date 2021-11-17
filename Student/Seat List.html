@@ -139,16 +139,16 @@
 
     <script src="../src/JQuery.js"></script>
     <script>
+        var par = {
+            "three": 3,
+            "four": 4,
+            "five": 5,
+            "six": 6
+        };
+        var seatnum = 0;
         $(document).ready(function () {
             //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
             //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
-            var par = {
-                "three": 3,
-                "four": 4,
-                "five": 5,
-                "six": 6
-            }
-            var num;
             $(".chair.selectable").on("click", function () {
                 var thisJquery = $(this)
                 var v = thisJquery.attr("id");
@@ -165,7 +165,11 @@
                         lat = 37.586232954034564;
                         lng = 127.02928291766814;
                         //end
-                        parent.$("iframe").attr("src", window.location.origin + "/Student/Map.html?seatnum=" + num + '&latitude=' + lat + '&longitude=' + lng);
+                        var url = new URLSearchParams();
+                        url.append("seatnum", seatnum);
+                        url.append("lat", lat);
+                        url.append("lng", lng);
+                        parent.$("iframe").attr("src", window.location.origin + "/Student/Map.html?"+ url.toString());
 
                     }, () => alert('현재 위치를 가져올 수 없습니다.'));
                 } else {
@@ -176,7 +180,10 @@
 
         function ChairClicked(num, button) {
             //alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
-            $("#Selected").html($("#Selected").html().replace("seatnum", num));
+            var sel = $("#Selected");
+            seatnum = num;
+            sel.html(sel.html().replace("seatnum", num));
+            sel.show();
             button.removeClass("unselected");
             button.addClass("selected");
             $("#Next").addClass("crimson")
