@@ -6,7 +6,8 @@ var pages = [];
 var firstPage ={
     undefined:"/Student/FirstPage.html",
     "STUDENT":"/Student/FirstPage.html",
-    "DRIVER":"/Driver/Map.html"
+    "DRIVER":"/Driver/Map.html",
+    "ADMINISTRATOR":"/Administrator/FirstPage.html",
 };
 
 $(function(){
