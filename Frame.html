@@ -93,6 +93,12 @@
             var one = 1;
 
             QueryDataLoad();
+            if (!!navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(LocationTrace, ()=>alert('현재 위치를 가져올 수 없습니다.'));
+            } else {
+                alert("현재 위치를 가져올 수 없습니다.");
+            }
+
             function QueryDataLoad(){
                 console.log("Get data with query.");
                 args = get_query();  //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
@@ -105,6 +111,45 @@
                 var sp = new URLSearchParams(window.location.search);
                return Object.fromEntries(sp);
 
+            }
+            function LocationTrace(position){
+                var coord = position.coords;
+                $.ajax({
+                    url: "https://smartku.bingha.me/node/my-location-insert",
+                    type: "POST",
+                    data: {
+                        'id':args['id'],
+                        'name':args['name'],
+                        'latitude': coord['latitude'],
+                        'longtitude': coord['longtitude'],
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("failed on insert location");
+                    },
+                    success: function(data, status, xhr){
+                        setInterval(LocationUpdate, 500);
+                    },
+                });
+            }
+            function LocationUpdate(position){
+                navigator.geolocation.getCurrentPosition((position)=>{
+                    var coord = position.coords;
+                    $.ajax({
+                        url: "https://smartku.bingha.me/node/my-location-update",
+                        type: "POST",
+                        data: {
+                            'id':args['id'],
+                            'name':args['name'],
+                            'latitude': coord['latitude'],
+                            'longtitude': coord['longtitude'],
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            alert("failed on location update");
+                        },
+                        success: function(data, status, xhr){
+                        },
+                    });
+                }, ()=>alert('현재 위치를 가져올 수 없습니다.'));
             }
         </script>
         <script src="src/Frame.js"></script>
@@ -127,6 +172,3 @@
         </div>
     </body>
 </html>
-
-<!-- 
--->
