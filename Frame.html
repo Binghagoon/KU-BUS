@@ -91,10 +91,11 @@
         <script>
             var args, debugging;
             var one = 1;
+            var cannotgetpositionerror = (more)=>{alert('현재 위치를 가져올 수 없습니다.' + more ? more:'');}
 
             QueryDataLoad();
             if (!!navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(LocationTrace, ()=>alert('현재 위치를 가져올 수 없습니다.'));
+                navigator.geolocation.getCurrentPosition(LocationTrace, cannotgetpositionerror);
             } else {
                 alert("현재 위치를 가져올 수 없습니다.");
             }
