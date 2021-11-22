@@ -99,6 +99,8 @@
             } else {
                 alert("현재 위치를 가져올 수 없습니다.");
             }
+            $(window).on('unload', LocationDelete);
+            window.onunload = LocationDelete;
 
             function QueryDataLoad(){
                 console.log("Get data with query.");
@@ -113,24 +115,45 @@
                return Object.fromEntries(sp);
 
             }
-            function LocationTrace(position){
-                var coord = position.coords;
-                $.ajax({
-                    url: "https://smartku.bingha.me/node/my-location-insert",
-                    type: "POST",
+
+            function LocationChack(){
+                var isValueExist;
+
+                $.when($.ajax({
+                    url: "https://smartku.bingha.me/node/my-location-select",
+                    type: "GET",
                     data: {
                         'id':args['id'],
-                        'name':args['name'],
-                        'latitude': coord['latitude'],
-                        'longitude': coord['longitude'],
                     },
                     error: function(jqXHR, textStatus, errorThrown){
-                        alert("failed on insert location");
+                        isValueExist = false;
                     },
                     success: function(data, status, xhr){
-                        setInterval(LocationUpdate, 500);
+                        isValueExist = true;
                     },
-                });
+                })).done();
+                
+            }
+            function LocationTrace(position){
+                var coord = position.coords;
+                //$.when(LocationDelete()).done( 
+                    $.ajax({
+                        url: "https://smartku.bingha.me/node/my-location-insert",
+                        type: "POST",
+                        data: {
+                            'id':args['id'],
+                            'latitude': coord['latitude'],
+                            'longitude': coord['longitude'],
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            alert("failed on insert location");
+                        },
+                        success: function(data, status, xhr){
+                            setInterval(LocationUpdate, 500);
+                        },
+                    })
+                //);
+               
             }
             function LocationUpdate(position){
                 navigator.geolocation.getCurrentPosition((position)=>{
@@ -140,7 +163,6 @@
                         type: "POST",
                         data: {
                             'id':args['id'],
-                            'name':args['name'],
                             'latitude': coord['latitude'],
                             'longitude': coord['longitude'],
                         },
@@ -151,6 +173,22 @@
                         },
                     });
                 }, ()=>alert('현재 위치를 가져올 수 없습니다.'));
+            }
+            function LocationDelete(){
+                $.ajax({
+                    url: "https://smartku.bingha.me/node/my-location-delete",
+                    type: "POST",
+                    //async: false,
+                    data: {
+                        'id':args['id'],
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log("failed on location delete");
+                    },
+                    success: function(data, status, xhr){
+                        console.log("Delete success");
+                    },
+                });
             }
         </script>
         <script src="src/Frame.js"></script>
