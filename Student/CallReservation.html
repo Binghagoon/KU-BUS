@@ -121,16 +121,21 @@
                                 alert("failed");
                             },
                             success: function(data, status, xhr){
-                                console.log("move toDoingReservation.html");
+                                console.log("move to DoingReservation.html");
                                 window.location.href ="DoingReservation.html";
                             }
                         });
                     } else {
-                        console.log("move toDoingReservation.html");
+                        console.log("move to DoingReservation.html");
                         window.location.href ="DoingReservation.html";
                     }
                     return false;
 
+                });
+                $("button#Cancel").click(function(){
+                    console.log("move to Map.html");
+                    window.location.href = "Map.html"
+                    return false;
                 });
             });
             function PrintData(from, dest, date, time, name, mp, email){
@@ -165,7 +170,7 @@
                     <label>신청자 이메일:</label><br>
                     <input type="text" id="UserEmailAddress" size="20" placeholder="이메일을 입력하세요."><br><br>
                     <button type="Submit" id="Submit">예약 신청</button><br>
-                    <button type="Cancel">뒤로 가기</button>
+                    <button type="Cancel" id="Cancel">뒤로 가기</button>
                 </fieldset>
             </form>
         </div>
