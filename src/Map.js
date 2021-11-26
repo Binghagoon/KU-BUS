@@ -73,7 +73,7 @@ function RecordPositionGet(){
             },
             success: function(data, status, xhr){
                 MapPinWithRecord(data);
-            }
+            },
         });
 
     } else{
@@ -87,6 +87,25 @@ function RecordPositionGet(){
             }
         });
     }
+}
+
+function DriverPositionGet(){
+    $.ajax({
+        url: 'https://smartku.bingha.me/node/driver-get',
+        data: {
+            "0":1,
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            alert("Error getting Driver Position");
+        },
+        success: function(data, status, xhr){
+           var position = data["position"];
+            PinDriver(position);
+        },
+    });
+}
+function PinDriver(position){
+    //TBD
 }
 
 function MapPinWithRecord(data){
