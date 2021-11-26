@@ -71,7 +71,7 @@
                 if(!top.debugging){
                     var args = top.args;
                     $.ajax({
-                        url: "https://smartku.bingha.me/node/my-reservation-get",
+                        url: "https://smartku.bingha.me/node/check-driver",
                         type: "GET",
                         data: {
                             "id":args["id"],
@@ -81,7 +81,8 @@
                         },
                         success: function(data, status, xhr){
                             if(data) data = data[0];
-                            if(data["responcer_no"] != null){
+                            if(data == undefined) return;
+                            if(data["id"] != null){
                                 SuccessReservation();
                             }
                         }
@@ -95,6 +96,7 @@
             function SuccessReservation(){
                 top.args["stat"] ="wating";
                 // To be add argument
+                window.onbeforeunload = ()=>{};
                 console.log("Move to Map.html");
                 window.location.href = "Map.html"
             }
