@@ -81,8 +81,9 @@
                     error: function(jqXHR, textstatus, errorthrown){
                     },
                     success: function(data, status, xhr){
-                        alert("Success");
-                        //TBD
+                        top.args["stat"] = "working";
+                        console.log("Move to Map.html");
+                        window.location.href = "Map.html";
                     }
                 })
 
