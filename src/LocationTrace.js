@@ -1,7 +1,6 @@
 
 function LocationChack(){       //TBD
     var isValueExist;
-
     $.when($.ajax({
         url: "https://smartku.bingha.me/node/my-location-select",
         type: "GET",
@@ -16,7 +15,25 @@ function LocationChack(){       //TBD
         },
     })).done();
     return isValueExist;
-    
+}
+function GetPositionById(id){
+    var val;
+    $.ajax({
+        url: "https://smartku.bingha.me/node/location-select",
+        type: "GET",
+        async: false,
+        data: {
+            'id':id,
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            isValueExist = false;
+        },
+        success: function(data, status, xhr){
+            val = data[0];
+        },
+    });
+    //console.log(val);
+    return val;
 }
 function LocationTrace(position){
     var coord = position.coords;
@@ -35,7 +52,7 @@ function LocationTrace(position){
             success: function(data, status, xhr){
                 setInterval(CheckGeolocation, 500);
             },
-        })
+        });
     //);
     
 }

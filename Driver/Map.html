@@ -21,8 +21,17 @@
                         MoveToNew([{name: 'asdf', time: '2021-10-03T11:32:40.000Z', now_name: '우당교양관', to_name: '정경대학과 타이거 프라자 사이'}]);
                         return false;
                     });
-                }                
+                }
+                if(top.args["stat"] == "working"){
+                    setInterval(()=>TraceStudent(top.args["id"]), 500);
+                }         
             });
+
+            function TraceStudent(id){
+                var position = top.GetPositionById(id);
+                UpdateAnother(position)
+            }
+
             function ChackReservation(){
                 $.ajax({
                     url: 'https://smartku.bingha.me/node/no-driver-request',
@@ -36,6 +45,7 @@
                     },
                 });
             }
+
             function MoveToNew(data){
                 top.args["reqData"] = data[0];
                 console.log("Move to NewAlarm");
