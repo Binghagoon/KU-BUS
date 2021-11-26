@@ -73,7 +73,7 @@ function RecordPositionGet(){
             },
             success: function(data, status, xhr){
                 MapPinWithRecord(data);
-            }
+            },
         });
 
     } else{
@@ -102,6 +102,25 @@ function CreateMarker(img, value, event){
         title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image : img // 마커 이미지 
     });
+}
+
+function DriverPositionGet(){
+    $.ajax({
+        url: 'https://smartku.bingha.me/node/driver-get',
+        data: {
+            "0":1,
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            alert("Error getting Driver Position");
+        },
+        success: function(data, status, xhr){
+           var position = data["position"];
+            PinDriver(position);
+        },
+    });
+}
+function PinDriver(position){
+    //TBD
 }
 
 function MapPinWithRecord(data){
