@@ -88,19 +88,22 @@
             }
         </style>
         <script src="src/JQuery.js"></script>
+        <script src="src/LocationTrace.js"></script>
         <script>
             var args, debugging;
             var one = 1;
             var cannotgetpositionerror = (more)=>{alert('현재 위치를 가져올 수 없습니다.' + more ? more:'');}
+            var count = 1;
 
             QueryDataLoad();
+            LocationChack();
             if (!!navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(LocationTrace, cannotgetpositionerror);
             } else {
                 alert("현재 위치를 가져올 수 없습니다.");
             }
-            $(window).on('unload', LocationDelete);
-            window.onunload = LocationDelete;
+            //$(window).on('unload', LocationDelete);
+            window.onbeforeunload = LocationDelete;
 
             function QueryDataLoad(){
                 console.log("Get data with query.");
@@ -116,80 +119,6 @@
 
             }
 
-            function LocationChack(){
-                var isValueExist;
-
-                $.when($.ajax({
-                    url: "https://smartku.bingha.me/node/my-location-select",
-                    type: "GET",
-                    data: {
-                        'id':args['id'],
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        isValueExist = false;
-                    },
-                    success: function(data, status, xhr){
-                        isValueExist = true;
-                    },
-                })).done();
-                
-            }
-            function LocationTrace(position){
-                var coord = position.coords;
-                //$.when(LocationDelete()).done( 
-                    $.ajax({
-                        url: "https://smartku.bingha.me/node/my-location-insert",
-                        type: "POST",
-                        data: {
-                            'id':args['id'],
-                            'latitude': coord['latitude'],
-                            'longitude': coord['longitude'],
-                        },
-                        error: function(jqXHR, textStatus, errorThrown){
-                            alert("failed on insert location");
-                        },
-                        success: function(data, status, xhr){
-                            setInterval(LocationUpdate, 500);
-                        },
-                    })
-                //);
-               
-            }
-            function LocationUpdate(position){
-                navigator.geolocation.getCurrentPosition((position)=>{
-                    var coord = position.coords;
-                    $.ajax({
-                        url: "https://smartku.bingha.me/node/my-location-update",
-                        type: "POST",
-                        data: {
-                            'id':args['id'],
-                            'latitude': coord['latitude'],
-                            'longitude': coord['longitude'],
-                        },
-                        error: function(jqXHR, textStatus, errorThrown){
-                            alert("failed on location update");
-                        },
-                        success: function(data, status, xhr){
-                        },
-                    });
-                }, ()=>alert('현재 위치를 가져올 수 없습니다.'));
-            }
-            function LocationDelete(){
-                $.ajax({
-                    url: "https://smartku.bingha.me/node/my-location-delete",
-                    type: "POST",
-                    //async: false,
-                    data: {
-                        'id':args['id'],
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        console.log("failed on location delete");
-                    },
-                    success: function(data, status, xhr){
-                        console.log("Delete success");
-                    },
-                });
-            }
         </script>
         <script src="src/Frame.js"></script>
     </head>
