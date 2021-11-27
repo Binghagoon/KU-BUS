@@ -10,6 +10,24 @@
                 $("button#Driver").click(function(){
                     window.location.href = "../Driver/Map.html";
                 });
+                $("button#Calling").click(function(){
+                    $.ajax({
+                            url: "https://smartku.bingha.me/node/reservation-post",
+                            type: "POST",
+                            data: {
+                                'now_place_no': 1,
+                                'to_place_no': 2,
+                                'id':top.args['id'],
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                alert("failed on Calling");
+                            },
+                            success: function(data, status, xhr){
+                                console.log("move to DoingReservation.html");
+                                window.location.href ="DoingReservation.html";
+                            }
+                        });
+                });
             });
         </script>
 
@@ -17,5 +35,6 @@
     <body>
         <button id="Student">학생 역할 해보기</button>
         <button id="Driver">기사 역할 해보기</button>
+        <button id="Calling">호출 해보기</button>
     </body>
 </html>
