@@ -17,6 +17,9 @@ var to={
 };
 var fromclicked = false,
     toclicked = false;
+var clickblocked = false;
+var StarMarkerSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+var imageSize = new kakao.maps.Size(24, 35);
 function StartMap() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, ()=>alert('현재 위치를 가져올 수 없습니다.'));
@@ -102,6 +105,7 @@ function CreateMarker(img, value, event){
         title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image : img // 마커 이미지 
     });
+    return marker;
 }
 
 function DriverPositionGet(){
@@ -122,19 +126,80 @@ function DriverPositionGet(){
 function PinDriver(position){
     //TBD
 }
+var stat=['from','to','reserve'];
+var statnum =0;
+var imgChangedMarker = null;
+
+function MarkerImageChange(what ,marker){
+    var imgsrc = what=='star'? StarMarkerSrc : 'https://t1.daumcdn.net/mapjsapi/images/marker.png'
+    marker.setImage(new kakao.maps.MarkerImage(imgsrc, imageSize));
+    imgChangedMarker = marker;
+}
+
+function MarkerClickEvent(value, marker, imageSize){
+    function InfowindowOpen(status){
+        var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+            iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+        $("#PositionName").html(value.name + status)
+
+        iwContent = $("#InfowindowTemplete").html();
+        var infowindow = new kakao.maps.InfoWindow({
+            content : iwContent,
+            removable : iwRemoveable
+        });   
+        infowindow.open(map, marker); 
+    }
+    function OrderInput(status){
+        if(status == stat[0]){      //from
+            from = value;
+
+        } else if(status == stat[1]){      //to
+            to = value;
+        } else{
+            console.log("Too many click");            
+        }
+        /* origin
+        if(!fromclicked){           //지도에서 출발지 선택할때
+            from = value;
+            InfowindowOpen("from");
+            $("#MapStartOrDest").html("도착지");
+            MarkerImageChange("Blue");
+            fromclicked = true;
+        }
+        else if(!toclicked){          //지도에서 도착지 선택할때
+            to = value;
+            InfowindowOpen("to");;
+            MarkerImageChange("Red");
+            toclicked = true;
+        }
+        else{
+        }
+        */
+    }
+    MarkerImageChange(null, marker);
+    NextButtonSwitch(true);
+    PrefixModify(stat[statnum]);
+    OrderInput(stat[statnum]);
+    InfowindowOpen(stat[statnum]);
+    NextStat();
+}
+
+function NextStat(){
+    statnum++;
+    if(statnum >= stat.length) console.log("Error On NextStat()");
+    console.log("Stat to" + stat[statnum]);
+    MarkerImageChange(null, imgChangedMarker);
+}
 
 function MapPinWithRecord(data){
-    var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
     if(typeof(data) == "string"){
         recordList = JSON.parse(data);
 
     } else{
         recordList = data;
     }
-    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    var bluepin = window.location.origin + "/src/img/blue-map-pin.png";
-    var redpin =  window.location.origin + "/src/img/red-map-pin.png";
+    //var bluepin = window.location.origin + "/src/img/blue-map-pin.png";
+    //var redpin =  window.location.origin + "/src/img/red-map-pin.png";
 
     
 
@@ -143,10 +208,10 @@ function MapPinWithRecord(data){
         //refernce with https://apis.map.kakao.com/web/sample/multipleMarkerImage/
 
         // 마커 이미지의 이미지 크기 입니다
-        var imageSize = new kakao.maps.Size(24, 35);
+        //var imageSize = new kakao.maps.Size(24, 35);
         
         // 마커 이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        var markerImage = new kakao.maps.MarkerImage(StarMarkerSrc, imageSize);
 
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
@@ -157,47 +222,6 @@ function MapPinWithRecord(data){
         });
         markers.push(marker);
         marker.setMap(map);
-        kakao.maps.event.addListener(marker, 'click', function() {
-            
-            var infowindowopen = function(status){
-                $("#PositionName").html(value.name + status)
-
-                iwContent = $("#InfowindowTemplete").html();
-                var infowindow = new kakao.maps.InfoWindow({
-                    content : iwContent,
-                    removable : iwRemoveable
-                });   
-                infowindow.open(map, marker); 
-            };
-            var MarkerImageChange = function(what){
-                var markerurl;
-                if(what =="Blue"){
-                    markerurl = bluepin;
-                } else if (what == "Red"){
-                    markerurl = redpin;
-                } else{
-                    console.log("fail an argument");
-                }
-                marker.setImage(new kakao.maps.MarkerImage(markerurl, imageSize));
-            };
-
-            if(!fromclicked){           //지도에서 출발지 선택할때
-                from = value;
-                infowindowopen("from");
-                $("#MapStartOrDest").html("도착지");
-                MarkerImageChange("Blue");
-                fromclicked = true;
-            }
-            else if(!toclicked){          //지도에서 도착지 선택할때
-                to = value;
-                infowindowopen("to");;
-                MarkerImageChange("Red");
-                toclicked = true;
-            }
-            else{
-                console.log("Too many click");
-            }
-            
-        });
+        kakao.maps.event.addListener(marker, 'click', ()=>MarkerClickEvent(value, marker, imageSize));
     });
 }

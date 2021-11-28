@@ -24,19 +24,27 @@
 
         #Map {
             width: 100%;
-            height: 80%;
+            height: 100%;
         }
 
         .template {
             display: none;
         }
 
-        #MapStartOrDest {
+        .off{
+            background-color: darkgray;
+        }
+        .on{
+            background-color: #8C0000;
+        }
+        .front{
+            z-index: 2;
+        }
+        #MapExplanation {
             padding-left: 10px;
             padding: 5px 10px 5px 18px;
 
             background-color: white;
-            color: #8C0000;
             font-size: 24px;
             font-weight: bold;
 
@@ -64,14 +72,16 @@
             top:60px;
             left:50%;
             transform: translate(-50%,0);
+            z-index: 2;
         }
 
-        #destination {
+        #Destination {
             margin-right: 0;
             font-size: 20px;
 
             border: none;
             width: 180px;
+            z-index: 2;
         }
 
         #search {
@@ -92,13 +102,12 @@
             left: 30px;
         }
 
-        .next {
+        #Next {
             position: absolute;
             bottom: 24px;
             left: 50%;
             transform: translate(-50%, 0%);
 
-            background-color: #8C0000;
             border: none;
 
             width: 230px;
@@ -110,34 +119,73 @@
             text-align: left;
         }
 
-        .arrow {
+        #Arrow {
             width: 30px;
             position: absolute;
             right: 10px;
             filter: invert(100);
+            z-index: inherit;
         }
     </style>
     <script src="https://kit.fontawesome.com/83496dc54d.js" crossorigin="anonymous"></script>
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-    <script src="src/JQuery.js"></script>
-    <script src="src/Map.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
+    <script src="../src/JQuery.js"></script>
+    <script src="../src/Map.js"></script>
     <script>
         var stat = top.args["stat"];
         var role = top.args["role"];
-        $(document).ready(function () {
-            StartMap();
-            if (role == "STUDENT") {
-                if (stat == "reserving") {
-                    RecordPositionGet();
+        var ButtonJq;
+        var PrefixJq;
+        var korean = {
+            'from':'출발지',
+            'to':'도착지'
+        };
+        
+        $(document).ready(function(){
+            ButtonJq = $("#Next");
+            PrefixJq = $('#Prefix');
+            $("unuse#NextButton").on("click", function(){
+                top.args["from"] = from;
+                top.args["to"] = to;
+                console.log("Move to CallReservation");
+                window.location.href ="CallReservation.html";
+            });
+            $("#Next").click( function(){
+                var thisJq = $(this);
+                if(thisJq.hasClass('on')){
+                    MarkerImageChange();
+                    NextButtonSwitch(false);
+                    PrefixModify();
 
-                } else if (stat == "wating") {
-                    setInterval(DriverPositionGet, 1000);
+                } else{
+                alert(korean[stat[statnum]] + '를 선택해주십시오');
+
                 }
-            } else if (role == "DRIVER") {
+            });
+            
+            StartMap();
+            if(stat == "reserving"){
+                RecordPositionGet();
 
+            } else if (stat == "wating") {
+                setInterval(DriverPositionGet, 1000);
             }
         });
+            
+        function NextButtonSwitch(isOn){
+            if(isOn){
+                ButtonJq.removeClass('off');
+                ButtonJq.addClass('on');
+            }else{
+                ButtonJq.removeClass('on');
+                ButtonJq.addClass('off');
+            }
+        }
+
+        function PrefixModify(){
+            PrefixJq.html(korean[stat[statnum]]);
+        }
+
     </script>
 </head>
 
@@ -149,18 +197,17 @@
     </div>
     <button id="GetLocation" class="template">어디서 참여하고 있지요?</button>
     <div id="SetLocation" class="template"></div>
-    <div id="MapExplanation">
-        <div id="MapStartOrDest">출발지를 선택하세요</div>
+    <div id="MapExplanation" class="front">
+        <div id="MapStartOrDest"><div id="Prefix"> 출발지</div>를 선택하세요</div>
     </div>
-        <div id="header">
-            <input id="destination" type="text" placeholder=" 장소를 검색하세요">
-            <button id="search"><i class="fas fa-search"></i></button>
+        <div id="Header">
+            <input id="Destination" type="text" placeholder=" 장소를 검색하세요">
+            <button id="Search"><i class="fas fa-search"></i></button>
         </div>
         
     <div id="Map"></div>
-    <button class="next"> Next
-        <img class="arrow"
-            src="../Korea Univ. Logo/Image/right arrow.png">
+    <button id="Next"  class="off front"> Next
+        <img id="Arrow" src="../Korea Univ. Logo/Image/right arrow.png">
     </button>
 
 </body>
