@@ -27,7 +27,7 @@
 
         function KUBUSSignin(responce){
             $.ajax({
-                url: "https://smartku.bingha.me/node/sign-in",
+                url:  window.location.origin + "/node/sign-in",
                 type:"GET",
                 data: responce,
                 error: function(jqXHR, textstatus, errorthrown){
@@ -47,7 +47,7 @@
         function KUBUSSignup(data){
             data['role'] ='STUDENT'
             $.ajax({
-                url: "https://smartku.bingha.me/node/sign-up",
+                url:  window.location.origin + "/node/sign-up",
                 type:"POST",
                 data: data,
                 beforeSend: function(jqXHR, settings){

@@ -34,7 +34,7 @@
 
             function ChackReservation(){
                 $.ajax({
-                    url: 'https://smartku.bingha.me/node/no-driver-request',
+                    url:  window.location.origin + '/node/no-driver-request',
                     type: 'GET',
                     error: function (jqxhr,textStatus, errorThrown){
                         console.log("Reservation Get Error");

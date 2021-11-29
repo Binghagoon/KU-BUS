@@ -68,7 +68,7 @@ function successCallback(position) {
 function RecordPositionGet(){
     if(!top.debugging){
         $.ajax({
-            url: "https://smartku.bingha.me/node/record-position",
+            url:  window.location.origin + "/node/record-position",
             type: "GET",
             error:function(request,status,error){
                 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -110,7 +110,7 @@ function CreateMarker(img, value, event){
 
 function DriverPositionGet(){
     $.ajax({
-        url: 'https://smartku.bingha.me/node/driver-get',
+        url:  window.location.origin + '/node/driver-get',
         data: {
             "0":1,
         },

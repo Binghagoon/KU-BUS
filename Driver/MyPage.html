@@ -90,7 +90,7 @@
                 $("#ConditionMessage").toggle();
             });
             $.ajax({
-                url:"http://smartku.bingha.me/php/driver-info-sample.php",
+                url:  window.location.origin + "/php/driver-info-sample.php",
                 type:"POST",
                 data: {
                     id:id

@@ -72,7 +72,7 @@
             PrintData(data["name"], data["time"], data["now_name"], data["to_name"], null, data['mp']);
             $("#Accept").on("click",function(){
                 $.ajax({
-                    url: "https://smartku.bingha.me/node/driver-select-request",
+                    url:  window.location.origin + "/node/driver-select-request",
                     type: "POST",
                     data:{
                         "responcer_id": top.args["id"],
