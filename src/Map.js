@@ -126,14 +126,25 @@ function DriverPositionGet(){
 function PinDriver(position){
     //TBD
 }
-var stat=['from','to','reserve'];
+var orderStat=['from','to','reserve'];
 var statnum =0;
 var imgChangedMarker = null;
+var deletedMarker = [];
 
 function MarkerImageChange(what ,marker){
     var imgsrc = what=='star'? StarMarkerSrc : 'https://t1.daumcdn.net/mapjsapi/images/marker.png'
     marker.setImage(new kakao.maps.MarkerImage(imgsrc, imageSize));
     imgChangedMarker = marker;
+}
+function ClickedMarkerDelete(){
+    imgChangedMarker.setMap(null);
+    deletedMarker.push(imgChangedMarker);
+}
+
+function DeletedMarkerRevive(){
+    deletedMarker.forEach(function(value, index){
+        value.setMap(map);
+    });
 }
 
 function MarkerClickEvent(value, marker, imageSize){
@@ -150,10 +161,10 @@ function MarkerClickEvent(value, marker, imageSize){
         infowindow.open(map, marker); 
     }
     function OrderInput(status){
-        if(status == stat[0]){      //from
+        if(status == orderStat[0]){      //from
             from = value;
 
-        } else if(status == stat[1]){      //to
+        } else if(status == orderStat[1]){      //to
             to = value;
         } else{
             console.log("Too many click");            
@@ -178,16 +189,14 @@ function MarkerClickEvent(value, marker, imageSize){
     }
     MarkerImageChange(null, marker);
     NextButtonSwitch(true);
-    PrefixModify(stat[statnum]);
-    OrderInput(stat[statnum]);
-    InfowindowOpen(stat[statnum]);
-    NextStat();
+    OrderInput(orderStat[statnum]);
+    InfowindowOpen(orderStat[statnum]);
 }
 
 function NextStat(){
     statnum++;
-    if(statnum >= stat.length) console.log("Error On NextStat()");
-    console.log("Stat to" + stat[statnum]);
+    if(statnum >= orderStat.length) console.log("Error On NextStat()");
+    console.log("Stat to" + orderStat[statnum]);
     MarkerImageChange(null, imgChangedMarker);
 }
 
