@@ -153,13 +153,16 @@
             $("#Next").click( function(){
                 var thisJq = $(this);
                 if(thisJq.hasClass('on')){
-                    MarkerImageChange();
+                    ClickedMarkerDelete();
                     NextButtonSwitch(false);
+                    NextStat();
                     PrefixModify();
 
                 } else{
-                alert(korean[stat[statnum]] + '를 선택해주십시오');
-
+                alert(korean[OrderStat[statnum]] + '를 선택해주십시오');
+                }
+                if (statnum == 2){
+                    GotoCallReservation();
                 }
             });
             
@@ -183,7 +186,14 @@
         }
 
         function PrefixModify(){
-            PrefixJq.html(korean[stat[statnum]]);
+            PrefixJq.html(korean[orderStat[statnum]]);
+        }
+
+        function GotoCallReservation(){
+            top.args["from"] = from;
+            top.args["to"] = to;
+            console.log("Move to CallReservation");
+            window.location.href ="CallReservation.html";
         }
 
     </script>
