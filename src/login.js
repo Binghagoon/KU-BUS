@@ -25,7 +25,7 @@ function IDSubmit(id, pw){
     pw = sha3_256(pw);  //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
     if(!debugging){
         $.ajax({
-            url: "https://smartku.bingha.me/node/id-get",
+            url:  window.location.origin + "/node/id-get",
             type: "GET",
             data: {
                 id:id,

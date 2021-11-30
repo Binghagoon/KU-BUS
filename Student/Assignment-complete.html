@@ -13,7 +13,7 @@
             StartMap();
             $("#CancelReservation").on("click", function(){
                 $.ajax({
-                    url: "https://smartku.bingha.me/reservation-delete",
+                    url:  window.location.origin + "/reservation-delete",
                     data:{
                         "id": top.args["id"],
                     },

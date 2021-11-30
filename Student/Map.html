@@ -1,56 +1,225 @@
-<html>
-    <head>
-        <style>
-            #Map{
-                width: 100%;
-                height: 80%;
-            }
-            .template{
-                display: none;
-            }
-            #ReservationButton{
-                top: -100px;
-            }
-        </style>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-        <script src="../src/JQuery.js"></script>
-        <script src="../src/Map.js"></script>
-        <script>
-            var stat = top.args["stat"];
-            var role = top.args["role"];
-            $(document).ready(function(){
-                $("#NextButton").on("click", function(){
-                    top.args["from"] = from;
-                    top.args["to"] = to;
-                    console.log("Move to CallReservation");
-                    window.location.href ="CallReservation.html";
-                });
+<!DOCTYPE html>
+<html lang="en">
 
-                StartMap();
-                if(stat == "reserving"){
-                    RecordPositionGet();
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
 
-                } else if (stat == "wating") {
-                    setInterval(DriverPositionGet, 1000);
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        #Map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .template {
+            display: none;
+        }
+
+        .off{
+            background-color: darkgray;
+        }
+        .on{
+            background-color: #8C0000;
+        }
+        .front{
+            z-index: 2;
+        }
+        #MapExplanation {
+            padding-left: 10px;
+            padding: 5px 10px 5px 18px;
+
+            background-color: white;
+            font-size: 24px;
+            font-weight: bold;
+
+            box-shadow: 0px 0px 10px 0px black;
+
+            position: fixed;
+            top: 0px;
+            width: 100%;
+        }
+
+        #header {
+            width: 80%;
+            height: 46px;
+
+            margin: 20px 0px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0px 0px 10px 0px darkgray;
+            border-radius: 50px;
+
+            position: fixed;
+            top:60px;
+            left:50%;
+            transform: translate(-50%,0);
+            z-index: 2;
+        }
+
+        #Destination {
+            margin-right: 0;
+            font-size: 20px;
+
+            border: none;
+            width: 180px;
+            z-index: 2;
+        }
+
+        #search {
+
+            font-size: 18px;
+            color: #8C0000;
+
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+            background-color: white;
+            border: none;
+
+            display: inline-block;
+            flex-shrink: 0;
+
+            position: relative;
+            left: 30px;
+        }
+
+        #Next {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translate(-50%, 0%);
+
+            border: none;
+
+            width: 230px;
+            height: 70px;
+            padding: 10px 20px;
+
+            color: white;
+            font-size: 20px;
+            text-align: left;
+        }
+
+        #Arrow {
+            width: 30px;
+            position: absolute;
+            right: 10px;
+            filter: invert(100);
+            z-index: inherit;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/83496dc54d.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
+    <script src="../src/JQuery.js"></script>
+    <script src="../src/Map.js"></script>
+    <script>
+        var stat = top.args["stat"];
+        var role = top.args["role"];
+        var ButtonJq;
+        var PrefixJq;
+        var korean = {
+            'from':'출발지',
+            'to':'도착지'
+        };
+        
+        $(document).ready(function(){
+            ButtonJq = $("#Next");
+            PrefixJq = $('#Prefix');
+            $("unuse#NextButton").on("click", function(){
+                top.args["from"] = from;
+                top.args["to"] = to;
+                console.log("Move to CallReservation");
+                window.location.href ="CallReservation.html";
+            });
+            $("#Next").click( function(){
+                var thisJq = $(this);
+                if(thisJq.hasClass('on')){
+                    ClickedMarkerDelete();
+                    NextButtonSwitch(false);
+                    NextStat();
+                    PrefixModify();
+
+                } else{
+                alert(korean[OrderStat[statnum]] + '를 선택해주십시오');
+                }
+                if (statnum == 2){
+                    GotoCallReservation();
                 }
             });
-        </script>
-    </head>
+            
+            StartMap();
+            if(stat == "reserving"){
+                RecordPositionGet();
 
-    <body>
-        <div id="InfowindowTemplete" class="template">
-            <div id="PositionName"></div>
-            <div id="ButtonLatitude" class="template"></div>
-            <div id="ButtonLongtitude" class="template" ></div>
+            } else if (stat == "wating") {
+                setInterval(DriverPositionGet, 1000);
+            }
+        });
+            
+        function NextButtonSwitch(isOn){
+            if(isOn){
+                ButtonJq.removeClass('off');
+                ButtonJq.addClass('on');
+            }else{
+                ButtonJq.removeClass('on');
+                ButtonJq.addClass('off');
+            }
+        }
+
+        function PrefixModify(){
+            PrefixJq.html(korean[orderStat[statnum]]);
+        }
+
+        function GotoCallReservation(){
+            top.args["from"] = from;
+            top.args["to"] = to;
+            console.log("Move to CallReservation");
+            window.location.href ="CallReservation.html";
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="InfowindowTemplete" class="template">
+        <div id="PositionName"></div>
+        <div id="ButtonLatitude" class="template"></div>
+        <div id="ButtonLongtitude" class="template"></div>
+    </div>
+    <button id="GetLocation" class="template">어디서 참여하고 있지요?</button>
+    <div id="SetLocation" class="template"></div>
+    <div id="MapExplanation" class="front">
+        <div id="MapStartOrDest"><div id="Prefix"> 출발지</div>를 선택하세요</div>
+    </div>
+        <div id="Header">
+            <input id="Destination" type="text" placeholder=" 장소를 검색하세요">
+            <button id="Search"><i class="fas fa-search"></i></button>
         </div>
-        <button id="GetLocation" class="template">어디서 참여하고 있지요?</button>
-        <div id="SetLocation" class="template"></div>
-        <div id="MapExplanation">
-            <div id="MapStartOrDest">출발지</div>를 선택하세요
-        </div>
-        <div id="Map"></div>
-        <div id="menu">
-            <button id="NextButton"> 다음</button>
-        </div>
-    </body>
+        
+    <div id="Map"></div>
+    <button id="Next"  class="off front"> Next
+        <img id="Arrow" src="../Korea Univ. Logo/Image/right arrow.png">
+    </button>
+
+</body>
+
 </html>

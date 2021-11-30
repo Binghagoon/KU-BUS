@@ -146,13 +146,15 @@
             "six": 6
         };
         var seatnum = 0;
+        var pre = null;
         $(document).ready(function () {
             //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
             //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
-            $(".chair.selectable").on("click", function () {
+            $(".chair").on("click", function () {
                 var thisJquery = $(this)
                 var v = thisJquery.attr("id");
                 num = par[v];
+                if(pre) ChairUnclicked();
                 ChairClicked(par[v], thisJquery);
             });
             $(".chair.unselectable").on("click", () => alert('해당 좌석은 선택할 수 없습니다'));
@@ -180,14 +182,28 @@
 
         function ChairClicked(num, button) {
             //alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
+            function ChangeExplain(sel){
+                var text = 'seatnum번 좌석 선택'
+                sel.html(text.replace("seatnum", num));
+            }
             var sel = $("#Selected");
             seatnum = num;
-            sel.html(sel.html().replace("seatnum", num));
+            ChangeExplain(sel);
             sel.show();
             button.removeClass("unselected");
             button.addClass("selected");
-            $("#Next").addClass("crimson")
+            $("#Next").addClass("crimson");
+            pre = button;
+        }
 
+        function ChairUnclicked(){
+            if(!pre){
+                console.log("Pre-selected chair does not exist.");
+                return;
+            }
+            var sel = $(pre);
+            sel.removeClass("selected");
+            //sel.addClass("unselected");
         }
 
         function renderTR(target, idValueArr) {

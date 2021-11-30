@@ -71,7 +71,7 @@
                 if(!top.debugging){
                     var args = top.args;
                     $.ajax({
-                        url: "https://smartku.bingha.me/node/check-driver",
+                        url:  window.location.origin + "/node/check-driver",
                         type: "GET",
                         data: {
                             "id":args["id"],
@@ -102,7 +102,7 @@
             }
             function CancelReservation(){
                 $.ajax({
-                    url: "https://smartku.bingha.me/node/reservation-delete",
+                    url:  window.location.origin + "/node/reservation-delete",
                     type:"POST",
                     data:{
                         "id": top.args["id"],

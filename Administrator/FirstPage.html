@@ -12,7 +12,7 @@
                 });
                 $("button#Calling").click(function(){
                     $.ajax({
-                            url: "https://smartku.bingha.me/node/reservation-post",
+                            url: window.location.origin + "/node/reservation-post",
                             type: "POST",
                             data: {
                                 'now_place_no': 1,

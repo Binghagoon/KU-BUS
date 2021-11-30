@@ -2,7 +2,7 @@
 function LocationChack(){       //TBD
     var isValueExist;
     $.when($.ajax({
-        url: "https://smartku.bingha.me/node/my-location-select",
+        url:  window.location.origin + "/node/my-location-select",
         type: "GET",
         data: {
             'id':args['id'],
@@ -19,7 +19,7 @@ function LocationChack(){       //TBD
 function GetPositionById(id){
     var val;
     $.ajax({
-        url: "https://smartku.bingha.me/node/location-select",
+        url:  window.location.origin + "/node/location-select",
         type: "GET",
         async: false,
         data: {
@@ -39,7 +39,7 @@ function LocationTrace(position){
     var coord = position.coords;
     //$.when(LocationDelete()).done( 
         $.ajax({
-            url: "https://smartku.bingha.me/node/my-location-insert",
+            url:  window.location.origin + "/node/my-location-insert",
             type: "POST",
             data: {
                 'id':args['id'],
@@ -62,7 +62,7 @@ function CheckGeolocation(){
 function LocationUpdate(position){
     var coords = position.coords;
     $.ajax({
-        url: "https://smartku.bingha.me/node/my-location-update",
+        url:  window.location.origin + "/node/my-location-update",
         type: "POST",
         data: {
             'id':args['id'],
@@ -79,7 +79,7 @@ function LocationUpdate(position){
 }
 function LocationDelete(){
     $.ajax({
-        url: "https://smartku.bingha.me/node/my-location-delete",
+        url:  window.location.origin + "/node/my-location-delete",
         type: "POST",
         //async: false,
         data: {

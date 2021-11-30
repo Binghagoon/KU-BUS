@@ -13,7 +13,7 @@
         
         $(document).ready(function(){
             $.ajax({
-                url: top.debugging ? "../src/alarmSample.json" : "https://smartku.bingha.me/node/alarm",
+                url: top.debugging ? "../src/alarmSample.json" :  window.location.origin + "/node/alarm",
                 type:"GET",
                 data: {
                     id:id
