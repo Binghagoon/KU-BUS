@@ -2,6 +2,16 @@
 <html>
     <head>
         <title>User Setting</title>
+        <script src="../src/JQuery.js"></script>
+        <script>
+            var userTempelete;
+            $(function(){
+                userTempelete = $('div#User.tempelete');
+            });
+            function PrintUser(dbno, name, email, role, kakaono){
+
+            }
+        </script>
     </head>
 
     <body>
@@ -12,12 +22,12 @@
                 <th>전화번호</th>
                 <th>이메일</th>
                 <th>역할</th>
-                <th>번호(카카오)</th>
+                <th>번호(카카오) 혹은 아이디</th>
                 <th>수정</th>
             </tr>
 
         </table>
-        <div id="User" hidden>
+        <div id="User" class="tempelete" hidden>
             <tr>
                 <td id="NoofDB"></td>
                 <td id="Name"></td>
