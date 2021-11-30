@@ -1,95 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-complete</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
     <style>
-        #After_Assigning_Driver {
-            background-color: white;
-            width: 320px;
-            height: 470px;
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
 
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        #Real_Time_Information{
+            box-shadow: 0px 0px 10px 0px black;
+
+            position: fixed;
+            top: 0px;
+            width: 100%;
+        }
+        .Minute_Left{
+            border-bottom: 1px solid darkgray;
+        }
+
+        .Minute_Left>p {
             text-align: center;
+            padding: 10px 5px;
+            margin: 0px;
 
-            display: flex;
-            flex-direction: column;
-            /*div를 가운데 위치로 오게하는 역할*/
-            margin: auto;
-
-            box-shadow: 0px 0px 20px -3px gray;
+            background-color: white;
+            color: #8C0000;
+            font-size: 18px;
+            font-weight: bold;
         }
+        .Driver_Information{
 
-        #Real_Time_Information, #Cancel_Reservation {
-            width: 315px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            border: solid gray;
         }
-
-        #Real_Time_Information > div {
-            width: 280px;
-            height: 55px;
-            padding: 5px 10px;
-            margin-bottom: 5px;
-
-            text-align: left;
-        }
-
-        #Control {
+        .control{
             display: flex;
-
             justify-content: space-evenly;
-            
-            align-items: center;
+            box-shadow: none; 
         }
-
-        #Control > div {
-            border: solid gray;
+        .control>button{
+            height: 40px;
+            width: 33%;
+            background-color: white;
+            border:none;
+            border-top: 1px solid darkgray;
+            border-right: 1px solid darkgray;
+            font-size: 16px;
+        }
+        .Cancel{
+            border-right: none;
         }
 
     </style>
-    <body>
-        <div id="After_Assigning_Driver">
-            <div id="Map">
 
-            </div>
+<body>
+    <div id="Map">
 
-            <div id="Real_Time_Information">
-                <div id="Minute_Left">
-                    <h4>기사님께서 이동 중이십니다. (%분 후 도착)</h4>
-                </div>
+    </div>
 
-                <div id="ProfileImage">
-
-                </div>
-
-                <div id="Name">
-
-                </div>
-
-                <div id="Car_Information">
-                    <h4>차량: %호차</h4>
-                </div>
-            </div>
-
-            <div id="Control">
-                <div id="Make_a_Call">
-                    <h3>전화하기</h3>
-                </div>
-    
-                <div id="Send_a_Message">
-                    <h3>메시지 보내기</h3>
-                </div>
-    
-                <div id="Cancel_Reservation_02">
-                    <h3>취소하기</h3>
-                </div>
-            </div>
+    <div id="Real_Time_Information">
+        <div class="Minute_Left">
+            <p>기사님께서 이동 중이십니다.(%분 후 도착)</p>
         </div>
-    </body>
+
+        <div class="Driver_Information">
+            <div class="ProfileImage"></div>
+            <ul>
+                <li class="name">김고려</li>
+                <li class="car_number">차량: %호차</li>
+                <li class="license_number">차량번호: 23가 1234</li>
+            </ul>
+        </div>
+
+        <div class="control">
+            <button class="Make_a_Call">전화하기</button>
+            <button class="Send_a_Message">메세지</button>
+            <button class="Cancel">취소하기</button>
+        </div>
+    </div>
+</body>
+
 </html>
