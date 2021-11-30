@@ -2,14 +2,33 @@
 <html>
     <head>
         <title>User Setting</title>
+        <style>
+            tr{
+                border: 1pt;
+            }
+            td{
+                border: 1pt;
+            }
+        </style>
         <script src="../src/JQuery.js"></script>
         <script>
             var userTempelete;
+            var l;
+            var userList;
             $(function(){
-                userTempelete = $('div#User.tempelete');
+                userTempelete = $('tbody#User.tempelete');
+                l = userTempelete.children('td');
+                userList = $('#UserList');
+                PrintUser('1','2','3','4','5');
             });
-            function PrintUser(dbno, name, email, role, kakaono){
-
+            function PrintUser(dbno, name, mp, email, role, kakaono){
+                if(!userTempelete && !userList && !l) throw new Error('Query is not Selected.');
+               [dbno, name, mp, email, role, kakaono].forEach(function(value, index){
+                    $(l[index]).html(value);
+                });
+                userTempelete.show();
+                userList.html(userList.html() + userTempelete[0].outerHTML);
+                userTempelete.hide();
             }
         </script>
     </head>
@@ -17,27 +36,29 @@
     <body>
         <h1>User List</h1>
         <table id="UserList">
-            <tr>
-                <th>이름</th>
-                <th>전화번호</th>
-                <th>이메일</th>
-                <th>역할</th>
-                <th>번호(카카오) 혹은 아이디</th>
-                <th>수정</th>
-            </tr>
+            <tbody>
+                <tr>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>역할</th>
+                    <th>번호(카카오) <br>혹은 아이디</th>
+                    <th>수정</th>
+                </tr>
+            </tbody>
 
-        </table>
-        <div id="User" class="tempelete" hidden>
+            <tbody id="User" class="tempelete" hidden>
             <tr>
-                <td id="NoofDB"></td>
-                <td id="Name"></td>
-                <td id="MP"></td>
+                <td id="NoofDB">123</td>
+                <td id="Name">4</td>
+                <td id="MP"> </td>
                 <td id="Email"></td>
                 <td id="role"></td>
                 <td id="NoofKakao"></td>
                 <td id="Modify"><button>수정</button></td>
             </tr>
-        </div>
+            </tbody>
+    </table>
 
     </body>
 </html>
