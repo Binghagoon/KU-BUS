@@ -12,21 +12,21 @@
                 });
                 $("button#Calling").click(function(){
                     $.ajax({
-                            url: window.location.origin + "/node/reservation-post",
-                            type: "POST",
-                            data: {
-                                'now_place_no': 1,
-                                'to_place_no': 2,
-                                'id':top.args['id'],
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                alert("failed on Calling");
-                            },
-                            success: function(data, status, xhr){
-                                console.log("move to DoingReservation.html");
-                                window.location.href ="../Student/DoingReservation.html";
-                            }
-                        });
+                        url: window.location.origin + "/node/reservation-post",
+                        type: "POST",
+                        data: {
+                            'now_place_no': 1,
+                            'to_place_no': 2,
+                            'id':top.args['id'],
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            alert("failed on Calling");
+                        },
+                        success: function(data, status, xhr){
+                            console.log("move to DoingReservation.html");
+                            window.location.href ="../Student/DoingReservation.html";
+                        }
+                    });
                 });
             });
         </script>
