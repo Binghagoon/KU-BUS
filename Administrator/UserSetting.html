@@ -16,19 +16,20 @@
             var l;
             var userList;
             $(function(){
-                userTempelete = $('tbody#User.tempelete');
-                l = userTempelete.children('td');
+                userTempelete = $('#TableModel');
+                l = userTempelete.find('td');
                 userList = $('#UserList');
-                PrintUser('1','2','3','4','5');
+                PrintUser('1','2','3','4','5', '6');
             });
             function PrintUser(dbno, name, mp, email, role, kakaono){
                 if(!userTempelete && !userList && !l) throw new Error('Query is not Selected.');
                [dbno, name, mp, email, role, kakaono].forEach(function(value, index){
                     $(l[index]).html(value);
                 });
-                userTempelete.show();
-                userList.html(userList.html() + userTempelete[0].outerHTML);
-                userTempelete.hide();
+                var clone = userTempelete.clone();
+                //userList.html(userList.html() + userTempelete[0].outerHTML);
+                userList.append(clone.html());
+                // ref. with https://stackoverflow.com/questions/7961900/jquery-clone-table-row
             }
         </script>
     </head>
@@ -38,6 +39,7 @@
         <table id="UserList">
             <tbody>
                 <tr>
+                    <th>DB 번호</th>
                     <th>이름</th>
                     <th>전화번호</th>
                     <th>이메일</th>
@@ -46,19 +48,20 @@
                     <th>수정</th>
                 </tr>
             </tbody>
-
-            <tbody id="User" class="tempelete" hidden>
-            <tr>
-                <td id="NoofDB">123</td>
-                <td id="Name">4</td>
-                <td id="MP"> </td>
-                <td id="Email"></td>
-                <td id="role"></td>
-                <td id="NoofKakao"></td>
-                <td id="Modify"><button>수정</button></td>
-            </tr>
+        </table>
+        <table id="TableModel" hidden>
+            <tbody id="User">
+                <tr>
+                    <td id="NoofDB">123</td>
+                    <td id="Name">4</td>
+                    <td id="MP"> </td>
+                    <td id="Email"></td>
+                    <td id="role"></td>
+                    <td id="NoofKakao"></td>
+                    <td id="Modify"><button>수정</button></td>
+                </tr>
             </tbody>
-    </table>
+        </table>
 
     </body>
 </html>
