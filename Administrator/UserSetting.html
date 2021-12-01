@@ -21,6 +21,22 @@
                 userList = $('#UserList');
                 PrintUser('1','2','3','4','5', '6');
             });
+            function GetUserData(){
+                $.ajax({
+                    url: window.location.origin + "/node/all-user-get",
+                    type: "POST",
+                    data: {
+                        'id':top.args['id'],
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("failed on get users");
+                    },
+                    success: function(data, status, xhr){
+                        data.forEach((value, index)=>PrintUser(value['no'], value['name'], 
+                                value['mp'], value['email'], value['role']));
+                    }
+                });
+            }
             function PrintUser(dbno, name, mp, email, role, kakaono){
                 if(!userTempelete && !userList && !l) throw new Error('Query is not Selected.');
                [dbno, name, mp, email, role, kakaono].forEach(function(value, index){
