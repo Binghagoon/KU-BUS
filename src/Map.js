@@ -99,13 +99,13 @@ function UpdateAnother(position){
 }
 
 function CreateMarker(img, value, event){
-    var marker = new kakao.maps.Marker({
+
+    return new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
         title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image : img // 마커 이미지 
     });
-    return marker;
 }
 
 function DriverPositionGet(){
@@ -200,6 +200,7 @@ function NextStat(){
     MarkerImageChange(null, imgChangedMarker);
 }
 
+
 function MapPinWithRecord(data){
     if(typeof(data) == "string"){
         recordList = JSON.parse(data);
@@ -223,12 +224,7 @@ function MapPinWithRecord(data){
         var markerImage = new kakao.maps.MarkerImage(StarMarkerSrc, imageSize);
 
         // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
-            title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image : markerImage // 마커 이미지 
-        });
+        var marker = CreateMarker(markerImage, value, null);
         markers.push(marker);
         marker.setMap(map);
         kakao.maps.event.addListener(marker, 'click', ()=>MarkerClickEvent(value, marker, imageSize));
