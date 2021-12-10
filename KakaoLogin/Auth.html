@@ -14,7 +14,7 @@
                     code: params.get("code"),
                 },
                 error: function(jqXHR, textstatus, errorthrown){
-                    alert("Error on login");
+                    alert("Error on login\n Is node server alive?");
                 },
                 success: function(data, status, xhr){
                     const Url = new URL(window.location.origin + "/KakaoLogin/Success.html");
