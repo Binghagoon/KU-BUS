@@ -91,15 +91,18 @@ function RecordPositionGet(){
         });
     }
 }
+var otherMaker = null;
 function UpdateAnother(position){
     var v = {};
     v['lat']= position['latitude'];
     v['lng']= position['longitude'];
-    CreateMarker(null, v, null);
+    if(!otherMaker){
+        otherMaker.setmap(null);
+    }
+    otherMarker = CreateMarker(null, v, null);
 }
 
 function CreateMarker(img, value, event){
-
     return new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
@@ -110,9 +113,9 @@ function CreateMarker(img, value, event){
 
 function DriverPositionGet(){
     $.ajax({
-        url:  window.location.origin + '/node/driver-get',
+        url:  window.location.origin + '/node/get-location',
         data: {
-            "0":1,
+            'id': '1'
         },
         error: function(jqXHR, textStatus, errorThrown){
             alert("Error getting Driver Position");
@@ -196,7 +199,7 @@ function MarkerClickEvent(value, marker, imageSize){
 function NextStat(){
     statnum++;
     if(statnum >= orderStat.length) console.log("Error On NextStat()");
-    console.log("Stat to" + orderStat[statnum]);
+    console.log("Stat is " + orderStat[statnum]);
     MarkerImageChange(null, imgChangedMarker);
 }
 
