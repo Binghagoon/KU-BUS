@@ -16,28 +16,26 @@ function LocationChack(){       //TBD
     })).done();
     return isValueExist;
 }
-function GetPositionById(id){
-    var val;
+function GetPositionById(id, updateCallback){
     $.ajax({
-        url:  window.location.origin + "/node/location-select",
+        url:  window.location.origin + "/node/get-location",
         type: "GET",
-        async: false,
+        //async: false,
         data: {
             'id':id,
         },
         error: function(jqXHR, textStatus, errorThrown){
-            isValueExist = false;
+            console.log('error getting  a position')
         },
         success: function(data, status, xhr){
-            val = data[0];
+            if(!updateCallback) return;
+            updateCallback(data[0])
         },
     });
-    //console.log(val);
-    return val;
 }
 function LocationTrace(position){
     var coord = position.coords;
-    //$.when(LocationDelete()).done( 
+    try{
         $.ajax({
             url:  window.location.origin + "/node/my-location-insert",
             type: "POST",
@@ -53,8 +51,9 @@ function LocationTrace(position){
                 setInterval(CheckGeolocation, 500);
             },
         });
-    //);
-    
+    } catch(e) {
+        console.error(e);
+    }
 }
 function CheckGeolocation(){
     navigator.geolocation.getCurrentPosition(LocationUpdate, ()=>alert('현재 위치를 가져올 수 없습니다.'));

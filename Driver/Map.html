@@ -23,13 +23,12 @@
                     });
                 }
                 if(top.args["stat"] == "working"){
-                    setInterval(()=>TraceStudent(top.args["id"]), 500);
+                    setInterval(()=>TraceAnother(top.args["id"]), 500);
                 }         
             });
 
-            function TraceStudent(id){
-                var position = top.GetPositionById(id);
-                UpdateAnother(position)
+            function TraceAnother(id){
+                top.GetPositionById(id, UpdateAnother);
             }
 
             function ChackReservation(){
