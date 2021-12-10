@@ -121,6 +121,7 @@
                                 alert("failed");
                             },
                             success: function(data, status, xhr){
+                                top.args['requestid'] = data.insertId;
                                 console.log("move to DoingReservation.html");
                                 window.location.href ="DoingReservation.html";
                             }

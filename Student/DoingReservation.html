@@ -74,10 +74,10 @@
                         url:  window.location.origin + "/node/check-driver",
                         type: "GET",
                         data: {
-                            "id":args["id"],
+                            "no" : args["requestid"],
                         },
                         error: function(jqXHR, textStatus, errorThrown){
-                            alert("failed");
+                            alert("failed on chack reservation");
                         },
                         success: function(data, status, xhr){
                             if(data) data = data[0];
@@ -105,7 +105,7 @@
                     url:  window.location.origin + "/node/reservation-delete",
                     type:"POST",
                     data:{
-                        "id": top.args["id"],
+                        "no": top.args["requestid"],
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log("Error");
