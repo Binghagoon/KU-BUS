@@ -91,15 +91,16 @@ function RecordPositionGet(){
         });
     }
 }
-var otherMaker = null;
+var otherMarker = null;
 function UpdateAnother(position){
     var v = {};
     v['lat']= position['latitude'];
     v['lng']= position['longitude'];
-    if(!otherMaker){
-        otherMaker.setmap(null);
+    if(otherMarker != null){
+        otherMarker = CreateMarker(null, v, null);
+    } else{
+        otherMarker.setPosition(new kakao.maps.LatLng(position['latitude'], position['longitude']))
     }
-    otherMarker = CreateMarker(null, v, null);
 }
 
 function CreateMarker(img, value, event){
@@ -111,21 +112,6 @@ function CreateMarker(img, value, event){
     });
 }
 
-function DriverPositionGet(){
-    $.ajax({
-        url:  window.location.origin + '/node/get-location',
-        data: {
-            'id': '1'
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            alert("Error getting Driver Position");
-        },
-        success: function(data, status, xhr){
-           var position = data["position"];
-            PinDriver(position);
-        },
-    });
-}
 function PinDriver(position){
     //TBD
 }
@@ -232,4 +218,8 @@ function MapPinWithRecord(data){
         marker.setMap(map);
         kakao.maps.event.addListener(marker, 'click', ()=>MarkerClickEvent(value, marker, imageSize));
     });
+}
+
+function TraceAnother(id){
+    top.GetPositionById(id, UpdateAnother);
 }
