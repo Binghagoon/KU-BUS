@@ -16,7 +16,7 @@ function LocationChack(){       //TBD
     })).done();
     return isValueExist;
 }
-function GetPositionById(id, updateCallback){
+async function GetPositionById(id){
     $.ajax({
         url:  window.location.origin + "/node/get-location",
         type: "GET",
@@ -25,35 +25,30 @@ function GetPositionById(id, updateCallback){
             'id':id,
         },
         error: function(jqXHR, textStatus, errorThrown){
-            console.log('error getting  a position')
+            console.log('error getting  a position');
         },
         success: function(data, status, xhr){
-            if(!updateCallback) return;
-            updateCallback(data[0])
+            return data[0];
         },
     });
 }
 function LocationTrace(position){
     var coord = position.coords;
-    try{
-        $.ajax({
-            url:  window.location.origin + "/node/my-location-insert",
-            type: "POST",
-            data: {
-                'id':args['id'],
-                'latitude': coord['latitude'],
-                'longitude': coord['longitude'],
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                alert("failed on insert location");
-            },
-            success: function(data, status, xhr){
-                setInterval(CheckGeolocation, 500);
-            },
-        });
-    } catch(e) {
-        console.error(e);
-    }
+    $.ajax({
+        url:  window.location.origin + "/node/my-location-insert",
+        type: "POST",
+        data: {
+            'id':args['id'],
+            'latitude': coord['latitude'],
+            'longitude': coord['longitude'],
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            alert("failed on insert location");
+        },
+        success: function(data, status, xhr){
+            setInterval(CheckGeolocation, 500);
+        },
+    });
 }
 function CheckGeolocation(){
     navigator.geolocation.getCurrentPosition(LocationUpdate, ()=>alert('현재 위치를 가져올 수 없습니다.'));
