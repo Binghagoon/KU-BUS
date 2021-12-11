@@ -23,6 +23,10 @@
                             alert("failed on Calling");
                         },
                         success: function(data, status, xhr){
+                            var from = {name:'debugfrom'};
+                            var to = {name:'debugto'}
+                            top.args['from'] = from;
+                            top.args['to'] = to;
                             console.log("move to DoingReservation.html");
                             window.location.href ="../Student/DoingReservation.html";
                         }
