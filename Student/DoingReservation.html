@@ -5,43 +5,193 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>차량 호출중</title>
+        <title>차량 호출중</title>    <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FirstPage</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+            rel="stylesheet">
         <style>
-            #After_Calling_Driver {
+            * {
+                font-family: 'Noto Sans KR', sans-serif;
+            }
+
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            #header {
+                padding: 5px 10px 5px 18px;
+
                 background-color: white;
-                width: 320px;
-                height: 470px;
-    
-                text-align: center;
-    
-                display: flex;
-                flex-direction: column;
-                /*div를 가운데 위치로 오게하는 역할*/
-                margin: auto;
-    
-                box-shadow: 0px 0px 20px -3px gray;
+                color: #8C0000;
+                font-size: 20px;
+                font-weight: bold;
+
+                box-shadow: 0px 0px 10px 0px black;
+
+                position: fixed;
+                top: 0px;
+                width: 100%;
             }
-    
-            #Departure_and_Arrival, #Cancel_Reservation {
-                width: 315px;
-                display: flex;
-                flex-direction: column;
+            .contents{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                display: block;
                 align-items: center;
-    
-                border: solid gray;
-                
+                justify-content: center;
             }
-    
-            #Departure_and_Arrival > div {
-                width: 280px;
-                height: 55px;
-                padding: 5px 10px;
-    
-                margin-bottom: 5px;
-    
-                text-align: left;
+            .contents>p{
+                text-align: center;
+                font-size: 18px;
             }
-    
+            /** BEGIN CSS **/
+            @keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @-moz-keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @-webkit-keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @-o-keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @-moz-keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @-webkit-keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @-o-keyframes rotate-loading {
+                0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+                100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+            }
+
+            @keyframes loading-text-opacity {
+                0%  {opacity: 0}
+                20% {opacity: 0}
+                50% {opacity: 1}
+                100%{opacity: 0}
+            }
+
+            @-moz-keyframes loading-text-opacity {
+                0%  {opacity: 0}
+                20% {opacity: 0}
+                50% {opacity: 1}
+                100%{opacity: 0}
+            }
+
+            @-webkit-keyframes loading-text-opacity {
+                0%  {opacity: 0}
+                20% {opacity: 0}
+                50% {opacity: 1}
+                100%{opacity: 0}
+            }
+
+            @-o-keyframes loading-text-opacity {
+                0%  {opacity: 0}
+                20% {opacity: 0}
+                50% {opacity: 1}
+                100%{opacity: 0}
+            }
+            .loading-container,
+            .loading {
+                height: 100px;
+                position: relative;
+                width: 100px;
+                border-radius: 100%;
+            }
+
+            .loading-container { margin: 40px auto }
+
+            .loading {
+                border: 2px solid transparent;
+                border-color: transparent #8C0000 transparent #8C0000;
+                -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
+                -moz-transform-origin: 50% 50%;
+                -o-animation: rotate-loading 1.5s linear 0s infinite normal;
+                -o-transform-origin: 50% 50%;
+                -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
+                -webkit-transform-origin: 50% 50%;
+                animation: rotate-loading 1.5s linear 0s infinite normal;
+                transform-origin: 50% 50%;
+            }
+
+            .loading-container:hover .loading,
+            .loading-container .loading {
+                -webkit-transition: all 0.5s ease-in-out;
+                -moz-transition: all 0.5s ease-in-out;
+                -ms-transition: all 0.5s ease-in-out;
+                -o-transition: all 0.5s ease-in-out;
+                transition: all 0.5s ease-in-out;
+            }
+
+            #loading-text {
+                -moz-animation: loading-text-opacity 3s linear 0s infinite normal;
+                -o-animation: loading-text-opacity 3s linear 0s infinite normal;
+                -webkit-animation: loading-text-opacity 3s linear 0s infinite normal;
+                animation: loading-text-opacity 3s linear 0s infinite normal;
+                color: #8C0000;
+                font-size: 16px;
+                font-weight: bold;
+                margin-top: 45px;
+                opacity: 0;
+                position: absolute;
+                text-align: center;
+                text-transform: uppercase;
+                top: 0;
+                width: 100px;
+            }
+            /*RMx*/
+            .buttons{
+                width:100%;
+                display:flex;
+                justify-content: center;
+            }
+            .buttons>button{
+                width: 146px;
+                height: 48px;
+                box-shadow: 0px 2px 7px darkgray;
+                margin: 5px;
+                font-size: 16px;
+                border-radius: 1px;
+            }
+            .cancel{
+                background-color: #8C0000;
+                color: white;
+                border: none;
+            }
+            .goback{
+                background-color: white;
+                color: #8C0000;
+                border: 1px solid #8C0000;
+            }
         </style>
         <script src="../src/JQuery.js"></script>
         <script src="../src/getQuery.js"></script>
@@ -83,6 +233,8 @@
                             if(data) data = data[0];
                             if(data == undefined) return;
                             if(data["id"] != null){
+                                top.args['reqData']={};
+                                top.args['reqData']['id'] = data['id'];
                                 SuccessReservation();
                             }
                         }

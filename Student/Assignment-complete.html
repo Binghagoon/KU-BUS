@@ -4,7 +4,54 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title></title>
-    </head>
+    </head> 
+    <style>
+        #After_Assigning_Driver {
+            background-color: white;
+            width: 320px;
+            height: 470px;
+
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            /*div를 가운데 위치로 오게하는 역할*/
+            margin: auto;
+
+            box-shadow: 0px 0px 20px -3px gray;
+        }
+
+        #Real_Time_Information, #Cancel_Reservation {
+            width: 315px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            border: solid gray;
+        }
+
+        #Real_Time_Information > div {
+            width: 280px;
+            height: 55px;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+
+            text-align: left;
+        }
+
+        #Control {
+            display: flex;
+
+            justify-content: space-evenly;
+
+            align-items: center;
+        }
+
+        #Control > div {
+            border: solid gray;
+        }
+
+    </style>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
     <script src="../src/JQuery.js"></script>
     <script src="../src/Map.js"></script>
