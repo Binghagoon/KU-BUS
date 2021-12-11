@@ -91,16 +91,40 @@ function RecordPositionGet(){
         });
     }
 }
-var otherMarker = null;
-function UpdateAnother(position){
+var UserMarker = {
+    'DRIVER': null,
+    'STUDENT': null,
+};
+
+function MarkerCreate(position, who){
+    const imgconvert={
+        'DRIVER': window.location.origin + '/src/img/car-pin.png',
+        'STUDENT': window.location.origin + '/src/img/human-pin.png',
+        null : null,
+        undefined : null,
+    }
+    var marker;
     var v = {};
     v['lat']= position['latitude'];
     v['lng']= position['longitude'];
-    if(otherMarker == null){
-        otherMarker = CreateMarker(null, v, null);
-    } else{
-        otherMarker.setPosition(new kakao.maps.LatLng(position['latitude'], position['longitude']))
+    marker = CreateMarker(imgconvert[who], v, null);
+    return marker;
+
+}
+
+function MarkerLocationChange(marker, position){
+    marker.setPosition(new kakao.maps.LatLng(position['latitude'], position['longitude']))
+
+}
+function Pinupdate(position, who){
+    if(UserMarker[who] == null){
+        UserMarker[who] = MarkerCreate(position, who);
+    } else {
+        MarkerLocationChange(UserMarker[who], position);
     }
+}
+function UpdateAnother(position, who){
+    Pinupdate(position,who);
 }
 
 function CreateMarker(img, value, event){
@@ -112,9 +136,6 @@ function CreateMarker(img, value, event){
     });
 }
 
-function PinDriver(position){
-    //TBD
-}
 var orderStat=['from','to','reserve'];
 var statnum =0;
 var imgChangedMarker = null;
@@ -220,6 +241,7 @@ function MapPinWithRecord(data){
     });
 }
 
-function TraceAnother(id){
-    top.GetPositionById(id, UpdateAnother);
+async function TraceAnother(id, who){
+    setInterval(()=> UpdateAnother(await top.GetPositionById(id), who),500)
+    
 }
