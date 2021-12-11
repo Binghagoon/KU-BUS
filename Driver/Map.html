@@ -23,13 +23,9 @@
                     });
                 }
                 if(top.args["stat"] == "working"){
-                    setInterval(()=>TraceAnother(top.args["id"]), 500);
+                    setInterval(()=>TraceAnother(top.args['reqData']["id"]), 500);
                 }         
             });
-
-            function TraceAnother(id){
-                top.GetPositionById(id, UpdateAnother);
-            }
 
             function ChackReservation(){
                 $.ajax({
