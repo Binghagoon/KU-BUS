@@ -96,7 +96,7 @@ function UpdateAnother(position){
     var v = {};
     v['lat']= position['latitude'];
     v['lng']= position['longitude'];
-    if(otherMarker != null){
+    if(otherMarker == null){
         otherMarker = CreateMarker(null, v, null);
     } else{
         otherMarker.setPosition(new kakao.maps.LatLng(position['latitude'], position['longitude']))
