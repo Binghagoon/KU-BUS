@@ -171,7 +171,7 @@
                 RecordPositionGet();
 
             } else if (stat == "wating") {
-                setInterval(()=>TraceAnother(top.args["reqData"]["id"]), 500);
+                TraceAnother(top.args["reqData"]["id"],'DRIVER')
             }
         });
             
