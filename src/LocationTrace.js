@@ -17,7 +17,8 @@ function LocationChack(){       //TBD
     return isValueExist;
 }
 async function GetPositionById(id){
-    $.ajax({
+    var r;
+    await $.ajax({
         url:  window.location.origin + "/node/get-location",
         type: "GET",
         //async: false,
@@ -28,9 +29,10 @@ async function GetPositionById(id){
             console.log('error getting  a position');
         },
         success: function(data, status, xhr){
-            return data[0];
+            r = data[0];
         },
     });
+    return r;
 }
 function LocationTrace(position){
     var coord = position.coords;

@@ -123,8 +123,14 @@ function Pinupdate(position, who){
         MarkerLocationChange(UserMarker[who], position);
     }
 }
-function UpdateAnother(position, who){
-    Pinupdate(position,who);
+
+async function TraceAnother(id, who){
+    setInterval(UpdateAnother(id, who),500);
+}
+
+async function UpdateAnother(id, who){
+    var result = await top.GetPositionById(id)
+    Pinupdate(result,who);
 }
 
 function CreateMarker(img, value, event){
@@ -241,7 +247,3 @@ function MapPinWithRecord(data){
     });
 }
 
-async function TraceAnother(id, who){
-    setInterval(()=> UpdateAnother(await top.GetPositionById(id), who),500)
-    
-}
