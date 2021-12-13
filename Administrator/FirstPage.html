@@ -23,8 +23,21 @@
                             alert("failed on Calling");
                         },
                         success: function(data, status, xhr){
-                            var from = {name:'debugfrom'};
-                            var to = {name:'debugto'}
+                            var from = {
+                                no: 25,
+                                name: "녹지운동장 옆 주차장",
+                                lat: 37.5918461,
+                                lng: 127.0259147,
+                                campus: "녹지",
+                            }
+                            var to = {
+                                no: 23,
+                                name: "간호 대학",
+                                lat: 37.5908204,
+                                lng: 127.0260461,
+                                campus: "녹지",
+                            }
+                            top.args['requestid'] = data.insertId;
                             top.args['from'] = from;
                             top.args['to'] = to;
                             console.log("move to DoingReservation.html");
