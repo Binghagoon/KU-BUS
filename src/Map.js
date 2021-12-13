@@ -107,6 +107,7 @@ function MarkerCreate(position, who){
     var v = {};
     v['lat']= position['latitude'];
     v['lng']= position['longitude'];
+
     marker = CreateMarker(imgconvert[who], v, null);
     return marker;
 
@@ -125,20 +126,23 @@ function Pinupdate(position, who){
 }
 
 async function TraceAnother(id, who){
-    setInterval(UpdateAnother(id, who),500);
+    setInterval(()=>UpdateAnother(id, who),1000);
 }
 
 async function UpdateAnother(id, who){
-    var result = await top.GetPositionById(id)
+    var result = await top.GetPositionById(id);
     Pinupdate(result,who);
 }
 
-function CreateMarker(img, value, event){
+function CreateMarker(imgSrc, value, event){
+    // img : String value : Object
+    var imageSize = new kakao.maps.Size(24,35);
+    var markerImage = new kakao.maps.MarkerImage(imgSrc, imageSize);
     return new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
         title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image : img // 마커 이미지 
+        image : markerImage, // 마커 이미지 
     });
 }
 
