@@ -208,6 +208,7 @@ function NextStat(){
     if(statnum >= orderStat.length) console.log("Error On NextStat()");
     console.log("Stat is " + orderStat[statnum]);
     MarkerImageChange(null, imgChangedMarker);
+    openedIwcontent.close();
 }
 
 
