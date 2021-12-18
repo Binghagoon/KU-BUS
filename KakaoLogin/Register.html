@@ -2,8 +2,38 @@
     <head>
         <title>이용 동의</title>
         <script src="../src/JQuery.js"></script>
+        <script>
+            function Register(){
+                $.ajax({
+                    url: window.location.origin + "/node/sign-up",
+                    error:function(request,status,error){
+                        alert("error on sign up");
+                    },
+                    success:function(data){
+
+                    }
+                });
+            }
+            $(document).ready(function(){
+                $('#Submit').click(function(){
+                    //TBD
+                });
+            })
+        </script>
     </head>
     <body>
-        //TBD
+        <form action = "">
+            <fieldset>
+                <legend>세부 정보 입력란</legend>
+                <label>신청자명:</label><br>
+                <input type="text" id="UserName" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
+                <label>연락처(모바일):</label><br>
+                <input type="text" id="UserPhoneNumber" size="20" placeholder="전화번호를 입력하세요."><br><br>
+                <label>신청자 이메일:</label><br>
+                <input type="text" id="UserEmailAddress" size="20" placeholder="이메일을 입력하세요."><br><br>
+                <button type="Submit" id="Submit">가입</button><br>
+                <button type="Cancel" id="Cancel">뒤로 가기</button>
+            </fieldset>
+        </form>
     </body>
 </html>
