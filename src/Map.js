@@ -240,11 +240,9 @@ function MapPinWithRecord(data){
         // 마커 이미지의 이미지 크기 입니다
         //var imageSize = new kakao.maps.Size(24, 35);
         
-        // 마커 이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(StarMarkerSrc, imageSize);
 
         // 마커를 생성합니다
-        var marker = CreateMarker(markerImage, value, null);
+        var marker = CreateMarker(StarMarkerSrc, value, null);
         markers.push(marker);
         marker.setMap(map);
         kakao.maps.event.addListener(marker, 'click', ()=>MarkerClickEvent(value, marker, imageSize));
