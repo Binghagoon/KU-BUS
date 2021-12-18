@@ -189,23 +189,6 @@ function MarkerClickEvent(value, marker, imageSize){
         } else{
             console.log("Too many click");            
         }
-        /* origin
-        if(!fromclicked){           //지도에서 출발지 선택할때
-            from = value;
-            InfowindowOpen("from");
-            $("#MapStartOrDest").html("도착지");
-            MarkerImageChange("Blue");
-            fromclicked = true;
-        }
-        else if(!toclicked){          //지도에서 도착지 선택할때
-            to = value;
-            InfowindowOpen("to");;
-            MarkerImageChange("Red");
-            toclicked = true;
-        }
-        else{
-        }
-        */
     }
     MarkerImageChange(null, marker);
     NextButtonSwitch(true);
