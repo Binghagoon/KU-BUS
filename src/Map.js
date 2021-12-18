@@ -173,7 +173,7 @@ function MarkerClickEvent(value, marker, imageSize){
     function InfowindowOpen(status){
         var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-        $("#PositionName").html(value.name + status)
+        $("#PositionName").html(value.name)
 
         if(openedIwcontent){
             openedIwcontent.close();
