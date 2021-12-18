@@ -152,6 +152,7 @@ var imgChangedMarker = null;
 var deletedMarker = [];
 
 function MarkerImageChange(what ,marker){
+    if(!marker) return;
     var imgsrc = what=='star'? StarMarkerSrc : 'https://t1.daumcdn.net/mapjsapi/images/marker.png'
     marker.setImage(new kakao.maps.MarkerImage(imgsrc, imageSize));
     imgChangedMarker = marker;
@@ -167,18 +168,23 @@ function DeletedMarkerRevive(){
     });
 }
 
+var openedIwcontent = null;
 function MarkerClickEvent(value, marker, imageSize){
     function InfowindowOpen(status){
         var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
         $("#PositionName").html(value.name + status)
 
+        if(openedIwcontent){
+            openedIwcontent.close();
+        }
         iwContent = $("#InfowindowTemplete").html();
         var infowindow = new kakao.maps.InfoWindow({
             content : iwContent,
             removable : iwRemoveable
         });   
-        infowindow.open(map, marker); 
+        infowindow.open(map, marker);
+        return infowindow;
     }
     function OrderInput(status){
         if(status == orderStat[0]){      //from
@@ -190,10 +196,11 @@ function MarkerClickEvent(value, marker, imageSize){
             console.log("Too many click");            
         }
     }
+    MarkerImageChange('star', imgChangedMarker);
     MarkerImageChange(null, marker);
     NextButtonSwitch(true);
     OrderInput(orderStat[statnum]);
-    InfowindowOpen(orderStat[statnum]);
+    openedIwcontent = InfowindowOpen(orderStat[statnum]);
 }
 
 function NextStat(){
