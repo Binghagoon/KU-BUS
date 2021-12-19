@@ -3,6 +3,42 @@
     <head>
         <script src="../src/JQuery.js"></script>
         <script>
+            var from = {
+                no: 25,
+                name: "녹지운동장 옆 주차장",
+                lat: 37.5918461,
+                lng: 127.0259147,
+                campus: "녹지",
+            }
+            var to = {
+                no: 23,
+                name: "간호 대학",
+                lat: 37.5908204,
+                lng: 127.0260461,
+                campus: "녹지",
+            }
+            function TestCall(){
+                $.ajax({
+                    url: window.location.origin + "/node/reservation-post",
+                    type: "POST",
+                    data: {
+                        'now_place_no': 25,
+                        'to_place_no': 23,
+                        'id':top.args['id'],
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("failed on Calling");
+                    },
+                    success: function(data, status, xhr){
+                        top.args['requestid'] = data.insertId;
+                        top.args['from'] = from;
+                        top.args['to'] = to;
+                        console.log("move to DoingReservation.html");
+                        window.location.href ="../Student/DoingReservation.html";
+                    }
+                });
+            }
+
             $(document).ready(function(){
                 $("button#Student").click(function(){
                     window.location.href = "../Student/FirstPage.html";
@@ -11,39 +47,13 @@
                     window.location.href = "../Driver/Map.html";
                 });
                 $("button#Calling").click(function(){
-                    $.ajax({
-                        url: window.location.origin + "/node/reservation-post",
-                        type: "POST",
-                        data: {
-                            'now_place_no': 1,
-                            'to_place_no': 2,
-                            'id':top.args['id'],
-                        },
-                        error: function(jqXHR, textStatus, errorThrown){
-                            alert("failed on Calling");
-                        },
-                        success: function(data, status, xhr){
-                            var from = {
-                                no: 25,
-                                name: "녹지운동장 옆 주차장",
-                                lat: 37.5918461,
-                                lng: 127.0259147,
-                                campus: "녹지",
-                            }
-                            var to = {
-                                no: 23,
-                                name: "간호 대학",
-                                lat: 37.5908204,
-                                lng: 127.0260461,
-                                campus: "녹지",
-                            }
-                            top.args['requestid'] = data.insertId;
-                            top.args['from'] = from;
-                            top.args['to'] = to;
-                            console.log("move to DoingReservation.html");
-                            window.location.href ="../Student/DoingReservation.html";
-                        }
-                    });
+                    TestCall();
+                });
+                $("button#UserSetting").click(function(){
+                    window.location.href = window.location.origin + '/Administrator/UserSetting.html';
+                });
+                $("button#UserSession").click(function(){
+                    window.location.href = window.location.origin + '/Administrator/UserSession.html';
                 });
             });
         </script>
@@ -53,5 +63,7 @@
         <button id="Student">학생 역할 해보기</button>
         <button id="Driver">기사 역할 해보기</button>
         <button id="Calling">호출 해보기</button>
+        <button id="UserSetting">사용자 세팅</button>
+        <button id="UserSession">사용자 세션</button>
     </body>
 </html>
