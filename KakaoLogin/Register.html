@@ -9,11 +9,11 @@
             var sp;
             function Register(){
                 var data ={};
-                data['name'] = $('#UserName').value();
+                data['name'] = $('#UserName').val();
                 data['id'] = sp.get('id');
-                data['email'] = $('#UserEmailAddress').value();
+                data['email'] = $('#UserEmailAddress').val();
                 data['role'] = sp.get('role');
-                data['mp'] = $('#UserPhoneNumber'),value();
+                data['mp'] = $('#UserPhoneNumber').val();
                 $.ajax({
                     url:  window.location.origin + "/node/sign-up",
                     type:"POST",
