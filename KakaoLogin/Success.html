@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<html>
     <head>
+        <meta charset="utf-8">
         <script src="../src/JQuery.js"></script>
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script>
@@ -38,8 +36,11 @@
                 success: function(data, status, xhr){
                     if( data['notRegistered']){     //If user are not regisetered, sign up.
                         KUBUSSignup(responce)
-                    }
-                    else {
+                    }else if(data['notAllowed']){
+                        alert('아직 가입 승인이 안되었습니다.\n센터에 문의해주세요.');
+                        console.log('Move to Login Page');
+                        window.location.href = windows.location.origin + '/KakaoLogin/Login.html';
+                    } else {
                         SigninAfter(responce, data)
                     }
                 }

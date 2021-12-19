@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<html>
     <head>
+        <meta charset="utf-8">
         <title>이용 동의</title>
         <script src="../src/JQuery.js"></script>
         <script>
@@ -19,15 +18,17 @@
                     type:"POST",
                     data: data,
                     error: function(jqXHR, textstatus, errorthrown){
+                        console.log("Error Sign up");
                         alert("Error on sign up");
                     },
                     success: function(data, status, xhr){
-                        console.log("Succefully Sign up");
+                        console.log("회원가입이 완료 되었습니다. 로그인 해주세요");
+                        window.location.href = window.location.origin + '/KakaoLogin/Login.html';
                     }
                 });
             }
             $(document).ready(function(){
-                sp = new URLSearchParams(window.location.url);
+                sp = new URLSearchParams(window.location.search);
                 $('#Submit').click(function(){
                     Register();
                 });
@@ -44,7 +45,7 @@
                 <label>사용자명:</label><br>
                 <input type="text" id="UserName" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
                 <label>연락처(모바일):</label><br>
-                <input type="text" id="UserPhoneNumber" size="20" placeholder="전화번호를 입력하세요."><br><br>
+                <input type="text" id="UserPhoneNumber" size="20" placeholder="전화번호를 -없이 입력하세요."><br><br>
                 <label>사용자 이메일:</label><br>
                 <input type="text" id="UserEmailAddress" size="20" placeholder="이메일을 입력하세요."><br><br>
                 <button type="Submit" id="Submit">가입</button><br>
