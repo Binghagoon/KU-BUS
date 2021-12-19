@@ -39,7 +39,7 @@
                     }else if(data['notAllowed']){
                         alert('아직 가입 승인이 안되었습니다.\n센터에 문의해주세요.');
                         console.log('Move to Login Page');
-                        window.location.href = windows.location.origin + '/KakaoLogin/Login.html';
+                        window.location.href = window.location.origin + '/KakaoLogin/Login.html';
                     } else {
                         SigninAfter(responce, data)
                     }
