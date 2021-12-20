@@ -49,20 +49,6 @@ function successCallback(position) {
         level: 3
     };
     map = new kakao.maps.Map(container, options);
-    /*  var markerPosition = new kakao.maps.LatLng(lat,lng);
-        var marker = new kakao.maps.Marker({
-        position: markerPosition
-        });
-        marker.setMap(map); */
-    var iwContent = "현재 있는 위치.";
-    var iwPosition = new kakao.maps.LatLng(lat, lng);
-    var iwRemoveable = true;
-    var infowindow = new kakao.maps.InfoWindow({
-        map: map,
-        position: iwPosition,
-        content: iwContent,
-        removable: iwRemoveable
-    });
 }
 
 function RecordPositionGet(){

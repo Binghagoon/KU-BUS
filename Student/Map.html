@@ -171,7 +171,10 @@
                 RecordPositionGet();
 
             } else if (stat == "wating") {
-                TraceAnother(top.args["reqData"]["id"],'DRIVER')
+                TraceAnother(top.args["reqData"]["id"],'DRIVER');
+                TraceAnother(top.args['id'], 'STUDENT');
+                $('#MapStartOrDest').hide();
+                $('#CallingCar').removeAttr('hidden');
             }
         });
             
@@ -208,6 +211,7 @@
     <button id="GetLocation" class="template">어디서 참여하고 있지요?</button>
     <div id="SetLocation" class="template"></div>
     <div id="MapExplanation" class="front">
+        <div id="CallingCar" hidden>차량을 호출중입니다.</div>
         <div id="MapStartOrDest"><div id="Prefix"> 출발지</div>를 선택하세요</div>
     </div>
         <div id="Header">
