@@ -95,11 +95,17 @@
         function PrintData(id, date, from, dest, carFull, mp){
             var td = $("#StudentDetail td");
             td[0].append(id);
-            td[1].append(date);
+            td[1].append(TimezoneChange(date));
             td[2].append(from);
             td[3].append(dest);
             td[4].append(carFull);
             td[5].append(mp);
+        }
+        function TimezoneChange(time){
+            var date = new Date(time);
+            var dateString = date.toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul'});
+            var newTime = dateString.toString();
+            return newTime;
         }
     </script>
 </head>
