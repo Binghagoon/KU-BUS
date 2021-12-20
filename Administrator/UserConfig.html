@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> User Config</title>
+        <script src="../src/JQuery.js"></script>
+        <script>
+            var sp;
+            $(document).ready(function(){
+                sp = new URLSearchParams(window.location.search);
+                sp.forEach(function(value, key){
+                    if(key == 'Role'){
+                        $('#' + key + ' > select').val(value);
+                    } else{
+                        $('#' + key + ' > input').val(value);
+                    }
+                });
+                $('#Submit').click(function(){
+                    var childinput = $('#Values input');
+                    var obf = {};
+                    var ob ={};
+                    childinput.each(function(index, elem){
+                        var p = $(this).parent();
+                        obf[p.attr('id')] = $(this).val();
+                    });
+                    var ob = {
+                        'no':obf['NoofDB'],
+                        'email':obf['Email'],
+                        'mp':obf['MP'],
+                        'name':obf['Name'],
+                        'role': $('select').val(),
+                    };
+                    $.ajax({
+                        url: window.location.origin + "/node/user-config",
+                        type: "POST",
+                        data: ob,
+                        error: function(jqXHR, textStatus, errorThrown){
+                            alert("failed configuring a user");
+                        },
+                        success: function(data, status, xhr){
+                            alert('Configure Successfully ended');
+                            history.back();
+                        }
+                    });
+                });
+                $('#Back').click(history.back);
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr>
+                    <th>DB 번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>역할</th>
+                    <th>번호(카카오) <br>혹은 아이디</th>
+                </tr>
+                <tr id="Values">
+                    <th id="NoofDB"><input type="number" readonly></th>
+                    <th id="Name"><input type="text"></th>
+                    <th id="MP"><input type="tel"></th>
+                    <th id="Email"><input type="email"></th>
+                    <th id="Role">
+                        <select>
+                            <option value="STUDENT">학생</option>
+                            <option value="DRIVER">기사</option>
+                            <option value="ADMINISTRATOR">관리자</option>
+                            <option value="">승인전</option>
+                        </select>
+                    </th>
+                    <th id="NoofKakao"><input></th>
+                </tr>
+            </tbody>
+        </table>
+        <div id="Buttons">
+            <button id="Submit">제출</button>
+            <button id="Back">뒤로가기</button>
+        </div>
+    </body>
+</html>

@@ -19,12 +19,12 @@
                 userTempelete = $('#TableModel');
                 l = userTempelete.find('td');
                 userList = $('#UserList');
-                PrintUser('1','2','3','4','5', '6');
+                GetUserData();
             });
             function GetUserData(){
                 $.ajax({
                     url: window.location.origin + "/node/all-user-get",
-                    type: "POST",
+                    type: "GET",
                     data: {
                         'id':top.args['id'],
                     },
@@ -32,8 +32,10 @@
                         alert("failed on get users");
                     },
                     success: function(data, status, xhr){
-                        data.forEach((value, index)=>PrintUser(value['no'], value['name'], 
-                                value['mp'], value['email'], value['role']));
+                        data.forEach((value, index)=>{
+                            PrintUser(value['no'], value['name'], value['mp'], value['email'], value['role'], value['id']);
+                        });
+                        ClickEvent();
                     }
                 });
             }
@@ -46,6 +48,20 @@
                 //userList.html(userList.html() + userTempelete[0].outerHTML);
                 userList.append(clone.html());
                 // ref. with https://stackoverflow.com/questions/7961900/jquery-clone-table-row
+            }
+            function ClickEvent(){
+                $('td#Modify > button').click(function(){
+                    var tr = $(this).parents('tr');
+                    var thList = tr.children('td');
+                    var sp = new URLSearchParams();
+                    thList.each(function (index){
+                        if($(this).attr('id') == 'Modify')  return;
+                        sp.append($(this).attr('id'), $(this).html());
+                    });
+                    console.log('Move to UserConfig.html');
+                    window.location.href = window.location.origin 
+                                            + '/Administrator/UserConfig.html?' + sp.toString();
+                });
             }
         </script>
     </head>
@@ -65,19 +81,21 @@
                 </tr>
             </tbody>
         </table>
-        <table id="TableModel" hidden>
-            <tbody id="User">
-                <tr>
-                    <td id="NoofDB">123</td>
-                    <td id="Name">4</td>
-                    <td id="MP"> </td>
-                    <td id="Email"></td>
-                    <td id="role"></td>
-                    <td id="NoofKakao"></td>
-                    <td id="Modify"><button>수정</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="Model">
+            <table id="TableModel" hidden>
+                <tbody id="User">
+                    <tr>
+                        <td id="NoofDB"></td>
+                        <td id="Name"></td>
+                        <td id="MP"></td>
+                        <td id="Email"></td>
+                        <td id="Role"></td>
+                        <td id="NoofKakao"></td>
+                        <td id="Modify"><button>수정</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
     </body>
 </html>
