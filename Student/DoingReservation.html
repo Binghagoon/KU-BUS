@@ -232,9 +232,9 @@
                         success: function(data, status, xhr){
                             if(data) data = data[0];
                             if(data == undefined) return;
-                            if(data["id"] != null){
+                            if(data["name"] != null){
                                 top.args['reqData']={};
-                                top.args['reqData']['id'] = data['id'];
+                                top.args['reqData'] = data;
                                 SuccessReservation();
                             }
                         }
