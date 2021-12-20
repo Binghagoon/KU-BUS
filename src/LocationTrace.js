@@ -66,7 +66,7 @@ function LocationUpdate(position){
             'longitude': coords['longitude'],
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("failed on location update");
+            console.log("failed on location update");
         },
         success: function(data, status, xhr){
             count = count + 1;
