@@ -175,6 +175,8 @@
                 TraceAnother(top.args['id'], 'STUDENT');
                 $('#MapStartOrDest').hide();
                 $('#CallingCar').removeAttr('hidden');
+                var s =$('#CallingCar').html().replace('driverAddress',top.args['reqData']['mp']);
+                $('#CallingCar').html(s);
             }
         });
             
@@ -208,10 +210,9 @@
         <div id="ButtonLatitude" class="template"></div>
         <div id="ButtonLongtitude" class="template"></div>
     </div>
-    <button id="GetLocation" class="template">어디서 참여하고 있지요?</button>
     <div id="SetLocation" class="template"></div>
     <div id="MapExplanation" class="front">
-        <div id="CallingCar" hidden>차량을 호출중입니다.</div>
+        <div id="CallingCar" hidden>차량을 호출중입니다.(연락처는: driverAddress입니다.)</div>
         <div id="MapStartOrDest"><div id="Prefix"> 출발지</div>를 선택하세요</div>
     </div>
         <div id="Header">
