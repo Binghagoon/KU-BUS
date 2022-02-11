@@ -132,14 +132,23 @@
     <script src="../src/JQuery.js"></script>
     <script src="../src/Map.js"></script>
     <script>
-        var stat = top.args["stat"];
-        var role = top.args["role"];
+        var stat;
+        var role;
         var ButtonJq;
         var PrefixJq;
         var korean = {
             'from':'출발지',
             'to':'도착지'
         };
+
+        try{
+            stat = top.args["stat"];
+            role = top.args["role"];
+        }catch(e){
+            console.log(e);
+            stat = 'reserving';
+            console.log('set stat as reserving.');
+        }
         
         $(document).ready(function(){
             ButtonJq = $("#Next");

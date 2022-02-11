@@ -52,7 +52,7 @@ function successCallback(position) {
 }
 
 function RecordPositionGet(){
-    if(!top.debugging){
+    if(!top.debugging && self != top){
         $.ajax({
             url:  window.location.origin + "/node/record-position",
             type: "GET",
