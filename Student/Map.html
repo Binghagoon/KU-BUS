@@ -209,10 +209,10 @@
         }
 
         function GotoCallReservation(){
-            top.args["from"] = from;
-            top.args["to"] = to;
+            var query = {'fromName':from.name,'toName':to.name};
+            var querystr = new URLSearchParams(query).toString();
             console.log("Move to CallReservation");
-            window.location.href ="CallReservation.html";
+            window.location.href ="CallReservation.html?" + querystr;
         }
 
     </script>

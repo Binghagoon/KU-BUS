@@ -103,10 +103,9 @@
         <script src="../src/JQuery.js"></script>
         <script>
             $(document).ready(function(){
-                var from = top.args["from"];
-                var to = top.args["to"];
+                var query = Object.fromEntries(new URLSearchParams(window.location.search));
                 //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
-                PrintData(from['name'], to["name"], undefined, undefined, undefined, undefined, undefined)
+                PrintData(query.fromName, query.toName, undefined, undefined, undefined, undefined, undefined)
                 $("#Submit").on("click", function(){
                     if(!top.debugging){
                         $.ajax({
