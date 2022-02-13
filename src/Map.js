@@ -137,21 +137,23 @@ function CreateMarker(imgSrc, value, event){
 }
 
 var imgChangedMarker = null;
-var deletedMarker = [];
 
 function MarkerImageChange(what ,marker){
     if(!marker) return;
     console.log('This function are deprecated.');
+    imgChangedMarker = marker;
     Marker.FindMarker(marker).ImgChange(what);
+
 }
 function ClickedMarkerDelete(){
-    imgChangedMarker.setMap(null);
-    deletedMarker.push(imgChangedMarker);
+    console.log('This function should be deprecated. Instead use Marker.Disable()');
+    Marker.FindMarker(imgChangedMarker).Disable();
 }
 
 function DeletedMarkerRevive(){
-    deletedMarker.forEach(function(value, index){
-        value.setMap(map);
+    console.log('This function should be deprecated.');
+    Marker.markerList.forEach(function(value, index, array){
+        value.Enable();
     });
 }
 

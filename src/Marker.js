@@ -1,6 +1,6 @@
 // It might need to import the Map.js
 class Marker{
-
+    
     static imgSrc ={
         'star' : "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
         null : 'https://t1.daumcdn.net/mapjsapi/images/marker.png',
@@ -13,6 +13,7 @@ class Marker{
 
     static ShowMarkerList(){
         this.markerList.forEach(console.log);
+        
     }
 
     static FindMarker(kakaoMarker){ //for compatibility
@@ -38,6 +39,7 @@ class Marker{
             title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image : markerImage, // 마커 이미지 
         });
+        this.map = map;     //it may make to static variable.
         Marker.markerList.push(this);
     }
 
@@ -52,11 +54,11 @@ class Marker{
     }
 
     Enable(){
-
+        this.kakaoMarker.setmap(this.map);
     }
 
     Disable(){
-
+        this.kakaoMarker.setMap(null);
     }
 
     Untrace(){
