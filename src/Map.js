@@ -136,8 +136,6 @@ function CreateMarker(imgSrc, value, event){
     return marker.kakaoMarker;
 }
 
-var orderStat=['from','to','reserve'];
-var statnum =0;
 var imgChangedMarker = null;
 var deletedMarker = [];
 
