@@ -110,8 +110,8 @@ function MarkerCreate(position, who){
 }
 
 function MarkerLocationChange(marker, position){
-    marker.setPosition(new kakao.maps.LatLng(position['latitude'], position['longitude']))
-
+    console.log('This function are deprecated.');
+    Marker.FindMarker(marker).LocationChange(position);
 }
 function Pinupdate(position, who){
     if(UserMarker[who] == null){
@@ -131,15 +131,9 @@ async function UpdateAnother(id, who){
 }
 
 function CreateMarker(imgSrc, value, event){
-    // img : String value : Object
-    var imageSize = new kakao.maps.Size(24,35);
-    var markerImage = new kakao.maps.MarkerImage(imgSrc, imageSize);
-    return new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: new kakao.maps.LatLng(value.lat,value.lng), // 마커를 표시할 위치
-        title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image : markerImage, // 마커 이미지 
-    });
+    console.log('This function are deprecated.');
+    var marker = new Marker(map, imgSrc, value);
+    return marker.kakaoMarker;
 }
 
 var orderStat=['from','to','reserve'];
@@ -149,9 +143,8 @@ var deletedMarker = [];
 
 function MarkerImageChange(what ,marker){
     if(!marker) return;
-    var imgsrc = what=='star'? StarMarkerSrc : 'https://t1.daumcdn.net/mapjsapi/images/marker.png'
-    marker.setImage(new kakao.maps.MarkerImage(imgsrc, imageSize));
-    imgChangedMarker = marker;
+    console.log('This function are deprecated.');
+    Marker.FindMarker(marker).ImgChange(what);
 }
 function ClickedMarkerDelete(){
     imgChangedMarker.setMap(null);
