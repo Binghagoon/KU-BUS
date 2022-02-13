@@ -26,7 +26,7 @@ class Marker{
         return marker;
     }
 
-    constructor(map, imgSrc, value) {
+    constructor(map, imgSrc, value, clickEvent) {
         if(typeof map !='object'){
             console.log('map is not initalized.');
             throw new Error();
@@ -39,6 +39,9 @@ class Marker{
             title : value.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image : markerImage, // 마커 이미지 
         });
+        if(clickEvent != undefined){
+            kakao.maps.event.addListener(this.kakaoMarker, 'click', clickEvent);
+        }
         this.map = map;     //it may make to static variable.
         Marker.markerList.push(this);
     }
