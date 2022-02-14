@@ -178,20 +178,18 @@
                 }
             });
             
-            StartMap(function(){
-                if(stat == "reserving"){
-                    RecordPositionGet();
+            StartMap();
+            if(stat == "reserving"){
+                RecordPositionGet();
 
-                } else if (stat == "wating") {
-                    TraceAnother(top.args["reqData"]["id"],'DRIVER');
-                    TraceAnother(top.args['id'], 'STUDENT');
-                    $('#MapStartOrDest').hide();
-                    $('#CallingCar').removeAttr('hidden');
-                    var s =$('#CallingCar').html().replace('driverAddress',top.args['reqData']['mp']);
-                    $('#CallingCar').html(s);
-                }
-
-            });
+            } else if (stat == "wating") {
+                TraceAnother(top.args["reqData"]["id"],'DRIVER');
+                TraceAnother(top.args['id'], 'STUDENT');
+                $('#MapStartOrDest').hide();
+                $('#CallingCar').removeAttr('hidden');
+                var s =$('#CallingCar').html().replace('driverAddress',top.args['reqData']['mp']);
+                $('#CallingCar').html(s);
+            }
         });
             
         function NextButtonSwitch(isOn){
