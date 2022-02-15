@@ -23,7 +23,13 @@ function StartMap(callback) {
         navigator.geolocation.getCurrentPosition(resolve, reject);
     });
     if (!!navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, ()=>alert('현재 위치를 가져올 수 없습니다.'));
+        getpos.then(function(data){
+            successCallback(data);
+            callback();
+        }).catch(function(error){
+            console.log(error);
+            alert("현재 위치를 가져올 수 없습니다.");
+        });
     } else {
         alert("현재 위치를 가져올 수 없습니다.");
     }
