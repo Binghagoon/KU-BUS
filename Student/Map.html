@@ -129,9 +129,9 @@
     </style>
     <script src="https://kit.fontawesome.com/83496dc54d.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-    <script src="../src/JQuery.js"></script>
-    <script src="../src/Map.js"></script>
-    <script src="../src/Marker.js"></script>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/map.js"></script>
+    <script src="../src/marker.js"></script>
     <script>
         var stat;
         var role;
@@ -159,8 +159,8 @@
             $("unuse#NextButton").on("click", function(){
                 top.args["from"] = from;
                 top.args["to"] = to;
-                console.log("Move to CallReservation");
-                window.location.href ="CallReservation.html";
+                console.log("Move to call-reservation");
+                window.location.href ="call-reservation.html";
             });
             $("#Next").click( function(){
                 var thisJq = $(this);
@@ -209,8 +209,8 @@
         function GotoCallReservation(){
             var query = {'fromName':from.name,'toName':to.name};
             var querystr = new URLSearchParams(query).toString();
-            console.log("Move to CallReservation");
-            window.location.href ="CallReservation.html?" + querystr;
+            console.log("Move to call-reservation");
+            window.location.href ="call-reservation.html?" + querystr;
         }
 
     </script>

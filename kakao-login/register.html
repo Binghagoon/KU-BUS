@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>이용 동의</title>
-        <script src="../src/JQuery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script>
             var sp;
             function Register(){
@@ -23,7 +23,7 @@
                     },
                     success: function(data, status, xhr){
                         console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
-                        window.location.href = window.location.origin + '/KakaoLogin/Login.html';
+                        window.location.href = window.location.origin + '/kakalogin/login.html';
                     }
                 });
             }
@@ -33,7 +33,7 @@
                     Register();
                 });
                 $('#Cancel').click(function(){
-                    window.location.href = '/KakaoLogin/Login.html'
+                    window.location.href = '/kakao-login/login.html'
                 });
             })
         </script>

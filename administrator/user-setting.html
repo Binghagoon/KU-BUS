@@ -10,7 +10,7 @@
                 border: 1pt;
             }
         </style>
-        <script src="../src/JQuery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script>
             var userTempelete;
             var l;
@@ -58,9 +58,9 @@
                         if($(this).attr('id') == 'Modify')  return;
                         sp.append($(this).attr('id'), $(this).html());
                     });
-                    console.log('Move to UserConfig.html');
+                    console.log('Move to user-config.html');
                     window.location.href = window.location.origin 
-                                            + '/Administrator/UserConfig.html?' + sp.toString();
+                                            + '/administrator/user-config.html?' + sp.toString();
                 });
             }
         </script>

@@ -193,8 +193,8 @@
                 border: 1px solid #8C0000;
             }
         </style>
-        <script src="../src/JQuery.js"></script>
-        <script src="../src/getQuery.js"></script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/get-query.js"></script>
         <script>
             var parse;
 
@@ -249,8 +249,8 @@
                 top.args["stat"] ="wating";
                 // To be add argument
                 window.onbeforeunload = ()=>{};
-                console.log("Move to Map.html");
-                window.location.href = "Map.html"
+                console.log("Move to map.html");
+                window.location.href = "map.html"
             }
             function CancelReservation(){
                 $.ajax({
@@ -264,8 +264,8 @@
                         return false;
                     },
                     success: function(data, textStatus, jqXHR){
-                        console.log("Move to CallReservation");
-                        window.location.href = "CallReservation.html";
+                        console.log("Move to call-reservation");
+                        window.location.href = "call-reservation.html";
                     },
                 });
             }

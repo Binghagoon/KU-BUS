@@ -1,6 +1,6 @@
 <html>
     <head>
-        <script src="../src/JQuery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script>
             var params =  new URLSearchParams(window.location.search);
 
@@ -17,7 +17,7 @@
                     alert("Error on login\n Is node server alive?");
                 },
                 success: function(data, status, xhr){
-                    const Url = new URL(window.location.origin + "/KakaoLogin/Success.html");
+                    const Url = new URL(window.location.origin + "/kakao-login/success.html");
                     Object.keys(data).forEach((key)=>{
                         Url.searchParams.append(key,data[key]);
                     });

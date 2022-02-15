@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="src/JQuery.js"></script>
-    <link rel="stylesheet" type="text/css" href="../src/Alarm.css">
+    <script src="src/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/alarm.css">
     <title>Driver Alarm</title>
 
     <script>
         
         $(document).ready(function(){
             $.ajax({
-                url: top.debugging ? "../src/alarmSample.json" :  window.location.origin + "/node/alarm",
+                url: top.debugging ? "../src/alarm-sample.json" :  window.location.origin + "/node/alarm",
                 type:"GET",
                 data: {
                     id:id

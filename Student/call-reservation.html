@@ -100,7 +100,7 @@
             }
     
         </style>
-        <script src="../src/JQuery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script>
             $(document).ready(function(){
                 var query = Object.fromEntries(new URLSearchParams(window.location.search));
@@ -121,20 +121,20 @@
                             },
                             success: function(data, status, xhr){
                                 top.args['requestid'] = data.insertId;
-                                console.log("move to DoingReservation.html");
-                                window.location.href ="DoingReservation.html";
+                                console.log("move to doing-reservation.html");
+                                window.location.href ="doing-reservation.html";
                             }
                         });
                     } else {
-                        console.log("move to DoingReservation.html");
-                        window.location.href ="DoingReservation.html";
+                        console.log("move to doing-reservation.html");
+                        window.location.href ="doing-reservation.html";
                     }
                     return false;
 
                 });
                 $("button#Cancel").click(function(){
-                    console.log("move to Map.html");
-                    window.location.href = "Map.html"
+                    console.log("move to map.html");
+                    window.location.href = "map.html"
                     return false;
                 });
             });

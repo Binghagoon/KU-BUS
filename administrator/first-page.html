@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../src/JQuery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script>
             var from = {
                 no: 25,
@@ -34,26 +34,26 @@
                         top.args['from'] = from;
                         top.args['to'] = to;
                         console.log("move to DoingReservation.html");
-                        window.location.href ="../Student/DoingReservation.html";
+                        window.location.href ="../student/doing-reservation.html";
                     }
                 });
             }
 
             $(document).ready(function(){
                 $("button#Student").click(function(){
-                    window.location.href = "../Student/FirstPage.html";
+                    window.location.href = "../student/first-page.html";
                 });
                 $("button#Driver").click(function(){
-                    window.location.href = "../Driver/Map.html";
+                    window.location.href = "../driver/map.html";
                 });
                 $("button#Calling").click(function(){
                     TestCall();
                 });
                 $("button#UserSetting").click(function(){
-                    window.location.href = window.location.origin + '/Administrator/UserSetting.html';
+                    window.location.href = window.location.origin + '/administrator/use-setting.html';
                 });
                 $("button#UserSession").click(function(){
-                    window.location.href = window.location.origin + '/Administrator/UserSession.html';
+                    window.location.href = window.location.origin + '/administrator/user-session.html';
                 });
             });
         </script>

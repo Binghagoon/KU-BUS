@@ -67,7 +67,7 @@ function RecordPositionGet(){
 
     } else{
         $.ajax({
-            url: window.location.origin + "/src/json/recordPosition.json",
+            url: window.location.origin + "/src/json/record-position.json",
             error:function(request,status,error){
                 alert("record position get error");
             },

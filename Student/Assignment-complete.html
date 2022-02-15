@@ -53,8 +53,8 @@
 
     </style>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-    <script src="../src/JQuery.js"></script>
-    <script src="../src/Map.js"></script>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/map.js"></script>
     <script>
         $(document).ready(function(){
             StartMap();
@@ -69,7 +69,7 @@
                     },
                     success: function(data, textStatus, jqXHR){
                         console.log("Move to ConfirmReservation");
-                        window.location.href = "ConfirmReservation";
+                        window.location.href = "confirm-reservation";
                     }
                 })
             })
