@@ -106,7 +106,7 @@
                 var query = Object.fromEntries(new URLSearchParams(window.location.search));
                 //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
                 PrintData(query.fromName, query.toName, undefined, undefined, undefined, undefined, undefined)
-                $("#Submit").on("click", function(){
+                $("#submit").on("click", function(){
                     if(!top.debugging){
                         $.ajax({
                             url:  window.location.origin + "/node/reservation-post",
@@ -132,36 +132,36 @@
                     return false;
 
                 });
-                $("button#Cancel").click(function(){
+                $("button#cancel").click(function(){
                     console.log("move to map.html");
                     window.location.href = "map.html"
                     return false;
                 });
             });
             function PrintData(from, dest, date, time, name, mp, email){
-                $("#From").html($("#From").html() + from);
-                $("#Dest").html($("#Dest").html() + dest);
-                $("#Date").html($("#Date").html() + date);
-                $("#PickupTime").html($("#PickupTime").html() + time);
-                $("#UserName").val(name);
-                $("#UserPhoneNumber").val(mp);
-                $("#UserEmailAddress").val(email);
+                $("#from").html($("#from").html() + from);
+                $("#dest").html($("#dest").html() + dest);
+                $("#date").html($("#date").html() + date);
+                $("#pick-up-time").html($("#pick-up-time").html() + time);
+                $("#user-name").val(name);
+                $("user-phone-number").val(mp);
+                $("#user-email-address").val(email);
             }
         </script>
 
     </head>
     <body>
         <h1>예약정보 확인하기</h1>
-        <div id="Reservation_Information">
+        <div id="reservation-information">
             <h3>선택된 위치 정보</h3>
             <div>
-                <p id="From">출발지: </p>
-                <p id="Dest">도착지: </p>
-                <p id="Date">예약일: </p>
-                <p id="PickupTime">픽업 시간대: </p>
+                <p id="from">출발지: </p>
+                <p id="dest">도착지: </p>
+                <p id="date">예약일: </p>
+                <p id="pick-up-time">픽업 시간대: </p>
             </div>
-            <button type="Submit" id="Submit">예약 신청</button><br>
-            <button type="Cancel" id="Cancel">뒤로 가기</button>
+            <button type="submit" id="submit">예약 신청</button><br>
+            <button type="cancel" id="cancel">뒤로 가기</button>
         </div>
     </body>
 

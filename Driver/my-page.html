@@ -87,7 +87,7 @@
     <script>
         $(document).ready(function(){
             $("#toggle > input[type='checkbox']").click(function () {
-                $("#ConditionMessage").toggle();
+                $("#condition-message").toggle();
             });
             $.ajax({
                 url:  window.location.origin + "/php/driver-info-sample.php",
@@ -108,8 +108,8 @@
 
         // 버튼 클릭 시 연결할 링크는 추후에 결정
         function Edit_Profile(name, carInfo) {
-            $("#CarInfo").text(carInfo);
-            $("#Name").text(name + " 기사님");
+            $("#car-info").text(carInfo);
+            $("#name").text(name + " 기사님");
         }
 
         function See_History() {

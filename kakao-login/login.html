@@ -15,14 +15,14 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
 
-        #LoginPage{
+        #login-page{
             background: linear-gradient(90deg, #8C0000 50%, #CCC2A3  50%);
             width: 320px;
             height: 450px;
             margin: auto;
             padding: 10px 0px;
         }
-        #KU_logo>img{
+        #ku-logo>img{
             width: 120px;
             height: 120px;
 
@@ -33,13 +33,13 @@
             justify-content: center;
             align-items: center;
         }
-        #Login{
+        #login{
             background-color: white;
             width: 320px; 
             height: 450px;
             /*Login이라는 div를 가운데 위치로 오게하는 역할*/  
             margin: auto;                
-            /*Login div내부의 배치*/
+            /*login div내부의 배치*/
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -47,17 +47,17 @@
 
             flex-wrap: wrap;
             }
-        #Login>h1{
+        #login>h1{
             font-size: 24px;
             text-align: center;
             margin-bottom: -2px;
         }
-        #Login>h2{
+        #login>h2{
             font-size: 15px;
             text-align: center;
             margin-bottom: 18px;
         }
-        #LoginField>input {
+        #login-field>input {
             width: 200px;
             height: 24px;
             margin-bottom: 5px;
@@ -80,32 +80,32 @@
         // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('d2481bf8dd089370ad295dd73d94a65a');
         $(document).ready(function(){
-            $("#EmbedLogin").click(function(){
+            $("#embed-login").click(function(){
                 console.log("goto embed login");
                 window.location.href = "../login-page.html";
             })
-            $("#Debug").click(function(){
+            $("#debug").click(function(){
                 debugging = !debugging;
                 if(debugging){
-                    $("#Debug").html("Debugging");
-                    $("#Class").show();
+                    $("#debug").html("Debugging");
+                    $("#class").show();
                 }else{
-                    $("#Debug").html("Not Debugging");
-                    $("#Class").hide();
+                    $("#debug").html("Not Debugging");
+                    $("#class").hide();
                 }
             });
-            $("#Logout").click(() => Kakao.Auth.logout(function(){
-                alert("Logout");
+            $("#logout").click(() => Kakao.Auth.logout(function(){
+                alert("logout");
             }));
-            $("#Class").click(function(){
+            $("#class").click(function(){
                 isStudent = !isStudent;
-                $("#Class").html(isStudent ? "학생": "기사");
+                $("#class").html(isStudent ? "학생": "기사");
             });
-            $("#Class").click(function(){
+            $("#class").click(function(){
                 isStudent = !isStudent;
-                $("#Class").html(isStudent ? "학생": "기사");
+                $("#class").html(isStudent ? "학생": "기사");
             });
-            $("#LoginWithKakao").click(function(){
+            $("#login-with-kakao").click(function(){
                 Kakao.Auth.authorize({
                     redirectUri: window.location.origin + '/KakaoLogin/Auth.html'
                 });
@@ -116,27 +116,27 @@
 </head>
 
 <body>
-    <div id="LoginPage">
-        <div id="Login">
-            <div id="KU_logo">
-                <img src ="../Korea Univ. Logo/emblem/emblem_01.gif">
+    <div id="login-page">
+        <div id="login">
+            <div id="ku-logo">
+                <img src ="../korea-univ-logo/emblem/emblem_01.gif">
             </div>
             <h1>고려대 배리어프리 카풀 <div class="br"> KUBUS</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
             <h2>이동지원차량서비스</h2>
             <div>
             </div>
 
-            <div id="LoginField">
-                <button id="LoginWithKakao"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"></button>
+            <div id="login-field">
+                <button id="login-with-kakao"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"></button>
                 <h5>사용자는 위 버튼을 누르면, 본 사이트의 쿠키 수집에 허용함으로 간주합니다.</h5>
                 <div id="token-result"></div>
             </div>
             <div>
-                <tr id="LoginSuffix">
-                    <td><button id="EmbedLogin" class="button">카카오 계정이 없으면!</button></td>
-                    <td><button id="Logout" class="button">로그아웃</button></td>
-                    <td><button id="Debug" class="button">그외</button></td>
-                    <td><button id="Class" class="button" hidden>학생</button></td>
+                <tr id="login-suffix">
+                    <td><button id="embed-login" class="button">카카오 계정이 없으면!</button></td>
+                    <td><button id="logout" class="button">로그아웃</button></td>
+                    <td><button id="debug" class="button">그외</button></td>
+                    <td><button id="class" class="button" hidden>학생</button></td>
                 </tr>
             </div>
         </div>

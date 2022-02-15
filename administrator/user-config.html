@@ -14,8 +14,8 @@
                         $('#' + key + ' > input').val(value);
                     }
                 });
-                $('#Submit').click(function(){
-                    var childinput = $('#Values input');
+                $('#submit').click(function(){
+                    var childinput = $('#values input');
                     var obf = {};
                     var ob ={};
                     childinput.each(function(index, elem){
@@ -42,7 +42,7 @@
                         }
                     });
                 });
-                $('#Back').click(history.back);
+                $('#back').click(history.back);
             });
 
         </script>
@@ -59,12 +59,12 @@
                     <th>역할</th>
                     <th>번호(카카오) <br>혹은 아이디</th>
                 </tr>
-                <tr id="Values">
-                    <th id="NoofDB"><input type="number" readonly></th>
-                    <th id="Name"><input type="text"></th>
-                    <th id="MP"><input type="tel"></th>
-                    <th id="Email"><input type="email"></th>
-                    <th id="Role">
+                <tr id="values">
+                    <th id="no-of-db"><input type="number" readonly></th>
+                    <th id="name"><input type="text"></th>
+                    <th id="mp"><input type="tel"></th>
+                    <th id="email"><input type="email"></th>
+                    <th id="role">
                         <select>
                             <option value="STUDENT">학생</option>
                             <option value="DRIVER">기사</option>
@@ -72,13 +72,13 @@
                             <option value="">승인전</option>
                         </select>
                     </th>
-                    <th id="NoofKakao"><input></th>
+                    <th id="no-ofkakao"><input></th>
                 </tr>
             </tbody>
         </table>
-        <div id="Buttons">
-            <button id="Submit">제출</button>
-            <button id="Back">뒤로가기</button>
+        <div id="buttons">
+            <button id="submit">제출</button>
+            <button id="back">뒤로가기</button>
         </div>
     </body>
 </html>

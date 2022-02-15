@@ -6,7 +6,7 @@
         <title></title>
     </head> 
     <style>
-        #After_Assigning_Driver {
+        #after-assigning-driver {
             background-color: white;
             width: 320px;
             height: 470px;
@@ -21,7 +21,7 @@
             box-shadow: 0px 0px 20px -3px gray;
         }
 
-        #Real_Time_Information, #Cancel_Reservation {
+        #real-time-information, #Cancel_Reservation {
             width: 315px;
             display: flex;
             flex-direction: column;
@@ -30,7 +30,7 @@
             border: solid gray;
         }
 
-        #Real_Time_Information > div {
+        #real-time-information > div {
             width: 280px;
             height: 55px;
             padding: 5px 10px;
@@ -39,7 +39,7 @@
             text-align: left;
         }
 
-        #Control {
+        #control {
             display: flex;
 
             justify-content: space-evenly;
@@ -47,7 +47,7 @@
             align-items: center;
         }
 
-        #Control > div {
+        #control > div {
             border: solid gray;
         }
 
@@ -58,7 +58,7 @@
     <script>
         $(document).ready(function(){
             StartMap();
-            $("#CancelReservation").on("click", function(){
+            $("#cancel-reservation").on("click", function(){
                 $.ajax({
                     url:  window.location.origin + "/reservation-delete",
                     data:{
@@ -76,7 +76,7 @@
         })
     </script>
     <style>
-        #After_Assigning_Driver {
+        #after-assigning-driver {
             background-color: white;
             width: 320px;
             height: 470px;
@@ -91,7 +91,7 @@
             box-shadow: 0px 0px 20px -3px gray;
         }
 
-        #Real_Time_Information, #Cancel_Reservation {
+        #real-time-information, #Cancel_Reservation {
             width: 315px;
             display: flex;
             flex-direction: column;
@@ -100,7 +100,7 @@
             border: solid gray;
         }
 
-        #Real_Time_Information > div {
+        #real-time-information > div {
             width: 280px;
             height: 55px;
             padding: 5px 10px;
@@ -109,7 +109,7 @@
             text-align: left;
         }
 
-        #Control {
+        #control {
             display: flex;
 
             justify-content: space-evenly;
@@ -117,45 +117,45 @@
             align-items: center;
         }
 
-        #Control > div {
+        #control > div {
             border: solid gray;
         }
 
     </style>
     <body>
-        <div id="AfterAssigningDriver">
-            <div id="Map">
+        <div id="after-assigning-driver">
+            <div id="map">
 
             </div>
 
-            <div id="RealTimeInformation">
-                <div id="MinuteLeft">
+            <div id="real-time-information">
+                <div id="minute-left">
                     <h4>기사님께서 이동 중이십니다. (%분 후 도착)</h4>
                 </div>
 
-                <div id="ProfileImage">
+                <div id="profile-image">
 
                 </div>
 
-                <div id="Name">
+                <div id="name">
 
                 </div>
 
-                <div id="CarInformation">
+                <div id="car-information">
                     <h4>차량: %호차</h4>
                 </div>
             </div>
 
-            <div id="Control">
-                <div id="MakeCall">
+            <div id="control">
+                <div id="make-call">
                     <h3>전화하기</h3>
                 </div>
     
-                <div id="SendMessage">
+                <div id="send-message">
                     <h3>메시지 보내기</h3>
                 </div>
     
-                <div id="CancelReservation">
+                <div id="cancel-reservation">
                     <h3>취소하기</h3>
                 </div>
             </div>

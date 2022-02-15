@@ -18,7 +18,7 @@
         }
         html,body{width: 100%; height: 100%; margin: 0;}
 
-        #NewCall {
+        #new-call {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -26,24 +26,24 @@
 
             position: relative; top: 10vh;
         }
-        #NewCall>h1{
+        #new-call>h1{
             font-size: 20px;
         }
 
-        #Picture {
+        #picture {
             font-size: 100px;
             color: #8C0000;
             margin-bottom: 20px;
         }
 
-        #Response {
+        #response {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
         }
 
-        #Response>button {
+        #response>button {
             width: 72px;
             height: 36px;
             border-radius: 7px;
@@ -70,7 +70,7 @@
             //PrintData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
             data = top.args["reqData"]; //ex: {name: 'asdf', time: '2021-10-03T11:32:40.000Z', now_name: '우당교양관', to_name: '정경대학과 타이거 프라자 사이'}
             PrintData(data["name"], data["time"], data["now_name"], data["to_name"], null, data['mp']);
-            $("#Accept").on("click",function(){
+            $("#accept").on("click",function(){
                 $.ajax({
                     url:  window.location.origin + "/node/driver-select-request",
                     type: "POST",
@@ -88,12 +88,12 @@
                 })
 
             });
-            $("#Reject").on("click",function(){
+            $("#reject").on("click",function(){
 
             });
         });
         function PrintData(id, date, from, dest, carFull, mp){
-            var td = $("#StudentDetail td");
+            var td = $("#student-detail td");
             td[0].append(id);
             td[1].append(TimezoneChange(date));
             td[2].append(from);
@@ -111,14 +111,14 @@
 </head>
 
 <body>
-    <div id="NewCall">
+    <div id="new-call">
         <h1> 새로운 요청이 들어왔습니다 </h1>
-        <div id="Picture"><i class="fas fa-map-marker-alt"></i></div>
-        <div id="Response">
-            <button id="Accept">수락</button>
-            <button id="Reject">거절</button>
+        <div id="picture"><i class="fas fa-map-marker-alt"></i></div>
+        <div id="response">
+            <button id="accept">수락</button>
+            <button id="reject">거절</button>
         </div>
-        <table id="StudentDetail">
+        <table id="student-detail">
             <tr>
                 <td>요청자 이름 : </td>
             </tr>

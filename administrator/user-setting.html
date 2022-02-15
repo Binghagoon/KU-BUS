@@ -16,9 +16,9 @@
             var l;
             var userList;
             $(function(){
-                userTempelete = $('#TableModel');
+                userTempelete = $('#table-model');
                 l = userTempelete.find('td');
-                userList = $('#UserList');
+                userList = $('#user-list');
                 GetUserData();
             });
             function GetUserData(){
@@ -50,7 +50,7 @@
                 // ref. with https://stackoverflow.com/questions/7961900/jquery-clone-table-row
             }
             function ClickEvent(){
-                $('td#Modify > button').click(function(){
+                $('td#modify > button').click(function(){
                     var tr = $(this).parents('tr');
                     var thList = tr.children('td');
                     var sp = new URLSearchParams();
@@ -68,7 +68,7 @@
 
     <body>
         <h1>User List</h1>
-        <table id="UserList">
+        <table id="user-list">
             <tbody>
                 <tr>
                     <th>DB 번호</th>
@@ -81,17 +81,17 @@
                 </tr>
             </tbody>
         </table>
-        <div id="Model">
-            <table id="TableModel" hidden>
-                <tbody id="User">
+        <div id="model">
+            <table id="table-model" hidden>
+                <tbody id="user">
                     <tr>
-                        <td id="NoofDB"></td>
-                        <td id="Name"></td>
-                        <td id="MP"></td>
-                        <td id="Email"></td>
-                        <td id="Role"></td>
-                        <td id="NoofKakao"></td>
-                        <td id="Modify"><button>수정</button></td>
+                        <td id="no-of-db"></td>
+                        <td id="name"></td>
+                        <td id="mp"></td>
+                        <td id="email"></td>
+                        <td id="role"></td>
+                        <td id="no-of-kakao"></td>
+                        <td id="modify"><button>수정</button></td>
                     </tr>
                 </tbody>
             </table>

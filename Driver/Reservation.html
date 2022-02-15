@@ -9,15 +9,15 @@
         *{
             font-family: 'Noto Sans KR', sans-serif;
             }
-        html, body, .CallList {width: 100%; height: 100%; margin: 0;}
+        html, body, .call-list {width: 100%; height: 100%; margin: 0;}
 
-        .CallList {
+        .call-list {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }/*CallList 가 필요한지 안필요한지 모르겠음. 만약 필요 없다면 이 css 그대로 body에 적용할 것임.*/
+        }/*call-list 가 필요한지 안필요한지 모르겠음. 만약 필요 없다면 이 css 그대로 body에 적용할 것임.*/
 
-        .CallRequest {
+        .call-request {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
@@ -31,13 +31,13 @@
             height: 25%;
             margin-top: 16px;
         }
-        .CallerID{
+        .caller-id{
             display: flex;
             flex-direction: column;
             align-items: center;
             
         }
-        .ProfileImage {
+        .profile-image {
             width: 50px;
             height: 50px;
             box-shadow: 0px 0px 5px 0px darkgray;
@@ -48,17 +48,17 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        .Caller_id{
+        .caller_id{
             margin-top: 3px;
             font-size: 14px;
         }
-        .CallerPP{
+        .caller-pp{
             display: flex;
             flex-direction: row;
             justify-content: center;
             font-size: 14px;
         }
-        .CallerPP>button {
+        .caller-pp>button {
             width: 50px;
             height: 32px;
             border: 1.5px solid gray;
@@ -68,7 +68,7 @@
             margin: 5px 2px;
         }
 
-        .CallerDetail {
+        .caller-detail {
             width: 56vw;
             height: 90px;
 
@@ -77,7 +77,7 @@
         }
 /*
         @media screen and (max-width: 1024px) {
-            .CallRequest {
+            .call-request {
                 width: 90vw;}
         }*/
         </style>
@@ -85,8 +85,8 @@
     <script src="../src/jquery.js"></script>
     <script>
             var query = [];
-            function ReservationIncome(id, nlo, mp, restime, rlo, dst, carfull){
-                var arg = [id, nlo, mp, restime, rlo, dst, carfull];
+            function ReservationIncome(id, nlo, mp, ResTime, rlo, dst, carfull){
+                var arg = [id, nlo, mp, ResTime, rlo, dst, carfull];
                 var i;
                 for(i =0; i <arguments.length; i++){
                     query[i].text(query[i].text() + arg[i]);
@@ -95,13 +95,13 @@
 
             $(document).ready(function(){
                 query =[
-                    $("#Caller_id"),
-                    $("#CallerPositionButton"),
-                    $("#CallerPhoneButton"),
-                    $("#ResTime"),
-                    $("#ResPosition"),
-                    $("#Destination"),
-                    $("#Carfull")
+                    $("#caller_id"),
+                    $("#caller-position-button"),
+                    $("#caller-phone-button"),
+                    $("#res-time"),
+                    $("#res-position"),
+                    $("#destination"),
+                    $("#car-full")
                 ];
                 ReservationIncome("1","2","3","4","5","6","7");
             });
@@ -110,29 +110,29 @@
 
     </head>
     <body>
-        <div id="CallList">
-            <table id="CallRequest">
-                <tr id="CallerTemplate">
-                    <td id="CallerID">
-                        <div id="ProfileImage"></div>
-                        <div id="Caller_id">요청자 id: </div>
-                        <div id="CallerPP">
-                            <button id="CallerPositionButton" href="#">위치: </button>
-                            <button id="CallerPhoneButton" href="#">전화: </button>
+        <div id="call-list">
+            <table id="call-request">
+                <tr id="caller-template">
+                    <td id="caller-id">
+                        <div id="profile-image"></div>
+                        <div id="caller_id">요청자 id: </div>
+                        <div id="caller-pp">
+                            <button id="caller-position-button" href="#">위치: </button>
+                            <button id="caller-phone-button" href="#">전화: </button>
                         </div>
                     </td>
                     <td> 
-                        <table id="CallerDetail">
-                            <tr><td id="ResTime">
+                        <table id="caller-detail">
+                            <tr><td id="res-time">
                                 호출 예약 시간: 
                             </td></tr>
-                            <tr><td id="ResPosition">
+                            <tr><td id="res-position">
                                 탑승위치:
                             </td></tr>
-                            <tr><td id="Destination">
+                            <tr><td id="destination">
                                 목적지:
                             </td></tr>
-                            <tr><td id="Carfull">
+                            <tr><td id="car-full">
                                 동승자 유무:
                             </td></tr>
                         </table>

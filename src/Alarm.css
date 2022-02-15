@@ -1,4 +1,4 @@
-.DriverNoticeHome {
+.driver-notice-home {
     background-color: white;
     width: 320px;
     height: 500px;
@@ -6,7 +6,7 @@
     margin: auto;
 }
 
-.Notice {
+.notice {
     display: flex;
     flex-direction: column;
 
@@ -16,7 +16,7 @@
     border: 1px solid gray;
 }
 
-.Alarm {
+.alarm {
     
     display: flex;
     flex-direction: row;
@@ -25,9 +25,9 @@
 
     height: 70px;
 }
-.Alarm:hover {background-color: rgb(231, 231, 231); }
+.alarm:hover {background-color: rgb(231, 231, 231); }
 
-.AlarmImage{
+.alarmImage{
     box-shadow: 0px 0px 4px 0px darkgray;
     width: 48px;
     height: 48px;
@@ -39,12 +39,12 @@
     background-size: cover;
 }
 
-.AlarmContents{
+.alarm-contents{
     width: 220px;
     height: 70px;
     padding: 0px 5px;
 }
-.Alarmer{
+.alarmer{
     font-size: 12px;
     margin-top: 18px;
     margin-bottom: 0px;
@@ -54,7 +54,7 @@
     white-space: nowrap;
     overflow: hidden; 
 }
-.AlarmTitle{
+.alarm-title{
     font-size: 10px;
     margin: 3px 0px;
 
@@ -64,7 +64,7 @@
     overflow: hidden; 
 }
 
-.MainSuffix {
+.main-suffix {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -75,7 +75,7 @@
     text-decoration: none;
 }
 
-.MainSuffix>button {
+.main-suffix>button {
     display: block;
     width: 80px;
     height: 30px;
@@ -83,12 +83,12 @@
     padding-top: 5px;
 }
 
-#NoticeHome {
+#notice-home {
     border-bottom: 5px solid darkred;
     border-top: 0px;
     background-color: white;
 }
-.DriverNoticeHome {
+.driver-notice-home {
     background-color: white;
     width: 320px;
     height: 450px;
@@ -96,7 +96,7 @@
     margin: auto;
 }
 
-.Notice {
+.notice {
     display: flex;
     flex-direction: column;
 
@@ -106,7 +106,7 @@
     box-shadow: 0px 0px 20px -3px gray;
 }
 
-.Alarm {
+.alarm {
     
     display: flex;
     flex-direction: row;
@@ -115,9 +115,9 @@
 
     height: 70px;
 }
-.Alarm:hover {background-color: rgb(231, 231, 231); }
+.alarm:hover {background-color: rgb(231, 231, 231); }
 
-.AlarmImage{
+.alarm-image{
     box-shadow: 0px 0px 4px 0px darkgray;
     width: 48px;
     height: 48px;
@@ -129,12 +129,12 @@
     background-size: cover;
 }
 
-.AlarmContents{
+.alarm-contents{
     width: 220px;
     height: 70px;
     padding: 0px 5px;
 }
-.Alarmer{
+.alarmer{
     font-size: 12px;
     margin-top: 18px;
     margin-bottom: 0px;
@@ -144,7 +144,7 @@
     white-space: nowrap;
     overflow: hidden; 
 }
-.AlarmTitle{
+.alarm-title{
     font-size: 10px;
     margin: 3px 0px;
 
@@ -154,7 +154,7 @@
     overflow: hidden; 
 }
 
-.MainSuffix {
+.main-suffix {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -167,7 +167,7 @@
     box-shadow: 0px -3px 20px -3px gray;
 }
 
-.MainSuffix>button {
+.main-suffix>button {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -185,20 +185,20 @@
     font-size: 6px;
 }
 
-.MainSuffix>button>img {
+.main-suffix>button>img {
     margin-bottom: 2px;
     -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
     filter: opacity(0.5) drop-shadow(0 0 0 gray);
     }
 
-#NoticeHome {
+#notice-home {
     color: darkred;
     border-top: 0px;
     background-color: white;
     border-top: 3px solid darkred;
 }
 
-#NoticeHome>img {
+#notice-home>img {
     -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
     filter: opacity(0.5) drop-shadow(0 0 0 darkred);
 }

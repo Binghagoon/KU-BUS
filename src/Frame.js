@@ -4,16 +4,16 @@ var now = 2;
 var buttons = [];
 var pages = [];
 var firstPage ={
-    undefined:"/Student/FirstPage.html",
-    "STUDENT":"/Student/FirstPage.html",
-    "DRIVER":"/Driver/Map.html",
-    "ADMINISTRATOR":"/Administrator/FirstPage.html",
+    undefined:"/student/first-page.html",
+    "STUDENT":"/student/first-page.html",
+    "DRIVER":"/driver/map.html",
+    "ADMINISTRATOR":"/administrator/first-page.html",
 };
 
 $(function(){
-    ifr =  $("#Iframe");
-    buttonParent = $("FrameSuffix");
-    buttons = [ undefined , $("#MapHome"), $("#ReservationHome"), $("#NoticeHome"), $("#MyInfoHome") ]
+    ifr =  $("#iframe");
+    buttonParent = $("frame-suffix");
+    buttons = [ undefined , $("#map-home"), $("#reservation-home"), $("#notice-home"), $("#my-info-home") ]
     pages = [ undefined, "Map", "Reservation", "Alarm", "MyPage" ]
     pre = { "STUDENT" : "Student", "DRIVER" : "Driver"};
     buttons[1].on("click",() => Click(1));

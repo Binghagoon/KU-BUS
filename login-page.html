@@ -15,14 +15,14 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
 
-        #LoginPage{
+        #login-page{
             background: linear-gradient(90deg, #8C0000 50%, #CCC2A3  50%);
             width: 320px;
             height: 450px;
             margin: auto;
             padding: 10px 0px;
         }
-        #KU_logo>img{
+        #ku-logo>img{
             width: 120px;
             height: 120px;
 
@@ -33,7 +33,7 @@
             justify-content: center;
             align-items: center;
         }
-        #Login{
+        #login{
             background-color: white;
             width: 320px; 
             height: 450px;
@@ -47,29 +47,29 @@
 
             flex-wrap: wrap;
             }
-        #Login>h1{
+        #login>h1{
             font-size: 24px;
             text-align: center;
             margin-bottom: -2px;
         }
-        #Login>h2{
+        #login>h2{
             font-size: 15px;
             text-align: center;
             margin-bottom: 18px;
         }
-        #LoginField>input {
+        #login-field>input {
             width: 200px;
             height: 24px;
             margin-bottom: 5px;
         }
-        #LoginSubmit{           /* 버튼 id디자인 분리하기 TBDCSS*/
+        #login-submit{           /* 버튼 id디자인 분리하기 TBDCSS*/
             background-color: #8C0000;
             color:white;
             width: 200px;
             height: 28px;
             border: 0px;
         }
-        #LoginSubmit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
+        #login-submit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
 
     </style>
     <script src="src/jquery.js"></script>
@@ -81,55 +81,55 @@
         var isStudent = true;
         $(document).ready(function(){
 
-            $("#LoginSubmit").click(function(){
+            $("#login-submit").click(function(){
                
-                IDSubmit($("#Username").val(),$("#Password").val())
+                IDSubmit($("#username").val(),$("#password").val())
             });
-            $("#IDFind").click(function(){
+            $("#id-find").click(function(){
 
             });
-            $("#Signup").click(function(){
+            $("#signup").click(function(){
 
             });
-            $("#Debug").click(function(){
+            $("#debug").click(function(){
                 debugging = !debugging;
                 if(debugging){
-                    $("#Debug").html("Debugging");
-                    $("#Class").show();
+                    $("#debug").html("Debugging");
+                    $("#class").show();
                 }else{
-                    $("#Debug").html("Not Debugging");
-                    $("#Class").hide();
+                    $("#debug").html("Not Debugging");
+                    $("#class").hide();
                 }
             });
-            $("#Class").click(function(){
+            $("#class").click(function(){
                 isStudent = !isStudent;
-                $("#Class").html(isStudent ? "학생": "기사");
+                $("#class").html(isStudent ? "학생": "기사");
             });
         });
     </script>
 </head>
 
 <body>
-    <div id="LoginPage">
-        <div id="Login">
-            <div id="KU_logo">
-                <img src ="Korea Univ. Logo/emblem/emblem_01.gif">
+    <div id="login-page">
+        <div id="login">
+            <div id="ku-logo">
+                <img src ="korea-univ-logo/emblem/emblem_01.gif">
             </div>
             <h1>고려대 배리어프리 카풀 <div class="br"> KUBUS</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
             <h2>이동지원차량서비스</h2>
 
-            <div id="LoginField">
-                <input id="Username" type="text" maxlength="20" placeholder="아이디 ID" required> <br>
-                <input id="Password" type="password" maxlength="20" placeholder="비밀번호 PASSWORD" required> <br>
-                <input id="LoginSubmit" type="submit" value="submit" class="button">
+            <div id="login-field">
+                <input id="username" type="text" maxlength="20" placeholder="아이디 ID" required> <br>
+                <input id="password" type="password" maxlength="20" placeholder="비밀번호 PASSWORD" required> <br>
+                <input id="login-submit" type="submit" value="submit" class="button">
                 <!--maxlength는 아이디랑 비밀번호 20자 이상 아니게 설정해놓은 것, required는 써야지만 넘어갈 수 있음-->
             </div>
             <div>
-                <tr id="LoginSuffix">
-                    <td><button id="IDFind" class="button">아이디/패스워드 찾기</button></td>
-                    <td><button id="Signup" class="button">회원가입</button></td>
-                    <td><button id="Debug" class="button">그외</button></td>
-                    <td><button id="Class" class="button" hidden>학생</button></td>
+                <tr id="login-suffix">
+                    <td><button id="id-find" class="button">아이디/패스워드 찾기</button></td>
+                    <td><button id="signup" class="button">회원가입</button></td>
+                    <td><button id="debug" class="button">그외</button></td>
+                    <td><button id="class" class="button" hidden>학생</button></td>
                 </tr>
             </div>
         </div>

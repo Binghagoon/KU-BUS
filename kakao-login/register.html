@@ -8,11 +8,11 @@
             var sp;
             function Register(){
                 var data ={};
-                data['name'] = $('#UserName').val();
+                data['name'] = $('#user-name').val();
                 data['id'] = sp.get('id');
-                data['email'] = $('#UserEmailAddress').val();
+                data['email'] = $('#user-email-address').val();
                 data['role'] = sp.get('role');
-                data['mp'] = $('#UserPhoneNumber').val();
+                data['mp'] = $('#user-phone-number').val();
                 $.ajax({
                     url:  window.location.origin + "/node/sign-up",
                     type:"POST",
@@ -29,10 +29,10 @@
             }
             $(document).ready(function(){
                 sp = new URLSearchParams(window.location.search);
-                $('#Submit').click(function(){
+                $('#submit').click(function(){
                     Register();
                 });
-                $('#Cancel').click(function(){
+                $('#cansel').click(function(){
                     window.location.href = '/kakao-login/login.html'
                 });
             })
@@ -43,13 +43,13 @@
             <fieldset>
                 <legend>세부 정보 입력란</legend>
                 <label>사용자명:</label><br>
-                <input type="text" id="UserName" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
+                <input type="text" id="user-name" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
                 <label>연락처(모바일):</label><br>
-                <input type="text" id="UserPhoneNumber" size="20" placeholder="전화번호를 -없이 입력하세요."><br><br>
+                <input type="text" id="user-phone-number" size="20" placeholder="전화번호를 -없이 입력하세요."><br><br>
                 <label>사용자 이메일:</label><br>
-                <input type="text" id="UserEmailAddress" size="20" placeholder="이메일을 입력하세요."><br><br>
-                <button type="Submit" id="Submit">가입</button><br>
-                <button type="Cancel" id="Cancel">뒤로 가기</button>
+                <input type="text" id="user-email-address" size="20" placeholder="이메일을 입력하세요."><br><br>
+                <button type="submit" id="submit">가입</button><br>
+                <button type="cansel" id="cansel">뒤로 가기</button>
             </fieldset>
         </form>
     </body>

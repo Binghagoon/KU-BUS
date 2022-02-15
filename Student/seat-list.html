@@ -51,7 +51,7 @@
             top: 70px;
         }
 
-        #BusSelect{
+        #bus-select{
             width: 160px; height: 32px;
             background-color: violet;
             /*TBD CSS*/
@@ -82,16 +82,16 @@
             width: 16px; height: 16px; 
         }
 
-        #ImpossibleColor{
+        #impossible-color{
             background-color: #CCC2A3;
         }
-        #ReservedColor{
+        #reserved-color{
             background-color: #E7E5E8;
         }
-        #PossibleColor{
+        #possible-color{
             background-color: #8C0000;
         }
-        .SeatCondition{
+        .seat-condition{
             font-size: 11px;
             text-align: left;
             padding: 0px 5px;
@@ -158,7 +158,7 @@
                 ChairClicked(par[v], thisJquery);
             });
             $(".chair.unselectable").on("click", () => alert('해당 좌석은 선택할 수 없습니다'));
-            $("#Next").on("click", function(){
+            $("#next").on("click", function(){
                 if (!!navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         var lat = position.coords.latitude;
@@ -186,13 +186,13 @@
                 var text = 'seatnum번 좌석 선택'
                 sel.html(text.replace("seatnum", num));
             }
-            var sel = $("#Selected");
+            var sel = $("#selected");
             seatnum = num;
             ChangeExplain(sel);
             sel.show();
             button.removeClass("unselected");
             button.addClass("selected");
-            $("#Next").addClass("crimson");
+            $("#next").addClass("crimson");
             pre = button;
         }
 
@@ -221,7 +221,7 @@
 <body>
     <div id="header"> 좌석을 선택하세요 </div>
     <div id="contents">
-        <div id="BusSelect"></div>
+        <div id="bus-select"></div>
         <table class="alltable">
             <tr>
                 <td><input type="submit" value="운전자" class="chair unselectable" id="driver"></td>
@@ -238,26 +238,26 @@
         </table>
         <table id="legend">
             <tr>
-                <td class="color" id="ImpossibleColor"></td>
-                <td class="SeatCondition">예약 불가능 좌석</td>
+                <td class="color" id="impossible-color"></td>
+                <td class="seat-condition">예약 불가능 좌석</td>
             </tr>
             <tr>
-                <td class="color" id="ReservedColor"></td>
-                <td class="SeatCondition">이미 예약된 좌석</td>
+                <td class="color" id="reserved-color"></td>
+                <td class="seat-condition">이미 예약된 좌석</td>
             </tr>
             <tr>
-                <td class="color" id="PossibleColor"></td>
-                <td class="SeatCondition">예약 가능 좌석</td>
+                <td class="color" id="possible-color"></td>
+                <td class="seat-condition">예약 가능 좌석</td>
             </tr>
         </table>
-        <div id="HelperSelect">
+        <div id="helper-select">
             <input type="checkbox" id="Helper" value="help"><label for="Helper"> 도우미가 탑승합니다.</label>
             <input type="checkbox" id="AnamStation" ><label> 안암역 </label>
         </div>
-        <div id="Selected" hidden> seatnum번 좌석 선택</div>
+        <div id="selected" hidden> seatnum번 좌석 선택</div>
     </div>
-    <button id="Next" class="next"> Next 
-        <img class="arrow" src="../Korea%20Univ.%20Logo/Image/right%20arrow.png">
+    <button id="next" class="next"> Next 
+        <img class="arrow" src="../korea-univ-logo/Image/left arrow.png">
     </button>
 </body>
 

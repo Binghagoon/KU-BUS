@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map</title>
+    <title>map</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
@@ -22,7 +22,7 @@
             margin: 0;
         }
 
-        #Map {
+        #map {
             width: 100%;
             height: 100%;
         }
@@ -40,7 +40,7 @@
         .front{
             z-index: 2;
         }
-        #MapExplanation {
+        #map-explanation {
             padding-left: 10px;
             padding: 5px 10px 5px 18px;
 
@@ -75,7 +75,7 @@
             z-index: 2;
         }
 
-        #Destination {
+        #destination {
             margin-right: 0;
             font-size: 20px;
 
@@ -102,7 +102,7 @@
             left: 30px;
         }
 
-        #Next {
+        #next {
             position: absolute;
             bottom: 24px;
             left: 50%;
@@ -119,7 +119,7 @@
             text-align: left;
         }
 
-        #Arrow {
+        #arrow {
             width: 30px;
             position: absolute;
             right: 10px;
@@ -154,15 +154,15 @@
         }
         
         $(document).ready(function(){
-            ButtonJq = $("#Next");
-            PrefixJq = $('#Prefix');
+            ButtonJq = $("#next");
+            PrefixJq = $('#prefix');
             $("unuse#NextButton").on("click", function(){
                 top.args["from"] = from;
                 top.args["to"] = to;
                 console.log("Move to call-reservation");
                 window.location.href ="call-reservation.html";
             });
-            $("#Next").click( function(){
+            $("#next").click( function(){
                 var thisJq = $(this);
                 if(thisJq.hasClass('on')){
                     ClickedMarkerDelete();
@@ -185,10 +185,10 @@
             } else if (stat == "wating") {
                 TraceAnother(top.args["reqData"]["id"],'DRIVER');
                 TraceAnother(top.args['id'], 'STUDENT');
-                $('#MapStartOrDest').hide();
-                $('#CallingCar').removeAttr('hidden');
-                var s =$('#CallingCar').html().replace('driverAddress',top.args['reqData']['mp']);
-                $('#CallingCar').html(s);
+                $('#map-start-or-dest').hide();
+                $('#calling-car').removeAttr('hidden');
+                var s =$('#calling-car').html().replace('driverAddress',top.args['reqData']['mp']);
+                $('#calling-car').html(s);
             }
         });
             
@@ -217,24 +217,24 @@
 </head>
 
 <body>
-    <div id="InfowindowTemplete" class="template">
-        <div id="PositionName"></div>
-        <div id="ButtonLatitude" class="template"></div>
-        <div id="ButtonLongtitude" class="template"></div>
+    <div id="infowindow-templete" class="template">
+        <div id="positionName"></div>
+        <div id="button-latitude" class="template"></div>
+        <div id="button-longitude" class="template"></div>
     </div>
-    <div id="SetLocation" class="template"></div>
-    <div id="MapExplanation" class="front">
-        <div id="CallingCar" hidden>차량을 호출중입니다.(연락처는: driverAddress입니다.)</div>
-        <div id="MapStartOrDest"><div id="Prefix"> 출발지</div>를 선택하세요</div>
+    <div id="set-location" class="template"></div>
+    <div id="map-explanation" class="front">
+        <div id="calling-car" hidden>차량을 호출중입니다.(연락처는: driverAddress입니다.)</div>
+        <div id="map-start-or-dest"><div id="prefix"> 출발지</div>를 선택하세요</div>
     </div>
-        <div id="Header">
-            <input id="Destination" type="text" placeholder=" 장소를 검색하세요">
-            <button id="Search"><i class="fas fa-search"></i></button>
+        <div id="header">
+            <input id="destination" type="text" placeholder=" 장소를 검색하세요">
+            <button id="search"><i class="fas fa-search"></i></button>
         </div>
         
-    <div id="Map"></div>
-    <button id="Next"  class="off front"> Next
-        <img id="Arrow" src="../Korea Univ. Logo/Image/right arrow.png">
+    <div id="map"></div>
+    <button id="next"  class="off front"> Next
+        <img id="arrow" src="../korea-univ-logo/Image/left arrow.png">
     </button>
 
 </body>
