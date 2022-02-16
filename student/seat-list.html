@@ -171,7 +171,7 @@
                         url.append("seatnum", seatnum);
                         url.append("lat", lat);
                         url.append("lng", lng);
-                        parent.$("iframe").attr("src", window.location.origin + "/Student/Map.html?"+ url.toString());
+                        parent.$("iframe").attr("src", window.location.origin + "/student/map.html?"+ url.toString());
 
                     }, () => alert('현재 위치를 가져올 수 없습니다.'));
                 } else {
