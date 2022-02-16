@@ -1,56 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>이용 동의</title>
-        <script src="../src/jquery.js"></script>
-        <script>
-            var sp;
-            function Register(){
-                var data ={};
-                data['name'] = $('#user-name').val();
-                data['id'] = sp.get('id');
-                data['email'] = $('#user-email-address').val();
-                data['role'] = sp.get('role');
-                data['mp'] = $('#user-phone-number').val();
-                $.ajax({
-                    url:  window.location.origin + "/node/sign-up",
-                    type:"POST",
-                    data: data,
-                    error: function(jqXHR, textstatus, errorthrown){
-                        console.log("Error Sign up");
-                        alert("Error on sign up");
-                    },
-                    success: function(data, status, xhr){
-                        console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
-                        window.location.href = window.location.origin + '/kakalogin/login.html';
-                    }
-                });
-            }
-            $(document).ready(function(){
-                sp = new URLSearchParams(window.location.search);
-                $('#submit').click(function(){
-                    Register();
-                });
-                $('#cansel').click(function(){
-                    window.location.href = '/kakao-login/login.html'
-                });
-            })
-        </script>
-    </head>
-    <body>
-        <form action = "">
-            <fieldset>
-                <legend>세부 정보 입력란</legend>
-                <label>사용자명:</label><br>
-                <input type="text" id="user-name" size="20" autofocus placeholder="이름을 입력하세요."><br><br>
-                <label>연락처(모바일):</label><br>
-                <input type="text" id="user-phone-number" size="20" placeholder="전화번호를 -없이 입력하세요."><br><br>
-                <label>사용자 이메일:</label><br>
-                <input type="text" id="user-email-address" size="20" placeholder="이메일을 입력하세요."><br><br>
-                <button type="submit" id="submit">가입</button><br>
-                <button type="cansel" id="cansel">뒤로 가기</button>
-            </fieldset>
-        </form>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <title>이용 동의</title>
+    <script src="../src/jquery.js"></script>
+    <script>
+      var sp;
+      function Register() {
+        var data = {};
+        data["name"] = $("#user-name").val();
+        data["id"] = sp.get("id");
+        data["email"] = $("#user-email-address").val();
+        data["role"] = sp.get("role");
+        data["mp"] = $("#user-phone-number").val();
+        $.ajax({
+          url: window.location.origin + "/node/sign-up",
+          type: "POST",
+          data: data,
+          error: function (jqXHR, textstatus, errorthrown) {
+            console.log("Error Sign up");
+            alert("Error on sign up");
+          },
+          success: function (data, status, xhr) {
+            console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
+            window.location.href =
+              window.location.origin + "/kakalogin/login.html";
+          },
+        });
+      }
+      $(document).ready(function () {
+        sp = new URLSearchParams(window.location.search);
+        $("#submit").click(function () {
+          Register();
+        });
+        $("#cansel").click(function () {
+          window.location.href = "/kakao-login/login.html";
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form action="">
+      <fieldset>
+        <legend>세부 정보 입력란</legend>
+        <label>사용자명:</label><br />
+        <input
+          type="text"
+          id="user-name"
+          size="20"
+          autofocus
+          placeholder="이름을 입력하세요."
+        /><br /><br />
+        <label>연락처(모바일):</label><br />
+        <input
+          type="text"
+          id="user-phone-number"
+          size="20"
+          placeholder="전화번호를 -없이 입력하세요."
+        /><br /><br />
+        <label>사용자 이메일:</label><br />
+        <input
+          type="text"
+          id="user-email-address"
+          size="20"
+          placeholder="이메일을 입력하세요."
+        /><br /><br />
+        <button type="submit" id="submit">가입</button><br />
+        <button type="cansel" id="cansel">뒤로 가기</button>
+      </fieldset>
+    </form>
+  </body>
 </html>

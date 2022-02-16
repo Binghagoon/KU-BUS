@@ -1,70 +1,77 @@
-
 <html>
-    <head>
-        <style>
-            #map{
-                width: 100%;
-                height: 100%;
-            }
-            .front{
-                z-index: 2;
-                box-shadow: 0px 0px 10px 0px black;
+  <head>
+    <style>
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      .front {
+        z-index: 2;
+        box-shadow: 0px 0px 10px 0px black;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
+    ></script>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/map.js"></script>
+    <script>
+      $(document).ready(function () {
+        StartMap();
+        setInterval(ChackReservation, 1000);
+        TraceAnother(top.args["id"], "DRIVER");
+        if (top.debugging) {
+          $("#map").height("80%");
+          $("#debugging").show();
+          $("#button").on("click", function () {
+            MoveToNew([
+              {
+                name: "asdf",
+                time: "2021-10-03T11:32:40.000Z",
+                now_name: "우당교양관",
+                to_name: "정경대학과 타이거 프라자 사이",
+              },
+            ]);
+            return false;
+          });
+        }
+        if (top.args["stat"] == "working") {
+          $("#ex1").hide();
+          $("#ex2").removeAttr("hidden");
+          TraceAnother(top.args["reqData"]["id"], "STUDENT");
+        }
+      });
 
-            }
-        </style>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-        <script src="../src/jquery.js"></script>
-        <script src="../src/map.js"></script>
-        <script>
-            $(document).ready(function(){
-                StartMap();
-                setInterval(ChackReservation, 1000);
-                TraceAnother(top.args['id'], 'DRIVER');
-                if(top.debugging){
-                    $("#map").height("80%");
-                    $("#debugging").show();
-                    $("#button").on("click", function(){
-                        MoveToNew([{name: 'asdf', time: '2021-10-03T11:32:40.000Z', now_name: '우당교양관', to_name: '정경대학과 타이거 프라자 사이'}]);
-                        return false;
-                    });
-                }
-                if(top.args["stat"] == "working"){
-                    $('#ex1').hide();
-                    $('#ex2').removeAttr('hidden');
-                    TraceAnother(top.args['reqData']["id"], 'STUDENT');
-                }         
-            });
+      function ChackReservation() {
+        $.ajax({
+          url: window.location.origin + "/node/no-driver-request",
+          type: "GET",
+          error: function (jqxhr, textStatus, errorThrown) {
+            console.log("Reservation Get Error");
+          },
+          success: function (data, textStatus, jqxhr) {
+            if (data.length != 0) MoveToNew(data);
+            7;
+          },
+        });
+      }
 
-            function ChackReservation(){
-                $.ajax({
-                    url:  window.location.origin + '/node/no-driver-request',
-                    type: 'GET',
-                    error: function (jqxhr,textStatus, errorThrown){
-                        console.log("Reservation Get Error");
-                    },
-                    success:function (data, textStatus, jqxhr){
-                        if(data.length != 0)
-                            MoveToNew(data);
-                 7   },
-                });
-            }
-
-            function MoveToNew(data){
-                top.args["reqData"] = data[0];
-                console.log("Move to new-alarm");
-                window.location.href = "new-alarm.html";
-
-            }
-        </script>
-    </head>
-    <body>
-        <div id="map-explanation" class="front">
-            <div id="ex2" hidden>운행을 시작합니다.</div>
-            <div id="ex1">호출을 대기중입니다.</div>
-        </div>
-        <div id="map"></div>
-        <div id="debugging" hidden>
-            <button id="button">호출 받기</button>
-        </div>
-    </body>
+      function MoveToNew(data) {
+        top.args["reqData"] = data[0];
+        console.log("Move to new-alarm");
+        window.location.href = "new-alarm.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div id="map-explanation" class="front">
+      <div id="ex2" hidden>운행을 시작합니다.</div>
+      <div id="ex1">호출을 대기중입니다.</div>
+    </div>
+    <div id="map"></div>
+    <div id="debugging" hidden>
+      <button id="button">호출 받기</button>
+    </div>
+  </body>
 </html>

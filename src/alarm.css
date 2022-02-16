@@ -1,207 +1,209 @@
 .driver-notice-home {
-    background-color: white;
-    width: 320px;
-    height: 500px;
-    /*div를 가운데 위치로 오게하는 역할*/
-    margin: auto;
+  background-color: white;
+  width: 320px;
+  height: 500px;
+  /*div를 가운데 위치로 오게하는 역할*/
+  margin: auto;
 }
 
 .notice {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    width: 320px;
-    height: 470px;
+  width: 320px;
+  height: 470px;
 
-    border: 1px solid gray;
+  border: 1px solid gray;
 }
 
 .alarm {
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-    height: 70px;
+  height: 70px;
 }
-.alarm:hover {background-color: rgb(231, 231, 231); }
-
-.alarmImage{
-    box-shadow: 0px 0px 4px 0px darkgray;
-    width: 48px;
-    height: 48px;
-    border-radius: 48px;
-    margin: 3px 8px 0px 0px;
-
-    background-image: url("고대 로고/emblem/emblem_01.gif");
-    background-repeat: no-repeat;
-    background-size: cover;
+.alarm:hover {
+  background-color: rgb(231, 231, 231);
 }
 
-.alarm-contents{
-    width: 220px;
-    height: 70px;
-    padding: 0px 5px;
-}
-.alarmer{
-    font-size: 12px;
-    margin-top: 18px;
-    margin-bottom: 0px;
+.alarmImage {
+  box-shadow: 0px 0px 4px 0px darkgray;
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  margin: 3px 8px 0px 0px;
 
-    display: block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; 
+  background-image: url("고대 로고/emblem/emblem_01.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.alarm-title{
-    font-size: 10px;
-    margin: 3px 0px;
 
-    display: block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; 
+.alarm-contents {
+  width: 220px;
+  height: 70px;
+  padding: 0px 5px;
+}
+.alarmer {
+  font-size: 12px;
+  margin-top: 18px;
+  margin-bottom: 0px;
+
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.alarm-title {
+  font-size: 10px;
+  margin: 3px 0px;
+
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .main-suffix {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    top: 80%;
-    margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  top: 80%;
+  margin: auto;
 
-    text-align: center;
-    text-decoration: none;
+  text-align: center;
+  text-decoration: none;
 }
 
-.main-suffix>button {
-    display: block;
-    width: 80px;
-    height: 30px;
-    border: 1px solid gray;
-    padding-top: 5px;
+.main-suffix > button {
+  display: block;
+  width: 80px;
+  height: 30px;
+  border: 1px solid gray;
+  padding-top: 5px;
 }
 
 #notice-home {
-    border-bottom: 5px solid darkred;
-    border-top: 0px;
-    background-color: white;
+  border-bottom: 5px solid darkred;
+  border-top: 0px;
+  background-color: white;
 }
 .driver-notice-home {
-    background-color: white;
-    width: 320px;
-    height: 450px;
-    /*div를 가운데 위치로 오게하는 역할*/
-    margin: auto;
+  background-color: white;
+  width: 320px;
+  height: 450px;
+  /*div를 가운데 위치로 오게하는 역할*/
+  margin: auto;
 }
 
 .notice {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    width: 320px;
-    height: 470px;
+  width: 320px;
+  height: 470px;
 
-    box-shadow: 0px 0px 20px -3px gray;
+  box-shadow: 0px 0px 20px -3px gray;
 }
 
 .alarm {
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-    height: 70px;
+  height: 70px;
 }
-.alarm:hover {background-color: rgb(231, 231, 231); }
-
-.alarm-image{
-    box-shadow: 0px 0px 4px 0px darkgray;
-    width: 48px;
-    height: 48px;
-    border-radius: 48px;
-    margin: 3px 8px 0px 0px;
-
-    background-image: url("Korea Univ. Logo/emblem/emblem_01.gif");
-    background-repeat: no-repeat;
-    background-size: cover;
+.alarm:hover {
+  background-color: rgb(231, 231, 231);
 }
 
-.alarm-contents{
-    width: 220px;
-    height: 70px;
-    padding: 0px 5px;
-}
-.alarmer{
-    font-size: 12px;
-    margin-top: 18px;
-    margin-bottom: 0px;
+.alarm-image {
+  box-shadow: 0px 0px 4px 0px darkgray;
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  margin: 3px 8px 0px 0px;
 
-    display: block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; 
+  background-image: url("Korea Univ. Logo/emblem/emblem_01.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.alarm-title{
-    font-size: 10px;
-    margin: 3px 0px;
 
-    display: block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; 
+.alarm-contents {
+  width: 220px;
+  height: 70px;
+  padding: 0px 5px;
+}
+.alarmer {
+  font-size: 12px;
+  margin-top: 18px;
+  margin-bottom: 0px;
+
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.alarm-title {
+  font-size: 10px;
+  margin: 3px 0px;
+
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .main-suffix {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    
-    margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-    text-align: center;
-    text-decoration: none;
+  margin: auto;
 
-    box-shadow: 0px -3px 20px -3px gray;
+  text-align: center;
+  text-decoration: none;
+
+  box-shadow: 0px -3px 20px -3px gray;
 }
 
-.main-suffix>button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* 아마 내용물 위아래중앙으로 정렬*/
-    align-items: center;
-    /* 내용물 좌우 가운데 정렬*/
+.main-suffix > button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 아마 내용물 위아래중앙으로 정렬*/
+  align-items: center;
+  /* 내용물 좌우 가운데 정렬*/
 
-    margin: auto;
-    width: 80px;
-    height: 50px;
-    border: 1px gray;
-    padding-top: 2px;
-    background-color: white;
+  margin: auto;
+  width: 80px;
+  height: 50px;
+  border: 1px gray;
+  padding-top: 2px;
+  background-color: white;
 
-    font-size: 6px;
+  font-size: 6px;
 }
 
-.main-suffix>button>img {
-    margin-bottom: 2px;
-    -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
-    filter: opacity(0.5) drop-shadow(0 0 0 gray);
-    }
+.main-suffix > button > img {
+  margin-bottom: 2px;
+  -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
+  filter: opacity(0.5) drop-shadow(0 0 0 gray);
+}
 
 #notice-home {
-    color: darkred;
-    border-top: 0px;
-    background-color: white;
-    border-top: 3px solid darkred;
+  color: darkred;
+  border-top: 0px;
+  background-color: white;
+  border-top: 3px solid darkred;
 }
 
-#notice-home>img {
-    -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
-    filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+#notice-home > img {
+  -webkit-filter: opacity(0.5) drop-shadow(0 0 0 darkred);
+  filter: opacity(0.5) drop-shadow(0 0 0 darkred);
 }
-.template{
-    display: none;
+.template {
+  display: none;
 }

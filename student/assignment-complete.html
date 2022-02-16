@@ -1,164 +1,161 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-    </head> 
-    <style>
-        #after-assigning-driver {
-            background-color: white;
-            width: 320px;
-            height: 470px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <style>
+    #after-assigning-driver {
+      background-color: white;
+      width: 320px;
+      height: 470px;
 
-            text-align: center;
+      text-align: center;
 
-            display: flex;
-            flex-direction: column;
-            /*div를 가운데 위치로 오게하는 역할*/
-            margin: auto;
+      display: flex;
+      flex-direction: column;
+      /*div를 가운데 위치로 오게하는 역할*/
+      margin: auto;
 
-            box-shadow: 0px 0px 20px -3px gray;
-        }
+      box-shadow: 0px 0px 20px -3px gray;
+    }
 
-        #real-time-information, #Cancel_Reservation {
-            width: 315px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+    #real-time-information,
+    #Cancel_Reservation {
+      width: 315px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-            border: solid gray;
-        }
+      border: solid gray;
+    }
 
-        #real-time-information > div {
-            width: 280px;
-            height: 55px;
-            padding: 5px 10px;
-            margin-bottom: 5px;
+    #real-time-information > div {
+      width: 280px;
+      height: 55px;
+      padding: 5px 10px;
+      margin-bottom: 5px;
 
-            text-align: left;
-        }
+      text-align: left;
+    }
 
-        #control {
-            display: flex;
+    #control {
+      display: flex;
 
-            justify-content: space-evenly;
+      justify-content: space-evenly;
 
-            align-items: center;
-        }
+      align-items: center;
+    }
 
-        #control > div {
-            border: solid gray;
-        }
+    #control > div {
+      border: solid gray;
+    }
+  </style>
+  <script
+    type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
+  ></script>
+  <script src="../src/jquery.js"></script>
+  <script src="../src/map.js"></script>
+  <script>
+    $(document).ready(function () {
+      StartMap();
+      $("#cancel-reservation").on("click", function () {
+        $.ajax({
+          url: window.location.origin + "/reservation-delete",
+          data: {
+            id: top.args["id"],
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error");
+          },
+          success: function (data, textStatus, jqXHR) {
+            console.log("Move to ConfirmReservation");
+            window.location.href = "confirm-reservation";
+          },
+        });
+      });
+    });
+  </script>
+  <style>
+    #after-assigning-driver {
+      background-color: white;
+      width: 320px;
+      height: 470px;
 
-    </style>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"></script>
-    <script src="../src/jquery.js"></script>
-    <script src="../src/map.js"></script>
-    <script>
-        $(document).ready(function(){
-            StartMap();
-            $("#cancel-reservation").on("click", function(){
-                $.ajax({
-                    url:  window.location.origin + "/reservation-delete",
-                    data:{
-                        "id": top.args["id"],
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        console.log("Error");
-                    },
-                    success: function(data, textStatus, jqXHR){
-                        console.log("Move to ConfirmReservation");
-                        window.location.href = "confirm-reservation";
-                    }
-                })
-            })
-        })
-    </script>
-    <style>
-        #after-assigning-driver {
-            background-color: white;
-            width: 320px;
-            height: 470px;
+      text-align: center;
 
-            text-align: center;
+      display: flex;
+      flex-direction: column;
+      /*div를 가운데 위치로 오게하는 역할*/
+      margin: auto;
 
-            display: flex;
-            flex-direction: column;
-            /*div를 가운데 위치로 오게하는 역할*/
-            margin: auto;
+      box-shadow: 0px 0px 20px -3px gray;
+    }
 
-            box-shadow: 0px 0px 20px -3px gray;
-        }
+    #real-time-information,
+    #Cancel_Reservation {
+      width: 315px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-        #real-time-information, #Cancel_Reservation {
-            width: 315px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+      border: solid gray;
+    }
 
-            border: solid gray;
-        }
+    #real-time-information > div {
+      width: 280px;
+      height: 55px;
+      padding: 5px 10px;
+      margin-bottom: 5px;
 
-        #real-time-information > div {
-            width: 280px;
-            height: 55px;
-            padding: 5px 10px;
-            margin-bottom: 5px;
+      text-align: left;
+    }
 
-            text-align: left;
-        }
+    #control {
+      display: flex;
 
-        #control {
-            display: flex;
+      justify-content: space-evenly;
 
-            justify-content: space-evenly;
-            
-            align-items: center;
-        }
+      align-items: center;
+    }
 
-        #control > div {
-            border: solid gray;
-        }
+    #control > div {
+      border: solid gray;
+    }
+  </style>
+  <body>
+    <div id="after-assigning-driver">
+      <div id="map"></div>
 
-    </style>
-    <body>
-        <div id="after-assigning-driver">
-            <div id="map">
-
-            </div>
-
-            <div id="real-time-information">
-                <div id="minute-left">
-                    <h4>기사님께서 이동 중이십니다. (%분 후 도착)</h4>
-                </div>
-
-                <div id="profile-image">
-
-                </div>
-
-                <div id="name">
-
-                </div>
-
-                <div id="car-information">
-                    <h4>차량: %호차</h4>
-                </div>
-            </div>
-
-            <div id="control">
-                <div id="make-call">
-                    <h3>전화하기</h3>
-                </div>
-    
-                <div id="send-message">
-                    <h3>메시지 보내기</h3>
-                </div>
-    
-                <div id="cancel-reservation">
-                    <h3>취소하기</h3>
-                </div>
-            </div>
+      <div id="real-time-information">
+        <div id="minute-left">
+          <h4>기사님께서 이동 중이십니다. (%분 후 도착)</h4>
         </div>
-    </body>
+
+        <div id="profile-image"></div>
+
+        <div id="name"></div>
+
+        <div id="car-information">
+          <h4>차량: %호차</h4>
+        </div>
+      </div>
+
+      <div id="control">
+        <div id="make-call">
+          <h3>전화하기</h3>
+        </div>
+
+        <div id="send-message">
+          <h3>메시지 보내기</h3>
+        </div>
+
+        <div id="cancel-reservation">
+          <h3>취소하기</h3>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

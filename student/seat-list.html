@@ -1,264 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seat List</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
     <style media="screen">
-        * {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
+      * {
+        font-family: "Noto Sans KR", sans-serif;
+      }
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
 
-        #header {
-            padding-left: 10px;
-            padding: 5px 10px 5px 18px;
+      #header {
+        padding-left: 10px;
+        padding: 5px 10px 5px 18px;
 
-            background-color: white;
-            color: #8C0000;
-            font-size: 20px;
-            font-weight: bold;
+        background-color: white;
+        color: #8c0000;
+        font-size: 20px;
+        font-weight: bold;
 
-            box-shadow: 0px 0px 10px 0px black;
+        box-shadow: 0px 0px 10px 0px black;
 
-            position: fixed;
-            top: 0px;
-            width: 100%;
-        }
+        position: fixed;
+        top: 0px;
+        width: 100%;
+      }
 
-        #contents {
-            text-align: center;
+      #contents {
+        text-align: center;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-            margin: 0px auto;
-            position: relative;
-            top: 70px;
-        }
+        margin: 0px auto;
+        position: relative;
+        top: 70px;
+      }
 
-        #bus-select{
-            width: 160px; height: 32px;
-            background-color: violet;
-            /*TBD CSS*/
-        }
+      #bus-select {
+        width: 160px;
+        height: 32px;
+        background-color: violet;
+        /*TBD CSS*/
+      }
 
-        .alltable {
-            border: 1px solid gray;
-            padding: 10px;
-            margin: auto;
-        }
+      .alltable {
+        border: 1px solid gray;
+        padding: 10px;
+        margin: auto;
+      }
 
-        .chair {
-            padding: 5px;
-            text-align: center;
-            width: 70px; height: 60px;
+      .chair {
+        padding: 5px;
+        text-align: center;
+        width: 70px;
+        height: 60px;
 
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0px 0px 1px 0px darkgrey;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 0px 1px 0px darkgrey;
 
-            margin: 10px;
-        }
-        
-        #legend{
-            margin: 25px 0px;
-        }
-        .color{
-            width: 16px; height: 16px; 
-        }
+        margin: 10px;
+      }
 
-        #impossible-color{
-            background-color: #CCC2A3;
-        }
-        #reserved-color{
-            background-color: #E7E5E8;
-        }
-        #possible-color{
-            background-color: #8C0000;
-        }
-        .seat-condition{
-            font-size: 11px;
-            text-align: left;
-            padding: 0px 5px;
-        }
+      #legend {
+        margin: 25px 0px;
+      }
+      .color {
+        width: 16px;
+        height: 16px;
+      }
 
-        .next {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translate(-50%, 0%);
+      #impossible-color {
+        background-color: #ccc2a3;
+      }
+      #reserved-color {
+        background-color: #e7e5e8;
+      }
+      #possible-color {
+        background-color: #8c0000;
+      }
+      .seat-condition {
+        font-size: 11px;
+        text-align: left;
+        padding: 0px 5px;
+      }
 
-            border: none;
+      .next {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translate(-50%, 0%);
 
-            width: 230px;
-            height: 70px;
-            padding: 10px 20px;
+        border: none;
 
-            color: white;
-            font-size: 20px;
-            text-align: left;          
-        }
-        .crimson{
-            background-color: #8C0000;
-        }
-        
-        .unselectable{
-            background-color: wheat;
-            color: black;
-        }
-        .unselected{
-            background-color: #8C0000;
-        }
-        .selected{
-            background-color: gray;
-            color: white;
-        }
+        width: 230px;
+        height: 70px;
+        padding: 10px 20px;
 
-        .arrow{
-            width: 30px;
-            position: absolute;
-            right: 10px;
-            filter: invert(100);
-        }
+        color: white;
+        font-size: 20px;
+        text-align: left;
+      }
+      .crimson {
+        background-color: #8c0000;
+      }
+
+      .unselectable {
+        background-color: wheat;
+        color: black;
+      }
+      .unselected {
+        background-color: #8c0000;
+      }
+      .selected {
+        background-color: gray;
+        color: white;
+      }
+
+      .arrow {
+        width: 30px;
+        position: absolute;
+        right: 10px;
+        filter: invert(100);
+      }
     </style>
 
     <script src="../src/jquery.js"></script>
     <script>
-        var par = {
-            "three": 3,
-            "four": 4,
-            "five": 5,
-            "six": 6
-        };
-        var seatnum = 0;
-        var pre = null;
-        $(document).ready(function () {
-            //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
-            //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
-            $(".chair").on("click", function () {
-                var thisJquery = $(this)
-                var v = thisJquery.attr("id");
-                num = par[v];
-                if(pre) ChairUnclicked();
-                ChairClicked(par[v], thisJquery);
-            });
-            $(".chair.unselectable").on("click", () => alert('해당 좌석은 선택할 수 없습니다'));
-            $("#next").on("click", function(){
-                if (!!navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var lat = position.coords.latitude;
-                        var lng = position.coords.longitude;
-                        //Anam station
-                        lat = 37.586232954034564;
-                        lng = 127.02928291766814;
-                        //end
-                        var url = new URLSearchParams();
-                        url.append("seatnum", seatnum);
-                        url.append("lat", lat);
-                        url.append("lng", lng);
-                        parent.$("iframe").attr("src", window.location.origin + "/student/map.html?"+ url.toString());
-
-                    }, () => alert('현재 위치를 가져올 수 없습니다.'));
-                } else {
-                    alert("현재 위치를 가져올 수 없습니다.");
-                }
-            });
+      var par = {
+        three: 3,
+        four: 4,
+        five: 5,
+        six: 6,
+      };
+      var seatnum = 0;
+      var pre = null;
+      $(document).ready(function () {
+        //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
+        //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
+        $(".chair").on("click", function () {
+          var thisJquery = $(this);
+          var v = thisJquery.attr("id");
+          num = par[v];
+          if (pre) ChairUnclicked();
+          ChairClicked(par[v], thisJquery);
         });
+        $(".chair.unselectable").on("click", () =>
+          alert("해당 좌석은 선택할 수 없습니다")
+        );
+        $("#next").on("click", function () {
+          if (!!navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              function (position) {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                //Anam station
+                lat = 37.586232954034564;
+                lng = 127.02928291766814;
+                //end
+                var url = new URLSearchParams();
+                url.append("seatnum", seatnum);
+                url.append("lat", lat);
+                url.append("lng", lng);
+                parent
+                  .$("iframe")
+                  .attr(
+                    "src",
+                    window.location.origin +
+                      "/student/map.html?" +
+                      url.toString()
+                  );
+              },
+              () => alert("현재 위치를 가져올 수 없습니다.")
+            );
+          } else {
+            alert("현재 위치를 가져올 수 없습니다.");
+          }
+        });
+      });
 
-        function ChairClicked(num, button) {
-            //alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
-            function ChangeExplain(sel){
-                var text = 'seatnum번 좌석 선택'
-                sel.html(text.replace("seatnum", num));
-            }
-            var sel = $("#selected");
-            seatnum = num;
-            ChangeExplain(sel);
-            sel.show();
-            button.removeClass("unselected");
-            button.addClass("selected");
-            $("#next").addClass("crimson");
-            pre = button;
+      function ChairClicked(num, button) {
+        //alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
+        function ChangeExplain(sel) {
+          var text = "seatnum번 좌석 선택";
+          sel.html(text.replace("seatnum", num));
         }
+        var sel = $("#selected");
+        seatnum = num;
+        ChangeExplain(sel);
+        sel.show();
+        button.removeClass("unselected");
+        button.addClass("selected");
+        $("#next").addClass("crimson");
+        pre = button;
+      }
 
-        function ChairUnclicked(){
-            if(!pre){
-                console.log("Pre-selected chair does not exist.");
-                return;
-            }
-            var sel = $(pre);
-            sel.removeClass("selected");
-            //sel.addClass("unselected");
+      function ChairUnclicked() {
+        if (!pre) {
+          console.log("Pre-selected chair does not exist.");
+          return;
         }
+        var sel = $(pre);
+        sel.removeClass("selected");
+        //sel.addClass("unselected");
+      }
 
-        function renderTR(target, idValueArr) {
-            var tr = document.getElementById(target);
-            tr.innerHTML = ''
-            for (var index in idValueArr) {
-                var value = idValueArr[index][0]
-                var id = idValueArr[index][1]
-                tr.innerHTML += '<td><input type="submit" value="' + value + '" id="' + id + '" onclick="touch()"/> </td>';
-            }
+      function renderTR(target, idValueArr) {
+        var tr = document.getElementById(target);
+        tr.innerHTML = "";
+        for (var index in idValueArr) {
+          var value = idValueArr[index][0];
+          var id = idValueArr[index][1];
+          tr.innerHTML +=
+            '<td><input type="submit" value="' +
+            value +
+            '" id="' +
+            id +
+            '" onclick="touch()"/> </td>';
         }
+      }
     </script>
-</head>
+  </head>
 
-<body>
-    <div id="header"> 좌석을 선택하세요 </div>
+  <body>
+    <div id="header">좌석을 선택하세요</div>
     <div id="contents">
-        <div id="bus-select"></div>
-        <table class="alltable">
-            <tr>
-                <td><input type="submit" value="운전자" class="chair unselectable" id="driver"></td>
-                <td><input type="submit" value="조수석" class="chair unselectable" id="supporter"></td>
-            </tr>
-            <tr id="target-tr1">
-                <td><input type="submit" value="3번" class="chair selectable" id="three"></td>
-                <td><input type="submit" value="4번" class="chair selectable" id="four"></td>
-            </tr>
-            <tr id="target-tr2">
-                <td><input type="submit" value="5번" class="chair selectable" id="five"></td>
-                <td><input type="submit" value="6번" class="chair selectable" id="six"></td>
-            </tr>
-        </table>
-        <table id="legend">
-            <tr>
-                <td class="color" id="impossible-color"></td>
-                <td class="seat-condition">예약 불가능 좌석</td>
-            </tr>
-            <tr>
-                <td class="color" id="reserved-color"></td>
-                <td class="seat-condition">이미 예약된 좌석</td>
-            </tr>
-            <tr>
-                <td class="color" id="possible-color"></td>
-                <td class="seat-condition">예약 가능 좌석</td>
-            </tr>
-        </table>
-        <div id="helper-select">
-            <input type="checkbox" id="Helper" value="help"><label for="Helper"> 도우미가 탑승합니다.</label>
-            <input type="checkbox" id="AnamStation" ><label> 안암역 </label>
-        </div>
-        <div id="selected" hidden> seatnum번 좌석 선택</div>
+      <div id="bus-select"></div>
+      <table class="alltable">
+        <tr>
+          <td>
+            <input
+              type="submit"
+              value="운전자"
+              class="chair unselectable"
+              id="driver"
+            />
+          </td>
+          <td>
+            <input
+              type="submit"
+              value="조수석"
+              class="chair unselectable"
+              id="supporter"
+            />
+          </td>
+        </tr>
+        <tr id="target-tr1">
+          <td>
+            <input
+              type="submit"
+              value="3번"
+              class="chair selectable"
+              id="three"
+            />
+          </td>
+          <td>
+            <input
+              type="submit"
+              value="4번"
+              class="chair selectable"
+              id="four"
+            />
+          </td>
+        </tr>
+        <tr id="target-tr2">
+          <td>
+            <input
+              type="submit"
+              value="5번"
+              class="chair selectable"
+              id="five"
+            />
+          </td>
+          <td>
+            <input
+              type="submit"
+              value="6번"
+              class="chair selectable"
+              id="six"
+            />
+          </td>
+        </tr>
+      </table>
+      <table id="legend">
+        <tr>
+          <td class="color" id="impossible-color"></td>
+          <td class="seat-condition">예약 불가능 좌석</td>
+        </tr>
+        <tr>
+          <td class="color" id="reserved-color"></td>
+          <td class="seat-condition">이미 예약된 좌석</td>
+        </tr>
+        <tr>
+          <td class="color" id="possible-color"></td>
+          <td class="seat-condition">예약 가능 좌석</td>
+        </tr>
+      </table>
+      <div id="helper-select">
+        <input type="checkbox" id="Helper" value="help" /><label for="Helper">
+          도우미가 탑승합니다.</label
+        >
+        <input type="checkbox" id="AnamStation" /><label> 안암역 </label>
+      </div>
+      <div id="selected" hidden>seatnum번 좌석 선택</div>
     </div>
-    <button id="next" class="next"> Next 
-        <img class="arrow" src="../korea-univ-logo/Image/left arrow.png">
+    <button id="next" class="next">
+      Next
+      <img class="arrow" src="../korea-univ-logo/Image/left arrow.png" />
     </button>
-</body>
-
+  </body>
 </html>

@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="../src/jquery.js"></script>
-        <script>
-            var from = {
-                no: 25,
-                name: "녹지운동장 옆 주차장",
-                lat: 37.5918461,
-                lng: 127.0259147,
-                campus: "녹지",
-            }
-            var to = {
-                no: 23,
-                name: "간호 대학",
-                lat: 37.5908204,
-                lng: 127.0260461,
-                campus: "녹지",
-            }
-            function TestCall(){
-                $.ajax({
-                    url: window.location.origin + "/node/reservation-post",
-                    type: "POST",
-                    data: {
-                        'now_place_no': 25,
-                        'to_place_no': 23,
-                        'id':top.args['id'],
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        alert("failed on Calling");
-                    },
-                    success: function(data, status, xhr){
-                        top.args['requestid'] = data.insertId;
-                        top.args['from'] = from;
-                        top.args['to'] = to;
-                        console.log("move to DoingReservation.html");
-                        window.location.href ="../student/doing-reservation.html";
-                    }
-                });
-            }
+  <head>
+    <script src="../src/jquery.js"></script>
+    <script>
+      var from = {
+        no: 25,
+        name: "녹지운동장 옆 주차장",
+        lat: 37.5918461,
+        lng: 127.0259147,
+        campus: "녹지",
+      };
+      var to = {
+        no: 23,
+        name: "간호 대학",
+        lat: 37.5908204,
+        lng: 127.0260461,
+        campus: "녹지",
+      };
+      function TestCall() {
+        $.ajax({
+          url: window.location.origin + "/node/reservation-post",
+          type: "POST",
+          data: {
+            now_place_no: 25,
+            to_place_no: 23,
+            id: top.args["id"],
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert("failed on Calling");
+          },
+          success: function (data, status, xhr) {
+            top.args["requestid"] = data.insertId;
+            top.args["from"] = from;
+            top.args["to"] = to;
+            console.log("move to DoingReservation.html");
+            window.location.href = "../student/doing-reservation.html";
+          },
+        });
+      }
 
-            $(document).ready(function(){
-                $("button#student").click(function(){
-                    window.location.href = "../student/first-page.html";
-                });
-                $("button#driver").click(function(){
-                    window.location.href = "../driver/map.html";
-                });
-                $("button#calling").click(function(){
-                    TestCall();
-                });
-                $("button#user-setting").click(function(){
-                    window.location.href = window.location.origin + '/administrator/use-setting.html';
-                });
-                $("button#user-session").click(function(){
-                    window.location.href = window.location.origin + '/administrator/user-session.html';
-                });
-            });
-        </script>
-
-    </head>
-    <body>
-        <button id="student">학생 역할 해보기</button>
-        <button id="driver">기사 역할 해보기</button>
-        <button id="calling">호출 해보기</button>
-        <button id="user-setting">사용자 세팅</button>
-        <button id="user-session">사용자 세션</button>
-    </body>
+      $(document).ready(function () {
+        $("button#student").click(function () {
+          window.location.href = "../student/first-page.html";
+        });
+        $("button#driver").click(function () {
+          window.location.href = "../driver/map.html";
+        });
+        $("button#calling").click(function () {
+          TestCall();
+        });
+        $("button#user-setting").click(function () {
+          window.location.href =
+            window.location.origin + "/administrator/use-setting.html";
+        });
+        $("button#user-session").click(function () {
+          window.location.href =
+            window.location.origin + "/administrator/user-session.html";
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="student">학생 역할 해보기</button>
+    <button id="driver">기사 역할 해보기</button>
+    <button id="calling">호출 해보기</button>
+    <button id="user-setting">사용자 세팅</button>
+    <button id="user-session">사용자 세션</button>
+  </body>
 </html>
