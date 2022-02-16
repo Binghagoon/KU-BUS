@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginHome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        #login-page{
+            background: linear-gradient(90deg, #8C0000 50%, #CCC2A3  50%);
+            width: 320px;
+            height: 450px;
+            margin: auto;
+            padding: 10px 0px;
+        }
+        #ku-logo>img{
+            width: 120px;
+            height: 120px;
+
+            margin: auto;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #login{
+            background-color: white;
+            width: 320px; 
+            height: 450px;
+            /*Login이라는 div를 가운데 위치로 오게하는 역할*/  
+            margin: auto;                
+            /*Login div내부의 배치*/
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+            }
+        #login>h1{
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: -2px;
+        }
+        #login>h2{
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        #login-field>input {
+            width: 200px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+        #login-submit{           /* 버튼 id디자인 분리하기 TBDCSS*/
+            background-color: #8C0000;
+            color:white;
+            width: 200px;
+            height: 28px;
+            border: 0px;
+        }
+        #login-submit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
+
+    </style>
+    <script src="src/jquery.js"></script>
+    <script src="src/sha3.js"></script>
+    <script src="src/url-parameter.js"></script>
+    <script src="src/login.js"></script>
+    <script>
+        var debugging = false;
+        var isStudent = true;
+        $(document).ready(function(){
+
+            $("#login-submit").click(function(){
+               
+                IDSubmit($("#username").val(),$("#password").val())
+            });
+            $("#id-find").click(function(){
+
+            });
+            $("#signup").click(function(){
+
+            });
+            $("#debug").click(function(){
+                debugging = !debugging;
+                if(debugging){
+                    $("#debug").html("Debugging");
+                    $("#class").show();
+                }else{
+                    $("#debug").html("Not Debugging");
+                    $("#class").hide();
+                }
+            });
+            $("#class").click(function(){
+                isStudent = !isStudent;
+                $("#class").html(isStudent ? "학생": "기사");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="login-page">
+        <div id="login">
+            <div id="ku-logo">
+                <img src ="korea-univ-logo/emblem/emblem_01.gif">
+            </div>
+            <h1>고려대 배리어프리 카풀 <div class="br"> KUBUS</div></h1>  <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
+            <h2>이동지원차량서비스</h2>
+
+            <div id="login-field">
+                <input id="username" type="text" maxlength="20" placeholder="아이디 ID" required> <br>
+                <input id="password" type="password" maxlength="20" placeholder="비밀번호 PASSWORD" required> <br>
+                <input id="login-submit" type="submit" value="submit" class="button">
+                <!--maxlength는 아이디랑 비밀번호 20자 이상 아니게 설정해놓은 것, required는 써야지만 넘어갈 수 있음-->
+            </div>
+            <div>
+                <tr id="login-suffix">
+                    <td><button id="id-find" class="button">아이디/패스워드 찾기</button></td>
+                    <td><button id="signup" class="button">회원가입</button></td>
+                    <td><button id="debug" class="button">그외</button></td>
+                    <td><button id="class" class="button" hidden>학생</button></td>
+                </tr>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

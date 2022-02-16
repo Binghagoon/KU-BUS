@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver_MyInfo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+    </style>
+    <script type="text/javascript" src="../src/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            UserInformation("홍길동", "UserImage", "user-department", "UserStudentNumber", "UserPhoneNumber", "User_Email_Address");
+        });
+        
+        function UserInformation(UserName, UserImage, UserDepartment, UserStudentNumber, UserPhoneNumber, UserEmailAddress) {
+            $("#user-name").prepend(UserName);
+            $("#user-image").append(UserImage);
+            $("#user-department").append(UserDepartment);
+            $("#user-student-number").append(UserStudentNumber);
+            $("#user-student-number").append(UserPhoneNumber);
+            $("#user-email-address").append(UserEmailAddress);
+        };
+    </script>
+</head>
+
+<body>
+    <div id="upward-profile">
+        <div><p><span id="user-name"></span>님, 안녕하세요!</p></div>
+        <button id="log-out">로그아웃하기</button>
+        <div id="user-image"></div>
+    </div>
+    <div id="downward-profile">
+        <h5>학부/학과</h5>
+        <h5><div id="user-department"></div></h5>
+        <h5>학번</h5>
+        <h5><div id="user-student-number"></div></h5>
+        <h5>연락처(모바일)</h5>
+        <h5><div id="user-phone-number"></div></h5>
+        <h5>이메일</h5>
+        <h5><div id="user-email-address"></div></h5>
+    </div>
+    <div>
+        <ul>
+            <li><button id="history">이용 내역</button></li>
+            <li><button id="application-information">어플리케이션 정보</button></li>
+        </ul>
+    </div>
+</body>
+
+</html>

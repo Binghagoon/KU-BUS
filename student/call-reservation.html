@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <title>5페이지 6번</title>
+        <style media="screen">
+            * {
+                font-family: 'Noto Sans KR', sans-serif;
+            }
+    
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+    
+            #header {
+                padding-left: 10px;
+                padding: 5px 10px 5px 18px;
+    
+                background-color: white;
+                color: #8C0000;
+                font-size: 20px;
+                font-weight: bold;
+    
+                box-shadow: 0px 0px 10px 0px black;
+    
+                position: fixed;
+                top: 0px;
+                width: 100%;
+            }
+    
+            #contents {
+                text-align: left;
+    
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+    
+                margin: 0px auto;
+                position: relative;
+                top: 70px;
+            }
+    
+            h3 {
+                color: #8C0000;
+                font-size: 18px;
+                font-weight: bold;
+    
+                padding: 0px 10px 0px 24px;
+                margin: 0px;
+            }
+    
+            p {
+                margin: 8px 0px;
+            }
+    
+            #timeplace {
+                padding: 0px 10px 0px 30px;
+            }
+    
+            #detail {
+                margin: 0px 30px;
+            }
+    
+            input{
+                width: 260px;
+            }
+    
+            #buttons {
+                flex-wrap: wrap;
+    
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, 0%);
+    
+                margin: 10px 0px;
+            }
+    
+            button {
+                width: 300px;
+                height: 40px;
+    
+                box-shadow: 0px 0px 5px 0px darkgrey;
+    
+                margin: 2px 5px;
+    
+                border: none;
+                padding: 0px;
+            }
+            #submission{
+                background-color: #8C0000;
+                color: white;
+            }
+            #goback{
+                background-color: white;
+                color: #8C0000;
+                border:solid 3px #8C0000;
+            }
+    
+        </style>
+        <script src="../src/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                var query = Object.fromEntries(new URLSearchParams(window.location.search));
+                //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+                PrintData(query.fromName, query.toName, undefined, undefined, undefined, undefined, undefined)
+                $("#submit").on("click", function(){
+                    if(!top.debugging){
+                        $.ajax({
+                            url:  window.location.origin + "/node/reservation-post",
+                            type: "POST",
+                            data: {
+                                'now_place_no': from['no'],
+                                'to_place_no': to['no'],
+                                'id':top.args['id'],
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                alert("failed");
+                            },
+                            success: function(data, status, xhr){
+                                top.args['requestid'] = data.insertId;
+                                console.log("move to doing-reservation.html");
+                                window.location.href ="doing-reservation.html";
+                            }
+                        });
+                    } else {
+                        console.log("move to doing-reservation.html");
+                        window.location.href ="doing-reservation.html";
+                    }
+                    return false;
+
+                });
+                $("button#cancel").click(function(){
+                    console.log("move to map.html");
+                    window.location.href = "map.html"
+                    return false;
+                });
+            });
+            function PrintData(from, dest, date, time, name, mp, email){
+                $("#from").html($("#from").html() + from);
+                $("#dest").html($("#dest").html() + dest);
+                $("#date").html($("#date").html() + date);
+                $("#pick-up-time").html($("#pick-up-time").html() + time);
+                $("#user-name").val(name);
+                $("user-phone-number").val(mp);
+                $("#user-email-address").val(email);
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>예약정보 확인하기</h1>
+        <div id="reservation-information">
+            <h3>선택된 위치 정보</h3>
+            <div>
+                <p id="from">출발지: </p>
+                <p id="dest">도착지: </p>
+                <p id="date">예약일: </p>
+                <p id="pick-up-time">픽업 시간대: </p>
+            </div>
+            <button type="submit" id="submit">예약 신청</button><br>
+            <button type="cancel" id="cancel">뒤로 가기</button>
+        </div>
+    </body>
+
+</html>
