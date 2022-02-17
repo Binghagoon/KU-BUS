@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
+<<<<<<< HEAD
     <style media="screen">
       * {
         font-family: "Noto Sans KR", sans-serif;
@@ -141,7 +142,18 @@
       }
     </style>
 
+=======
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link
+      media="screen"
+      rel="stylesheet"
+      type="text/css"
+      href="css/seat-list.css"
+    />
+>>>>>>> pr/hslim99/20
     <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
     <script>
       var par = {
         three: 3,
@@ -154,16 +166,13 @@
       $(document).ready(function () {
         //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
         //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
-        $(".chair").on("click", function () {
+        $(".chair.selectable").on("click", function () {
           var thisJquery = $(this);
           var v = thisJquery.attr("id");
           num = par[v];
           if (pre) ChairUnclicked();
           ChairClicked(par[v], thisJquery);
         });
-        $(".chair.unselectable").on("click", () =>
-          alert("해당 좌석은 선택할 수 없습니다")
-        );
         $("#next").on("click", function () {
           if (!!navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -320,7 +329,11 @@
       </div>
       <div id="selected" hidden>seatnum번 좌석 선택</div>
     </div>
+<<<<<<< HEAD
     <button id="next" class="next">
+=======
+    <button id="next" class="next" onclick="location.href='map.html'">
+>>>>>>> pr/hslim99/20
       Next
       <img class="arrow" src="../korea-univ-logo/Image/left arrow.png" />
     </button>
