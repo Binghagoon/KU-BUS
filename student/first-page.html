@@ -1,126 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FirstPage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link rel="stylesheet" type="text/css" href="css/first-page.css" />
+    <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#calling").on("click", function () {
+          parent.$("iframe").attr("src", "./student/seat-list.html");
+        });
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FirstPage</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
-            rel="stylesheet">
-        <style>
-            * {
-                font-family: 'Noto Sans KR', sans-serif;
-            }
+        $("#reservation").on("click", function () {
+          parent.alert("아직은 지원하지 않는 기능입니다.");
+        });
+      });
+    </script>
+  </head>
 
-            html,
-            body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-            }
-
-            body {
-                background-image: url("../korea-univ-logo/image/student-first-page-ash.jpg");
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-
-            #header {
-                padding: 5px 10px 5px 18px;
-
-                background-color: white;
-                color: #8C0000;
-                font-size: 24px;
-                font-weight: bold;
-
-                box-shadow: 0px 0px 10px 0px black;
-
-                position: fixed;
-                top: 0px;
-                width: 100%;
-            }
-
-            #contents {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .borderline {
-                background: linear-gradient(50deg, #8C0000 50%, #CCC2A3 50%);
-                margin: 20px 0px;
-
-                box-shadow: 0px 0px 10px 0px darkgray;
-                border-radius: 5px;
-
-            }
-
-            button {
-                margin: 0px 0px 5px 0px;
-
-                width: 196px;
-                height: 80px;
-                padding: 0px 10px;
-
-                color: #8C0000;
-                font-size: 24px;
-                font-weight: bold;
-                text-align: left;
-
-                background-color: white;
-                border: none;
-
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-            }
-
-            .arrow {
-                width: 24px;
-                filter: opacity(30%);
-                position: relative;
-                left: 60px;
-                top: 3px;
-            }
-        </style>
-        <script src="../src/jquery.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#calling").on("click", function () {
-                    parent.$("iframe").attr("src", "./student/seat-list.html");
-                });
-
-                $("#reservation").on("click", function () {
-                    parent.alert("아직은 지원하지 않는 기능입니다.");
-                });
-            });
-        </script>
-    </head>
-
-    <body>
-        <div id="header"> KUBUS </div>
-        <div id="contents">
-            <div class="borderline">
-                <button id="calling"> 호출하기
-                    <img class="arrow"
-                        src="../Korea%20Univ.%20Logo/Image/right%20arrow.png">
-                </button>
-            </div>
-            <div class="borderline">
-                <button id="reservation"> 예약하기
-                    <img class="arrow"
-                        src="../Korea%20Univ.%20Logo/Image/right%20arrow.png">
-                </button>
-            </div>
-        </div>
-    </body>
-
+  <body>
+    <div id="header">KUBUS</div>
+    <div id="contents">
+      <div class="borderline">
+        <button id="calling" onclick="location.href='seat-list.html'">
+          호출하기
+          <img
+            class="arrow"
+            src="../Korea%20Univ.%20Logo/Image/right%20arrow.png"
+          />
+        </button>
+      </div>
+      <div class="borderline">
+        <button
+          id="reservation"
+          onclick="location.href='call-reservation.html'"
+        >
+          예약하기
+          <img
+            class="arrow"
+            src="../Korea%20Univ.%20Logo/Image/right%20arrow.png"
+          />
+        </button>
+      </div>
+    </div>
+  </body>
 </html>
