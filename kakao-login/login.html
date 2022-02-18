@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LoginHome</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,6 +70,62 @@
         }
         #LoginSubmit:hover{box-shadow: 0px 5px 10px 0px darkgray;}
 
+      #login-page {
+        background: linear-gradient(90deg, #8c0000 50%, #ccc2a3 50%);
+        width: 320px;
+        height: 450px;
+        margin: auto;
+        padding: 10px 0px;
+      }
+      #ku-logo > img {
+        width: 120px;
+        height: 120px;
+        margin: auto;
+        display: flex;
+        /*
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        */
+      }
+      #login {
+        background-color: white;
+        width: 320px;
+        height: 450px;
+        /*Login이라는 div를 가운데 위치로 오게하는 역할*/
+        margin: auto;
+        /*Login div내부의 배치*/
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+      }
+      #login > h1 {
+        font-size: 24px;
+        margin-bottom: -2px;
+      }
+      #login > h2 {
+        font-size: 15px;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      #login-field > input {
+        width: 200px;
+        height: 24px;
+        margin-bottom: 5px;
+      }
+      #login-submit {
+        /* 버튼 id디자인 분리하기 TBDCSS*/
+        background-color: #8c0000;
+        color: white;
+        width: 200px;
+        height: 28px;
+        border: 0px;
+      }
+      #login-submit:hover {
+        box-shadow: 0px 5px 10px 0px darkgray;
+      }
     </style>
     <script src="../src/jquery.js"></script>
     <script src="../src/jquery.cookie.js"></script>
@@ -111,9 +166,27 @@
                 });
             });           
         });
-            
+        $("#logout").click(() =>
+          Kakao.Auth.logout(function () {
+            alert("logout");
+          })
+        );
+        $("#class").click(function () {
+          isStudent = !isStudent;
+          $("#class").html(isStudent ? "학생" : "기사");
+        });
+        $("#class").click(function () {
+          isStudent = !isStudent;
+          $("#class").html(isStudent ? "학생" : "기사");
+        });
+        $("#login-with-kakao").click(function () {
+          Kakao.Auth.authorize({
+            redirectUri: window.location.origin + "/KakaoLogin/Auth.html",
+          });
+        });
+      });
     </script>
-</head>
+  </head>
 
 <body>
     <div id="login-page">
@@ -140,7 +213,7 @@
                 </tr>
             </div>
         </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
