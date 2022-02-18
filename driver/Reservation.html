@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap" rel="stylesheet">
+        
+        <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+            }
+        html, body, .call-list {width: 100%; height: 100%; margin: 0;}
+
+        .call-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }/*call-list 가 필요한지 안필요한지 모르겠음. 만약 필요 없다면 이 css 그대로 body에 적용할 것임.*/
+
+        .call-request {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+
+            border: 1px gray;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px 0px darkgray;
+
+            width: 95%;
+            height: 25%;
+            margin-top: 16px;
+        }
+        .caller-id{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            box-shadow: 0px 0px 5px 0px darkgray;
+            border-radius: 50px;
+            margin-top: 5px;
+
+            background-image: url('고대 로고/emblem/emblem_02.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .caller_id{
+            margin-top: 3px;
+            font-size: 14px;
+        }
+        .caller-pp{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .caller-pp>button {
+            width: 50px;
+            height: 32px;
+            border: 1.5px solid gray;
+            box-shadow: 0px 0px 2px 0px darkgray;
+            border-radius: 5px;
+            background-color: white;
+            margin: 5px 2px;
+        }
+
+        .caller-detail {
+            width: 56vw;
+            height: 90px;
+
+            padding: 5px 0px;
+            font-size: 14px;
+        }
+/*
+        @media screen and (max-width: 1024px) {
+            .call-request {
+                width: 90vw;}
+        }*/
+        </style>
+
+    <script src="../src/jquery.js"></script>
+    <script>
+            var query = [];
+            function ReservationIncome(id, nlo, mp, ResTime, rlo, dst, carfull){
+                var arg = [id, nlo, mp, ResTime, rlo, dst, carfull];
+                var i;
+                for(i =0; i <arguments.length; i++){
+                    query[i].text(query[i].text() + arg[i]);
+                }
+            }
+
+            $(document).ready(function(){
+                query =[
+                    $("#caller_id"),
+                    $("#caller-position-button"),
+                    $("#caller-phone-button"),
+                    $("#res-time"),
+                    $("#res-position"),
+                    $("#destination"),
+                    $("#car-full")
+                ];
+                ReservationIncome("1","2","3","4","5","6","7");
+            });
+        
+        </script>
+
+    </head>
+    <body>
+        <div id="call-list">
+            <table id="call-request">
+                <tr id="caller-template">
+                    <td id="caller-id">
+                        <div id="profile-image"></div>
+                        <div id="caller_id">요청자 id: </div>
+                        <div id="caller-pp">
+                            <button id="caller-position-button" href="#">위치: </button>
+                            <button id="caller-phone-button" href="#">전화: </button>
+                        </div>
+                    </td>
+                    <td> 
+                        <table id="caller-detail">
+                            <tr><td id="res-time">
+                                호출 예약 시간: 
+                            </td></tr>
+                            <tr><td id="res-position">
+                                탑승위치:
+                            </td></tr>
+                            <tr><td id="destination">
+                                목적지:
+                            </td></tr>
+                            <tr><td id="car-full">
+                                동승자 유무:
+                            </td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

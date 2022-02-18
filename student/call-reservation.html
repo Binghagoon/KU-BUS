@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>5페이지 6번</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <script src="../src/navigator.js"></script>
+    <link
+      media="screen"
+      rel="stylesheet"
+      type="text/css"
+      href="css/call-reservation.css"
+    />
+    <script src="../src/jquery.js"></script>
+    <script>
+      $(document).ready(function () {
+        var query = Object.fromEntries(
+          new URLSearchParams(window.location.search)
+        );
+        //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+        PrintData(
+          query.fromName,
+          query.toName,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined
+        );
+        $("#submit").on("click", function () {
+          if (!top.debugging) {
+            $.ajax({
+              url: window.location.origin + "/node/reservation-post",
+              type: "POST",
+              data: {
+                now_place_no: from["no"],
+                to_place_no: to["no"],
+                id: top.args["id"],
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                alert("failed");
+              },
+              success: function (data, status, xhr) {
+                top.args["requestid"] = data.insertId;
+                console.log("move to doing-reservation.html");
+                window.location.href = "doing-reservation.html";
+              },
+            });
+          } else {
+            console.log("move to doing-reservation.html");
+            window.location.href = "doing-reservation.html";
+          }
+          return false;
+        });
+        $("button#cancel").click(function () {
+          console.log("move to map.html");
+          window.location.href = "map.html";
+          return false;
+        });
+      });
+      function PrintData(from, dest, date, time, name, mp, email) {
+        $("#from").html($("#from").html() + from);
+        $("#dest").html($("#dest").html() + dest);
+        $("#date").html($("#date").html() + date);
+        $("#pick-up-time").html($("#pick-up-time").html() + time);
+        $("#user-name").val(name);
+        $("user-phone-number").val(mp);
+        $("#user-email-address").val(email);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>예약정보 확인하기</h1>
+    <div id="reservation-information">
+      <h3>선택된 위치 정보</h3>
+      <div>
+        <p id="from">출발지:</p>
+        <p id="dest">도착지:</p>
+        <p id="date">예약일:</p>
+        <p id="pick-up-time">픽업 시간대:</p>
+      </div>
+      <button type="submit" id="submit">예약 신청</button><br />
+      <button type="cancel" id="cancel">뒤로 가기</button>
+    </div>
+  </body>
+</html>

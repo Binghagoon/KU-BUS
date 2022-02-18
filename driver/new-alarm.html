@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- 운전자 5 -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        html,body{width: 100%; height: 100%; margin: 0;}
+
+        #new-call {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            position: relative; top: 10vh;
+        }
+        #new-call>h1{
+            font-size: 20px;
+        }
+
+        #picture {
+            font-size: 100px;
+            color: #8C0000;
+            margin-bottom: 20px;
+        }
+
+        #response {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #response>button {
+            width: 72px;
+            height: 36px;
+            border-radius: 7px;
+            border: 1.5px solid #8C0000;
+            margin: 5px;
+            letter-spacing: 1px;
+        }
+
+        #accept {
+            background-color: #8C0000;
+            color: white;
+        }
+
+        #reject {
+            background-color: white;
+            color: #8C0000;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/83496dc54d.js" crossorigin="anonymous"></script>
+    <script src="../src/jquery.js"></script>
+    <script>
+        var data;
+        $(document).ready(function(){
+            //PrintData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
+            data = top.args["reqData"]; //ex: {name: 'asdf', time: '2021-10-03T11:32:40.000Z', now_name: '우당교양관', to_name: '정경대학과 타이거 프라자 사이'}
+            PrintData(data["name"], data["time"], data["now_name"], data["to_name"], null, data['mp']);
+            $("#accept").on("click",function(){
+                $.ajax({
+                    url:  window.location.origin + "/node/driver-select-request",
+                    type: "POST",
+                    data:{
+                        "responcer_id": top.args["id"],
+                        "requester_id": top.args["reqData"]["id"]
+                    },
+                    error: function(jqXHR, textstatus, errorthrown){
+                    },
+                    success: function(data, status, xhr){
+                        top.args["stat"] = "working";
+                        console.log("Move to map.html");
+                        window.location.href = "map.html";
+                    }
+                })
+
+            });
+            $("#reject").on("click",function(){
+
+            });
+        });
+        function PrintData(id, date, from, dest, carFull, mp){
+            var td = $("#student-detail td");
+            td[0].append(id);
+            td[1].append(TimezoneChange(date));
+            td[2].append(from);
+            td[3].append(dest);
+            td[4].append(carFull);
+            td[5].append(mp);
+        }
+        function TimezoneChange(time){
+            var date = new Date(time);
+            var dateString = date.toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul'});
+            var newTime = dateString.toString();
+            return newTime;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="new-call">
+        <h1> 새로운 요청이 들어왔습니다 </h1>
+        <div id="picture"><i class="fas fa-map-marker-alt"></i></div>
+        <div id="response">
+            <button id="accept">수락</button>
+            <button id="reject">거절</button>
+        </div>
+        <table id="student-detail">
+            <tr>
+                <td>요청자 이름 : </td>
+            </tr>
+
+            <tr>
+                <td>요청 시간 :</td>
+            </tr>
+
+            <tr>
+                <td> 현위치 : </td>
+            </tr>
+
+            <tr>
+                <td> 목적지 : </td>
+            </tr>
+
+            <tr>
+                <td>동승자 여부 :</td>
+            </tr>
+
+            <tr>
+                <td>전화번호 :</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

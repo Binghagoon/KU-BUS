@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FirstPage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link rel="stylesheet" type="text/css" href="css/first-page.css" />
+    <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#calling").on("click", function () {
+          parent.$("iframe").attr("src", "./student/seat-list.html");
+        });
+
+        $("#reservation").on("click", function () {
+          parent.alert("아직은 지원하지 않는 기능입니다.");
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="header">KUBUS</div>
+    <div id="contents">
+      <div class="borderline">
+        <button id="calling" onclick="location.href='seat-list.html'">
+          호출하기
+          <img
+            class="arrow"
+            src="../Korea%20Univ.%20Logo/Image/right%20arrow.png"
+          />
+        </button>
+      </div>
+      <div class="borderline">
+        <button
+          id="reservation"
+          onclick="location.href='call-reservation.html'"
+        >
+          예약하기
+          <img
+            class="arrow"
+            src="../Korea%20Univ.%20Logo/Image/right%20arrow.png"
+          />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

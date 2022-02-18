@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seat List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link
+      media="screen"
+      rel="stylesheet"
+      type="text/css"
+      href="css/seat-list.css"
+    />
+    <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
+    <script>
+      var par = {
+        three: 3,
+        four: 4,
+        five: 5,
+        six: 6,
+      };
+      var seatnum = 0;
+      var pre = null;
+      $(document).ready(function () {
+        //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
+        //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
+        $(".chair.selectable").on("click", function () {
+          var thisJquery = $(this);
+          var v = thisJquery.attr("id");
+          num = par[v];
+          if (pre) ChairUnclicked();
+          ChairClicked(par[v], thisJquery);
+        });
+        $("#next").on("click", function () {
+          if (!!navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              function (position) {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                //Anam station
+                lat = 37.586232954034564;
+                lng = 127.02928291766814;
+                //end
+                var url = new URLSearchParams();
+                url.append("seatnum", seatnum);
+                url.append("lat", lat);
+                url.append("lng", lng);
+                parent
+                  .$("iframe")
+                  .attr(
+                    "src",
+                    window.location.origin +
+                      "/student/map.html?" +
+                      url.toString()
+                  );
+              },
+              () => alert("현재 위치를 가져올 수 없습니다.")
+            );
+          } else {
+            alert("현재 위치를 가져올 수 없습니다.");
+          }
+        });
+      });
+
+      function ChairClicked(num, button) {
+        //alert('좌석이 선택되었습니다 \n 호출 버튼을 누르는 창으로 이동합니다');
+        function ChangeExplain(sel) {
+          var text = "seatnum번 좌석 선택";
+          sel.html(text.replace("seatnum", num));
+        }
+        var sel = $("#selected");
+        seatnum = num;
+        ChangeExplain(sel);
+        sel.show();
+        button.removeClass("unselected");
+        button.addClass("selected");
+        $("#next").addClass("crimson");
+        pre = button;
+      }
+
+      function ChairUnclicked() {
+        if (!pre) {
+          console.log("Pre-selected chair does not exist.");
+          return;
+        }
+        var sel = $(pre);
+        sel.removeClass("selected");
+        //sel.addClass("unselected");
+      }
+
+      function renderTR(target, idValueArr) {
+        var tr = document.getElementById(target);
+        tr.innerHTML = "";
+        for (var index in idValueArr) {
+          var value = idValueArr[index][0];
+          var id = idValueArr[index][1];
+          tr.innerHTML +=
+            '<td><input type="submit" value="' +
+            value +
+            '" id="' +
+            id +
+            '" onclick="touch()"/> </td>';
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header">좌석을 선택하세요</div>
+    <div id="contents">
+      <div id="bus-select"></div>
+      <table class="alltable">
+        <tr>
+          <td>
+            <input
+              type="submit"
+              value="운전자"
+              class="chair unselectable"
+              id="driver"
+            />
+          </td>
+          <td>
+            <input
+              type="submit"
+              value="조수석"
+              class="chair unselectable"
+              id="supporter"
+            />
+          </td>
+        </tr>
+        <tr id="target-tr1">
+          <td>
+            <input
+              type="submit"
+              value="3번"
+              class="chair selectable"
+              id="three"
+            />
+          </td>
+          <td>
+            <input
+              type="submit"
+              value="4번"
+              class="chair selectable"
+              id="four"
+            />
+          </td>
+        </tr>
+        <tr id="target-tr2">
+          <td>
+            <input
+              type="submit"
+              value="5번"
+              class="chair selectable"
+              id="five"
+            />
+          </td>
+          <td>
+            <input
+              type="submit"
+              value="6번"
+              class="chair selectable"
+              id="six"
+            />
+          </td>
+        </tr>
+      </table>
+      <table id="legend">
+        <tr>
+          <td class="color" id="impossible-color"></td>
+          <td class="seat-condition">예약 불가능 좌석</td>
+        </tr>
+        <tr>
+          <td class="color" id="reserved-color"></td>
+          <td class="seat-condition">이미 예약된 좌석</td>
+        </tr>
+        <tr>
+          <td class="color" id="possible-color"></td>
+          <td class="seat-condition">예약 가능 좌석</td>
+        </tr>
+      </table>
+      <div id="helper-select">
+        <input type="checkbox" id="Helper" value="help" /><label for="Helper">
+          도우미가 탑승합니다.</label
+        >
+        <input type="checkbox" id="AnamStation" /><label> 안암역 </label>
+      </div>
+      <div id="selected" hidden>seatnum번 좌석 선택</div>
+    </div>
+    <button id="next" class="next" onclick="location.href='map.html'">
+      Next
+      <img class="arrow" src="../korea-univ-logo/Image/left arrow.png" />
+    </button>
+  </body>
+</html>

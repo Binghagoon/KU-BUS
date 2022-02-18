@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link ref="stylesheet" type="text/css" href="css/map.css" />
+    <script
+      src="https://kit.fontawesome.com/83496dc54d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
+    ></script>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/map.js"></script>
+    <script src="../src/marker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <script src="../src/navigator.js"></script>
+    <script src="../src/location-trace.js"></script>
+    <script>
+      var args, debugging;
+      var one = 1;
+      var cannotGetPositionError = (more) => {
+        alert("현재 위치를 가져올 수 없습니다." + more ? more : "");
+      };
+      var count = 1;
+
+      queryDataLoad();
+      locationCheck();
+      if (!!navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          locationTrace,
+          cannotGetPositionError
+        );
+      } else {
+        alert("현재 위치를 가져올 수 없습니다.");
+      }
+      //$(window).on('unload', locationDelete);
+      window.onbeforeunload = locationDelete;
+
+      function queryDataLoad() {
+        console.log("Get data with query.");
+        args = getQuery(); //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
+
+        args["stat"] = "reserving";
+        debugging = args["debugging"] === "true";
+        //if(!args)
+      }
+      function getQuery() {
+        var sp = new URLSearchParams(window.location.search);
+        return Object.fromEntries(sp);
+      }
+    </script>
+    <script>
+      var stat;
+      var role;
+      var buttonJq;
+      var prefixJq;
+      var korean = {
+        from: "출발지",
+        to: "도착지",
+      };
+      var orderStat = ["from", "to", "reserve"];
+      var statnum = 0;
+
+      try {
+        stat = args["stat"];
+        role = args["role"];
+      } catch (e) {
+        console.log(e);
+        stat = "reserving";
+        console.log("set stat as reserving.");
+      }
+
+      $(document).ready(function () {
+        buttonJq = $("#next");
+        prefixJq = $("#prefix");
+        $("unuse#next-button").on("click", function () {
+          args["from"] = from;
+          args["to"] = to;
+          console.log("Move to call-reservation");
+          window.location.href = "call-reservation.html";
+        });
+        $("#next").click(function () {
+          var thisJq = $(this);
+          if (thisJq.hasClass("on")) {
+            clickedMarkerDelete();
+            nextButtonSwitch(false);
+            nextStat();
+            prefixModify();
+          } else {
+            alert(korean[orderStat[statnum]] + "를 선택해주십시오");
+          }
+          if (statnum == 2) {
+            goToCallReservation();
+          }
+        });
+
+        startMap();
+        if (stat == "reserving") {
+          recordPositionGet();
+        } else if (stat == "wating") {
+          traceAnother(args["reqData"]["id"], "DRIVER");
+          traceAnother(args["id"], "STUDENT");
+          $("#map-start-or-dest").hide();
+          $("#calling-car").removeAttr("hidden");
+          var s = $("#calling-car")
+            .html()
+            .replace("driverAddress", args["reqData"]["mp"]);
+          $("#calling-car").html(s);
+        }
+      });
+
+      function nextButtonSwitch(isOn) {
+        if (isOn) {
+          buttonJq.removeClass("off");
+          buttonJq.addClass("on");
+        } else {
+          buttonJq.removeClass("on");
+          buttonJq.addClass("off");
+        }
+      }
+
+      function prefixModify() {
+        prefixJq.html(korean[orderStat[statnum]]);
+      }
+
+      function goToCallReservation() {
+        var query = { fromName: from.name, toName: to.name };
+        var querystr = new URLSearchParams(query).toString();
+        console.log("Move to call-reservation");
+        window.location.href = "call-reservation.html?" + querystr;
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="infowindow-templete" class="template">
+      <div id="positionName"></div>
+      <div id="button-latitude" class="template"></div>
+      <div id="button-longitude" class="template"></div>
+    </div>
+    <div id="set-location" class="template"></div>
+    <div id="map-explanation" class="front">
+      <div id="calling-car" hidden>
+        차량을 호출중입니다.(연락처는: driverAddress입니다.)
+      </div>
+      <div id="map-start-or-dest">
+        <span id="prefix">출발지</span>를 선택하세요
+      </div>
+    </div>
+    <div id="header">
+      <input id="destination" type="text" placeholder=" 장소를 검색하세요" />
+      <button id="search"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div id="map" style="height: 80%"></div>
+    <button id="next" class="off front">
+      Next
+      <img id="arrow" src="../korea-univ-logo/Image/left arrow.png" />
+    </button>
+  </body>
+</html>

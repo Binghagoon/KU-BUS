@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- 2-0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link ref="stylesheet" type="text/css" href="css/favorite.css" />
+    <script src="../src/jquery.js"></script>
+    <script
+      src="https://kit.fontawesome.com/83496dc54d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      circles = [];
+      $(document).ready(function () {
+        [1, 2, 3].forEach((index) => {
+          var circle = $("circle" + index);
+          circles.push(circle);
+          circle.click(function () {
+            alert(circle.val() + "를 출발지로 지정하시겠습니까");
+          });
+        });
+        [1, 2, 3].forEach((index) => circles.push($("circle" + index)));
+        $.ajax({
+          url: window.location.origin + "/php/record-position-get.php",
+          type: "GET",
+          error: function (request, status, error) {
+            alert("record position get error");
+          },
+          success: function (data, status, xhr) {
+            //data:{ num, lat, lon, name }  num:array num, name: position number; Korean, how to access datas is like date["name"].
+            data = JSON.parse(data);
+            var i = 0;
+            for (i = 0; i < data.length; i++) {
+              var name = data[i]["name"];
+              $(".templete > .circle").html(name);
+              var dom = $(".templete").html();
+              $("#favorite.group").append(dom);
+            }
+            //TBDJS for han
+          },
+        });
+        $("#button").click(function () {
+          //TBDJS
+        });
+        circles[0].click(function () {
+          //TBDJS
+        });
+        circles[1].click(function () {
+          //TBDJS
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="input">
+      <div id="header">
+        <input
+          id="destination"
+          type="text"
+          placeholder=" 목적지를 입력하세요"
+        />
+      </div>
+      <button id="search"><i class="fas fa-search"></i></button>
+    </div>
+    <div id="main">
+      <div class="contents">
+        <div class="title">
+          <h3>즐겨찾기</h3>
+          <a class="plus"> + </a>
+        </div>
+        <div class="group" id="favorite">
+          <div class="templete">
+            <a class="circle"></a>
+          </div>
+
+          <a class="circle">공학관</a>
+          <a class="circle">신공학관</a>
+          <a class="circle">아산이학관</a>
+        </div>
+      </div>
+      <div class="contents">
+        <h3>최근 방문한 장소</h3>
+        <div class="group">
+          <a class="circle">공학관</a>
+          <a class="circle">신공학관</a>
+          <a class="circle">아산이학관</a>
+          <a class="circle">더보기</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
