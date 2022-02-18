@@ -3,3 +3,4 @@ test.html
 debug.log
 .vscode/
 src/keys.js
+.DS_Store

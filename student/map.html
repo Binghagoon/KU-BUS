@@ -11,122 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      * {
-        font-family: "Noto Sans KR", sans-serif;
-      }
-
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-      }
-
-      #map {
-        width: 100%;
-        height: 100%;
-      }
-
-      .template {
-        display: none;
-      }
-
-      .off {
-        background-color: darkgray;
-      }
-      .on {
-        background-color: #8c0000;
-      }
-      .front {
-        z-index: 2;
-      }
-      #map-explanation {
-        padding-left: 10px;
-        padding: 5px 10px 5px 18px;
-
-        background-color: white;
-        font-size: 24px;
-        font-weight: bold;
-
-        box-shadow: 0px 0px 10px 0px black;
-
-        position: fixed;
-        top: 0px;
-        width: 100%;
-      }
-
-      #header {
-        width: 80%;
-        height: 46px;
-
-        margin: 20px 0px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        box-shadow: 0px 0px 10px 0px darkgray;
-        border-radius: 50px;
-
-        position: fixed;
-        top: 60px;
-        left: 50%;
-        transform: translate(-50%, 0);
-        z-index: 2;
-      }
-
-      #destination {
-        margin-right: 0;
-        font-size: 20px;
-
-        border: none;
-        width: 180px;
-        z-index: 2;
-      }
-
-      #search {
-        font-size: 18px;
-        color: #8c0000;
-
-        width: 30px;
-        height: 30px;
-        border-radius: 30px;
-        background-color: white;
-        border: none;
-
-        display: inline-block;
-        flex-shrink: 0;
-
-        position: relative;
-        left: 30px;
-      }
-
-      #next {
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translate(-50%, 0%);
-
-        border: none;
-
-        width: 230px;
-        height: 70px;
-        padding: 10px 20px;
-
-        color: white;
-        font-size: 20px;
-        text-align: left;
-      }
-
-      #arrow {
-        width: 30px;
-        position: absolute;
-        right: 10px;
-        filter: invert(100);
-        z-index: inherit;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link ref="stylesheet" type="text/css" href="css/map.css" />
     <script
       src="https://kit.fontawesome.com/83496dc54d.js"
       crossorigin="anonymous"
@@ -138,11 +24,48 @@
     <script src="../src/jquery.js"></script>
     <script src="../src/map.js"></script>
     <script src="../src/marker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <script src="../src/navigator.js"></script>
+    <script src="../src/location-trace.js"></script>
+    <script>
+      var args, debugging;
+      var one = 1;
+      var cannotGetPositionError = (more) => {
+        alert("현재 위치를 가져올 수 없습니다." + more ? more : "");
+      };
+      var count = 1;
+
+      queryDataLoad();
+      locationCheck();
+      if (!!navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          locationTrace,
+          cannotGetPositionError
+        );
+      } else {
+        alert("현재 위치를 가져올 수 없습니다.");
+      }
+      //$(window).on('unload', locationDelete);
+      window.onbeforeunload = locationDelete;
+
+      function queryDataLoad() {
+        console.log("Get data with query.");
+        args = getQuery(); //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
+
+        args["stat"] = "reserving";
+        debugging = args["debugging"] === "true";
+        //if(!args)
+      }
+      function getQuery() {
+        var sp = new URLSearchParams(window.location.search);
+        return Object.fromEntries(sp);
+      }
+    </script>
     <script>
       var stat;
       var role;
-      var ButtonJq;
-      var PrefixJq;
+      var buttonJq;
+      var prefixJq;
       var korean = {
         from: "출발지",
         to: "도착지",
@@ -151,8 +74,8 @@
       var statnum = 0;
 
       try {
-        stat = top.args["stat"];
-        role = top.args["role"];
+        stat = args["stat"];
+        role = args["role"];
       } catch (e) {
         console.log(e);
         stat = "reserving";
@@ -160,59 +83,59 @@
       }
 
       $(document).ready(function () {
-        ButtonJq = $("#next");
-        PrefixJq = $("#prefix");
-        $("unuse#NextButton").on("click", function () {
-          top.args["from"] = from;
-          top.args["to"] = to;
+        buttonJq = $("#next");
+        prefixJq = $("#prefix");
+        $("unuse#next-button").on("click", function () {
+          args["from"] = from;
+          args["to"] = to;
           console.log("Move to call-reservation");
           window.location.href = "call-reservation.html";
         });
         $("#next").click(function () {
           var thisJq = $(this);
           if (thisJq.hasClass("on")) {
-            ClickedMarkerDelete();
-            NextButtonSwitch(false);
-            NextStat();
-            PrefixModify();
+            clickedMarkerDelete();
+            nextButtonSwitch(false);
+            nextStat();
+            prefixModify();
           } else {
-            alert(korean[OrderStat[statnum]] + "를 선택해주십시오");
+            alert(korean[orderStat[statnum]] + "를 선택해주십시오");
           }
           if (statnum == 2) {
-            GotoCallReservation();
+            goToCallReservation();
           }
         });
 
-        StartMap();
+        startMap();
         if (stat == "reserving") {
-          RecordPositionGet();
+          recordPositionGet();
         } else if (stat == "wating") {
-          TraceAnother(top.args["reqData"]["id"], "DRIVER");
-          TraceAnother(top.args["id"], "STUDENT");
+          traceAnother(args["reqData"]["id"], "DRIVER");
+          traceAnother(args["id"], "STUDENT");
           $("#map-start-or-dest").hide();
           $("#calling-car").removeAttr("hidden");
           var s = $("#calling-car")
             .html()
-            .replace("driverAddress", top.args["reqData"]["mp"]);
+            .replace("driverAddress", args["reqData"]["mp"]);
           $("#calling-car").html(s);
         }
       });
 
-      function NextButtonSwitch(isOn) {
+      function nextButtonSwitch(isOn) {
         if (isOn) {
-          ButtonJq.removeClass("off");
-          ButtonJq.addClass("on");
+          buttonJq.removeClass("off");
+          buttonJq.addClass("on");
         } else {
-          ButtonJq.removeClass("on");
-          ButtonJq.addClass("off");
+          buttonJq.removeClass("on");
+          buttonJq.addClass("off");
         }
       }
 
-      function PrefixModify() {
-        PrefixJq.html(korean[orderStat[statnum]]);
+      function prefixModify() {
+        prefixJq.html(korean[orderStat[statnum]]);
       }
 
-      function GotoCallReservation() {
+      function goToCallReservation() {
         var query = { fromName: from.name, toName: to.name };
         var querystr = new URLSearchParams(query).toString();
         console.log("Move to call-reservation");
@@ -233,8 +156,7 @@
         차량을 호출중입니다.(연락처는: driverAddress입니다.)
       </div>
       <div id="map-start-or-dest">
-        <div id="prefix">출발지</div>
-        를 선택하세요
+        <span id="prefix">출발지</span>를 선택하세요
       </div>
     </div>
     <div id="header">
@@ -242,7 +164,7 @@
       <button id="search"><i class="fas fa-search"></i></button>
     </div>
 
-    <div id="map"></div>
+    <div id="map" style="height: 80%"></div>
     <button id="next" class="off front">
       Next
       <img id="arrow" src="../korea-univ-logo/Image/left arrow.png" />

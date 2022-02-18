@@ -17,7 +17,7 @@ var fromclicked = false,
   toclicked = false;
 var clickblocked = false;
 
-function StartMap(callback) {
+function startMap(callback = null) {
   var getpos = new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
@@ -25,7 +25,9 @@ function StartMap(callback) {
     getpos
       .then(function (data) {
         successCallback(data);
-        callback();
+        if (callback) {
+          callback();
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -45,16 +47,17 @@ function successCallback(position) {
   lng = 127.02928291766814;
   //end
 
-  var container = document.getElementById("Map");
+  var container = document.getElementById("map");
   var options = {
     center: new kakao.maps.LatLng(lat, lng),
     level: 3,
   };
   map = new kakao.maps.Map(container, options);
+  container.append(map);
 }
 
-function RecordPositionGet() {
-  if (!top.debugging && self != top) {
+function recordPositionGet() {
+  if (!debugging) {
     $.ajax({
       url: window.location.origin + "/node/record-position",
       type: "GET",
@@ -62,7 +65,7 @@ function RecordPositionGet() {
         alert("record position get error");
       },
       success: function (data, status, xhr) {
-        MapPinWithRecord(data);
+        mapPinWithRecord(data);
       },
     });
   } else {
@@ -72,37 +75,37 @@ function RecordPositionGet() {
         alert("record position get error");
       },
       success: function (data) {
-        MapPinWithRecord(data);
+        mapPinWithRecord(data);
       },
     });
   }
 }
-function Pinupdate(position, who) {
-  if (UserMarker[who] == null) {
-    UserMarker[who] = MarkerCreate(position, who);
+function pinUpdate(position, who) {
+  if (userMarker[who] == null) {
+    userMarker[who] = markerCreate(position, who);
   } else {
-    MarkerLocationChange(UserMarker[who], position);
+    markerLocationChange(userMarker[who], position);
   }
 }
 
-async function TraceAnother(id, who) {
-  setInterval(() => UpdateAnother(id, who), 1000);
+async function traceAnother(id, who) {
+  setInterval(() => updateAnother(id, who), 1000);
 }
 
-async function UpdateAnother(id, who) {
-  var result = await top.GetPositionById(id);
-  Pinupdate(result, who);
+async function updateAnother(id, who) {
+  var result = await getPositionById(id);
+  pinUpdate(result, who);
 }
 
-function NextStat() {
+function nextStat() {
   statnum++;
-  if (statnum >= orderStat.length) console.log("Error On NextStat()");
+  if (statnum >= orderStat.length) console.log("Error On nextStat()");
   console.log("Stat is " + orderStat[statnum]);
-  MarkerImageChange(null, imgChangedMarker);
+  markerImageChange(null, imgChangedMarker);
   openedIwcontent.close();
 }
 
-function MapPinWithRecord(data) {
+function mapPinWithRecord(data) {
   if (typeof data == "string") {
     recordList = JSON.parse(data);
   } else {
@@ -110,11 +113,11 @@ function MapPinWithRecord(data) {
   }
 
   recordList.forEach(function (value, index) {
-    var marker = CreateMarker(StarMarkerSrc, value, null);
+    var marker = createMarker(StarMarkerSrc, value, null);
     markers.push(marker);
     marker.setMap(map);
     kakao.maps.event.addListener(marker, "click", () =>
-      MarkerClickEvent(value, marker, imageSize)
+      markerClickEvent(value, marker, imageSize)
     );
   });
 }
