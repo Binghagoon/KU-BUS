@@ -22,6 +22,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
+          port: ${{ secrets.PORT }}
           script: |
             cd /var/www/html
             git reset --hard
