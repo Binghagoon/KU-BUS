@@ -12,7 +12,7 @@ function pageChange(position) {
   } else if (position["name"] == "STUDENT") {
   }
   position["name"] = position["name"].toUpperCase();
-  var url = updateURLParameter("./Frame.html", "role", position["role"]);
+  var url = updateURLParameter("./frame.html", "role", position["role"]);
   url = updateURLParameter(url, "id", position["id"]);
   if (position["debugging"] == "true")
     url = updateURLParameter(url, "debugging", position["debugging"]);
