@@ -45,7 +45,7 @@ function successCallback(position) {
   lng = 127.02928291766814;
   //end
 
-  var container = document.getElementById("Map");
+  var container = document.getElementById("map");
   var options = {
     center: new kakao.maps.LatLng(lat, lng),
     level: 3,
