@@ -1,10 +1,10 @@
 var markers = [];
 
-var UserMarker = {
+var userMarker = {
   DRIVER: null,
   STUDENT: null,
 };
-var StarMarkerSrc =
+var starMarkerSrc =
   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 var imageSize = new kakao.maps.Size(24, 35);
 var orderStat = ["from", "to", "reserve"];
@@ -13,7 +13,7 @@ var imgChangedMarker = null;
 var deletedMarker = [];
 var openedIwcontent = null;
 
-function MarkerCreate(position, who) {
+function markerCreate(position, who) {
   const imgconvert = {
     DRIVER: window.location.origin + "/src/img/car-pin.png",
     STUDENT: window.location.origin + "/src/img/human-pin.png",
@@ -25,17 +25,17 @@ function MarkerCreate(position, who) {
   v["lat"] = position["latitude"];
   v["lng"] = position["longitude"];
 
-  marker = CreateMarker(imgconvert[who], v, null);
+  marker = createMarker(imgconvert[who], v, null);
   return marker;
 }
 
-function MarkerLocationChange(marker, position) {
+function markerLocationChange(marker, position) {
   marker.setPosition(
     new kakao.maps.LatLng(position["latitude"], position["longitude"])
   );
 }
 
-function CreateMarker(imgSrc, value, event) {
+function createMarker(imgSrc, value, event) {
   // img : String value : Object
   var imageSize = new kakao.maps.Size(24, 35);
   var markerImage = new kakao.maps.MarkerImage(imgSrc, imageSize);
@@ -47,29 +47,29 @@ function CreateMarker(imgSrc, value, event) {
   });
 }
 
-function ClickedMarkerDelete() {
+function clickedMarkerDelete() {
   imgChangedMarker.setMap(null);
   deletedMarker.push(imgChangedMarker);
 }
 
-function DeletedMarkerRevive() {
+function deletedMarkerRevive() {
   deletedMarker.forEach(function (value, index) {
     value.setMap(map);
   });
 }
 
-function MarkerImageChange(what, marker) {
+function markerImageChange(what, marker) {
   if (!marker) return;
   var imgsrc =
     what == "star"
-      ? StarMarkerSrc
+      ? starMarkerSrc
       : "https://t1.daumcdn.net/mapjsapi/images/marker.png";
   marker.setImage(new kakao.maps.MarkerImage(imgsrc, imageSize));
   imgChangedMarker = marker;
 }
 
-function MarkerClickEvent(value, marker, imageSize) {
-  function InfowindowOpen(status) {
+function markerClickEvent(value, marker, imageSize) {
+  function infoWindowOpen(status) {
     var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
       iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
     $("#position-name").html(value.name);
@@ -85,7 +85,7 @@ function MarkerClickEvent(value, marker, imageSize) {
     infowindow.open(map, marker);
     return infowindow;
   }
-  function OrderInput(status) {
+  function orderInput(status) {
     if (status == orderStat[0]) {
       //from
       from = value;
@@ -96,9 +96,9 @@ function MarkerClickEvent(value, marker, imageSize) {
       console.log("Too many click");
     }
   }
-  MarkerImageChange("star", imgChangedMarker);
-  MarkerImageChange(null, marker);
-  NextButtonSwitch(true);
-  OrderInput(orderStat[statnum]);
-  openedIwcontent = InfowindowOpen(orderStat[statnum]);
+  markerImageChange("star", imgChangedMarker);
+  markerImageChange(null, marker);
+  nextButtonSwitch(true);
+  orderInput(orderStat[statnum]);
+  openedIwcontent = infoWindowOpen(orderStat[statnum]);
 }

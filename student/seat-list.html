@@ -11,137 +11,16 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
-    <style media="screen">
-      * {
-        font-family: "Noto Sans KR", sans-serif;
-      }
-
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-      }
-
-      #header {
-        padding-left: 10px;
-        padding: 5px 10px 5px 18px;
-
-        background-color: white;
-        color: #8c0000;
-        font-size: 20px;
-        font-weight: bold;
-
-        box-shadow: 0px 0px 10px 0px black;
-
-        position: fixed;
-        top: 0px;
-        width: 100%;
-      }
-
-      #contents {
-        text-align: center;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        margin: 0px auto;
-        position: relative;
-        top: 70px;
-      }
-
-      #bus-select {
-        width: 160px;
-        height: 32px;
-        background-color: violet;
-        /*TBD CSS*/
-      }
-
-      .alltable {
-        border: 1px solid gray;
-        padding: 10px;
-        margin: auto;
-      }
-
-      .chair {
-        padding: 5px;
-        text-align: center;
-        width: 70px;
-        height: 60px;
-
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0px 0px 1px 0px darkgrey;
-
-        margin: 10px;
-      }
-
-      #legend {
-        margin: 25px 0px;
-      }
-      .color {
-        width: 16px;
-        height: 16px;
-      }
-
-      #impossible-color {
-        background-color: #ccc2a3;
-      }
-      #reserved-color {
-        background-color: #e7e5e8;
-      }
-      #possible-color {
-        background-color: #8c0000;
-      }
-      .seat-condition {
-        font-size: 11px;
-        text-align: left;
-        padding: 0px 5px;
-      }
-
-      .next {
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translate(-50%, 0%);
-
-        border: none;
-
-        width: 230px;
-        height: 70px;
-        padding: 10px 20px;
-
-        color: white;
-        font-size: 20px;
-        text-align: left;
-      }
-      .crimson {
-        background-color: #8c0000;
-      }
-
-      .unselectable {
-        background-color: wheat;
-        color: black;
-      }
-      .unselected {
-        background-color: #8c0000;
-      }
-      .selected {
-        background-color: gray;
-        color: white;
-      }
-
-      .arrow {
-        width: 30px;
-        position: absolute;
-        right: 10px;
-        filter: invert(100);
-      }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link
+      media="screen"
+      rel="stylesheet"
+      type="text/css"
+      href="css/seat-list.css"
+    />
     <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
     <script>
       var par = {
         three: 3,
@@ -154,16 +33,13 @@
       $(document).ready(function () {
         //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
         //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
-        $(".chair").on("click", function () {
+        $(".chair.selectable").on("click", function () {
           var thisJquery = $(this);
           var v = thisJquery.attr("id");
           num = par[v];
           if (pre) ChairUnclicked();
           ChairClicked(par[v], thisJquery);
         });
-        $(".chair.unselectable").on("click", () =>
-          alert("해당 좌석은 선택할 수 없습니다")
-        );
         $("#next").on("click", function () {
           if (!!navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -320,7 +196,7 @@
       </div>
       <div id="selected" hidden>seatnum번 좌석 선택</div>
     </div>
-    <button id="next" class="next">
+    <button id="next" class="next" onclick="location.href='map.html'">
       Next
       <img class="arrow" src="../korea-univ-logo/Image/left arrow.png" />
     </button>

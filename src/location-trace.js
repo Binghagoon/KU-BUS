@@ -1,4 +1,4 @@
-function LocationChack() {
+function locationCheck() {
   //TBD
   var isValueExist;
   $.when(
@@ -18,7 +18,7 @@ function LocationChack() {
   ).done();
   return isValueExist;
 }
-async function GetPositionById(id) {
+async function getPositionById(id) {
   var r;
   await $.ajax({
     url: window.location.origin + "/node/get-location",
@@ -36,7 +36,7 @@ async function GetPositionById(id) {
   });
   return r;
 }
-function LocationTrace(position) {
+function locationTrace(position) {
   var coord = position.coords;
   $.ajax({
     url: window.location.origin + "/node/my-location-insert",
@@ -50,16 +50,16 @@ function LocationTrace(position) {
       alert("failed on insert location");
     },
     success: function (data, status, xhr) {
-      setInterval(CheckGeolocation, 500);
+      setInterval(checkGeolocation, 500);
     },
   });
 }
-function CheckGeolocation() {
-  navigator.geolocation.getCurrentPosition(LocationUpdate, () =>
+function checkGeolocation() {
+  navigator.geolocation.getCurrentPosition(locationUpdate, () =>
     alert("현재 위치를 가져올 수 없습니다.")
   );
 }
-function LocationUpdate(position) {
+function locationUpdate(position) {
   var coords = position.coords;
   $.ajax({
     url: window.location.origin + "/node/my-location-update",
@@ -77,7 +77,7 @@ function LocationUpdate(position) {
     },
   });
 }
-function LocationDelete() {
+function locationDelete() {
   $.ajax({
     url: window.location.origin + "/node/my-location-delete",
     type: "POST",

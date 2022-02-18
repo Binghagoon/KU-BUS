@@ -18,14 +18,14 @@
     <script src="../src/map.js"></script>
     <script>
       $(document).ready(function () {
-        StartMap();
-        setInterval(ChackReservation, 1000);
-        TraceAnother(top.args["id"], "DRIVER");
+        startMap();
+        setInterval(checkReservation, 1000);
+        traceAnother(top.args["id"], "DRIVER");
         if (top.debugging) {
           $("#map").height("80%");
           $("#debugging").show();
           $("#button").on("click", function () {
-            MoveToNew([
+            moveToNew([
               {
                 name: "asdf",
                 time: "2021-10-03T11:32:40.000Z",
@@ -39,11 +39,11 @@
         if (top.args["stat"] == "working") {
           $("#ex1").hide();
           $("#ex2").removeAttr("hidden");
-          TraceAnother(top.args["reqData"]["id"], "STUDENT");
+          traceAnother(top.args["reqData"]["id"], "STUDENT");
         }
       });
 
-      function ChackReservation() {
+      function checkReservation() {
         $.ajax({
           url: window.location.origin + "/node/no-driver-request",
           type: "GET",
@@ -51,13 +51,13 @@
             console.log("Reservation Get Error");
           },
           success: function (data, textStatus, jqxhr) {
-            if (data.length != 0) MoveToNew(data);
+            if (data.length != 0) moveToNew(data);
             7;
           },
         });
       }
 
-      function MoveToNew(data) {
+      function moveToNew(data) {
         top.args["reqData"] = data[0];
         console.log("Move to new-alarm");
         window.location.href = "new-alarm.html";

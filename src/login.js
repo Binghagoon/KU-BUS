@@ -3,10 +3,10 @@ var Position = {
   STUDENT: 1,
   DRIVER: 2,
   ADMIN: 3,
-  ETC: 4,
+  etc: 4,
 };
 
-function PageChange(position) {
+function pageChange(position) {
   //position = {id: String, name: String, no: Int}
   if (position["name"] == "DRIVER") {
   } else if (position["name"] == "STUDENT") {
@@ -34,7 +34,7 @@ function IDSubmit(id, pw) {
         alert("failed");
       },
       success: function (data, status, xhr) {
-        PageChange(data);
+        pageChange(data);
       },
     });
   } else {
@@ -53,18 +53,18 @@ function IDSubmit(id, pw) {
       debugging: "true",
     };
     var val = isStudent ? student : driver;
-    PageChange(val);
+    pageChange(val);
   }
   /*
     if(id == "Driver"){
-        PageChange(Position.DRIVER);
+        pageChange(Position.DRIVER);
     } else if (id=="Student"){
-        PageChange(Position.STUDENT);
+        pageChange(Position.STUDENT);
     }
     */
   //debugger;
 }
 
 function IDFind() {}
-function SignUp() {}
-function Etc() {}
+function signUp() {}
+function etc() {}
