@@ -26,11 +26,46 @@
     <script src="../src/marker.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
     <script src="../src/navigator.js"></script>
+    <script src="../src/location-trace.js"></script>
+    <script>
+      var args, debugging;
+      var one = 1;
+      var cannotGetPositionError = (more) => {
+        alert("현재 위치를 가져올 수 없습니다." + more ? more : "");
+      };
+      var count = 1;
+
+      queryDataLoad();
+      locationCheck();
+      if (!!navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          locationTrace,
+          cannotGetPositionError
+        );
+      } else {
+        alert("현재 위치를 가져올 수 없습니다.");
+      }
+      //$(window).on('unload', locationDelete);
+      window.onbeforeunload = locationDelete;
+
+      function queryDataLoad() {
+        console.log("Get data with query.");
+        args = getQuery(); //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
+
+        args["stat"] = "reserving";
+        debugging = args["debugging"] === "true";
+        //if(!args)
+      }
+      function getQuery() {
+        var sp = new URLSearchParams(window.location.search);
+        return Object.fromEntries(sp);
+      }
+    </script>
     <script>
       var stat;
       var role;
-      var ButtonJq;
-      var PrefixJq;
+      var buttonJq;
+      var prefixJq;
       var korean = {
         from: "출발지",
         to: "도착지",
@@ -39,8 +74,8 @@
       var statnum = 0;
 
       try {
-        stat = top.args["stat"];
-        role = top.args["role"];
+        stat = args["stat"];
+        role = args["role"];
       } catch (e) {
         console.log(e);
         stat = "reserving";
@@ -48,59 +83,59 @@
       }
 
       $(document).ready(function () {
-        ButtonJq = $("#next");
-        PrefixJq = $("#prefix");
-        $("unuse#NextButton").on("click", function () {
-          top.args["from"] = from;
-          top.args["to"] = to;
+        buttonJq = $("#next");
+        prefixJq = $("#prefix");
+        $("unuse#next-button").on("click", function () {
+          args["from"] = from;
+          args["to"] = to;
           console.log("Move to call-reservation");
           window.location.href = "call-reservation.html";
         });
         $("#next").click(function () {
           var thisJq = $(this);
           if (thisJq.hasClass("on")) {
-            ClickedMarkerDelete();
-            NextButtonSwitch(false);
-            NextStat();
-            PrefixModify();
+            clickedMarkerDelete();
+            nextButtonSwitch(false);
+            nextStat();
+            prefixModify();
           } else {
-            alert(korean[OrderStat[statnum]] + "를 선택해주십시오");
+            alert(korean[orderStat[statnum]] + "를 선택해주십시오");
           }
           if (statnum == 2) {
-            GotoCallReservation();
+            goToCallReservation();
           }
         });
 
-        StartMap();
+        startMap();
         if (stat == "reserving") {
-          RecordPositionGet();
+          recordPositionGet();
         } else if (stat == "wating") {
-          TraceAnother(top.args["reqData"]["id"], "DRIVER");
-          TraceAnother(top.args["id"], "STUDENT");
+          traceAnother(args["reqData"]["id"], "DRIVER");
+          traceAnother(args["id"], "STUDENT");
           $("#map-start-or-dest").hide();
           $("#calling-car").removeAttr("hidden");
           var s = $("#calling-car")
             .html()
-            .replace("driverAddress", top.args["reqData"]["mp"]);
+            .replace("driverAddress", args["reqData"]["mp"]);
           $("#calling-car").html(s);
         }
       });
 
-      function NextButtonSwitch(isOn) {
+      function nextButtonSwitch(isOn) {
         if (isOn) {
-          ButtonJq.removeClass("off");
-          ButtonJq.addClass("on");
+          buttonJq.removeClass("off");
+          buttonJq.addClass("on");
         } else {
-          ButtonJq.removeClass("on");
-          ButtonJq.addClass("off");
+          buttonJq.removeClass("on");
+          buttonJq.addClass("off");
         }
       }
 
-      function PrefixModify() {
-        PrefixJq.html(korean[orderStat[statnum]]);
+      function prefixModify() {
+        prefixJq.html(korean[orderStat[statnum]]);
       }
 
-      function GotoCallReservation() {
+      function goToCallReservation() {
         var query = { fromName: from.name, toName: to.name };
         var querystr = new URLSearchParams(query).toString();
         console.log("Move to call-reservation");
@@ -129,7 +164,7 @@
       <button id="search"><i class="fas fa-search"></i></button>
     </div>
 
-    <div id="map"></div>
+    <div id="map" style="height: 80%"></div>
     <button id="next" class="off front">
       Next
       <img id="arrow" src="../korea-univ-logo/Image/left arrow.png" />
