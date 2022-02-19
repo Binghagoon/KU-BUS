@@ -18,34 +18,36 @@
     ></script>
     <script src="../src/jquery.js"></script>
     <script src="../src/map.js"></script>
+    <script src="../src/marker.js"></script>
     <script src="../src/location.js"></script>
     <script>
+      let clicked = 0;
       $(document).ready(function () {
         StartMap(function () {
           let driverID = 1;
           let studentID = 2;
           try {
-            let driverLoc = new Location(driverID, function () {
-              let driverMarker = CreateMarker(null, driverLoc.pos);
-              driverLoc.awakeInterval(function (pos) {
+            let driverLoc = new Location(driverID, function (loc) {
+              let driverMarker = CreateMarker(StarMarkerSrc, loc.pos);
+              loc.awakeInterval(function (pos) {
                 MarkerLocationChange(driverMarker, {
-                  latitude: pos.lat,
+                  latitude: pos.lat + 0.0001 * clicked,
                   longitude: pos.lng,
                 });
               });
             });
 
-            let studentLoc = new Location(studentID, function () {
-              let studentMarker = CreateMarker(null, studentLoc.pos);
-              studentLoc.awakeInterval(function (pos) {
+            let studentLoc = new Location(studentID, function (loc) {
+              let studentMarker = CreateMarker(StarMarkerSrc, loc.pos);
+              loc.awakeInterval(function (pos) {
                 MarkerLocationChange(studentMarker, {
-                  latitude: pos.lat,
+                  latitude: pos.lat - 0.0001 * clicked,
                   longitude: pos.lng,
                 });
               });
             });
           } catch (e) {
-            console.log(e.stack());
+            console.log(e.stack);
           }
         });
         $("#cancel-reservation").on("click", function () {
@@ -62,6 +64,10 @@
               window.location.href = "confirm-reservation";
             },
           });
+        });
+        $("send-message").on("click",function (e) {
+          //e.preventDefault();
+          clicked = clicked + 1;
         });
       });
     </script>
