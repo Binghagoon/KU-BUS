@@ -1,3 +1,7 @@
+/**
+ * GET /node/my-location-select
+ * @returns 
+ */
 function locationCheck() {
   //TBD
   var isValueExist;
@@ -36,6 +40,10 @@ async function getPositionById(id) {
   });
   return r;
 }
+/**
+ * POST /node/my-location-insert
+ * @param {} position location of 
+ */
 function locationTrace(position) {
   var coord = position.coords;
   $.ajax({
@@ -54,10 +62,10 @@ function locationTrace(position) {
     },
   });
 }
-function checkGeolocation() {
+function checkGeolocation(callback) {
   if (!!navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      locationUpdate,
+      typeof(callback) === "function" ? callback : locationUpdate,
       cannotGetPositionError
     );
   } else {

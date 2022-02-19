@@ -37,14 +37,7 @@
 
       queryDataLoad();
       locationCheck();
-      if (!!navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          locationTrace,
-          cannotGetPositionError
-        );
-      } else {
-        alert("현재 브라우저에서 위치정보를 지원하지 않습니다.");
-      }
+      checkGeolocation(locationTrace);
       //$(window).on('unload', LocationDelete);
       window.onbeforeunload = LocationDelete;
 
