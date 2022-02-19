@@ -83,11 +83,14 @@ class Location {
     });
     return location;
   }
-  constructor(id, callback) {
-    this.lat = 0;
-    this.lng = 0;
+  constructor(id, callback) { 
+    //Anam station
+    let lat = 37.586232954034564;
+    let lng = 127.02928291766814;
+    this.lat = lat;
+    this.lng = lng;
     this.id = id;
-    callback();
+    callback(this);
   }
 
   get pos() {
@@ -105,17 +108,21 @@ class Location {
   }
   /** callback argument is pos */
   awakeInterval(timed = 1000, callback) {
-    this.interval = setInterval(function () {
-      Location.getPosViaClient().then(function (pos) {
-        Location.serverPosUpdate(pos, this.id);
+    let loc = this;
+    this.intervalID = setInterval(async function () {
+      let pos = await Location.getPositionViaClient();
+      Location.serverPosUpdate(pos, loc.id);
+      try{
         callback(pos);
-      });
+      } catch(e){
+        console.log(e.stack);
+      }
     }, timed);
   }
 
   killInterval() {
     try {
-      clearInterval(this.interval);
+      clearInterval(this.intervalID);
     } catch (e) {
       console.log(e);
     }
