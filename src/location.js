@@ -1,4 +1,4 @@
-// this file might need to be import JQuery file. otherwise it works not fine.
+/** this file might need to be import JQuery file. otherwise it works not fine. */
 class Location {    //pos returns {lat:Number,lng:Number}, position returns {latitude:Number, longitude:Number}
   static async checkIsValueExist(id) {    //To be merged on getPosViaServer()
     let isValueExist;
@@ -28,11 +28,11 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
 
   static async getPositionViaClient(callback){
     let lat,lng;
-    this.getCurPosPromise.then(function(position) {
+    await this.getCurPosPromise.then(function(position) {
       let coords = position.coords;
       lat = coords.latitude;
       lng = coords.longitude;
-      callback(position);
+      callback(coords);
     }).catch(function(err) {
       console.log("Could not get Position via client");
     });
@@ -60,7 +60,7 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     });
   }
 
-  static async getPosViaServer(id){
+  static async getPosViaServer(id,callback){
     let location = {};
     await $.ajax({
       type: "GET",
@@ -71,15 +71,15 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
       dataType: "JSON",
       success: function (response) {
         location = {
-          lat: responce.latitude,
+          lat: response.latitude,
           lng: response.longitude,
         };
+        callback(location);
       },
     });
     return location;
   }
-
-  constructor(lat, lng, intervalEnable, id) {
+  constructor(intervalEnable, id, initializeCallback, eventCallback) {
     try {
       function chackInput(val){
         if(parseFloat(val) == NaN)
@@ -91,7 +91,15 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
       this.lng = lng;
       this.id = id;
       if(intervalEnable){
-
+        Location.getPositionViaClient(function(position){
+          this.lat = position.latitude;
+          this.lng = position.longitude;
+          initializeCallback();
+        });
+        this.awakeInterval(1000, eventCallback);
+      }
+      else{
+        initializeCallback();
       }
     } catch (e) {
       console.log(e);
@@ -113,10 +121,11 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     };
   }
 
-  awakeInterval(timed = 1000){
+  awakeInterval(timed = 1000, callback){
     this.interval = setInterval(function(){
       Location.getPosViaClient().then(function (pos) {
         Location.serverPosUpdate(pos,this.id);
+        callback(pos);
       });
     }, timed);
   }
@@ -146,5 +155,17 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
       },
       complete: function (jqXHR, textStatus) {},
     });
+  }
+}
+class Pos{
+  constructor(lat,lng){
+    this.lat = lat;
+    this.lng = lng;
+  }
+  get pos() {
+    return {
+      lat:this.lat,
+      lng:this.lng,
+    };
   }
 }
