@@ -4,42 +4,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-  </head>
-  <style></style>
-  <script
-    type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
-  ></script>
-  <script src="../src/jquery.js"></script>
-  <script src="../src/map.js"></script>
-  <script>
-    $(document).ready(function () {
-      StartMap();
-      $("#cancel-reservation").on("click", function () {
-        $.ajax({
-          url: window.location.origin + "/reservation-delete",
-          data: {
-            id: top.args["id"],
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Error");
-          },
-          success: function (data, textStatus, jqXHR) {
-            console.log("Move to ConfirmReservation");
-            window.location.href = "confirm-reservation";
-          },
+    <link
+      media="screen"
+      rel="stylesheet"
+      type="text/css"
+      href="css/call-reservation.css"
+    />
+
+    <style></style>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
+    ></script>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/map.js"></script>
+    <script src="../src/location.js"></script>
+    <script>
+      $(document).ready(function () {
+        StartMap(function () {
+          let driverID = 1;
+          let studentID = 2;
+          try {
+            let driverLoc = new Location(driverID, function () {
+              let driverMarker = CreateMarker(null, driverLoc.pos);
+              driverLoc.awakeInterval(function (pos) {
+                MarkerLocationChange(driverMarker, {
+                  latitude: pos.lat,
+                  longitude: pos.lng,
+                });
+              });
+            });
+
+            let studentLoc = new Location(studentID, function () {
+              let studentMarker = CreateMarker(null, studentLoc.pos);
+              studentLoc.awakeInterval(function (pos) {
+                MarkerLocationChange(studentMarker, {
+                  latitude: pos.lat,
+                  longitude: pos.lng,
+                });
+              });
+            });
+          } catch (e) {
+            console.log(e.stack());
+          }
+        });
+        $("#cancel-reservation").on("click", function () {
+          $.ajax({
+            url: window.location.origin + "/reservation-delete",
+            data: {
+              id: top.args["id"],
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.log("Error");
+            },
+            success: function (data, textStatus, jqXHR) {
+              console.log("Move to ConfirmReservation");
+              window.location.href = "confirm-reservation";
+            },
+          });
         });
       });
-    });
-  </script>
-  <link rel="stylesheet" type="text/css" href="../css/style.css" />
-  <link rel="stylesheet" type="text/css" href="css/assignment-complete.css" />
-  <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
-  <script src="../src/navigator.js"></script>
+    </script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/assignment-complete.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <script src="../src/navigator.js"></script>
+  </head>
   <body>
+    <div id="map"></div>
     <div id="after-assigning-driver">
-      <div id="map"></div>
-
       <div id="real-time-information">
         <div id="minute-left">
           <h4>기사님께서 이동 중이십니다. (%분 후 도착)</h4>

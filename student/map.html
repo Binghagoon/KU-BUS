@@ -29,7 +29,6 @@
     <script src="../src/url-parameter.js"></script>
     <script src="../src/location.js"></script>
     <script>
-      var stat;
       var role;
       var ButtonJq;
       var PrefixJq;
@@ -42,10 +41,8 @@
 
       let arg = queryToObject();
       if($(arg).empty()){
-        stat = "waiting"
         role = "STUDENT"
       }else{
-        stat = arg.stat;
         role = arg.role;
       }
 
@@ -75,36 +72,7 @@
         });
 
         StartMap(function(){ 
-          if (stat == "reserving") {
             RecordPositionGet();
-          } else if (stat == "waiting") {
-            let driverID = 1;
-            let studentID = 2;
-            try{
-              let driverLoc = new Location(driverID, function(){
-                let driverMarker = CreateMarker(null, driverLoc.pos);
-                driverLoc.awakeInterval(function(pos){
-                  MarkerLocationChange(driverMarker, {latitude:pos.lat, longitude:pos.lng});
-                });
-              });
-
-              let studentLoc = new Location(studentID, function(){
-                let studentMarker = CreateMarker(null, studentLoc.pos);
-                studentLoc.awakeInterval(function(pos){
-                  MarkerLocationChange(studentMarker, {latitude:pos.lat, longitude:pos.lng});
-                });
-              });
-            }catch(e){
-              console.log(e.stack());
-            }
-            // need to be tested.
-            $("#map-start-or-dest").hide();
-            $("#calling-car").removeAttr("hidden");
-            var s = $("#calling-car")
-              .html()
-              .replace("driverAddress", driverMP);
-            $("#calling-car").html(s);
-          }
         });
       });
 
