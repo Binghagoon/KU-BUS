@@ -19,3 +19,16 @@ function updateURLParameter(url, param, paramVal) {
   var rows_txt = temp + "" + param + "=" + paramVal;
   return baseURL + "?" + newAdditionalURL + rows_txt;
 }
+function queryToObject(query){
+  let sp;
+  let ob = {};
+  if(query == undefined){
+    sp = new URLSearchParams(window.location.search);
+  } else{
+    sp = new URLSearchParams(query);
+  }
+  for (const pair of sp.entries()) {
+    ob[pair[0]]=pair[1];
+  }
+  return ob;
+}
