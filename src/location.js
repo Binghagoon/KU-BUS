@@ -1,6 +1,8 @@
 /** this file might need to be import JQuery file. otherwise it works not fine. */
-class Location {    //pos returns {lat:Number,lng:Number}, position returns {latitude:Number, longitude:Number}
-  static async checkIsValueExist(id) {    //To be merged on getPosViaServer()
+class Location {
+  //pos returns {lat:Number,lng:Number}, position returns {latitude:Number, longitude:Number}
+  static async checkIsValueExist(id) {
+    //To be merged on getPosViaServer()
     let isValueExist;
     await $.ajax({
       url: window.location.origin + "/node/my-location-select",
@@ -13,7 +15,7 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
       },
       success: function (data, status, xhr) {
         if ($.isEmptyObject(data)) {
-          isValueExist = false;   //TBD
+          isValueExist = false; //TBD
         } else {
           isValueExist = true;
         }
@@ -26,23 +28,25 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 
-  static async getPositionViaClient(callback){
-    let lat,lng;
-    await this.getCurPosPromise.then(function(position) {
-      let coords = position.coords;
-      lat = coords.latitude;
-      lng = coords.longitude;
-      callback(coords);
-    }).catch(function(err) {
-      console.log("Could not get Position via client");
-    });
+  static async getPositionViaClient(callback) {
+    let lat, lng;
+    await this.getCurPosPromise
+      .then(function (position) {
+        let coords = position.coords;
+        lat = coords.latitude;
+        lng = coords.longitude;
+        callback(coords);
+      })
+      .catch(function (err) {
+        console.log("Could not get Position via client");
+      });
     return {
-      lat:lat,
-      lng:lng,
+      lat: lat,
+      lng: lng,
     };
   }
-  
-  static async serverPosUpdate(pos,id,successCallback){
+
+  static async serverPosUpdate(pos, id, successCallback) {
     $.ajax({
       url: window.location.origin + "/node/my-location-update",
       type: "POST",
@@ -60,13 +64,13 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     });
   }
 
-  static async getPosViaServer(id,callback){
+  static async getPosViaServer(id, callback) {
     let location = {};
     await $.ajax({
       type: "GET",
       url: window.location.origin + "/node/get-location",
       data: {
-        "id": id,
+        id: id,
       },
       dataType: "JSON",
       success: function (response) {
@@ -79,32 +83,11 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     });
     return location;
   }
-  constructor(intervalEnable, id, initializeCallback, eventCallback) {
-    try {
-      function chackInput(val){
-        if(parseFloat(val) == NaN)
-          throw new Error("input is not float!");
-      }
-      chackInput(lat);
-      chackInput(lng);
-      this.lat = lat;
-      this.lng = lng;
-      this.id = id;
-      if(intervalEnable){
-        Location.getPositionViaClient(function(position){
-          this.lat = position.latitude;
-          this.lng = position.longitude;
-          initializeCallback();
-        });
-        this.awakeInterval(1000, eventCallback);
-      }
-      else{
-        initializeCallback();
-      }
-    } catch (e) {
-      console.log(e);
-      alert(e.massage);
-    }
+  constructor(id, callback) {
+    this.lat = 0;
+    this.lng = 0;
+    this.id = id;
+    callback();
   }
 
   get pos() {
@@ -114,30 +97,30 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     };
   }
 
-  get position(){
+  get position() {
     return {
       latitude: this.lat,
       longitude: this.lng,
     };
   }
-
-  awakeInterval(timed = 1000, callback){
-    this.interval = setInterval(function(){
+  /** callback argument is pos */
+  awakeInterval(timed = 1000, callback) {
+    this.interval = setInterval(function () {
       Location.getPosViaClient().then(function (pos) {
-        Location.serverPosUpdate(pos,this.id);
+        Location.serverPosUpdate(pos, this.id);
         callback(pos);
       });
     }, timed);
   }
 
-  killInterval(){
-    try{
-      clearInterval(this.interval)
-    } catch(e){
+  killInterval() {
+    try {
+      clearInterval(this.interval);
+    } catch (e) {
       console.log(e);
     }
   }
-  delete(){
+  delete() {
     $.ajax({
       url: window.location.origin + "/node/my-location-delete",
       type: "POST",
@@ -157,15 +140,15 @@ class Location {    //pos returns {lat:Number,lng:Number}, position returns {lat
     });
   }
 }
-class Pos{
-  constructor(lat,lng){
+class Pos {
+  constructor(lat, lng) {
     this.lat = lat;
     this.lng = lng;
   }
   get pos() {
     return {
-      lat:this.lat,
-      lng:this.lng,
+      lat: this.lat,
+      lng: this.lng,
     };
   }
 }
