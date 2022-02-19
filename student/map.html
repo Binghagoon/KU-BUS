@@ -26,6 +26,8 @@
     <script src="../src/marker.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
     <script src="../src/navigator.js"></script>
+    <script src="../src/url-parameter.js"></script>
+    <script src="../src/location.js"></script>
     <script>
       var stat;
       var role;
@@ -38,14 +40,15 @@
       var orderStat = ["from", "to", "reserve"];
       var statnum = 0;
 
-      try {
-        stat = top.args["stat"];
-        role = top.args["role"];
-      } catch (e) {
-        console.log(e);
-        stat = "reserving";
-        console.log("set stat as reserving.");
+      let arg = queryToObject();
+      if($(arg).empty()){
+        stat = "waiting"
+        role = "STUDENT"
+      }else{
+        stat = arg.stat;
+        role = arg.role;
       }
+
 
       $(document).ready(function () {
         ButtonJq = $("#next");
@@ -71,19 +74,38 @@
           }
         });
 
-        StartMap();
-        if (stat == "reserving") {
-          RecordPositionGet();
-        } else if (stat == "wating") {
-          TraceAnother(top.args["reqData"]["id"], "DRIVER");
-          TraceAnother(top.args["id"], "STUDENT");
-          $("#map-start-or-dest").hide();
-          $("#calling-car").removeAttr("hidden");
-          var s = $("#calling-car")
-            .html()
-            .replace("driverAddress", top.args["reqData"]["mp"]);
-          $("#calling-car").html(s);
-        }
+        StartMap(function(){ 
+          if (stat == "reserving") {
+            RecordPositionGet();
+          } else if (stat == "waiting") {
+            let driverID = 1;
+            let studentID = 2;
+            try{
+              let driverLoc = new Location(driverID, function(){
+                let driverMarker = CreateMarker(null, driverLoc.pos);
+                driverLoc.awakeInterval(function(pos){
+                  MarkerLocationChange(driverMarker, {latitude:pos.lat, longitude:pos.lng});
+                });
+              });
+
+              let studentLoc = new Location(studentID, function(){
+                let studentMarker = CreateMarker(null, studentLoc.pos);
+                studentLoc.awakeInterval(function(pos){
+                  MarkerLocationChange(studentMarker, {latitude:pos.lat, longitude:pos.lng});
+                });
+              });
+            }catch(e){
+              console.log(e.stack());
+            }
+            // need to be tested.
+            $("#map-start-or-dest").hide();
+            $("#calling-car").removeAttr("hidden");
+            var s = $("#calling-car")
+              .html()
+              .replace("driverAddress", driverMP);
+            $("#calling-car").html(s);
+          }
+        });
       });
 
       function NextButtonSwitch(isOn) {
