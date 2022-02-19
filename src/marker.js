@@ -1,5 +1,3 @@
-var markers = [];
-
 var UserMarker = {
   DRIVER: null,
   STUDENT: null,
