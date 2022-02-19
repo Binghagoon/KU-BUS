@@ -1,3 +1,7 @@
+/**
+ * GET /node/my-location-select
+ * @returns 
+ */
 function locationCheck() {
   //TBD
   var isValueExist;
@@ -36,6 +40,10 @@ async function getPositionById(id) {
   });
   return r;
 }
+/**
+ * POST /node/my-location-insert
+ * @param {} position location of 
+ */
 function locationTrace(position) {
   var coord = position.coords;
   $.ajax({
@@ -54,10 +62,15 @@ function locationTrace(position) {
     },
   });
 }
-function checkGeolocation() {
-  navigator.geolocation.getCurrentPosition(locationUpdate, () =>
-    alert("현재 위치를 가져올 수 없습니다.")
-  );
+function checkGeolocation(callback) {
+  if (!!navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      typeof(callback) === "function" ? callback : locationUpdate,
+      cannotGetPositionError
+    );
+  } else {
+    alert("현재 브라우저에서 위치정보를 지원하지 않습니다.");
+  }
 }
 function locationUpdate(position) {
   var coords = position.coords;
@@ -96,3 +109,21 @@ function locationDelete() {
     complete: function (jqXHR, textStatus) {},
   });
 }
+
+function cannotGetPositionError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      alert("위치정보 사용 요청이 거부되었습니다.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("사용할 수 없는 위치정보입니다.");
+      break;
+    case error.TIMEOUT:
+      alert("위치정보를 가져오는 시간을 초과했습니다.");
+      break;
+    case error.UNKNOWN_ERROR:
+    default:
+      alert("확인 불가능 오류입니다. 관리자에게 문의해주세요.");
+      break;
+  }
+};
