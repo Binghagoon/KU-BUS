@@ -48,12 +48,6 @@
 
 
       $(document).ready(function () {
-        $("unuse#next-button").on("click", function () {
-          args["from"] = from;
-          args["to"] = to;
-          console.log("Move to call-reservation");
-          window.location.href = "call-reservation.html";
-        });
         $("#next").click(function () {
           var thisJq = $(this);
           if (thisJq.hasClass("on")) {
