@@ -1,5 +1,5 @@
 var recordList;
-var map;
+let map;
 
 var mylat, mylng;
 var from = {
@@ -113,9 +113,7 @@ function mapPinWithRecord(data) {
   }
 
   recordList.forEach(function (value, index) {
-    let marker = MarkerCreate(value, "STAR");
-    markers.push(marker);
-    marker.setMap(map);
+    let marker = markerCreate(value, "STAR", value.name, map);
     kakao.maps.event.addListener(marker, "click", () =>
       markerClickEvent(value, marker, imageSize)
     );

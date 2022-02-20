@@ -5,33 +5,33 @@ var userMarker = {
 var starMarkerSrc =
   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 var imageSize = new kakao.maps.Size(24, 35);
-var orderStat = ["from", "to", "reserve"];
-var statnum = 0;
+//var orderStat = ["from", "to", "reserve"];
+//var statnum = 0;
 var imgChangedMarker = null;
 var deletedMarker = [];
 var openedIwcontent = null;
 
-function markerCreate(position, who) {
+function markerCreate(position, who, title, map) {
   const imgconvert = {
     DRIVER: window.location.origin + "/src/img/car-pin.png",
     STUDENT: window.location.origin + "/src/img/human-pin.png",
-    STAR: StarMarkerSrc,
+    STAR: starMarkerSrc,
     null: null,
     undefined: null,
   };
-  let pos = {};
-  pos["lat"] = position["latitude"];
-  pos["lng"] = position["longitude"];
+  let pos = position;
 
   // img : String value : Object
-  var imageSize = new kakao.maps.Size(24, 35);
-  var markerImage = new kakao.maps.MarkerImage(imgconvert[who], imageSize);
-  return new kakao.maps.Marker({
+  let imageSize = new kakao.maps.Size(24, 35);
+  let markerImage = new kakao.maps.MarkerImage(imgconvert[who], imageSize);
+  let marker = new kakao.maps.Marker({
     map: map, // 마커를 표시할 지도
     position: new kakao.maps.LatLng(pos.lat, pos.lng), // 마커를 표시할 위치
     title: title==undefined ? who: title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
     image: markerImage, // 마커 이미지
   });
+  marker.setMap(map);
+  return marker;
 }
 
 function markerLocationChange(marker, position) {

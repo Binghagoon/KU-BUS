@@ -29,27 +29,25 @@
     <script src="../src/url-parameter.js"></script>
     <script src="../src/location.js"></script>
     <script>
-      var role;
-      var buttonJq;
-      var prefixJq;
-      var korean = {
+      const korean = {
         from: "출발지",
         to: "도착지",
       };
-      var orderStat = ["from", "to", "reserve"];
-      var statnum = 0;
+      let orderStat = ["from", "to", "reserve"];
+      let statnum = 0;
 
       let arg = queryToObject();
-      if($(arg).empty()){
-        role = "STUDENT"
+      let debugging, seatnum;
+      if($(arg).empty()){   //default setting
+        debugging = true;
+        seatnum = 0;
       }else{
-        role = arg.role;
+        debugging = arg.debugging;
+        seatnum = arg.seatnum;
       }
 
 
       $(document).ready(function () {
-        buttonJq = $("#next");
-        prefixJq = $("#prefix");
         $("unuse#next-button").on("click", function () {
           args["from"] = from;
           args["to"] = to;
@@ -78,16 +76,16 @@
 
       function nextButtonSwitch(isOn) {
         if (isOn) {
-          buttonJq.removeClass("off");
-          buttonJq.addClass("on");
+          $("#next").removeClass("off");
+          $("#next").addClass("on");
         } else {
-          buttonJq.removeClass("on");
-          buttonJq.addClass("off");
+          $("#next").removeClass("on");
+          $("#next").addClass("off");
         }
       }
 
       function prefixModify() {
-        prefixJq.html(korean[orderStat[statnum]]);
+        $("#prefix").html(korean[orderStat[statnum]]);
       }
 
       function goToCallReservation() {
