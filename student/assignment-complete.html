@@ -29,7 +29,7 @@
           try {
             let driverLoc = new Location(driverID, function (loc) {
               let driverMarker = CreateMarker(StarMarkerSrc, loc.pos);
-              loc.awakeInterval(function (pos) {
+              loc.awakeInterval(1000, function (pos) {
                 MarkerLocationChange(driverMarker, {
                   latitude: pos.lat + 0.0001 * clicked,
                   longitude: pos.lng,
@@ -39,7 +39,7 @@
 
             let studentLoc = new Location(studentID, function (loc) {
               let studentMarker = CreateMarker(StarMarkerSrc, loc.pos);
-              loc.awakeInterval(function (pos) {
+              loc.awakeInterval(1000, function (pos) {
                 MarkerLocationChange(studentMarker, {
                   latitude: pos.lat - 0.0001 * clicked,
                   longitude: pos.lng,
@@ -65,7 +65,7 @@
             },
           });
         });
-        $("send-message").on("click",function (e) {
+        $("#send-message").on("click",function (e) {
           //e.preventDefault();
           clicked = clicked + 1;
         });

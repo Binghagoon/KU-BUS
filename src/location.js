@@ -35,9 +35,12 @@ class Location {
         let coords = position.coords;
         lat = coords.latitude;
         lng = coords.longitude;
-        callback(coords);
+        if(callback != undefined){
+          callback(coords);
+        }
       })
       .catch(function (err) {
+        console.log(e);
         console.log("Could not get Position via client");
       });
     return {
@@ -113,7 +116,9 @@ class Location {
       let pos = await Location.getPositionViaClient();
       Location.serverPosUpdate(pos, loc.id);
       try{
-        callback(pos);
+        if(callback != undefined){
+          callback(pos);
+        }
       } catch(e){
         console.log(e.stack);
       }
