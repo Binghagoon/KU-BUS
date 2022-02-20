@@ -19,22 +19,6 @@ function markerCreate(position, who) {
     null: null,
     undefined: null,
   };
-  var marker;
-  var v = {};
-  v["lat"] = position["latitude"];
-  v["lng"] = position["longitude"];
-
-  marker = createMarker(imgconvert[who], v, null);
-  return marker;
-}
-
-function markerLocationChange(marker, position) {
-  marker.setPosition(
-    new kakao.maps.LatLng(position["latitude"], position["longitude"])
-  );
-}
-
-function createMarker(imgSrc, value, event) {
   let pos = {};
   pos["lat"] = position["latitude"];
   pos["lng"] = position["longitude"];
@@ -48,6 +32,15 @@ function createMarker(imgSrc, value, event) {
     title: title==undefined ? who: title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
     image: markerImage, // 마커 이미지
   });
+}
+
+function markerLocationChange(marker, position) {
+  marker.setPosition(
+    new kakao.maps.LatLng(position["latitude"], position["longitude"])
+  );
+}
+
+function createMarker(imgSrc, value, event) {
 }
 
 function clickedMarkerDelete() {
