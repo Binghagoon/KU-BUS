@@ -5,6 +5,12 @@
     <script src="../src/jquery.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
+      let firstPage = {
+        undefined: "/student/first-page.html",
+        STUDENT: "/student/first-page.html",
+        DRIVER: "/driver/map.html",
+        ADMINISTRATOR: "/administrator/first-page.html",
+      };
       var params = new URLSearchParams(window.location.search);
       var token = params.get("access_token");
       var debugging = false;
@@ -73,7 +79,7 @@
         sp.append("id", responce["id"]);
 
         window.location.href =
-          window.location.origin + "/frame.html?" + sp.toString();
+          window.location.origin + firstPage[role] + "?" + sp.toString();
       }
     </script>
   </head>
