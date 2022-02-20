@@ -26,33 +26,9 @@
     <script src="../src/marker.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
     <script src="../src/navigator.js"></script>
-    <script src="../src/location-trace.js"></script>
+    <script src="../src/url-parameter.js"></script>
+    <script src="../src/location.js"></script>
     <script>
-      var args, debugging;
-      var one = 1;
-      var count = 1;
-
-      queryDataLoad();
-      locationCheck();
-      checkGeolocation(locationTrace);
-      //$(window).on('unload', locationDelete);
-      window.onbeforeunload = locationDelete;
-
-      function queryDataLoad() {
-        console.log("Get data with query.");
-        args = getQuery(); //args["role"] = "STUDENT"||"DRIVER" args["debugging"], args["id"], args["stat"]
-
-        args["stat"] = "reserving";
-        debugging = args["debugging"] === "true";
-        //if(!args)
-      }
-      function getQuery() {
-        var sp = new URLSearchParams(window.location.search);
-        return Object.fromEntries(sp);
-      }
-    </script>
-    <script>
-      var stat;
       var role;
       var buttonJq;
       var prefixJq;
@@ -63,14 +39,13 @@
       var orderStat = ["from", "to", "reserve"];
       var statnum = 0;
 
-      try {
-        stat = args["stat"];
-        role = args["role"];
-      } catch (e) {
-        console.log(e);
-        stat = "reserving";
-        console.log("set stat as reserving.");
+      let arg = queryToObject();
+      if($(arg).empty()){
+        role = "STUDENT"
+      }else{
+        role = arg.role;
       }
+
 
       $(document).ready(function () {
         buttonJq = $("#next");
@@ -96,19 +71,9 @@
           }
         });
 
-        startMap();
-        if (stat == "reserving") {
-          recordPositionGet();
-        } else if (stat == "wating") {
-          traceAnother(args["reqData"]["id"], "DRIVER");
-          traceAnother(args["id"], "STUDENT");
-          $("#map-start-or-dest").hide();
-          $("#calling-car").removeAttr("hidden");
-          var s = $("#calling-car")
-            .html()
-            .replace("driverAddress", args["reqData"]["mp"]);
-          $("#calling-car").html(s);
-        }
+        StartMap(function(){ 
+            RecordPositionGet();
+        });
       });
 
       function nextButtonSwitch(isOn) {
@@ -157,7 +122,7 @@
     <div id="map" style="height: 80%"></div>
     <button id="next" class="off front">
       Next
-      <img id="arrow" src="../korea-univ-logo/Image/left arrow.png" />
+      <img id="arrow" src="../korea-univ-logo/image/right-arrow.png" />
     </button>
   </body>
 </html>

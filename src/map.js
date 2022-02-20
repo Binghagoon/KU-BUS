@@ -113,7 +113,7 @@ function mapPinWithRecord(data) {
   }
 
   recordList.forEach(function (value, index) {
-    var marker = createMarker(StarMarkerSrc, value, null);
+    let marker = MarkerCreate(value, "STAR");
     markers.push(marker);
     marker.setMap(map);
     kakao.maps.event.addListener(marker, "click", () =>
