@@ -15,7 +15,7 @@
     <script src="../src/jquery.js"></script>
     <script>
       $(document).ready(function () {
-        var query = Object.fromEntries(
+        let query = Object.fromEntries(
           new URLSearchParams(window.location.search)
         );
         //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
@@ -34,9 +34,9 @@
               url: window.location.origin + "/node/reservation-post",
               type: "POST",
               data: {
-                now_place_no: from["no"],
-                to_place_no: to["no"],
-                id: top.args["id"],
+                now_place_no: query.fromNo,
+                to_place_no: query.toNo,
+                id: query.id,
               },
               error: function (jqXHR, textStatus, errorThrown) {
                 alert("failed");
