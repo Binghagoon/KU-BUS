@@ -41,10 +41,10 @@
 
       $(document).ready(function () {
         $("button#student").click(function () {
-          window.location.href = "../student/first-page.html";
+          window.location.href = "../student/first-page.html" + location.search;
         });
         $("button#driver").click(function () {
-          window.location.href = "../driver/map.html";
+          window.location.href = "../driver/map.html" + location.search;
         });
         $("button#calling").click(function () {
           TestCall();
