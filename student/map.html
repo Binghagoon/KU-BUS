@@ -83,7 +83,7 @@
       }
 
       function goToCallReservation() {
-        var query = { fromName: from.name, fromNo:from.num, toName: to.name, toNo: to.num , id: id};    //id does not work
+        var query = { fromName: from.name, fromNo:from.num, toName: to.name, toNo: to.num , id: arg.id};    //id does not work
         urlChangeWithQuery("call-reservation.html", query);
       }
     </script>
