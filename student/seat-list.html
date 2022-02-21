@@ -21,6 +21,7 @@
     />
     <script src="../src/jquery.js"></script>
     <script src="../src/navigator.js"></script>
+    <script src="../src/url-parameter.js"></script>
     <script>
       var par = {
         three: 3,
@@ -28,8 +29,9 @@
         five: 5,
         six: 6,
       };
-      var seatnum = 0;
-      var pre = null;
+      let seatnum = 0;
+      let pre = null;
+      let query = queryToObject();
       $(document).ready(function () {
         //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
         //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);
@@ -52,32 +54,21 @@
             url.append("seatnum", seatnum);
             url.append("lat", lat);
             url.append("lng", lng);
-            parent
-              .$("iframe")
-              .attr(
-                "src",
-                window.location.origin +
-                  "/student/map.html?" +
-                  url.toString()
-              );
           });*/
           if (seatnum === 0)
           {
             alert("좌석을 선택해주세요.");
             return;
           }
-          var url = new URLSearchParams();
-          url.append("seatnum", seatnum);
-          url.append("lat", 10); // 임시값
-          url.append("lng", 10); // 임시값
-          parent
-            .$("iframe")
-            .attr(
-              "src",
-              window.location.origin +
-                "/student/map.html?" +
-                url.toString()
-            );
+          let lat = 37.586232954034564;
+          let lng = 127.02928291766814;   //Anam Stn.
+          urlChangeWithQuery("map.html",{
+            seatnum: seatnum,
+            lat: lat,
+            lng: lng,
+            id: query.id,
+            debugging: query.debugging,
+          });
         });
       });
 
