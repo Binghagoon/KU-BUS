@@ -32,3 +32,11 @@ function queryToObject(query){
   }
   return ob;
 }
+/** window.location.href = url?object.toQuery */
+function urlChangeWithQuery(url, object){
+  window.location.href = `${url}?${objectToQuery(object)}`;
+}
+
+function objectToQuery(object){
+  return new URLSearchParams(object).toString();
+}
