@@ -1,0 +1,44 @@
+#new-call {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+
+	position: relative;
+	top: 10vh;
+}
+#new-call > h1 {
+	font-size: 20px;
+}
+
+#picture {
+	font-size: 100px;
+	color: #8c0000;
+	margin-bottom: 20px;
+}
+
+#response {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#response > button {
+	width: 72px;
+	height: 36px;
+	border-radius: 7px;
+	border: 1.5px solid #8c0000;
+	margin: 5px;
+	letter-spacing: 1px;
+}
+
+#accept {
+	background-color: #8c0000;
+	color: white;
+}
+
+#reject {
+	background-color: white;
+	color: #8c0000;
+}
