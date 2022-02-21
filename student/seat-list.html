@@ -61,6 +61,23 @@
                   url.toString()
               );
           });*/
+          if (seatnum === 0)
+          {
+            alert("좌석을 선택해주세요.");
+            return;
+          }
+          var url = new URLSearchParams();
+          url.append("seatnum", seatnum);
+          url.append("lat", 10); // 임시값
+          url.append("lng", 10); // 임시값
+          parent
+            .$("iframe")
+            .attr(
+              "src",
+              window.location.origin +
+                "/student/map.html?" +
+                url.toString()
+            );
         });
       });
 
@@ -191,7 +208,7 @@
       </div>
       <div id="selected" hidden>seatnum번 좌석 선택</div>
     </div>
-    <button id="next" class="next" onclick="location.href='map.html'">
+    <button id="next" class="next">
       Next
       <img class="arrow" src="../korea-univ-logo/image/right-arrow.png" />
     </button>
