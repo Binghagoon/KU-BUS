@@ -13,34 +13,7 @@
     />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <script type="text/javascript" src="../src/jquery.js"></script>
-    <script>
-      $(document).ready(function () {
-        UserInformation(
-          "홍길동",
-          "UserImage",
-          "user-department",
-          "UserStudentNumber",
-          "UserPhoneNumber",
-          "User_Email_Address"
-        );
-      });
-
-      function UserInformation(
-        UserName,
-        UserImage,
-        UserDepartment,
-        UserStudentNumber,
-        UserPhoneNumber,
-        UserEmailAddress
-      ) {
-        $("#user-name").prepend(UserName);
-        $("#user-image").append(UserImage);
-        $("#user-department").append(UserDepartment);
-        $("#user-student-number").append(UserStudentNumber);
-        $("#user-student-number").append(UserPhoneNumber);
-        $("#user-email-address").append(UserEmailAddress);
-      }
-    </script>
+    <script src="src/my-page.js" />
   </head>
 
   <body>
