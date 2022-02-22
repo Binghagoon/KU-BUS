@@ -6,17 +6,27 @@ var Position = {
   etc: 4,
 };
 
+const firstPage = {
+  undefined: "/student/first-page.html",
+  STUDENT: "/student/first-page.html",
+  DRIVER: "/driver/map.html",
+  ADMINISTRATOR: "/administrator/first-page.html",
+};
+
 function pageChange(position) {
   //position = {id: String, name: String, no: Int}
   if (position["name"] == "DRIVER") {
   } else if (position["name"] == "STUDENT") {
   }
   position["name"] = position["name"].toUpperCase();
-  var url = updateURLParameter("./frame.html", "role", position["role"]);
+  var url = updateURLParameter(
+    "." + firstPage[position["name"]],
+    "role",
+    position["role"]
+  );
   url = updateURLParameter(url, "id", position["id"]);
   if (position["debugging"] == "true")
     url = updateURLParameter(url, "debugging", position["debugging"]);
-  console.log("Move to Frame");
   window.location.href = url;
 }
 
