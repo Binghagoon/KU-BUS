@@ -50,7 +50,11 @@
       $(document).ready(function () {
         $("#next").click(function () {
           var thisJq = $(this);
-          if (thisJq.hasClass("on")) {
+          if (arg.debugging) {
+            from.name = "TESTFROM";
+            to.name = "TESTTO";
+            goToCallReservation();
+          } else if (thisJq.hasClass("on")) {
             clickedMarkerDelete();
             nextButtonSwitch(false);
             nextStat();
