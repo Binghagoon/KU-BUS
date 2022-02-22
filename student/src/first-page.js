@@ -1,9 +1,9 @@
 $(document).ready(function () {
   $("#calling").on("click", function () {
-    parent.$("iframe").attr("src", "./student/seat-list.html");
+    location.href = "./seat-list.html";
   });
 
   $("#reservation").on("click", function () {
-    parent.alert("아직은 지원하지 않는 기능입니다.");
+    document.alert("아직은 지원하지 않는 기능입니다.");
   });
 });
