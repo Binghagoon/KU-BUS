@@ -12,6 +12,7 @@
       href="css/call-reservation.css"
     />
     <script src="../src/jquery.js"></script>
+    <script src="../src/url-parameter.js"></script>
     <script src="../src/navigator.js"></script>
     <script>
       $(document).ready(function () {
@@ -42,9 +43,10 @@
                 alert("failed");
               },
               success: function (data, status, xhr) {
-                top.args["requestid"] = data.insertId;
-                console.log("move to doing-reservation.html");
-                window.location.href = "doing-reservation.html";
+                urlChangeWithQuery("doing-reservation.html",{
+                  queryid: data.insertId,
+                  id: query.id,
+                });
               },
             });
           } else {
