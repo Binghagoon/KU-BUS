@@ -5,7 +5,7 @@ class Location {
     //To be merged on getPosViaServer()
     let isValueExist;
     await $.ajax({
-      url: window.location.origin + "/node/my-location-select",
+      url: "../node/my-location-select",
       type: "GET",
       data: {
         id: args["id"],
@@ -35,7 +35,7 @@ class Location {
         let coords = position.coords;
         lat = coords.latitude;
         lng = coords.longitude;
-        if(callback != undefined){
+        if (callback != undefined) {
           callback(coords);
         }
       })
@@ -51,7 +51,7 @@ class Location {
 
   static async serverPosUpdate(pos, id, successCallback) {
     $.ajax({
-      url: window.location.origin + "/node/my-location-update",
+      url: "../node/my-location-update",
       type: "POST",
       data: {
         id: id,
@@ -71,7 +71,7 @@ class Location {
     let location = {};
     await $.ajax({
       type: "GET",
-      url: window.location.origin + "/node/get-location",
+      url: "../node/get-location",
       data: {
         id: id,
       },
@@ -86,7 +86,7 @@ class Location {
     });
     return location;
   }
-  constructor(id, callback) { 
+  constructor(id, callback) {
     //Anam station
     let lat = 37.586232954034564;
     let lng = 127.02928291766814;
@@ -115,11 +115,11 @@ class Location {
     this.intervalID = setInterval(async function () {
       let pos = await Location.getPositionViaClient();
       Location.serverPosUpdate(pos, loc.id);
-      try{
-        if(callback != undefined){
+      try {
+        if (callback != undefined) {
           callback(pos);
         }
-      } catch(e){
+      } catch (e) {
         console.log(e.stack);
       }
     }, timed);
@@ -134,7 +134,7 @@ class Location {
   }
   delete() {
     $.ajax({
-      url: window.location.origin + "/node/my-location-delete",
+      url: "../node/my-location-delete",
       type: "POST",
       //async: false,
       data: {

@@ -59,7 +59,7 @@ function successCallback(position) {
 function recordPositionGet() {
   if (!debugging) {
     $.ajax({
-      url: window.location.origin + "/node/record-position",
+      url: "../node/record-position",
       type: "GET",
       error: function (request, status, error) {
         alert("record position get error");
@@ -70,7 +70,7 @@ function recordPositionGet() {
     });
   } else {
     $.ajax({
-      url: window.location.origin + "/src/json/record-position.json",
+      url: "../src/json/record-position.json",
       error: function (request, status, error) {
         alert("record position get error");
       },
