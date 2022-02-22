@@ -21,8 +21,13 @@
       var debugging = true;
       var isStudent = true;
       $(document).ready(function () {
-        $("#login-submit").click(function () {
-          IDSubmit($("#username").val(), $("#password").val());
+        $("form[name='login-field']").submit(function (event) {
+          console.log("submitted");
+          IDSubmit(
+            $("input[name='username']").val(),
+            $("input[name='password']").val()
+          );
+          event.preventDefault();
         });
         $("#id-find").click(function () {});
         $("#signup").click(function () {});
@@ -57,9 +62,10 @@
         <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
         <h2>이동지원차량서비스</h2>
 
-        <form id="login-field">
+        <form id="login-field" name="login-field">
           <input
             id="username"
+            name="username"
             type="text"
             maxlength="20"
             placeholder="아이디 ID"
@@ -68,6 +74,7 @@
           <br />
           <input
             id="password"
+            name="password"
             type="password"
             maxlength="20"
             placeholder="비밀번호 PASSWORD"
