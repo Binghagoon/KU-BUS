@@ -1,6 +1,6 @@
 $(document).ready(function () {
   $("#calling").on("click", function () {
-    location.href = "./seat-list.html";
+    location.href = "./seat-list.html" + location.search;
   });
 
   $("#reservation").on("click", function () {

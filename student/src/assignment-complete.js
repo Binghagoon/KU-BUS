@@ -1,8 +1,10 @@
-let clicked = 0; // for debugging
-$(document).ready(function () {
-  StartMap(function () {
-    let driverID = 1;
-    let studentID = 2;
+let clicked = 0;
+$(function () {
+  console.log(top);
+
+  startMap(function () {
+    let driverID = top.args["driverId"];
+    let studentID = top.args["id"];
     try {
       let driverLoc = new Location(driverID, function (loc) {
         let driverMarker = markerCreate(loc.pos, "DRIVER");
@@ -42,8 +44,7 @@ $(document).ready(function () {
       },
     });
   });
-  $("#send-message").on("click", function (e) {
-    //for use debug
+  $("#send-message").on("click",function (e) {    //for use debug
     //e.preventDefault();
     clicked = clicked + 1;
   });
