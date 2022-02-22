@@ -1,15 +1,17 @@
-var parse;
+let parse;
+let checkIntervalId;
 
 window.onbeforeunload = cancelReservation;
 
-$(document).ready(function () {
-  printData(top.args["from"]["name"], top.args["to"]["name"]);
+$(function () {
+  printData(top.args["fromName"], top.args["toName"]);
+  //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
   if (!top.debugging) {
-    setInterval(() => checkReservation(), 1000);
+    checkIntervalId = setInterval(checkReservation, 1000);
   } else {
-    setInterval(() => successReservation(), 1000);
+    setTimeout(successReservation, 1000);
   }
-  $("#cancel-reservation").click(cancelReservation);
+  $("#cancel-reservation").on("click", cancelReservation);
 });
 
 function printData(fromName, toName) {
@@ -26,18 +28,22 @@ function checkReservation() {
       url: window.location.origin + "/node/check-driver",
       type: "GET",
       data: {
-        no: args["requestid"],
+        callNo: args["callNo"],
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        alert("failed on chack reservation");
+        alert("failed on check reservation");
       },
       success: function (data, status, xhr) {
         if (data) data = data[0];
         if (data == undefined) return;
-        if (data["name"] != null) {
-          top.args["reqData"] = {};
-          top.args["reqData"] = data;
-          successReservation();
+        if (data.callSuccess != null) {
+          if (data.callSuccess) {
+            top.args["driverId"] = data.driverId;
+            clearInterval(checkIntervalId);
+            successReservation();
+          } else {
+            alert("콜에 실패했습니다. 잠시 후 다시 시도해주세요.");
+          }
         }
       },
     });
@@ -49,10 +55,15 @@ function successReservation() {
   top.args["stat"] = "wating";
   // To be add argument
   window.onbeforeunload = () => {};
-  console.log("Move to map.html");
-  window.location.href = "map.html";
+  alert("예약이 완료되었습니다!");
+  
+  window.location.href = "assignment-complete.html";
 }
+
 function cancelReservation() {
+  if (top.debugging) {
+    window.location.href = "first-page.html";
+  }
   $.ajax({
     url: window.location.origin + "/node/reservation-delete",
     type: "POST",
