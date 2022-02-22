@@ -19,8 +19,8 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/doing-reservation.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
-    <script src="../src/navigator.js"></script>
     <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
     <script src="../src/get-query.js"></script>
     <script>
       var parse;
@@ -28,11 +28,12 @@
       window.onbeforeunload = CancelReservation;
 
       $(document).ready(function () {
-        PrintData(top.args["from"]["name"], top.args["to"]["name"]);
+        PrintData(top.args["fromName"], top.args["toName"]);
+        //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
         if (!top.debugging) {
-          setInterval(() => ChackReservation(), 1000);
+          setInterval(() => CheckReservation(), 1000);
         } else {
-          setInterval(() => SuccessReservation(), 1000);
+          setTimeout(() => SuccessReservation(), 1000);
         }
         $("#cancel-reservation").click(CancelReservation);
       });
@@ -44,7 +45,7 @@
         arr.html(arr.html() + toName);
       }
 
-      function ChackReservation() {
+      function CheckReservation() {
         if (!top.debugging) {
           var args = top.args;
           $.ajax({
@@ -54,7 +55,7 @@
               no: args["requestid"],
             },
             error: function (jqXHR, textStatus, errorThrown) {
-              alert("failed on chack reservation");
+              alert("failed on check reservation");
             },
             success: function (data, status, xhr) {
               if (data) data = data[0];
@@ -74,10 +75,14 @@
         top.args["stat"] = "wating";
         // To be add argument
         window.onbeforeunload = () => {};
-        console.log("Move to map.html");
-        window.location.href = "map.html";
+        alert("예약이 완료되었습니다!");
+        
+        //window.location.href = "assignment-complete.html";
       }
       function CancelReservation() {
+        if (top.debugging) {
+          window.location.href = "first-page.html";
+        }
         $.ajax({
           url: window.location.origin + "/node/reservation-delete",
           type: "POST",
