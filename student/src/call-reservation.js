@@ -1,7 +1,5 @@
 $(() => {
-  let query = Object.fromEntries(
-    new URLSearchParams(window.location.search)
-  );
+  let query = Object.fromEntries(new URLSearchParams(window.location.search));
   console.log(query);
   //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
   printData(
@@ -17,7 +15,7 @@ $(() => {
   $("#submit").on("click", () => {
     if (!top.debugging) {
       $.ajax({
-        url: window.location.origin + "/node/reservation-post",
+        url: "../node/reservation-post",
         type: "POST",
         data: {
           now_place_no: query.fromNo,

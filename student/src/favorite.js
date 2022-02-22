@@ -9,7 +9,7 @@ $(document).ready(function () {
   });
   [1, 2, 3].forEach((index) => circles.push($("circle" + index)));
   $.ajax({
-    url: window.location.origin + "/php/record-position-get.php",
+    url: "../php/record-position-get.php",
     type: "GET",
     error: function (request, status, error) {
       alert("record position get error");

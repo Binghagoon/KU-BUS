@@ -25,7 +25,7 @@ function checkReservation() {
   if (!top.debugging) {
     var args = top.args;
     $.ajax({
-      url: window.location.origin + "/node/check-driver",
+      url: "../node/check-driver",
       type: "GET",
       data: {
         callNo: args["callNo"],
@@ -56,7 +56,7 @@ function successReservation() {
   // To be add argument
   window.onbeforeunload = () => {};
   alert("예약이 완료되었습니다!");
-  
+
   window.location.href = "assignment-complete.html";
 }
 
@@ -65,7 +65,7 @@ function cancelReservation() {
     window.location.href = "first-page.html";
   }
   $.ajax({
-    url: window.location.origin + "/node/reservation-delete",
+    url: "../node/reservation-delete",
     type: "POST",
     data: {
       no: top.args["requestid"],
