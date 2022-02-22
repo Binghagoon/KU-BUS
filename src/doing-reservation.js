@@ -28,7 +28,7 @@ function checkReservation() {
       url: window.location.origin + "/node/check-driver",
       type: "GET",
       data: {
-        no: args["requestid"],
+        callNo: args["callNo"],
       },
       error: function (jqXHR, textStatus, errorThrown) {
         alert("failed on check reservation");
@@ -36,11 +36,14 @@ function checkReservation() {
       success: function (data, status, xhr) {
         if (data) data = data[0];
         if (data == undefined) return;
-        if (data["name"] != null) {
-          top.args["reqData"] = {};
-          top.args["reqData"] = data;
-          clearInterval(checkIntervalId);
-          successReservation();
+        if (data.callSuccess != null) {
+          if (data.callSuccess) {
+            top.args["driverId"] = data.driverId;
+            clearInterval(checkIntervalId);
+            successReservation();
+          } else {
+            alert("콜에 실패했습니다. 잠시 후 다시 시도해주세요.");
+          }
         }
       },
     });
@@ -54,7 +57,7 @@ function successReservation() {
   window.onbeforeunload = () => {};
   alert("예약이 완료되었습니다!");
   
-  //window.location.href = "assignment-complete.html";
+  window.location.href = "assignment-complete.html";
 }
 
 function cancelReservation() {

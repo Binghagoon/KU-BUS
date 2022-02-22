@@ -10,8 +10,9 @@
       type="text/css"
       href="css/call-reservation.css"
     />
-
-    <style></style>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link rel="stylesheet" type="text/css" href="css/assignment-complete.css" />
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
@@ -20,12 +21,15 @@
     <script src="../src/map.js"></script>
     <script src="../src/marker.js"></script>
     <script src="../src/location.js"></script>
+    <script src="../src/navigator.js"></script>
     <script>
       let clicked = 0;
-      $(document).ready(function () {
-        StartMap(function () {
-          let driverID = 1;
-          let studentID = 2;
+      $(function () {
+        console.log(top);
+
+        startMap(function () {
+          let driverID = top.args["driverId"];
+          let studentID = top.args["id"];
           try {
             let driverLoc = new Location(driverID, function (loc) {
               let driverMarker = markerCreate(loc.pos, "DRIVER");
@@ -71,10 +75,6 @@
         });
       });
     </script>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/assignment-complete.css" />
-    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
-    <script src="../src/navigator.js"></script>
   </head>
   <body>
     <div id="map"></div>

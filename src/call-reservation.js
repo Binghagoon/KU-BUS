@@ -2,6 +2,7 @@ $(() => {
   let query = Object.fromEntries(
     new URLSearchParams(window.location.search)
   );
+  console.log(query);
   //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
   printData(
     query.fromName,
@@ -12,6 +13,7 @@ $(() => {
     undefined,
     undefined
   );
+
   $("#submit").on("click", () => {
     if (!top.debugging) {
       $.ajax({
@@ -26,7 +28,7 @@ $(() => {
           alert("failed, " + textStatus);
         },
         success: function (data, status, xhr) {
-          top.args["requestid"] = data.insertId;
+          top.args["callNo"] = data.callNo;
           console.log("move to doing-reservation.html");
           window.location.href = "doing-reservation.html";
         },
