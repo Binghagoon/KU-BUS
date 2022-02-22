@@ -31,7 +31,7 @@ $(function () {
   });
   $("#cancel-reservation").on("click", function () {
     $.ajax({
-      url: window.location.origin + "/reservation-delete",
+      url: "../reservation-delete",
       data: {
         id: top.args["id"],
       },
@@ -44,7 +44,8 @@ $(function () {
       },
     });
   });
-  $("#send-message").on("click",function (e) {    //for use debug
+  $("#send-message").on("click", function (e) {
+    //for use debug
     //e.preventDefault();
     clicked = clicked + 1;
   });

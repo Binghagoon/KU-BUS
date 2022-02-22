@@ -13,8 +13,8 @@ var openedIwcontent = null;
 
 function markerCreate(position, who, title, map) {
   const imgconvert = {
-    DRIVER: window.location.origin + "/src/img/car-pin.png",
-    STUDENT: window.location.origin + "/src/img/human-pin.png",
+    DRIVER: "../src/img/car-pin.png",
+    STUDENT: "../src/img/human-pin.png",
     STAR: starMarkerSrc,
     null: null,
     undefined: null,
@@ -27,7 +27,7 @@ function markerCreate(position, who, title, map) {
   let marker = new kakao.maps.Marker({
     map: map, // 마커를 표시할 지도
     position: new kakao.maps.LatLng(pos.lat, pos.lng), // 마커를 표시할 위치
-    title: title==undefined ? who: title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+    title: title == undefined ? who : title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
     image: markerImage, // 마커 이미지
   });
   marker.setMap(map);
@@ -40,8 +40,7 @@ function markerLocationChange(marker, position) {
   );
 }
 
-function createMarker(imgSrc, value, event) {
-}
+function createMarker(imgSrc, value, event) {}
 
 function clickedMarkerDelete() {
   imgChangedMarker.setMap(null);
