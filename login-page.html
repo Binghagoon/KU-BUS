@@ -11,7 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/login-page.css" />
     <script src="src/jquery.js"></script>
     <script src="src/sha3.js"></script>
     <script src="src/url-parameter.js"></script>
@@ -20,8 +21,13 @@
       var debugging = true;
       var isStudent = true;
       $(document).ready(function () {
-        $("#login-submit").click(function () {
-          IDSubmit($("#username").val(), $("#password").val());
+        $("form[name='login-field']").submit(function (event) {
+          console.log("submitted");
+          IDSubmit(
+            $("input[name='username']").val(),
+            $("input[name='password']").val()
+          );
+          event.preventDefault();
         });
         $("#id-find").click(function () {});
         $("#signup").click(function () {});
@@ -56,9 +62,10 @@
         <!-- ms;개인적인바램: br같은 태그를 사용하기 보단, div로 css에서 디자인을 정의! (모듈화)-->
         <h2>이동지원차량서비스</h2>
 
-        <div id="login-field">
+        <form id="login-field" name="login-field">
           <input
             id="username"
+            name="username"
             type="text"
             maxlength="20"
             placeholder="아이디 ID"
@@ -67,6 +74,7 @@
           <br />
           <input
             id="password"
+            name="password"
             type="password"
             maxlength="20"
             placeholder="비밀번호 PASSWORD"
@@ -80,7 +88,7 @@
             class="button"
           />
           <!--maxlength는 아이디랑 비밀번호 20자 이상 아니게 설정해놓은 것, required는 써야지만 넘어갈 수 있음-->
-        </div>
+        </form>
         <div>
           <tr id="login-suffix">
             <td>
