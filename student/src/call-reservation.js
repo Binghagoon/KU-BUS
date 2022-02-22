@@ -1,6 +1,9 @@
-$(document).ready(function () {
-  let query = Object.fromEntries(new URLSearchParams(window.location.search));
-  //printData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
+$(() => {
+  let query = Object.fromEntries(
+    new URLSearchParams(window.location.search)
+  );
+  console.log(query);
+  //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
   printData(
     query.fromName,
     query.toName,
@@ -10,7 +13,8 @@ $(document).ready(function () {
     undefined,
     undefined
   );
-  $("#submit").on("click", function () {
+
+  $("#submit").on("click", () => {
     if (!top.debugging) {
       $.ajax({
         url: window.location.origin + "/node/reservation-post",
@@ -21,10 +25,10 @@ $(document).ready(function () {
           id: query.id,
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          alert("failed");
+          alert("failed, " + textStatus);
         },
         success: function (data, status, xhr) {
-          top.args["requestid"] = data.insertId;
+          top.args["callNo"] = data.callNo;
           console.log("move to doing-reservation.html");
           window.location.href = "doing-reservation.html";
         },
@@ -35,12 +39,13 @@ $(document).ready(function () {
     }
     return false;
   });
-  $("button#cancel").click(function () {
+  $("button#cancel").on("click", () => {
     console.log("move to map.html");
     window.location.href = "map.html";
     return false;
   });
 });
+
 function printData(from, dest, date, time, name, mp, email) {
   $("#from").html($("#from").html() + from);
   $("#dest").html($("#dest").html() + dest);
