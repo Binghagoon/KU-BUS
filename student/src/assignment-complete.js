@@ -1,10 +1,12 @@
+// import ../src/url-parameter.js
+
 let clicked = 0;
 $(function () {
-  console.log(top);
+  let query = queryToObject();
 
   startMap(function () {
-    let driverID = top.args["driverId"];
-    let studentID = top.args["id"];
+    let driverID = query["driverId"];
+    let studentID = query["id"];
     try {
       let driverLoc = new Location(driverID, function (loc) {
         let driverMarker = markerCreate(loc.pos, "DRIVER");
@@ -33,7 +35,7 @@ $(function () {
     $.ajax({
       url: "../reservation-delete",
       data: {
-        id: top.args["id"],
+        id: query["id"],
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("Error");
