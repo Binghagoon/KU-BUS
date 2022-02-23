@@ -58,6 +58,9 @@ function goToCallReservation() {
     toName: to.name,
     toNo: to.num,
     id: arg.id,
-  }; //id does not work
+  };
+  if (debugging) {
+    query.debugging = debugging;
+  }
   urlChangeWithQuery("call-reservation.html", query);
 }
