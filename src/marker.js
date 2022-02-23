@@ -65,14 +65,12 @@ function markerImageChange(what, marker) {
 
 function markerClickEvent(value, marker, imageSize) {
   function infoWindowOpen(status) {
-    var iwContent = "", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-      iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-    $("#position-name").html(value.name);
+    var iwContent = `<span class="info-title">${value.name}</span>`,
+      iwRemoveable = false;
 
     if (openedIwcontent) {
       openedIwcontent.close();
     }
-    iwContent = $("#infowindow-templete").html();
     var infowindow = new kakao.maps.InfoWindow({
       content: iwContent,
       removable: iwRemoveable,
@@ -95,5 +93,15 @@ function markerClickEvent(value, marker, imageSize) {
   markerImageChange(null, marker);
   nextButtonSwitch(true);
   orderInput(orderStat[statnum]);
-  openedIwcontent = infoWindowOpen(orderStat[statnum]);
+  openedIwcontent = infoWindowOpen(value.name, orderStat[statnum]);
+
+  let infoTitle = document.querySelector(".info-title");
+  const w = infoTitle.offsetWidth + 10;
+  const ml = w / 2;
+  infoTitle.parentElement.style.left = "50%";
+  infoTitle.parentElement.style.marginLeft = -ml + "px";
+  infoTitle.parentElement.style.width = w + "px";
+  infoTitle.parentElement.previousSibling.style.display = "none";
+  infoTitle.parentElement.parentElement.style.border = "0px";
+  infoTitle.parentElement.parentElement.style.background = "unset";
 }
