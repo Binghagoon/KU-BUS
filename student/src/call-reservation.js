@@ -56,12 +56,24 @@ $(() => {
   });
 });
 
-function printData(from, dest, date, time, name, mp, email) {
-  $("#from").html($("#from").html() + from);
-  $("#dest").html($("#dest").html() + dest);
-  $("#date").html($("#date").html() + date);
-  $("#pick-up-time").html($("#pick-up-time").html() + time);
-  $("#user-name").val(name);
-  $("user-phone-number").val(mp);
-  $("#user-email-address").val(email);
+function printData(from, dest, date, time, name, phone, email) {
+  const div = $("<div />");
+  const tag = {
+    from: $("<p />").text(`출발지: ${from}`),
+    dest: $("<p />").text(`도착지: ${dest}`),
+    date: $("<p />").text(`예약일: ${date}`),
+    time: $("<p />").text(`픽업 시간대: ${time}`),
+    name: $("<p />").text(`이름: ${name}`),
+    phone: $("<p />").text(`연락처: ${phone}`),
+    email: $("<p />").text(`이메일: ${email}`),
+  };
+
+  from && div.append(tag.from);
+  dest && div.append(tag.dest);
+  date && div.append(tag.date);
+  time && div.append(tag.time);
+  name && div.append(tag.name);
+  phone && div.append(tag.phone);
+  email && div.append(tag.email);
+  div.insertBefore("#submit");
 }
