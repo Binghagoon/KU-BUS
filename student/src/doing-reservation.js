@@ -1,12 +1,16 @@
+// import ../src/url-parameter.js
+
 let parse;
 let checkIntervalId;
+let query;
 
 window.onbeforeunload = cancelReservation;
 
 $(function () {
-  printData(top.args["fromName"], top.args["toName"]);
+  query = queryToObject();
+  printData(query["fromName"], query["toName"]);
   //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
-  if (!top.debugging) {
+  if (!query.debugging) {
     checkIntervalId = setInterval(checkReservation, 1000);
   } else {
     setTimeout(successReservation, 1000);
@@ -22,13 +26,12 @@ function printData(fromName, toName) {
 }
 
 function checkReservation() {
-  if (!top.debugging) {
-    var args = top.args;
+  if (!query.debugging) {
     $.ajax({
       url: "../node/check-driver",
       type: "GET",
       data: {
-        callNo: args["callNo"],
+        callNo: query["callNo"],
       },
       error: function (jqXHR, textStatus, errorThrown) {
         alert("failed on check reservation");
@@ -38,7 +41,7 @@ function checkReservation() {
         if (data == undefined) return;
         if (data.callSuccess != null) {
           if (data.callSuccess) {
-            top.args["driverId"] = data.driverId;
+            query["driverId"] = data.driverId;
             clearInterval(checkIntervalId);
             successReservation();
           } else {
@@ -52,31 +55,38 @@ function checkReservation() {
 }
 
 function successReservation() {
-  top.args["stat"] = "wating";
+  query["status"] = "waiting";
   // To be add argument
   window.onbeforeunload = () => {};
   alert("예약이 완료되었습니다!");
 
-  window.location.href = "assignment-complete.html";
+  urlChangeWithQuery("assignment-complete.html", {
+    id: query.id,
+    callNo: query.callNo,
+    status: "waiting",
+    driverId: query.driverId,
+    debugging: query.debugging,
+  });
 }
 
+// first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
 function cancelReservation() {
-  if (top.debugging) {
+  if (query.debugging) {
     window.location.href = "first-page.html";
   }
   $.ajax({
     url: "../node/reservation-delete",
     type: "POST",
     data: {
-      no: top.args["requestid"],
+      no: query["callNo"],
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log("Error");
+      console.log(textStatus);
       return false;
     },
     success: function (data, textStatus, jqXHR) {
-      console.log("Move to call-reservation");
-      window.location.href = "call-reservation.html";
+      console.log("Move to first page");
+      window.location.href = "first-page.html";
     },
   });
 }

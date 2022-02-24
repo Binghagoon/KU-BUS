@@ -14,13 +14,13 @@ const firstPage = {
 };
 
 function pageChange(position) {
-  //position = {id: String, name: String, no: Int}
-  if (position["name"] == "DRIVER") {
-  } else if (position["name"] == "STUDENT") {
+  //positino = {"name":"HEllo World","id":"asdf"(??),"role":"STUDENT"}
+  if (position["role"] == "DRIVER") {
+  } else if (position["role"] == "STUDENT") {
   }
-  position["name"] = position["name"].toUpperCase();
+  position["role"] = position["role"].toUpperCase();
   var url = updateURLParameter(
-    "." + firstPage[position["name"]],
+    "." + firstPage[position["role"]],
     "role",
     position["role"]
   );

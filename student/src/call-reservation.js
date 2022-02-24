@@ -1,6 +1,9 @@
+// import ../src/url-parameter.js
+
 $(() => {
-  let query = Object.fromEntries(new URLSearchParams(window.location.search));
-  console.log(query);
+  let query = queryToObject();
+  //console.log(query);
+  //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
   printData(
     query.fromName,
     query.toName,
@@ -12,7 +15,7 @@ $(() => {
   );
 
   $("#submit").on("click", () => {
-    if (!top.debugging) {
+    if (!query.debugging) {
       $.ajax({
         url: "../node/reservation-post",
         type: "POST",
@@ -25,20 +28,30 @@ $(() => {
           alert("failed, " + textStatus);
         },
         success: function (data, status, xhr) {
-          top.args["callNo"] = data.callNo;
           console.log("move to doing-reservation.html");
-          window.location.href = "doing-reservation.html";
+          urlChangeWithQuery("doing-reservation.html", {
+            id: query.id,
+            fromName: query.fromName,
+            toName: query.toName,
+            callNo: data.callNo,
+          })
         },
       });
     } else {
-      console.log("move to doing-reservation.html");
-      window.location.href = "doing-reservation.html";
+      console.log("on debugging mode, move to doing-reservation.html");
+      urlChangeWithQuery("doing-reservation.html", {
+        id: query.id,
+        fromName: query.fromName,
+        toName: query.toName,
+        callNo: 10,
+        debugging: true,
+      });
     }
     return false;
   });
   $("button#cancel").on("click", () => {
-    console.log("move to map.html");
-    window.location.href = "map.html";
+    console.log("move to first-page.html");
+    window.location.href = "first-page.html";
     return false;
   });
 });
