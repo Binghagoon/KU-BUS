@@ -1,9 +1,7 @@
 // import ../src/url-parameter.js
-
+const query = queryToObject();
 let clicked = 0;
 $(function () {
-  let query = queryToObject();
-
   startMap(function () {
     let driverID = query["driverId"];
     let studentID = query["id"];

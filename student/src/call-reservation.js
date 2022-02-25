@@ -1,7 +1,6 @@
 // import ../src/url-parameter.js
-
+const query = queryToObject();
 $(() => {
-  let query = queryToObject();
   //console.log(query);
   //PrintData("아산이학관", "하나스퀘어", "2021-09-20", "13:00", "홍길동", "010-1234-5678", "asdf@adsf.com");
   printData(
@@ -34,7 +33,7 @@ $(() => {
             fromName: query.fromName,
             toName: query.toName,
             callNo: data.callNo,
-          })
+          });
         },
       });
     } else {

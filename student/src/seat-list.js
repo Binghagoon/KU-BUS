@@ -1,4 +1,4 @@
-var par = {
+const par = {
   three: 3,
   four: 4,
   five: 5,
@@ -6,7 +6,8 @@ var par = {
 };
 let seatnum = 0;
 let pre = null;
-let query = queryToObject();
+const query = queryToObject();
+
 $(document).ready(function () {
   //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
   //renderTR('target-tr2', [['5번', 'five'], ['6번', 'sixth']]);

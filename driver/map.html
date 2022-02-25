@@ -22,54 +22,9 @@
     ></script>
     <script src="../src/jquery.js"></script>
     <script src="../src/navigator.js"></script>
+    <script src="../src/url-parameter.js"></script>
     <script src="../src/map.js"></script>
-    <script>
-      $(document).ready(function () {
-        startMap();
-        setInterval(checkReservation, 1000);
-        traceAnother(top.args["id"], "DRIVER");
-        if (top.debugging) {
-          $("#map").height("80%");
-          $("#debugging").show();
-          $("#button").on("click", function () {
-            moveToNew([
-              {
-                name: "asdf",
-                time: "2021-10-03T11:32:40.000Z",
-                now_name: "우당교양관",
-                to_name: "정경대학과 타이거 프라자 사이",
-              },
-            ]);
-            return false;
-          });
-        }
-        if (top.args["stat"] == "working") {
-          $("#ex1").hide();
-          $("#ex2").removeAttr("hidden");
-          traceAnother(top.args["reqData"]["id"], "STUDENT");
-        }
-      });
-
-      function checkReservation() {
-        $.ajax({
-          url: window.location.origin + "/node/no-driver-request",
-          type: "GET",
-          error: function (jqxhr, textStatus, errorThrown) {
-            console.log("Reservation Get Error");
-          },
-          success: function (data, textStatus, jqxhr) {
-            if (data.length != 0) moveToNew(data);
-            7;
-          },
-        });
-      }
-
-      function moveToNew(data) {
-        top.args["reqData"] = data[0];
-        console.log("Move to new-alarm");
-        window.location.href = "new-alarm.html";
-      }
-    </script>
+    <script src="src/map.js"></script>
   </head>
   <body>
     <div id="header" class="front">

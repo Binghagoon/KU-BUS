@@ -2,12 +2,11 @@
 
 let parse;
 let checkIntervalId;
-let query;
+const query = queryToObject();
 
 window.onbeforeunload = cancelReservation;
 
 $(function () {
-  query = queryToObject();
   printData(query["fromName"], query["toName"]);
   //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
   if (!query.debugging) {

@@ -23,16 +23,16 @@ var sample = {
 };
 
 $(document).ready(function () {
-  PrintData();
+  printData();
 });
-function Onedata(id, location, destination, message, time) {
+function oneData(id, location, destination, message, time) {
   $("div#alarm-tempelete div#alarm-contents > #alarmer").html(id);
   $("div#alarm-tempelete div#alarm-contents > #alarm-title").html(location);
   $("div#alarm-tempelete div#alarm-contents > #alarm-email").html("asdf");
   $("div#alarm-tempelete div#alarm-contents > #alarm-message").html(message);
   $("div#alarm-tempelete div#alarm-contents > #alarm-send-time").html(time);
 }
-function PrintData(id, location, destination, message, time) {
+function printData(id, location, destination, message, time) {
   var data = sample;
   var templete = $("#alarm-tempelete");
   var td = $("#studentAlarm td");
@@ -40,7 +40,7 @@ function PrintData(id, location, destination, message, time) {
   templete.removeClass("template");
   for (var i = 0; i < Object.keys(sample).length; i++) {
     var key = Object.keys(data)[i]; //key는 자주 접근하니 선언!
-    Onedata(
+    oneData(
       data[key].name,
       data[key].location,
       data[key].destination,

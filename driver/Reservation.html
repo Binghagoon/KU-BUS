@@ -1,39 +1,21 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
-    
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/reservation.css" />
     <script src="../src/jquery.js"></script>
-    <script>
-      var query = [];
-      function ReservationIncome(id, nlo, mp, ResTime, rlo, dst, carfull) {
-        var arg = [id, nlo, mp, ResTime, rlo, dst, carfull];
-        var i;
-        for (i = 0; i < arguments.length; i++) {
-          query[i].text(query[i].text() + arg[i]);
-        }
-      }
-
-      $(document).ready(function () {
-        query = [
-          $("#caller_id"),
-          $("#caller-position-button"),
-          $("#caller-phone-button"),
-          $("#res-time"),
-          $("#res-position"),
-          $("#destination"),
-          $("#car-full"),
-        ];
-        ReservationIncome("1", "2", "3", "4", "5", "6", "7");
-      });
-    </script>
+    <script src="../src/url-parameter.js"></script>
+    <script src="src/reservation.js"></script>
   </head>
   <body>
     <div id="call-list">
