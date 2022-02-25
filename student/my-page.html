@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
-    <title>Driver_MyInfo</title>
+    <title>Student_MyInfo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,34 +17,62 @@
     <link rel="stylesheet" type="text/css" href="../css/header.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link rel="stylesheet" type="text/css" href="./css/my-page.css" />
     <script type="text/javascript" src="../src/jquery.js"></script>
     <script src="src/my-page.js"></script>
     <script src="../src/navigator.js"></script>
   </head>
-
-  <body>
+  <body style="text-align: left">
     <div id="header">내정보</div>
-    <div id="upward-profile">
-      <div>
-        <p><span id="user-name"></span>님, 안녕하세요!</p>
-      </div>
-      <button id="log-out">로그아웃하기</button>
-      <div id="user-image"></div>
+    <div class="greeting">
+      <span class="name">홍길동 </span>님, 안녕하세요!<br />
+      언제나 감사드립니다:)
     </div>
-    <div id="downward-profile">
-      <h5>학부/학과</h5>
-      <h5><div id="user-department"></div></h5>
-      <h5>학번</h5>
-      <h5><div id="user-student-number"></div></h5>
-      <h5>연락처(모바일)</h5>
-      <h5><div id="user-phone-number"></div></h5>
-      <h5>이메일</h5>
-      <h5><div id="user-email-address"></div></h5>
-    </div>
-    <div>
+    <div class="backboard">
+      <button class="logout">Logout ></button>
+      <table class="car_number">
+        <tr>
+          <th>호차</th>
+        </tr>
+        <tr>
+          <td>1호차</td>
+        </tr>
+      </table>
+      <table class="user-department">
+        <tr>
+          <th>학부/학과</th>
+        </tr>
+        <tr>
+          <td>00학부 00학과</td>
+        </tr>
+      </table>
+      <table class="user-student-number">
+        <tr>
+          <th>학번</th>
+        </tr>
+        <tr>
+          <td>2022000000</td>
+        </tr>
+      </table>
+      <table class="phone">
+        <tr>
+          <th>연락처(모바일)</th>
+        </tr>
+        <tr>
+          <td>010-0000-0000</td>
+        </tr>
+      </table>
+      <table class="email">
+        <tr>
+          <th>이메일</th>
+        </tr>
+        <tr>
+          <td>address1004@korea.ac.kr</td>
+        </tr>
+      </table>
       <ul>
-        <li><button id="history">이용 내역</button></li>
-        <li><button id="application-information">어플리케이션 정보</button></li>
+        <li>이용 내역</li>
+        <li>Application Information</li>
       </ul>
     </div>
   </body>

@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <title>MyPage</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,8 +14,12 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/header.css" />
     <link rel="stylesheet" type="text/css" href="css/my-page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
     <!-- <script type="text/javascript" src="src/jquery.js"></script>
     <script>
         $(document).ready(function(){
@@ -52,7 +59,8 @@
     </script>-->
   </head>
 
-  <body>
+  <body style="text-align: left">
+    <div id="header">내정보</div>
     <div class="greeting">
       <span class="name">홍길동 </span>님, 안녕하세요!<br />
       언제나 감사드립니다:)

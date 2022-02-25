@@ -2,15 +2,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="../css/header.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/map.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
     ></script>
     <script src="../src/jquery.js"></script>
+    <script src="../src/navigator.js"></script>
     <script src="../src/map.js"></script>
     <script>
       $(document).ready(function () {
@@ -65,7 +76,9 @@
       <div id="ex2" hidden>운행을 시작합니다.</div>
       <div id="ex1">호출을 대기중입니다.</div>
     </div>
-    <div id="map"></div>
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
     <div id="debugging" hidden>
       <button id="button">호출 받기</button>
     </div>
