@@ -62,7 +62,8 @@ function IDSubmit(id, pw) {
       no: "1",
       debugging: "true",
     };
-    var val = isStudent ? student : driver;
+    //var val = isStudent ? student : driver;
+    let val = driver;
     pageChange(val);
   }
   /*

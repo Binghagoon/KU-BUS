@@ -68,9 +68,12 @@
   background-color: wheat;
   color: black;
 }
-.unselected {
+
+.selectable {
   background-color: #8c0000;
+  color: white;
 }
+
 .selected {
   background-color: gray;
   color: white;

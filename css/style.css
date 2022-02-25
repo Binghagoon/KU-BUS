@@ -8,4 +8,6 @@ body {
   height: 100%;
   margin: 0;
   text-align: center;
+  /* 스크롤 방지 */
+  position: fixed;
 }
