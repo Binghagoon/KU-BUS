@@ -4,6 +4,6 @@ $(document).ready(function () {
   });
 
   $("#reservation").on("click", function () {
-    document.alert("아직은 지원하지 않는 기능입니다.");
+    alert("아직은 지원하지 않는 기능입니다.");
   });
 });
