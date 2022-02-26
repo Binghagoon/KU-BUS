@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src="../src/jquery.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="../src/login.js"></script>
     <script>
       let firstPage = {
         undefined: "/student/first-page.html",
@@ -32,7 +33,6 @@
       }
 
       function KUBUSSignin(responce) {
-        console.log(responce);
         $.ajax({
           url: window.location.origin + "/node/sign-in",
           type: "GET",
@@ -50,7 +50,7 @@
               window.location.href =
                 window.location.origin + "/kakao-login/login.html";
             } else {
-              SigninAfter(responce, data);
+              SigninAfter(data);
             }
           },
         });
@@ -69,18 +69,6 @@
           window.location.origin +
           "/kakao-login/register.html?" +
           sp.toString();
-      }
-
-      function SigninAfter(responce, data) {
-        console.log("Successfully Sign in via Kakao API");
-        var role = data["role"];
-
-        sessionStorage.setItem("kubus_member_id", data["id"]);
-        sessionStorage.setItem("kubus_member_role", role);
-        sessionStorage.setItem("debugging", debugging);
-
-        window.location.href =
-          window.location.origin + firstPage[role];
       }
     </script>
   </head>

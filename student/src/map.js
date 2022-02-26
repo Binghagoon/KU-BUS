@@ -1,3 +1,5 @@
+// import ../src/url-parameter.js
+
 const korean = {
   from: "출발지",
   to: "도착지",
@@ -5,14 +7,16 @@ const korean = {
 let orderStat = ["from", "to", "reserve"];
 let statnum = 0;
 
+let lat = 37.586232954034564;
+let lng = 127.02928291766814; //Anam Stn.
+
+// not used
 let arg = queryToObject();
-let debugging, seatnum;
+let seatnum;
 if ($(arg).empty()) {
   //default setting
-  debugging = true;
   seatnum = 0;
 } else {
-  debugging = arg.debugging;
   seatnum = arg.seatnum;
 }
 
@@ -57,10 +61,6 @@ function goToCallReservation() {
     fromNo: from.num,
     toName: to.name,
     toNo: to.num,
-    id: arg.id,
   };
-  if (debugging) {
-    query.debugging = debugging;
-  }
   urlChangeWithQuery("call-reservation.html", query);
 }

@@ -1,4 +1,5 @@
 // import ../src/url-parameter.js
+
 const query = queryToObject();
 $(() => {
   //console.log(query);
@@ -14,22 +15,22 @@ $(() => {
   );
 
   $("#submit").on("click", () => {
-    if (!query.debugging) {
+    if (!sessionStorage.getItem("debugging")) {
       $.ajax({
         url: "../node/reservation-post",
         type: "POST",
         data: {
           now_place_no: query.fromNo,
           to_place_no: query.toNo,
-          id: query.id,
+          id: sessionStorage.getItem("kubus_member_id"),
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          alert("failed, " + textStatus);
+          alert("failed to call");
+          console.error(`${textStatus}\n${errorThrown}`);
         },
         success: function (data, status, xhr) {
           console.log("move to doing-reservation.html");
           urlChangeWithQuery("doing-reservation.html", {
-            id: query.id,
             fromName: query.fromName,
             toName: query.toName,
             callNo: data.callNo,
@@ -39,11 +40,9 @@ $(() => {
     } else {
       console.log("on debugging mode, move to doing-reservation.html");
       urlChangeWithQuery("doing-reservation.html", {
-        id: query.id,
         fromName: query.fromName,
         toName: query.toName,
         callNo: 10,
-        debugging: true,
       });
     }
     return false;
