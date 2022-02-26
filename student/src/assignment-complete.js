@@ -4,7 +4,7 @@ let clicked = 0;
 $(function () {
   startMap(function () {
     let driverID = query["driverId"];
-    let studentID = query["id"];
+    let studentID = sessionStorage.getItem("kubus_member_id");
     try {
       let driverLoc = new Location(driverID, function (loc) {
         let driverMarker = markerCreate(loc.pos, "DRIVER");
@@ -33,7 +33,7 @@ $(function () {
     $.ajax({
       url: "../reservation-delete",
       data: {
-        id: query["id"],
+        id: query["callNo"],
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("Error");
