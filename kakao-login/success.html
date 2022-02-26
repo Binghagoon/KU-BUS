@@ -32,6 +32,7 @@
       }
 
       function KUBUSSignin(responce) {
+        console.log(responce);
         $.ajax({
           url: window.location.origin + "/node/sign-in",
           type: "GET",
@@ -56,7 +57,7 @@
       }
 
       function KUBUSSignup(data) {
-        var sp = new URLSearchParams();
+        var sp = new URLSearchParams(); // to be fixed
         sp.append("role", "STUDENT");
         sp.append("email", data["kakao_account"]["email"]);
         sp.append("nickname", data["properties"]["nickname"]);
@@ -74,13 +75,12 @@
         console.log("Successfully Sign in via Kakao API");
         var role = data["role"];
 
-        var sp = new URLSearchParams();
-        sp.append("role", role);
-        sp.append("debugging", debugging);
-        sp.append("id", responce["id"]);
+        sessionStorage.setItem("kubus_member_id", data["id"]);
+        sessionStorage.setItem("kubus_member_role", role);
+        sessionStorage.setItem("debugging", debugging);
 
         window.location.href =
-          window.location.origin + firstPage[role] + "?" + sp.toString();
+          window.location.origin + firstPage[role];
       }
     </script>
   </head>
