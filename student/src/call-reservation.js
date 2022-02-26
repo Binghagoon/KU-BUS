@@ -20,9 +20,9 @@ $(() => {
         url: "../node/reservation-post",
         type: "POST",
         data: {
-          now_place_no: query.fromNo,
-          to_place_no: query.toNo,
-          id: sessionStorage.getItem("kubus_member_id"),
+          departure_no: query.fromNo,
+          arrival_no: query.toNo,
+          id: query.id,   //if it works not properly use this  id: sessionStorage.getItem("kubus_member_id"), deleted data on PR #39
         },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("failed to call");

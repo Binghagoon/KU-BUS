@@ -31,7 +31,7 @@ $(function () {
   });
   $("#cancel-reservation").on("click", function () {
     $.ajax({
-      url: "../reservation-delete",
+      url: "../node/reservation-delete",
       data: {
         id: query["callNo"],
       },
