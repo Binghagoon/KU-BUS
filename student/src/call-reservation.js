@@ -19,8 +19,8 @@ $(() => {
         url: "../node/reservation-post",
         type: "POST",
         data: {
-          now_place_no: query.fromNo,
-          to_place_no: query.toNo,
+          departure_no: query.fromNo,
+          arrival_no: query.toNo,
           id: query.id,
         },
         error: function (jqXHR, textStatus, errorThrown) {

@@ -63,7 +63,7 @@ function IDSubmit(id, pw) {
       debugging: "true",
     };
     //var val = isStudent ? student : driver;
-    let val = driver;
+    let val = student;
     pageChange(val);
   }
   /*

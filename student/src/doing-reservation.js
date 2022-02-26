@@ -18,8 +18,8 @@ $(function () {
 });
 
 function printData(fromName, toName) {
-  var dep = $("#Departure > h4");
-  var arr = $("#Arrival > h4");
+  var dep = $("#departure > h4");
+  var arr = $("#arrival > h4");
   dep.html(dep.html() + fromName);
   arr.html(arr.html() + toName);
 }
