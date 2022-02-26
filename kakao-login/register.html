@@ -1,74 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <title>이용 동의</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/header.css" />
+    <link rel="stylesheet" type="text/css" href="css/register.css" />
     <script src="../src/jquery.js"></script>
-    <script>
-      var sp;
-      function Register() {
-        var data = {};
-        data["name"] = $("#user-name").val();
-        data["id"] = sp.get("id");
-        data["email"] = $("#user-email-address").val();
-        data["role"] = sp.get("role");
-        data["mp"] = $("#user-phone-number").val();
-        $.ajax({
-          url: window.location.origin + "/node/sign-up",
-          type: "POST",
-          data: data,
-          error: function (jqXHR, textstatus, errorthrown) {
-            console.log("Error Sign up");
-            alert("Error on sign up");
-          },
-          success: function (data, status, xhr) {
-            console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
-            window.location.href =
-              window.location.origin + "/kakao-login/login.html";
-          },
-        });
-      }
-      $(document).ready(function () {
-        sp = new URLSearchParams(window.location.search);
-        $("#submit").click(function () {
-          Register();
-        });
-        $("#cancel").click(function () {
-          window.location.href = "/kakao-login/login.html";
-        });
-      });
-    </script>
+    <script src="src/register.js"></script>
   </head>
   <body>
-    <form action="">
-      <fieldset>
-        <legend>세부 정보 입력란</legend>
-        <label>사용자명:</label><br />
-        <input
-          type="text"
-          id="user-name"
-          size="20"
-          autofocus
-          placeholder="이름을 입력하세요."
-        /><br /><br />
-        <label>연락처(모바일):</label><br />
-        <input
-          type="text"
-          id="user-phone-number"
-          size="20"
-          placeholder="전화번호를 -없이 입력하세요."
-        /><br /><br />
-        <label>사용자 이메일:</label><br />
-        <input
-          type="text"
-          id="user-email-address"
-          size="20"
-          placeholder="이메일을 입력하세요."
-        /><br /><br />
-        <button type="submit" id="submit">가입</button><br />
-        <button type="cancel" id="cancel">뒤로 가기</button>
-      </fieldset>
-    </form>
+    <div id="header">회원 가입</div>
+    <div id="container">
+      <form id="details" action="">
+        <fieldset>
+          <legend>세부 정보 입력란</legend>
+          <div>
+            <label for="user-name">사용자명:</label>
+            <input
+              type="text"
+              id="user-name"
+              size="20"
+              autofocus
+              placeholder="이름을 입력하세요"
+            />
+          </div>
+          <div>
+            <label for="user-phone-number">연락처(모바일):</label>
+            <input
+              type="text"
+              id="user-phone-number"
+              size="20"
+              placeholder="연락처를 숫자만 입력하세요"
+            />
+          </div>
+          <div>
+            <label for="user-email-address">이메일:</label>
+            <input
+              type="text"
+              id="user-email-address"
+              size="20"
+              placeholder="이메일을 입력하세요"
+            />
+          </div>
+          <div id="button-container">
+            <button type="submit" id="submit">가입</button>
+            <button type="cancel" id="cancel">뒤로 가기</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </body>
 </html>

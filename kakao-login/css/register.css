@@ -1,0 +1,37 @@
+body {
+  text-align: left;
+}
+input {
+  width: calc(100% - 104px);
+  height: 24px;
+  font-size: 16px;
+  border: none;
+  border-bottom: grey 1px solid;
+}
+input:focus {
+  outline: none;
+}
+#container {
+  background: linear-gradient(90deg, #8c0000 50%, #ccc2a3 50%);
+  width: 320px;
+  height: 450px;
+  margin: auto;
+  padding: 10px 0px;
+}
+#details {
+  background-color: white;
+  width: 320px;
+  height: 450px;
+}
+#details div {
+  margin: 20px 0px;
+}
+#details label {
+  display: inline-block;
+  width: 96px;
+  text-align: right;
+  font-size: 14px;
+}
+#button-container {
+  text-align: right;
+}
