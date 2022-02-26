@@ -57,28 +57,25 @@ function successCallback(position) {
 }
 
 function recordPositionGet() {
-  if (!debugging) {
-    $.ajax({
-      url: "../node/record-position",
-      type: "GET",
-      error: function (request, status, error) {
-        alert("record position get error");
-      },
-      success: function (data, status, xhr) {
-        mapPinWithRecord(data);
-      },
-    });
-  } else {
-    $.ajax({
-      url: "../src/json/record-position.json",
-      error: function (request, status, error) {
-        alert("record position get error");
-      },
-      success: function (data) {
-        mapPinWithRecord(data);
-      },
-    });
-  }
+  $.ajax({
+    url: "../node/record-position",
+    type: "GET",
+    error: function (request, status, error) {
+      console.log("record positions are not read from server, but we can read local json file.");
+      $.ajax({
+        url: "../src/json/record-position.json",
+        error: function (request, status, error) {
+          alert("record position get error");
+        },
+        success: function (data) {
+          mapPinWithRecord(data);
+        },
+      });
+    },
+    success: function (data, status, xhr) {
+      mapPinWithRecord(data);
+    },
+  });
 }
 function pinUpdate(position, who) {
   if (userMarker[who] == null) {
