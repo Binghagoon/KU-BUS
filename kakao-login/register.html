@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>이용 동의</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="../src/jquery.js"></script>
     <script>
       var sp;
@@ -25,7 +25,7 @@
           success: function (data, status, xhr) {
             console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
             window.location.href =
-              window.location.origin + "/kakalogin/login.html";
+              window.location.origin + "/kakao-login/login.html";
           },
         });
       }
@@ -34,7 +34,7 @@
         $("#submit").click(function () {
           Register();
         });
-        $("#cansel").click(function () {
+        $("#cancel").click(function () {
           window.location.href = "/kakao-login/login.html";
         });
       });
@@ -67,7 +67,7 @@
           placeholder="이메일을 입력하세요."
         /><br /><br />
         <button type="submit" id="submit">가입</button><br />
-        <button type="cansel" id="cansel">뒤로 가기</button>
+        <button type="cancel" id="cancel">뒤로 가기</button>
       </fieldset>
     </form>
   </body>

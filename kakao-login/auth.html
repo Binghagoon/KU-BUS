@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="../src/jquery.js"></script>
     <script>
       var params = new URLSearchParams(window.location.search);
@@ -21,6 +21,7 @@
           const Url = new URL(
             window.location.origin + "/kakao-login/success.html"
           );
+          localStorage.setItem("kubus_member_id", data["id"]);
           Object.keys(data).forEach((key) => {
             Url.searchParams.append(key, data[key]);
           });
