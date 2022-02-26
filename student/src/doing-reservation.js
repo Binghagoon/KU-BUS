@@ -9,7 +9,7 @@ window.onbeforeunload = cancelReservation;
 $(function () {
   printData(query["fromName"], query["toName"]);
   //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
-  if (!query.debugging) {
+  if (!sessionStorage.getItem("debugging")) {
     checkIntervalId = setInterval(checkReservation, 1000);
   } else {
     setTimeout(successReservation, 1000);
@@ -25,7 +25,7 @@ function printData(fromName, toName) {
 }
 
 function checkReservation() {
-  if (!query.debugging) {
+  if (!sessionStorage.getItem("debugging")) {
     $.ajax({
       url: "../node/check-driver",
       type: "GET",
@@ -59,18 +59,12 @@ function successReservation() {
   window.onbeforeunload = () => {};
   alert("예약이 완료되었습니다!");
 
-  urlChangeWithQuery("assignment-complete.html", {
-    id: query.id,
-    callNo: query.callNo,
-    status: "waiting",
-    driverId: query.driverId,
-    debugging: query.debugging,
-  });
+  urlChangeWithQuery("assignment-complete.html", query);
 }
 
 // first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
 function cancelReservation() {
-  if (query.debugging) {
+  if (sessionStorage.getItem("debugging")) {
     window.location.href = "first-page.html";
   }
   $.ajax({
@@ -80,7 +74,7 @@ function cancelReservation() {
       no: query["callNo"],
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus);
+      console.error(textStatus);
       return false;
     },
     success: function (data, textStatus, jqXHR) {

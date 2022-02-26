@@ -1,3 +1,5 @@
+// import ../src/url-parameter.js
+
 const par = {
   three: 3,
   four: 4,
@@ -6,7 +8,6 @@ const par = {
 };
 let seatnum = 0;
 let pre = null;
-const query = queryToObject();
 
 $(document).ready(function () {
   //renderTR("target-tr1", [['3번', 'three'], ['4번', 'four']]);
@@ -35,14 +36,8 @@ $(document).ready(function () {
       alert("좌석을 선택해주세요.");
       return;
     }
-    let lat = 37.586232954034564;
-    let lng = 127.02928291766814; //Anam Stn.
     urlChangeWithQuery("map.html", {
       seatnum: seatnum,
-      lat: lat,
-      lng: lng,
-      id: query.id,
-      debugging: query.debugging,
     });
   });
 });

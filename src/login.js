@@ -13,23 +13,6 @@ const firstPage = {
   ADMINISTRATOR: "/administrator/first-page.html",
 };
 
-function pageChange(position) {
-  //positino = {"name":"HEllo World","id":"asdf"(??),"role":"STUDENT"}
-  if (position["role"] == "DRIVER") {
-  } else if (position["role"] == "STUDENT") {
-  }
-  position["role"] = position["role"].toUpperCase();
-  var url = updateURLParameter(
-    "." + firstPage[position["role"]],
-    "role",
-    position["role"]
-  );
-  url = updateURLParameter(url, "id", position["id"]);
-  if (position["debugging"] == "true")
-    url = updateURLParameter(url, "debugging", position["debugging"]);
-  window.location.href = url;
-}
-
 function IDSubmit(id, pw) {
   pw = sha3_256(pw); //PW는 sha 256으로 해싱후 확인(평문이 노출되지 않도록)
   if (!debugging) {
@@ -44,7 +27,7 @@ function IDSubmit(id, pw) {
         alert("failed");
       },
       success: function (data, status, xhr) {
-        pageChange(data);
+        SigninAfter(data);
       },
     });
   } else {
@@ -52,19 +35,17 @@ function IDSubmit(id, pw) {
       role: "STUDENT",
       id: "asdf",
       name: "student",
-      no: "1",
       debugging: "true",
     };
     var driver = {
       role: "DRIVER",
       id: "asdf",
       name: "driver",
-      no: "1",
       debugging: "true",
     };
     //var val = isStudent ? student : driver;
     let val = student;
-    pageChange(val);
+    SigninAfter(val);
   }
   /*
     if(id == "Driver"){
@@ -74,6 +55,20 @@ function IDSubmit(id, pw) {
     }
     */
   //debugger;
+}
+
+function SigninAfter(data) {
+  console.log("Successfully Sign in via Kakao API");
+  console.log(data);
+
+  sessionStorage.clear();
+  sessionStorage.setItem("kubus_member_id", data["id"]);
+  sessionStorage.setItem("kubus_member_name", data["name"]);
+  sessionStorage.setItem("kubus_member_role", data["role"]);
+  sessionStorage.setItem("debugging", debugging);
+
+  window.location.href =
+    window.location.origin + firstPage[data["role"]];
 }
 
 function IDFind() {}
