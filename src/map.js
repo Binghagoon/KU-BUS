@@ -106,14 +106,15 @@ function pinUpdate(position, who) {
   } else {
     markerLocationChange(userMarker[who], position);
   }
+  return userMarker[who];
 }
 
 async function traceAnother(id, who) {
-  setInterval(() => updateAnother(id, who), 1000);
+  return setInterval(() => updateAnother(id, who), 1000);
 }
 
 async function updateAnother(id, who) {
-  var result = await getPositionById(id);
+  var result = await Location.getPosViaServer(id);
   pinUpdate(result, who);
 }
 

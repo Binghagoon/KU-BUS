@@ -3,11 +3,13 @@
 const debugging = sessionStorage.getItem("debugging");
 const id = sessionStorage.getItem("kubus_member_id");
 const reqData = queryToObject();
+const location = new Location(id);
 
 $(document).ready(function () {
   startMap(() => {
-    pinCurrentPosition("DRIVER");
+    location.awakeInterval(1000, pos => pinUpdate(pos, "DRIVER"));
   });
+
   if (!sessionStorage.getItem("driverStatus")) {
     sessionStorage.setItem("driverStatus", "waiting");
   }
@@ -20,11 +22,9 @@ $(document).ready(function () {
   if (sessionStorage.getItem("driverStatus") === "working") {
     showOnlyEx(3);
     $("#ex3").append(printData(reqData));
-
-    console.log(reqData);
-    //traceAnother(reqData["id"], "STUDENT");
+    
+    traceAnother(reqData["studentid"], "STUDENT");
   }
-  //traceAnother(id, "DRIVER");
 
   if (debugging) {
     console.log("In debugging mode");

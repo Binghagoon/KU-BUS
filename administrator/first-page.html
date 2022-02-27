@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <script src="../src/jquery.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
       var from = {
         no: 25,
@@ -57,6 +59,13 @@
           window.location.href =
             window.location.origin + "/administrator/user-session.html";
         });
+        $("button#logout").click(function () {
+          Kakao.Auth.logout(function() {
+            alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+          })
+          window.location.href =
+            window.location.origin + "/kakao-login/login.html";
+        });
       });
     </script>
   </head>
@@ -66,5 +75,7 @@
     <button id="calling">호출 해보기</button>
     <button id="user-setting">사용자 세팅</button>
     <button id="user-session">사용자 세션</button>
+    <br>
+    <button id="logout">로그아웃</button>
   </body>
 </html>
