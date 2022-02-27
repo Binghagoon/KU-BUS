@@ -47,7 +47,7 @@ $(document).ready(function () {
   $("#reject").on("click", function () {});
 });
 
-function printData(name, date, dep, arr, phone, email) {
+function printData(date, dep, arr, name, phone, email) {
   var td = $("#student-detail td");
   td[0].append(timezoneChange(date));
   td[1].append(dep);

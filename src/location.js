@@ -1,21 +1,32 @@
 /** this file might need to be import JQuery file. otherwise it works not fine. */
 class Location {
+  constructor(id, callback) {
+    //Anam station
+    let lat = 37.586232954034564;
+    let lng = 127.02928291766814;
+    this.lat = lat;
+    this.lng = lng;
+    this.id = id;
+    if (callback) callback(this);
+  }
+
   //pos returns {lat:Number,lng:Number}, position returns {latitude:Number, longitude:Number}
   static async checkIsValueExist(id) {
     //To be merged on getPosViaServer()
     let isValueExist;
     await $.ajax({
-      url: "../node/my-location-select",
+      url: "../node/get-location",
       type: "GET",
       data: {
-        id: args["id"],
+        id: id,
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.log(errorThrown);
+        console.error(errorThrown);
+        isValueExist = false;
       },
       success: function (data, status, xhr) {
-        if ($.isEmptyObject(data)) {
-          isValueExist = false; //TBD
+        if (data.status) {
+          isValueExist = false;
         } else {
           isValueExist = true;
         }
@@ -51,7 +62,7 @@ class Location {
 
   static async serverPosUpdate(pos, id, successCallback) {
     $.ajax({
-      url: "../node/my-location-update",
+      url: "../node/location-update",
       type: "POST",
       data: {
         id: id,
@@ -79,23 +90,18 @@ class Location {
       },
       dataType: "JSON",
       success: function (response) {
-        location = {
-          lat: response.latitude,
-          lng: response.longitude,
-        };
-        callback(location);
+        if (response.status) {
+          console.error(response.errorMessage);
+        } else {
+          location = {
+            lat: response.latitude,
+            lng: response.longitude,
+          };
+          if (callback) callback(location);
+        }
       },
     });
     return location;
-  }
-  constructor(id, callback) {
-    //Anam station
-    let lat = 37.586232954034564;
-    let lng = 127.02928291766814;
-    this.lat = lat;
-    this.lng = lng;
-    this.id = id;
-    callback(this);
   }
 
   get pos() {
@@ -134,9 +140,10 @@ class Location {
       console.log(e);
     }
   }
+
   delete() {
     $.ajax({
-      url: "../node/my-location-delete",
+      url: "../node/mlocation-delete",
       type: "POST",
       //async: false,
       data: {
@@ -154,6 +161,7 @@ class Location {
     });
   }
 }
+
 class Pos {
   constructor(lat, lng) {
     this.lat = lat;
