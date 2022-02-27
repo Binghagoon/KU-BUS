@@ -31,6 +31,8 @@ $(document).ready(function () {
           urlChangeWithQuery("map.html", {
             callNo: reqData["callNo"],
             studentid: data["studentid"],
+            departure: reqData["departure"],
+            arrival: reqData["arrival"],
             name: reqData["name"],
             phoneNumber: reqData["phoneNumber"],
           });

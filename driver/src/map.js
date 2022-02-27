@@ -20,8 +20,7 @@ $(document).ready(function () {
   if (sessionStorage.getItem("driverStatus") === "working") {
     showOnlyEx(3);
     $("#ex3").append(printData(reqData));
-
-    console.log(reqData);
+    
     //traceAnother(reqData["id"], "STUDENT");
   }
   //traceAnother(id, "DRIVER");
