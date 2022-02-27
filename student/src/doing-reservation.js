@@ -9,7 +9,7 @@ window.onbeforeunload = cancelCall;
 $(function () {
   printData(query["fromName"], query["toName"]);
   //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
-  if (!sessionStorage.getItem("debugging")) {
+  if (!(sessionStorage.getItem("debugging") === "true")) {
     checkIntervalId = setInterval(checkCall, 1000);
   } else {
     setTimeout(successCall, 1000);
@@ -25,7 +25,7 @@ function printData(fromName, toName) {
 }
 
 function checkCall() {
-  if (!sessionStorage.getItem("debugging")) {
+  if (!(sessionStorage.getItem("debugging") === "true")) {
     $.ajax({
       url: "../node/call-status",
       type: "GET",
@@ -66,7 +66,7 @@ function successCall() {
 
 // first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
 function cancelCall() {
-  if (sessionStorage.getItem("debugging")) {
+  if ((sessionStorage.getItem("debugging") === "true")) {
     window.location.href = "first-page.html";
   }
   $.ajax({
