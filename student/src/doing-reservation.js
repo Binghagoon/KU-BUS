@@ -36,9 +36,8 @@ function checkCall() {
         alert("failed on check reservation");
       },
       success: function (data, status, xhr) {
-        if (data) data = data[0];
         if (data == undefined) return;
-        if (data.callSuccess != null) {
+        if (data.callSuccess != false) {
           if (data.callSuccess) {
             query["driverId"] = data.driverId;
             clearInterval(checkIntervalId);
