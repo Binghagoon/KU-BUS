@@ -20,8 +20,8 @@ $(() => {
         url: "../node/call-request",
         type: "POST",
         data: {
-          departure_no: query.fromNo,
-          arrival_no: query.toNo,
+          departureNo: query.fromNo,
+          arrivalNo: query.toNo,
           id: sessionStorage.getItem("kubus_member_id"),
         },
         error: function (jqXHR, textStatus, errorThrown) {
