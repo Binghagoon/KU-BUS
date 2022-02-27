@@ -53,15 +53,3 @@ function KUBUSSignup(data) {
   window.location.href =
     window.location.origin + "/kakao-login/register.html?" + sp.toString();
 }
-
-function SigninAfter(responce, data) {
-  console.log("Successfully Sign in via Kakao API");
-  let role = data["role"];
-  sessionStorage.setItem("kubus_member_id", data.id);
-
-  urlChangeWithQuery(firstPage[role],{
-    role: role,
-    debugging: debugging,
-    id: data.id,
-  });
-}
