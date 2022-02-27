@@ -60,13 +60,11 @@ function KUBUSSignup(data) {
 
 function SigninAfter(responce, data) {
   console.log("Successfully Sign in via Kakao API");
-  var role = data["role"];
+  let role = data["role"];
 
-  var sp = new URLSearchParams();
-  sp.append("role", role);
-  sp.append("debugging", debugging);
-  sp.append("id", responce["id"]);
-
-  window.location.href =
-    window.location.origin + firstPage[role] + "?" + sp.toString();
+  urlChangeWithQuery(firstPage[role],{
+    role: role,
+    debugging: debugging,
+    id: id,
+  });
 }
