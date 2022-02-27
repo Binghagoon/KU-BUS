@@ -1,5 +1,5 @@
 /** this file might need to be import JQuery file. otherwise it works not fine. */
-class Location {
+class UserLocation {
   constructor(id, callback) {
     //Anam station
     let lat = 37.586232954034564;
@@ -121,8 +121,8 @@ class Location {
   awakeInterval(timed = 1000, callback) {
     let loc = this;
     this.intervalID = setInterval(async function () {
-      let pos = await Location.getPositionViaClient();
-      Location.serverPosUpdate(pos, loc.id);
+      let pos = await UserLocation.getPositionViaClient();
+      UserLocation.serverPosUpdate(pos, loc.id);
       try {
         if (callback != undefined) {
           callback(pos);

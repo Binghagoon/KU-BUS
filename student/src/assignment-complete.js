@@ -13,7 +13,7 @@ $(function () {
     try {
       traceAnother(driverID, "DRIVER");
 
-      let studentLoc = new Location(studentID, function (loc) {
+      let studentLoc = new UserLocation(studentID, function (loc) {
         let studentMarker = pinUpdate(loc.pos, "STUDENT");
         loc.awakeInterval(1000, function (pos) {
           markerLocationChange(studentMarker, {

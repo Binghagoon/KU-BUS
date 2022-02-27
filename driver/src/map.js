@@ -3,7 +3,7 @@
 const debugging = (sessionStorage.getItem("debugging") === "true");
 const id = sessionStorage.getItem("kubus_member_id");
 const reqData = queryToObject();
-const driverLocation = new Location(id);
+const driverLocation = new UserLocation(id);
 
 $(document).ready(function () {
   if(sessionStorage.getItem("ignoreList") == null)
