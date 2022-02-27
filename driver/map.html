@@ -14,28 +14,30 @@
     />
     <link rel="stylesheet" type="text/css" href="../css/header.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/map.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+    <link rel="stylesheet" type="text/css" href="css/map.css" />
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
     ></script>
     <script src="../src/jquery.js"></script>
-    <script src="../src/navigator.js"></script>
     <script src="../src/url-parameter.js"></script>
+    <script src="../src/navigator.js"></script>
     <script src="../src/map.js"></script>
+    <script src="../src/marker.js"></script>
     <script src="src/map.js"></script>
   </head>
   <body>
     <div id="header" class="front">
-      <div id="ex2" hidden>운행을 시작합니다.</div>
       <div id="ex1">호출을 대기중입니다.</div>
+      <div id="ex2">운행을 시작합니다.</div>
+      <div id="ex3"></div>
+      <div id="debugging" hidden>
+        <button id="button">호출 받기</button>
+      </div>
     </div>
     <div id="map-container">
       <div id="map"></div>
-    </div>
-    <div id="debugging" hidden>
-      <button id="button">호출 받기</button>
     </div>
   </body>
 </html>

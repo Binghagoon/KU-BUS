@@ -30,7 +30,7 @@ function startMap(callback = null) {
         }
       })
       .catch(function (error) {
-        console.log(error.code);
+        console.log(error.message);
         alert("현재 위치를 가져올 수 없습니다.");
       });
   } else {
@@ -77,9 +77,32 @@ function recordPositionGet() {
     },
   });
 }
+
+function pinCurrentPosition(who) {
+  var getpos = new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+  if (!!navigator.geolocation) {
+    getpos
+      .then(function (data) {
+        let newCoords = {
+          lat: data.coords.latitude,
+          lng: data.coords.longitude,
+        }
+        pinUpdate(newCoords, who);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+        alert("현재 위치를 가져올 수 없습니다.");
+      });
+  } else {
+    alert("현재 브라우저에서 위치정보를 지원하지 않습니다.");
+  }
+}
+
 function pinUpdate(position, who) {
   if (userMarker[who] == null) {
-    userMarker[who] = markerCreate(position, who);
+    userMarker[who] = markerCreate(position, who, who, map);
   } else {
     markerLocationChange(userMarker[who], position);
   }

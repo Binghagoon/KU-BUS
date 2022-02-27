@@ -26,7 +26,7 @@ $(() => {
         },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("failed to call");
-          console.error(`${textStatus}\n${errorThrown}`);
+          //console.error(`${textStatus}\n${errorThrown}`);
         },
         success: function (data, status, xhr) {
           console.log("move to doing-reservation.html");

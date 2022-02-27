@@ -1,9 +1,5 @@
-let firstPage = {
-  undefined: "/student/first-page.html",
-  STUDENT: "/student/first-page.html",
-  DRIVER: "/driver/map.html",
-  ADMINISTRATOR: "/administrator/first-page.html",
-};
+// import ../src/login.js
+
 var params = new URLSearchParams(window.location.search);
 var token = params.get("access_token");
 var debugging = false;
@@ -41,7 +37,7 @@ function KUBUSSignin(responce) {
         window.location.href =
           window.location.origin + "/kakao-login/login.html";
       } else {
-        SigninAfter(responce, data);
+        SigninAfter(data);
       }
     },
   });
@@ -56,16 +52,4 @@ function KUBUSSignup(data) {
   alert("KUBUS서비스를 처음이용하시는것 같네요! 회원가입을 하셔야 됩니다!");
   window.location.href =
     window.location.origin + "/kakao-login/register.html?" + sp.toString();
-}
-
-function SigninAfter(responce, data) {
-  console.log("Successfully Sign in via Kakao API");
-  let role = data["role"];
-  sessionStorage.setItem("kubus_member_id", id);
-
-  urlChangeWithQuery(firstPage[role],{
-    role: role,
-    debugging: debugging,
-    id: id,
-  });
 }

@@ -19,7 +19,7 @@
     <script src="src/login.js"></script>
     <script>
       var debugging = false;
-      var isStudent = true;
+      var debuggingIsStudent = true;
       $(document).ready(function () {
         $("form[name='login-field']").submit(function (event) {
           console.log("submitted");
@@ -42,8 +42,8 @@
           }
         });
         $("#class").click(function () {
-          isStudent = !isStudent;
-          $("#class").html(isStudent ? "학생" : "기사");
+          debuggingIsStudent = !debuggingIsStudent;
+          $("#class").html(debuggingIsStudent ? "학생" : "기사");
         });
       });
     </script>

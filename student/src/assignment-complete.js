@@ -31,7 +31,7 @@ $(function () {
   });
   $("#cancel-reservation").on("click", function () {
     $.ajax({
-      url: "../node/reservation-delete",
+      url: "../node/call-cancel",
       data: {
         id: query["callNo"],
       },
@@ -39,8 +39,8 @@ $(function () {
         console.log("Error");
       },
       success: function (data, textStatus, jqXHR) {
-        console.log("Move to ConfirmReservation");
-        window.location.href = "confirm-reservation";
+        console.log("Move to first-page");
+        window.location.href = "first-page.html";
       },
     });
   });

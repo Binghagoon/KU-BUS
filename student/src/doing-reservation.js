@@ -10,11 +10,11 @@ $(function () {
   printData(query["fromName"], query["toName"]);
   //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
   if (!sessionStorage.getItem("debugging")) {
-    checkIntervalId = setInterval(checkReservation, 1000);
+    checkIntervalId = setInterval(checkCall, 1000);
   } else {
-    setTimeout(successReservation, 1000);
+    setTimeout(successCall, 1000);
   }
-  $("#cancel-reservation").on("click", cancelReservation);
+  $("#cancel-reservation").on("click", cancelCall);
 });
 
 function printData(fromName, toName) {
@@ -24,10 +24,10 @@ function printData(fromName, toName) {
   arr.html(arr.html() + toName);
 }
 
-function checkReservation() {
+function checkCall() {
   if (!sessionStorage.getItem("debugging")) {
     $.ajax({
-      url: "../node/check-driver",
+      url: "../node/call-status",
       type: "GET",
       data: {
         callNo: query["callNo"],
@@ -42,18 +42,20 @@ function checkReservation() {
           if (data.callSuccess) {
             query["driverId"] = data.driverId;
             clearInterval(checkIntervalId);
-            successReservation();
+            successCall();
           } else {
-            alert("콜에 실패했습니다. 잠시 후 다시 시도해주세요.");
+            alert("배차에 실패했습니다. 잠시 후 다시 시도해주세요.");
+            cancelCall();
           }
         }
       },
     });
   } else {
+    console.log(`on debugging mode, skip`);
   }
 }
 
-function successReservation() {
+function successCall() {
   query["status"] = "waiting";
   // To be add argument
   window.onbeforeunload = () => {};
@@ -63,12 +65,12 @@ function successReservation() {
 }
 
 // first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
-function cancelReservation() {
+function cancelCall() {
   if (sessionStorage.getItem("debugging")) {
     window.location.href = "first-page.html";
   }
   $.ajax({
-    url: "../node/reservation-delete",
+    url: "../node/call-cancel",
     type: "POST",
     data: {
       no: query["callNo"],

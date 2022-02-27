@@ -1,42 +1,49 @@
-const debugging = true;
-const id = 0;
-var stat = "working";
+// import ../src/url-parameter.js
+
+const debugging = sessionStorage.getItem("debugging");
+const id = sessionStorage.getItem("kubus_member_id");
+const reqData = queryToObject();
 
 $(document).ready(function () {
-  startMap();
-
-  /*
-  받아와야 할 것들
-  id, stat, reqData
-  */
-
-  setInterval(checkReservation, 1000); // 1초마다 새 콜이 오는지 확인
-  traceAnother(id, "DRIVER");
-  if (debugging) {
-    $("#debugging").show();
-    $("#button").on("click", function () {
-      moveToNew([
-        {
-          id: "test_id_000",
-          name: "asdf",
-          date: "2021-10-03T11:32:40.000Z",
-          departure: "우당교양관",
-          arrival: "정경대학과 타이거 프라자 사이",
-          carfull: "없음",
-          phone: "010-0000-0000",
-        },
-      ]);
-      return false;
-    });
+  startMap(() => {
+    pinCurrentPosition("DRIVER");
+  });
+  if (!sessionStorage.getItem("driverStatus")) {
+    sessionStorage.setItem("driverStatus", "waiting");
   }
-  if (stat == "working") {
-    $("#ex1").hide();
-    $("#ex2").removeAttr("hidden");
-    traceAnother(reqData["id"], "STUDENT");
+
+  if (sessionStorage.getItem("driverStatus") === "waiting") {
+    showOnlyEx(1);
+
+    setTimeout(checkCall, 1000); // 1초마다 새 콜이 오는지 확인
+  }
+  if (sessionStorage.getItem("driverStatus") === "working") {
+    showOnlyEx(3);
+    $("#ex3").append(printData(reqData));
+
+    console.log(reqData);
+    //traceAnother(reqData["id"], "STUDENT");
+  }
+  //traceAnother(id, "DRIVER");
+
+  if (debugging) {
+    console.log("In debugging mode");
+    $("#debugging").hidden = false;
+    //showOnlyEx(4);
+    $("#button").on("click", function () {
+      urlChangeWithQuery("new-alarm.html", {
+        id: "test_id_000",
+        name: "asdf",
+        date: "2021-10-03T11:32:40.000Z",
+        departure: "우당교양관",
+        arrival: "정경대학과 타이거 프라자 사이",
+        phoneNumber: "010-0000-0000",
+      });
+    });
   }
 });
 
-function checkReservation() {
+function checkCall() {
   $.ajax({
     url: "../node/no-driver-call",
     type: "GET",
@@ -44,13 +51,35 @@ function checkReservation() {
       console.log("Reservation Get Error");
     },
     success: function (data, textStatus, jqxhr) {
-      if (data.length != 0) moveToNew(data);
-      7;
+      if (data.length != 0) {
+        console.log("Move to new-alarm");
+        urlChangeWithQuery("new-alarm.html", data[0]);
+      }
+      else {
+        setTimeout(checkCall);
+      }
     },
   });
 }
 
-function moveToNew(data) {
-  console.log("Move to new-alarm");
-  urlChangeWithQuery("new-alarm.html", data[0]);
+function showOnlyEx(idx) {
+  let divs = $("#header div");
+  for (let i = 0; i < divs.length; ++i) {
+    if (i === idx - 1) {
+      divs[i].hidden = false;
+    } else {
+      divs[i].hidden = true;
+    }
+  }
+}
+
+function printData(data) {
+  let newString = "";
+
+  newString += `이름 : ${data.name}<br>`;
+  newString += `출발 : ${data.departure}<br>`;
+  newString += `도착 : ${data.arrival}<br>`;
+  newString += `전화번호 : ${data.phoneNumber}<br>`;
+
+  return newString;
 }
