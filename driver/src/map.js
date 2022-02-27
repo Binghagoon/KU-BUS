@@ -3,13 +3,13 @@
 const debugging = (sessionStorage.getItem("debugging") === "true");
 const id = sessionStorage.getItem("kubus_member_id");
 const reqData = queryToObject();
-const location = new Location(id);
+const driverLocation = new Location(id);
 
 $(document).ready(function () {
   if(sessionStorage.getItem("ignoreList") == null)
   sessionStorage.setItem("ignoreList","");
   startMap(() => {
-    location.awakeInterval(1000, pos => pinUpdate(pos, "DRIVER"));
+    driverLocation.awakeInterval(1000, pos => pinUpdate(pos, "DRIVER"));
   });
 
   if (!sessionStorage.getItem("driverStatus")) {
