@@ -17,8 +17,8 @@ $(function () {
         let studentMarker = pinUpdate(loc.pos, "STUDENT");
         loc.awakeInterval(1000, function (pos) {
           markerLocationChange(studentMarker, {
-            latitude: pos.lat - 0.0001 * clicked,
-            longitude: pos.lng,
+            lat: pos.lat - 0.0001 * clicked,
+            lng: pos.lng,
           });
         });
       });

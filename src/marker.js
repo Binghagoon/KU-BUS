@@ -36,7 +36,7 @@ function markerCreate(position, who, title, map) {
 
 function markerLocationChange(marker, position) {
   marker.setPosition(
-    new kakao.maps.LatLng(position["latitude"], position["longitude"])
+    new kakao.maps.LatLng(position["lat"], position["lng"])
   );
 }
 
