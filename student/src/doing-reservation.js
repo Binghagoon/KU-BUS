@@ -4,7 +4,7 @@ let parse;
 let checkIntervalId;
 const query = queryToObject();
 
-window.onbeforeunload = cancelReservation;
+window.onbeforeunload = cancelCall;
 
 $(function () {
   printData(query["fromName"], query["toName"]);

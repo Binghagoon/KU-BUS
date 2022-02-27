@@ -62,7 +62,9 @@ class Location {
         console.log("failed on location update");
       },
       success: function (data, status, xhr) {
-        successCallback(data);
+        if (successCallback) {
+          successCallback(data);
+        }
       },
     });
   }
