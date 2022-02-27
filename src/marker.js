@@ -12,6 +12,7 @@ var deletedMarker = [];
 var openedIwcontent = null;
 
 function markerCreate(position, who, title, map) {
+  console.log(position, who);
   const imgconvert = {
     DRIVER: "../src/img/car-pin.png",
     STUDENT: "../src/img/human-pin.png",

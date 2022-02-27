@@ -43,8 +43,7 @@ function IDSubmit(id, pw) {
       name: "driver",
       debugging: "true",
     };
-    //var val = isStudent ? student : driver;
-    let val = student;
+    let val = debuggingIsStudent ? student : driver;
     SigninAfter(val);
   }
   /*

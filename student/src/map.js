@@ -38,6 +38,7 @@ $(document).ready(function () {
 
   startMap(function () {
     recordPositionGet();
+    pinCurrentPosition("STUDENT");
   });
 });
 
