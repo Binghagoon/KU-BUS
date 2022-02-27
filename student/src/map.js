@@ -58,9 +58,9 @@ function prefixModify() {
 function goToCallReservation() {
   var query = {
     fromName: from.name,
-    fromNo: from.num,
+    fromNo: from.no,
     toName: to.name,
-    toNo: to.num,
+    toNo: to.no,
   };
   urlChangeWithQuery("call-reservation.html", query);
 }
