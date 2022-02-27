@@ -42,7 +42,11 @@ $(document).ready(function () {
       },
     });
   });
-  $("#reject").on("click", function () {});
+  $("#reject").on("click", function () {
+    let ignoreList = sessionStorage.getItem("ignoreList");
+    sessionStorage.setItem("ignoreList",ignoreList + " " + reqData.callNo);
+    urlChangeWithQuery("./map.html",{});
+  });
 });
 
 function printData(name, date, dep, arr, phone, email) {

@@ -1,10 +1,12 @@
 // import ../src/url-parameter.js
 
-const debugging = sessionStorage.getItem("debugging");
+const debugging = sessionStorage.getItem("debugging") === "true";
 const id = sessionStorage.getItem("kubus_member_id");
 const reqData = queryToObject();
 
 $(document).ready(function () {
+  if(sessionStorage.getItem("ignoreList") == null)
+  sessionStorage.setItem("ignoreList","");
   startMap(() => {
     pinCurrentPosition("DRIVER");
   });
@@ -51,13 +53,15 @@ function checkCall() {
       console.log("Reservation Get Error");
     },
     success: function (data, textStatus, jqxhr) {
-      if (data.length != 0) {
-        console.log("Move to new-alarm");
-        urlChangeWithQuery("new-alarm.html", data[0]);
-      }
-      else {
-        setTimeout(checkCall, 1000);
-      }
+        for(const val of data){
+          let ignoreList = sessionStorage.getItem("ignoreList");
+          if(ignoreList.includes(val.callNo)){
+            continue;
+          }
+          console.log("Move to new-alarm");
+          urlChangeWithQuery("new-alarm.html", val);
+        }
+      setTimeout(checkCall, 1000);
     },
   });
 }
