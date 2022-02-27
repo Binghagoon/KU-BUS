@@ -72,7 +72,7 @@ function cancelCall() {
     url: "../node/call-cancel",
     type: "POST",
     data: {
-      no: query["callNo"],
+      callNo: query["callNo"],
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.error(textStatus);
