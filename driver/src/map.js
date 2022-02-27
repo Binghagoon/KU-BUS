@@ -56,7 +56,7 @@ function checkCall() {
         urlChangeWithQuery("new-alarm.html", data[0]);
       }
       else {
-        setTimeout(checkCall);
+        setTimeout(checkCall, 1000);
       }
     },
   });
