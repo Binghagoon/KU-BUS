@@ -1,17 +1,30 @@
-const debugging = true;
-const id = 0;
-var stat = "working";
+// import ../src/url-parameter.js
+
+const debugging = sessionStorage.getItem("debugging");
+const id = sessionStorage.getItem("kubus_member_id");
+const reqData = queryToObject();
 
 $(document).ready(function () {
   startMap();
+  if (!sessionStorage.getItem("driverStatus")) {
+    sessionStorage.setItem("driverStatus", "waiting");
+  }
 
-  /*
-  받아와야 할 것들
-  id, stat, reqData
-  */
+  if (sessionStorage.getItem("driverStatus") == "waiting") {
+    $("#ex1").show();
+    $("#ex2").hide();
 
-  setInterval(checkReservation, 1000); // 1초마다 새 콜이 오는지 확인
-  traceAnother(id, "DRIVER");
+    setTimeout(checkCall, 1000); // 1초마다 새 콜이 오는지 확인
+  }
+  if (sessionStorage.getItem("driverStatus") == "working") {
+    $("#ex1").hide();
+    $("#ex2").show();
+
+    console.log(reqData);
+    //traceAnother(reqData["id"], "STUDENT");
+  }
+  //traceAnother(id, "DRIVER");
+
   if (debugging) {
     $("#debugging").show();
     $("#button").on("click", function () {
@@ -29,14 +42,9 @@ $(document).ready(function () {
       return false;
     });
   }
-  if (stat == "working") {
-    $("#ex1").hide();
-    $("#ex2").removeAttr("hidden");
-    traceAnother(reqData["id"], "STUDENT");
-  }
 });
 
-function checkReservation() {
+function checkCall() {
   $.ajax({
     url: "../node/no-driver-call",
     type: "GET",
@@ -44,13 +52,13 @@ function checkReservation() {
       console.log("Reservation Get Error");
     },
     success: function (data, textStatus, jqxhr) {
-      if (data.length != 0) moveToNew(data);
-      7;
+      if (data.length != 0) {
+        console.log("Move to new-alarm");
+        urlChangeWithQuery("new-alarm.html", data[0]);
+      }
+      else {
+        setTimeout(checkCall);
+      }
     },
   });
-}
-
-function moveToNew(data) {
-  console.log("Move to new-alarm");
-  urlChangeWithQuery("new-alarm.html", data[0]);
 }
