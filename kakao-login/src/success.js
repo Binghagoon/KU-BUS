@@ -61,11 +61,11 @@ function KUBUSSignup(data) {
 function SigninAfter(responce, data) {
   console.log("Successfully Sign in via Kakao API");
   let role = data["role"];
-  sessionStorage.setItem("kubus_member_id", id);
+  sessionStorage.setItem("kubus_member_id", data.id);
 
   urlChangeWithQuery(firstPage[role],{
     role: role,
     debugging: debugging,
-    id: id,
+    id: data.id,
   });
 }
