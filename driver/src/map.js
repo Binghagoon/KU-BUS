@@ -1,6 +1,6 @@
 // import ../src/url-parameter.js
 
-const debugging = sessionStorage.getItem("debugging") === "true";
+const debugging = (sessionStorage.getItem("debugging") === "true");
 const id = sessionStorage.getItem("kubus_member_id");
 const reqData = queryToObject();
 

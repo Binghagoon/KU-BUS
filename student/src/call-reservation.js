@@ -15,7 +15,7 @@ $(() => {
   );
 
   $("#submit").on("click", () => {
-    if (!sessionStorage.getItem("debugging")) {
+    if (!(sessionStorage.getItem("debugging") === "true")) {
       $.ajax({
         url: "../node/call-request",
         type: "POST",
