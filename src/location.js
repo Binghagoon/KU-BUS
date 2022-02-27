@@ -60,6 +60,25 @@ class Location {
     };
   }
 
+  static async serverPosInsert(pos, id, successCallback) {
+    $.ajax({
+      url: "../node/location-insert",
+      type: "POST",
+      data: {
+        id: id,
+        latitude: pos.lat,
+        longitude: pos.lng,
+      },
+      success: function (data, status, xhr) {
+        if (data.status === "success") {
+          if (successCallback) {
+            successCallback(data);
+          }
+        }
+      },
+    })
+  } 
+
   static async serverPosUpdate(pos, id, successCallback) {
     $.ajax({
       url: "../node/location-update",
@@ -120,17 +139,20 @@ class Location {
   /** callback argument is pos */
   awakeInterval(timed = 1000, callback) {
     let loc = this;
-    this.intervalID = setInterval(async function () {
-      let pos = await Location.getPositionViaClient();
-      Location.serverPosUpdate(pos, loc.id);
-      try {
-        if (callback != undefined) {
-          callback(pos);
+    let pos = await Location.getPositionViaClient();
+    Location.serverPosInsert(pos, loc.id, () => {
+      this.intervalID = setInterval(async function () {
+        pos = await Location.getPositionViaClient();
+        Location.serverPosUpdate(pos, loc.id);
+        try {
+          if (callback != undefined) {
+            callback(pos);
+          }
+        } catch (e) {
+          console.log(e.stack);
         }
-      } catch (e) {
-        console.log(e.stack);
-      }
-    }, timed);
+      }, timed);
+    });
   }
 
   killInterval() {
