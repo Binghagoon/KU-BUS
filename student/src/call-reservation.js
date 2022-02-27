@@ -17,12 +17,12 @@ $(() => {
   $("#submit").on("click", () => {
     if (!sessionStorage.getItem("debugging")) {
       $.ajax({
-        url: "../node/reservation-post",
+        url: "../node/call-request",
         type: "POST",
         data: {
-          departure_no: query.fromNo,
-          arrival_no: query.toNo,
-          id: query.id,   //if it works not properly use this  id: sessionStorage.getItem("kubus_member_id"), deleted data on PR #39
+          departureNo: query.fromNo,
+          arrivalNo: query.toNo,
+          id: sessionStorage.getItem("kubus_member_id"),
         },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("failed to call");
