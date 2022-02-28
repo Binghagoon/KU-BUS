@@ -101,6 +101,7 @@ function pinCurrentPosition(who) {
 }
 
 function pinUpdate(position, who) {
+  console.log(position, who);
   if (userMarker[who] == null) {
     userMarker[who] = markerCreate(position, who, who, map);
   } else {

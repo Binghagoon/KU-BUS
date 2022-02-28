@@ -39,7 +39,7 @@ function checkCall() {
         if (data == undefined) return;
         if (data.callSuccess != false) {
           if (data.callSuccess) {
-            query["driverId"] = data.driverId;
+            query["driverid"] = data.driverid;
             clearInterval(checkIntervalId);
             successCall();
           } else {

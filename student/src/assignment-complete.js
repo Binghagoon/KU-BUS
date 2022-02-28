@@ -2,7 +2,7 @@
 
 const query = queryToObject();
 const studentLocation = new UserLocation(sessionStorage.getItem("kubus_member_id"));
-let driverID = query["driverId"];
+let driverID = query["driverid"];
 let studentID = sessionStorage.getItem("kubus_member_id");
 
 let clicked = 0;
