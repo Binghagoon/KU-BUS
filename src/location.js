@@ -141,13 +141,12 @@ class UserLocation {
     let loc = this;
     let pos = await UserLocation.getPositionViaClient();
 
-    UserLocation.serverPosInsert(pos, loc.id, () => {
-      loc.intervalID = setInterval(function () {
-        UserLocation.serverPosUpdate(pos, loc.id);
-        if (callback != undefined) {
-          callback(pos);
-        }
-      });
+    await UserLocation.serverPosInsert(pos, loc.id);
+    this.intervalID = setInterval(function () {
+      UserLocation.serverPosUpdate(pos, loc.id);
+      if (callback != undefined) {
+        callback(pos);
+      }
     }, timed);
   }
 
