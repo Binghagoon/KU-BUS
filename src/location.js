@@ -36,25 +36,25 @@ class UserLocation {
   }
 
   static getPositionViaClient(callback) {
-    let lat, lng;
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        let coords = position.coords;
-        lat = coords.latitude;
-        lng = coords.longitude;
-        if (callback != undefined) {
-          callback(coords);
+    return new Promise((res, rej) => {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          let coords = position.coords;
+          if (callback != undefined) {
+            callback(coords);
+          }
+          res({
+            lat: coords.latitude,
+            lng: coords.longitude,
+          })
+        },
+        function (err) {
+          console.error(err);
+          console.log("Could not get Position via client");
+          rej(err);
         }
-      },
-      function (err) {
-        console.error(err);
-        console.log("Could not get Position via client");
-      }
-    )
-    return {
-      lat: lat,
-      lng: lng,
-    };
+      )
+    });
   }
 
   static serverPosInsert(pos, id, successCallback) {
@@ -150,14 +150,18 @@ class UserLocation {
   /** callback argument is pos */
   awakeInterval(timed = 1000, callback) {
     let loc = this;
-    let pos = UserLocation.getPositionViaClient();
-    UserLocation.serverPosInsert(pos, loc.id);
+    UserLocation.getPositionViaClient()
+    .then(pos => {
+      return UserLocation.serverPosInsert(pos, loc.id);
+    });
 
     this.intervalID = setInterval(function () {
-      let newPos = UserLocation.getPositionViaClient();
-      
-      UserLocation.serverPosUpdate(newPos, loc.id);
-      if (callback) callback(newPos);
+      UserLocation.getPositionViaClient()
+      .then(pos => {
+        if (callback) callback(pos);
+
+        return UserLocation.serverPosUpdate(pos, loc.id);
+      });
     }, timed);
   }
 
