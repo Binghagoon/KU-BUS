@@ -58,7 +58,7 @@ function successCall() {
   query["status"] = "waiting";
   // To be add argument
   window.onbeforeunload = () => {};
-  alert("예약이 완료되었습니다!");
+  //alert("예약이 완료되었습니다!");
 
   urlChangeWithQuery("assignment-complete.html", query);
 }

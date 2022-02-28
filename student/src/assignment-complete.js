@@ -7,9 +7,10 @@ let studentID = sessionStorage.getItem("kubus_member_id");
 
 let clicked = 0;
 
-$(function () {
+$(document).ready(function () {
   window.onbeforeunload = cancelCall;
-  startMap(function () {
+
+  startMap(() => {
     studentLocation.awakeInterval(1000, pos => pinUpdate(pos, "STUDENT"));
   });
 

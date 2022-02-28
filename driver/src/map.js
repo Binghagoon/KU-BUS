@@ -8,6 +8,7 @@ const driverLocation = new UserLocation(id);
 $(document).ready(function () {
   if(sessionStorage.getItem("ignoreList") == null)
   sessionStorage.setItem("ignoreList","");
+
   startMap(() => {
     driverLocation.awakeInterval(1000, pos => pinUpdate(pos, "DRIVER"));
   });
