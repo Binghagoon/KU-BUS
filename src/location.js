@@ -57,70 +57,81 @@ class UserLocation {
     };
   }
 
-  static async serverPosInsert(pos, id, successCallback) {
-    $.ajax({
-      url: "../node/location-insert",
-      type: "POST",
-      data: {
-        id: id,
-        latitude: pos.lat,
-        longitude: pos.lng,
-      },
-      success: function (data, status, xhr) {
-        if (data.status === "success") {
-          console.log("serverPosInsert success");
-          if (successCallback) {
-            successCallback(data);
+  static serverPosInsert(pos, id, successCallback) {
+    return new Promise((res, rej) => {
+      $.ajax({
+        url: "../node/location-insert",
+        type: "POST",
+        data: {
+          id: id,
+          latitude: pos.lat,
+          longitude: pos.lng,
+        },
+        success: function (data, status, xhr) {
+          if (data.status === "success") {
+            console.log("serverPosInsert success");
+            if (successCallback) {
+              successCallback(data);
+            }
+            res(data);
+          } else {
+            console.log(data.errorMessage);
+            rej(data.status);
           }
-        } else {
-          console.log(data.errorMessage);
-        }
-      },
+        },
+      })
     })
   } 
 
-  static async serverPosUpdate(pos, id, successCallback) {
-    $.ajax({
-      url: "../node/location-update",
-      type: "POST",
-      data: {
-        id: id,
-        latitude: pos.lat,
-        longitude: pos.lng,
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.log("failed on location update");
-      },
-      success: function (data, status, xhr) {
-        if (successCallback) {
-          successCallback(data);
-        }
-      },
+  static serverPosUpdate(pos, id, successCallback) {
+    return new Promise((res, rej) => {
+      $.ajax({
+        url: "../node/location-update",
+        type: "POST",
+        data: {
+          id: id,
+          latitude: pos.lat,
+          longitude: pos.lng,
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log("failed on location update");
+          rej("error in serverPosUpdate");
+        },
+        success: function (data, status, xhr) {
+          if (successCallback) {
+            successCallback(data);
+          }
+          res(data);
+        },
+      });
     });
   }
 
-  static async getPosViaServer(id, callback) {
-    let location = {};
-    await $.ajax({
-      type: "GET",
-      url: "../node/get-location",
-      data: {
-        id: id,
-      },
-      dataType: "JSON",
-      success: function (response) {
-        if (response.status == "error") {
-          console.error(response.errorMessage);
-        } else {
-          location = {
-            lat: response.latitude,
-            lng: response.longitude,
-          };
-          if (callback) callback(location);
-        }
-      },
+  static getPosViaServer(id, callback) {
+    return new Promise((res, rej) => {
+      let location = {};
+      $.ajax({
+        type: "GET",
+        url: "../node/get-location",
+        data: {
+          id: id,
+        },
+        dataType: "JSON",
+        success: function (response) {
+          if (response.status == "error") {
+            console.error(response.errorMessage);
+            rej(response.status);
+          } else {
+            location = {
+              lat: response.latitude,
+              lng: response.longitude,
+            };
+            if (callback) callback(location);
+            res(location);
+          }
+        },
+      });
     });
-    return location;
   }
 
   get pos() {
@@ -143,9 +154,10 @@ class UserLocation {
     UserLocation.serverPosInsert(pos, loc.id);
 
     this.intervalID = setInterval(function () {
-      pos = UserLocation.getPositionViaClient();
-      UserLocation.serverPosUpdate(pos, loc.id);
-      if (callback) callback(pos);
+      let newPos = UserLocation.getPositionViaClient();
+      
+      UserLocation.serverPosUpdate(newPos, loc.id);
+      if (callback) callback(newPos);
     }, timed);
   }
 
