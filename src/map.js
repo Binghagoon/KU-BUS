@@ -110,8 +110,8 @@ function pinUpdate(position, who) {
 }
 
 function traceAnother(id, who) {
-  return setInterval(async function() {
-    await updateAnother(id, who)
+  return setInterval(function() {
+    updateAnother(id, who)
   }, 1000);
 }
 
