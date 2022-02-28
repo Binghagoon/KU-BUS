@@ -35,25 +35,22 @@ class UserLocation {
     return isValueExist;
   }
 
-  static getCurPosPromise = new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-
-  static async getPositionViaClient(callback) {
+  static getPositionViaClient(callback) {
     let lat, lng;
-    await this.getCurPosPromise
-      .then(function (position) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
         let coords = position.coords;
         lat = coords.latitude;
         lng = coords.longitude;
         if (callback != undefined) {
           callback(coords);
         }
-      })
-      .catch(function (err) {
-        console.log(e);
+      },
+      function (err) {
+        console.error(err);
         console.log("Could not get Position via client");
-      });
+      }
+    )
     return {
       lat: lat,
       lng: lng,
