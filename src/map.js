@@ -109,7 +109,7 @@ function pinUpdate(position, who) {
   return userMarker[who];
 }
 
-async function traceAnother(id, who) {
+function traceAnother(id, who) {
   return setInterval(() => updateAnother(id, who), 1000);
 }
 
