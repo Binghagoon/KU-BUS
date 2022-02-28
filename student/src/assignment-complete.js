@@ -10,21 +10,17 @@ $(function () {
     let driverID = query["driverId"];
     let studentID = sessionStorage.getItem("kubus_member_id");
 
-    try {
-      traceAnother(driverID, "DRIVER");
+    traceAnother(driverID, "DRIVER");
 
-      let studentLoc = new UserLocation(studentID, function (loc) {
-        let studentMarker = pinUpdate(loc.pos, "STUDENT");
-        loc.awakeInterval(1000, function (pos) {
-          markerLocationChange(studentMarker, {
-            lat: pos.lat - 0.0001 * clicked,
-            lng: pos.lng,
-          });
+    let studentLoc = new UserLocation(studentID, function (loc) {
+      let studentMarker = pinUpdate(loc.pos, "STUDENT");
+      loc.awakeInterval(1000, function (pos) {
+        markerLocationChange(studentMarker, {
+          lat: pos.lat - 0.0001 * clicked,
+          lng: pos.lng,
         });
       });
-    } catch (e) {
-      console.log(e.stack);
-    }
+    });
   });
   $("#cancel-reservation").on("click", cancelCall);
   $("#send-message").on("click", function (e) {
