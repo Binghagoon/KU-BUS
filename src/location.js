@@ -139,12 +139,17 @@ class UserLocation {
   /** callback argument is pos */
   awakeInterval(timed = 1000, callback) {
     let loc = this;
-    this.intervalID = setInterval(async function () {
-      let pos = await UserLocation.getPositionViaClient();
-      UserLocation.serverPosUpdate(pos, loc.id);
-      try {
-        if (callback != undefined) {
-          callback(pos);
+    let pos = await UserLocation.getPositionViaClient();
+    UserLocation.serverPosInsert(pos, loc.id, () => {
+      this.intervalID = setInterval(async function () {
+        pos = await UserLocation.getPositionViaClient();
+        UserLocation.serverPosUpdate(pos, loc.id);
+        try {
+          if (callback != undefined) {
+            callback(pos);
+          }
+        } catch (e) {
+          console.log(e.stack);
         }
       } catch (e) {
         console.log(e.stack);
