@@ -71,6 +71,7 @@ class UserLocation {
       },
       success: function (data, status, xhr) {
         if (data.status === "success") {
+          console.log("serverPosInsert success");
           if (successCallback) {
             successCallback(data);
           }
@@ -109,13 +110,14 @@ class UserLocation {
       },
       dataType: "JSON",
       success: function (response) {
-        if (response.status) {
+        if (response.status == "error") {
           console.error(response.errorMessage);
         } else {
           location = {
             lat: response.latitude,
             lng: response.longitude,
           };
+          console.log(location);
           if (callback) callback(location);
         }
       },
@@ -144,9 +146,7 @@ class UserLocation {
     await UserLocation.serverPosInsert(pos, loc.id);
     this.intervalID = setInterval(function () {
       UserLocation.serverPosUpdate(pos, loc.id);
-      if (callback != undefined) {
-        callback(pos);
-      }
+      if (callback) callback(pos);
     }, timed);
   }
 
