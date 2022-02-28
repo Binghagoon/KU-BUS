@@ -114,7 +114,6 @@ class UserLocation {
             lat: response.latitude,
             lng: response.longitude,
           };
-          console.log(location);
           if (callback) callback(location);
         }
       },

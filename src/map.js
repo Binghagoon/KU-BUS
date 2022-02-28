@@ -110,12 +110,13 @@ function pinUpdate(position, who) {
 }
 
 function traceAnother(id, who) {
-  return setInterval(() => updateAnother(id, who), 1000);
+  return setInterval(async function() {
+    await updateAnother(id, who)
+  }, 1000);
 }
 
 async function updateAnother(id, who) {
   var result = await UserLocation.getPosViaServer(id);
-  console.log(id, result);
   pinUpdate(result, who);
 }
 
