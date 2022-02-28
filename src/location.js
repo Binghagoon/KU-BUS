@@ -72,6 +72,8 @@ class UserLocation {
           if (successCallback) {
             successCallback(data);
           }
+        } else {
+          console.log(data.errorMessage);
         }
       },
     })
@@ -135,10 +137,10 @@ class UserLocation {
     };
   }
   /** callback argument is pos */
-  async awakeInterval(timed = 1000, callback) {
+  awakeInterval(timed = 1000, callback) {
     let loc = this;
     let pos = UserLocation.getPositionViaClient();
-    await UserLocation.serverPosInsert(pos, loc.id);
+    UserLocation.serverPosInsert(pos, loc.id);
 
     this.intervalID = setInterval(function () {
       pos = UserLocation.getPositionViaClient();
