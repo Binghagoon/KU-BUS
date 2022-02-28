@@ -137,7 +137,7 @@ class UserLocation {
     };
   }
   /** callback argument is pos */
-  awakeInterval(timed = 1000, callback) {
+  async awakeInterval(timed = 1000, callback) {
     let loc = this;
     let pos = await UserLocation.getPositionViaClient();
     UserLocation.serverPosInsert(pos, loc.id, () => {
