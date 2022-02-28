@@ -137,10 +137,11 @@ class UserLocation {
   /** callback argument is pos */
   async awakeInterval(timed = 1000, callback) {
     let loc = this;
-    let pos = await UserLocation.getPositionViaClient();
-
+    let pos = UserLocation.getPositionViaClient();
     await UserLocation.serverPosInsert(pos, loc.id);
+
     this.intervalID = setInterval(function () {
+      pos = UserLocation.getPositionViaClient();
       UserLocation.serverPosUpdate(pos, loc.id);
       if (callback) callback(pos);
     }, timed);
