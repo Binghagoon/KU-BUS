@@ -144,16 +144,10 @@ class UserLocation {
       this.intervalID = setInterval(async function () {
         pos = await UserLocation.getPositionViaClient();
         UserLocation.serverPosUpdate(pos, loc.id);
-        try {
-          if (callback != undefined) {
-            callback(pos);
-          }
-        } catch (e) {
-          console.log(e.stack);
+        if (callback != undefined) {
+          callback(pos);
         }
-      } catch (e) {
-        console.log(e.stack);
-      }
+      });
     }, timed);
   }
 
