@@ -115,6 +115,7 @@ async function traceAnother(id, who) {
 
 async function updateAnother(id, who) {
   var result = await UserLocation.getPosViaServer(id);
+  console.log(id, result);
   pinUpdate(result, who);
 }
 
