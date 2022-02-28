@@ -60,6 +60,25 @@ class UserLocation {
     };
   }
 
+  static async serverPosInsert(pos, id, successCallback) {
+    $.ajax({
+      url: "../node/location-insert",
+      type: "POST",
+      data: {
+        id: id,
+        latitude: pos.lat,
+        longitude: pos.lng,
+      },
+      success: function (data, status, xhr) {
+        if (data.status === "success") {
+          if (successCallback) {
+            successCallback(data);
+          }
+        }
+      },
+    })
+  } 
+
   static async serverPosUpdate(pos, id, successCallback) {
     $.ajax({
       url: "../node/location-update",
