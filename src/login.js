@@ -66,8 +66,7 @@ function SigninAfter(data) {
   sessionStorage.setItem("kubus_member_role", data["role"]);
   sessionStorage.setItem("debugging", debugging);
 
-  window.location.href =
-    window.location.origin + firstPage[data["role"]];
+  window.location.href = "." + firstPage[data["role"]];
 }
 
 function IDFind() {}

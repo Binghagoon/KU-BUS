@@ -61,7 +61,9 @@ function recordPositionGet() {
     url: "../node/record-position",
     type: "GET",
     error: function (request, status, error) {
-      console.log("record positions are not read from server, but we can read local json file.");
+      console.log(
+        "record positions are not read from server, but we can read local json file."
+      );
       $.ajax({
         url: "../src/json/record-position.json",
         error: function (request, status, error) {
@@ -82,18 +84,24 @@ function pinCurrentPosition(who) {
   var getpos = new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
+  let newCoords = {
+    lat: 37.586232954034564,
+    lng: 127.02928291766814,
+  };
   if (!!navigator.geolocation) {
     getpos
       .then(function (data) {
-        let newCoords = {
+        newCoords = {
           lat: data.coords.latitude,
           lng: data.coords.longitude,
-        }
-        pinUpdate(newCoords, who);
+        };
       })
       .catch(function (error) {
         console.log(error.message);
-        alert("현재 위치를 가져올 수 없습니다.");
+        alert("위치 정보를 획득하는 데 실패했습니다. 안암역으로 이동합니다.");
+      })
+      .finally(function () {
+        pinUpdate(newCoords, who);
       });
   } else {
     alert("현재 브라우저에서 위치정보를 지원하지 않습니다.");
@@ -111,14 +119,13 @@ function pinUpdate(position, who) {
 }
 
 function traceAnother(id, who) {
-  return setInterval(function() {
-    updateAnother(id, who)
+  return setInterval(function () {
+    updateAnother(id, who);
   }, 1000);
 }
 
 function updateAnother(id, who) {
-  UserLocation.getPosViaServer(id)
-  .then(result => {
+  UserLocation.getPosViaServer(id).then((result) => {
     pinUpdate(result, who);
   });
 }
