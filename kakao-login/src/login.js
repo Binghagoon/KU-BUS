@@ -33,4 +33,27 @@ $(document).ready(function () {
       redirectUri: window.location.origin + "/kakao-login/auth.html",
     });
   });
+
+  let deferredPrompt;
+  const addBtn = $("#installpwa");
+  addBtn.css("display", "none");
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    addBtn.css("display", "inline-block");
+
+    addBtn.click(function () {
+      addBtn.css("display", "none");
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the A2HS prompt");
+        } else {
+          console.log("User dismissed the A2HS prompt");
+        }
+        deferredPrompt = null;
+      });
+    });
+  });
 });
