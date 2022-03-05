@@ -10,13 +10,12 @@
   position: relative;
   top: 70px;
 }
-
+/*TBD CSS
 #bus-select {
   width: 160px;
   height: 32px;
   background-color: violet;
-  /*TBD CSS*/
-}
+}*/
 
 .alltable {
   border: 1px solid gray;
@@ -34,7 +33,7 @@
   border-radius: 5px;
   box-shadow: 0px 0px 1px 0px darkgrey;
 
-  margin: 10px;
+  margin: 10px 2px;
 }
 
 #legend {
