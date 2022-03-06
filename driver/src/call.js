@@ -1,5 +1,5 @@
 var query = [];
-function reservationIncome(id, nlo, mp, ResTime, rlo, dst, carfull) {
+function callIncome(id, nlo, mp, ResTime, rlo, dst, carfull) {
   var arg = [id, nlo, mp, ResTime, rlo, dst, carfull];
   var i;
   for (i = 0; i < arguments.length; i++) {
@@ -17,5 +17,5 @@ $(document).ready(function () {
     $("#destination"),
     $("#car-full"),
   ];
-  reservationIncome("1", "2", "3", "4", "5", "6", "7");
+  callIncome("1", "2", "3", "4", "5", "6", "7");
 });

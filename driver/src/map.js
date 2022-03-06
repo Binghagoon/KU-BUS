@@ -1,16 +1,16 @@
 // import ../src/url-parameter.js
 
-const debugging = (sessionStorage.getItem("debugging") === "true");
+const debugging = sessionStorage.getItem("debugging") === "true";
 const id = sessionStorage.getItem("kubus_member_id");
 const reqData = queryToObject();
 const driverLocation = new UserLocation(id);
 
 $(document).ready(function () {
-  if(sessionStorage.getItem("ignoreList") == null)
-  sessionStorage.setItem("ignoreList","");
+  if (sessionStorage.getItem("ignoreList") == null)
+    sessionStorage.setItem("ignoreList", "");
 
   startMap(() => {
-    driverLocation.awakeInterval(1000, pos => pinUpdate(pos, "DRIVER"));
+    driverLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "DRIVER"));
   });
 
   if (!sessionStorage.getItem("driverStatus")) {
@@ -25,7 +25,7 @@ $(document).ready(function () {
   if (sessionStorage.getItem("driverStatus") === "working") {
     showOnlyEx(3);
     $("#ex3").append(printData(reqData));
-    
+
     traceAnother(reqData["studentid"], "STUDENT");
   }
 
@@ -51,17 +51,17 @@ function checkCall() {
     url: "../node/no-driver-call",
     type: "GET",
     error: function (jqxhr, textStatus, errorThrown) {
-      console.log("Reservation Get Error");
+      console.log("Call Get Error");
     },
     success: function (data, textStatus, jqxhr) {
-        for(const val of data){
-          let ignoreList = sessionStorage.getItem("ignoreList");
-          if(ignoreList.includes(val.callNo)){
-            continue;
-          }
-          console.log("Move to new-alarm");
-          urlChangeWithQuery("new-alarm.html", val);
+      for (const val of data) {
+        let ignoreList = sessionStorage.getItem("ignoreList");
+        if (ignoreList.includes(val.callNo)) {
+          continue;
         }
+        console.log("Move to new-alarm");
+        urlChangeWithQuery("new-alarm.html", val);
+      }
       setTimeout(checkCall, 1000);
     },
   });

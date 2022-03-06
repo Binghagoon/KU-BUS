@@ -1,5 +1,3 @@
-// import ../src/url-parameter.js
-
 let parse;
 let checkIntervalId;
 const query = queryToObject();
@@ -8,13 +6,13 @@ window.onbeforeunload = cancelCall;
 
 $(function () {
   printData(query["fromName"], query["toName"]);
-  //PrintData(top.args["from"]["name"], top.args["to"]["name"]);
   if (!(sessionStorage.getItem("debugging") === "true")) {
     checkIntervalId = setInterval(checkCall, 1000);
   } else {
     setTimeout(successCall, 1000);
   }
-  $("#cancel-reservation").on("click", cancelCall);
+  $("#cancel-call").on("click", cancelCall);
+  $("#back-home").on("click", backHome);
 });
 
 function printData(fromName, toName) {
@@ -65,7 +63,7 @@ function successCall() {
 
 // first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
 function cancelCall() {
-  if ((sessionStorage.getItem("debugging") === "true")) {
+  if (sessionStorage.getItem("debugging") === "true") {
     window.location.href = "first-page.html";
   }
   $.ajax({
@@ -83,4 +81,9 @@ function cancelCall() {
       window.location.href = "first-page.html";
     },
   });
+}
+
+function backHome() {
+  console.log("Move to first page");
+  window.location.href = "first-page.html";
 }
