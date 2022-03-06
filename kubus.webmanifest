@@ -12,5 +12,6 @@
     "start_url": "/kakao-login/login.html",
     "display": "fullscreen",
     "theme_color": "white",
-    "background_color": "white"
+    "background_color": "white",
+    "scope": "/"
 }
