@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USER }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/html
+            cd /var/www/test
             git reset --hard
             git fetch
             git pull
