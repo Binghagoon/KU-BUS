@@ -43,9 +43,11 @@
 
       $(document).ready(function () {
         $("button#student").click(function () {
+          sessionStorage.setItem("kubus_member_role", "STUDENT");
           window.location.href = "../student/first-page.html" + location.search;
         });
         $("button#driver").click(function () {
+          sessionStorage.setItem("kubus_member_role", "DRIVER");
           window.location.href = "../driver/map.html" + location.search;
         });
         $("button#calling").click(function () {
