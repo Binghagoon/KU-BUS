@@ -1,3 +1,5 @@
+// import ../src/url-parameter.js
+
 const driverSeatMaximum = {
   "normal": 3, // 일반좌석
   "wheel": 1 // 휠체어좌석
@@ -8,6 +10,12 @@ const id = sessionStorage.getItem("kubus_member_id");
 const driverLocation = new UserLocation(id);
 
 let checkCallTimeoutId = -1;
+
+window.onbeforeunload = () => {
+  if (checkCallTimeoutId >= 0) {
+    clearTimeout(checkCallTimeoutId);
+  }
+};
 
 $(document).ready(function () {
   if(sessionStorage.getItem("ignoreList") == null)
@@ -38,10 +46,10 @@ $(document).ready(function () {
 
   if (debugging) {
     console.log("In debugging mode");
-    $("#debugging").hidden = false;
-    //showOnlyEx(4);
-    $("#button").on("click", function () {
+    $("#debugging").show();
+    $("#debuggingCallButton").on("click", function () {
       urlChangeWithQuery("new-alarm.html", {
+        callNo: 8888,
         id: "test_id_000",
         name: "asdf",
         date: "2021-10-03T11:32:40.000Z",
@@ -50,6 +58,8 @@ $(document).ready(function () {
         phoneNumber: "010-0000-0000",
       });
     });
+  } else {
+    $("#debugging").hide();
   }
 });
 
