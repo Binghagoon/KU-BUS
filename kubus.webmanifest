@@ -1,0 +1,16 @@
+{
+    "name": "KU-BUS PWA",
+    "short_name": "KU-BUS",
+    "description": "KoreaUniv. Moving Assist for Disabled",
+    "icons": [
+        {
+            "src": "korea-univ-logo/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/kakao-login/login.html",
+    "display": "fullscreen",
+    "theme_color": "#B12A34",
+    "background_color": "#B12A34"
+}
