@@ -9,11 +9,11 @@ const debugging = (sessionStorage.getItem("debugging") === "true");
 const id = sessionStorage.getItem("kubus_member_id");
 const driverLocation = new UserLocation(id);
 
-let checkCallTimeoutId = -1;
+let checkWaitingTimeoutId = -1;
 
 window.onbeforeunload = () => {
-  if (checkCallTimeoutId >= 0) {
-    clearTimeout(checkCallTimeoutId);
+  if (checkWaitingCallTimeoutId >= 0) {
+    clearTimeout(checkWaitingCallTimeoutId);
   }
 };
 
@@ -63,7 +63,7 @@ $(document).ready(function () {
   }
 });
 
-function checkCall() {
+function checkWaitingCall() {
   $.ajax({
     url: "../node/no-driver-call",
     type: "GET",
@@ -81,9 +81,27 @@ function checkCall() {
           urlChangeWithQuery("new-alarm.html", val);
         }
       }
-      checkCallTimeoutId = setTimeout(checkCall, 1000);
+      checkWaitingCallTimeoutId = setTimeout(checkWaitingCall, 1000);
     },
   });
+}
+
+function checkAllocatedCall(callNo) {
+  $.ajax({
+    url: "/node/call-status",
+    type: "GET",
+    data: {
+      callNo: callNo,
+    },
+    error: function (jqxhr, textStatus, errorThrown) {
+      console.error(textStatus);
+    },
+    success: function (data, textStatus, jqxhr) {
+      if (data["callStatus"] === "canceled") {
+        removeCall(callNo, "사용자가 취소했습니다.");
+      }
+    }
+  })
 }
 
 function printData(data, prefix) {
@@ -103,7 +121,7 @@ function refreshHeader() {
       일반${driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat")}/
       휠체어${driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat")})
       <br>`);
-      checkCallTimeoutId = setTimeout(checkCall, 1000); // 1초마다 새 콜이 오는지 확인
+      checkWaitingCallTimeoutId = setTimeout(checkWaitingCall, 1000); // 1초마다 새 콜이 오는지 확인
   } else {
     $("#ex1").html(`자리가 모두 찼습니다.`);
   }
@@ -114,4 +132,32 @@ function checkSeatLeft(isWheel) {
   const wheelSeatLeft = driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat");
 
   return isWheel ? wheelSeatLeft > 0 : normalSeatLeft > 0;
+}
+
+function removeCall(callNo, message) {
+  const callData = JSON.parse(sessionStorage.getItem("callData"));
+
+  let isWheel = callData[callNo]["isWheelchairSeat"];
+  let normalSeatUsed = sessionStorage.getItem("normalSeat");
+  let wheelSeatUsed = sessionStorage.getItem("wheelSeat");
+
+  if (isWheel) {
+    wheelSeatUsed -= 1;
+  } else {
+    normalSeatUsed -= 1;
+  }
+
+  const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
+  const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
+
+  callData[callNo] = undefined;
+
+  if (normalSeatUsed + wheelSeatUsed === 0) {
+    sessionStorage.setItem("driverStatus", "waiting");
+  } else {
+    sessionStorage.setItem("driverStatus", "working");
+  }
+  sessionStorage.setItem("callData", JSON.stringify(callData));
+
+  alert(`${callNo}번 콜이 취소되었습니다.${message ? "\n" + message : ""}`)
 }
