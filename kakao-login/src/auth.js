@@ -13,7 +13,13 @@ $.ajax({
     alert("Error on login\n Is node server alive?");
   },
   success: function (data, status, xhr) {
-    const Url = new URL(window.location.origin + "/kakao-login/success.html");
+    let giveToken = sessionStorage.getItem("give-token");
+    let Url;
+    if(giveToken  == "1"){
+      Url = new URL(window.location.origin + "/kakao-login/gotoexpress.html");
+    } else {
+      Url = new URL(window.location.origin + "/kakao-login/success.html");
+    }
     localStorage.setItem("kubus_member_id", data["id"]);
     Object.keys(data).forEach((key) => {
       Url.searchParams.append(key, data[key]);

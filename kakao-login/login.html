@@ -8,6 +8,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
     <title>LoginHome</title>
+    <link rel="manifest" href="/kubus.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,8 +20,9 @@
     <link rel="stylesheet" type="text/css" href="css/login.css" />
     <script src="../src/jquery.js"></script>
     <script src="../src/jquery.cookie.js"></script>
-    <script src="../src/login.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="../src/pwa-app.js"></script>
+    <script src="../src/login.js"></script>
     <script src="src/login.js"></script>
   </head>
 
@@ -59,9 +61,11 @@
                 카카오 계정이 없으면!
               </button>
             </td>
+            <td><button id="installpwa" class="button">설치하기</button></td>
             <td><button id="logout" class="button">로그아웃</button></td>
             <td><button id="debug" class="button">그외</button></td>
             <td><button id="class" class="button" hidden>학생</button></td>
+            <td><button id="give-token" class="button" hidden>토큰주기</button></td>
           </tr>
         </div>
       </div>
