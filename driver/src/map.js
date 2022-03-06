@@ -1,9 +1,10 @@
-// import ../src/url-parameter.js
-
 const debugging = (sessionStorage.getItem("debugging") === "true");
 const id = sessionStorage.getItem("kubus_member_id");
-const reqData = queryToObject();
 const driverLocation = new UserLocation(id);
+const driverSeatMaximum = {
+  "normal": 3, // 일반좌석
+  "wheel": 1 // 휠체어좌석
+};
 
 $(document).ready(function () {
   if(sessionStorage.getItem("ignoreList") == null)
@@ -14,19 +15,29 @@ $(document).ready(function () {
   });
 
   if (!sessionStorage.getItem("driverStatus")) {
-    sessionStorage.setItem("driverStatus", "waiting");
+    sessionStorage.setItem("driverStatus", "waiting"); // "waiting", "working", "full"
+    sessionStorage.setItem("normalSeat", 0);
+    sessionStorage.setItem("wheelSeat", 0);
   }
 
-  if (sessionStorage.getItem("driverStatus") === "waiting") {
-    showOnlyEx(1);
-
+  if (sessionStorage.getItem("driverStatus") !== "full") {
+    $("#ex1").html(`콜을 받는 중입니다...(남은자리 
+      일반${driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat")}/
+      휠체어${driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat")})
+      <br>`);
     setTimeout(checkCall, 1000); // 1초마다 새 콜이 오는지 확인
+  } else {
+    $("#ex1").html(`자리가 모두 찼습니다.`);
   }
-  if (sessionStorage.getItem("driverStatus") === "working") {
-    showOnlyEx(3);
-    $("#ex3").append(printData(reqData));
+
+  if (sessionStorage.getItem("driverStatus") !== "waiting") {
+    const callData = JSON.parse(sessionStorage.getItem("callData"));
+    // [ { studentid, callNo, name, arrival, phoneNumber }, ... ]
+    //$("#ex1").append(printData(reqData));
     
-    traceAnother(reqData["studentid"], "STUDENT");
+    callData.forEach(element => {
+      traceAnother(element["studentid"], "STUDENT");
+    });
   }
 
   if (debugging) {
@@ -60,26 +71,17 @@ function checkCall() {
             continue;
           }
           console.log("Move to new-alarm");
-          urlChangeWithQuery("new-alarm.html", val);
+          if (checkLeftSeat(val["isWheelchairSeat"])) {
+            urlChangeWithQuery("new-alarm.html", val);
+          }
         }
       setTimeout(checkCall, 1000);
     },
   });
 }
 
-function showOnlyEx(idx) {
-  let divs = $("#header div");
-  for (let i = 0; i < divs.length; ++i) {
-    if (i === idx - 1) {
-      divs[i].hidden = false;
-    } else {
-      divs[i].hidden = true;
-    }
-  }
-}
-
-function printData(data) {
-  let newString = "";
+function printData(data, prefix) {
+  let newString = prefix ? prefix + "<br>" : "";
 
   newString += `이름 : ${data.name}<br>`;
   newString += `출발 : ${data.departure}<br>`;
@@ -87,4 +89,8 @@ function printData(data) {
   newString += `전화번호 : ${data.phoneNumber}<br>`;
 
   return newString;
+}
+
+function checkLeftSeat(isWheel) {
+  return true;
 }
