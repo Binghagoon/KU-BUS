@@ -2,8 +2,12 @@ const _version = "v1";
 const cacheName = "v1";
 const cacheList = ["/kubus.webmanifest"];
 
+const enableLog = false;
+
 function log(msg) {
-  console.log(`[ServiceWorker ${_version}] ${msg}`);
+  if (enableLog) {
+    console.log(`[ServiceWorker ${_version}] ${msg}`);
+  }
 }
 
 self.addEventListener("install", (event) => {

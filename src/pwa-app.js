@@ -8,7 +8,7 @@ if ("serviceWorker" in navigator) {
       console.log("Service Worker update found!");
 
       newWorker.addEventListener("statechange", () => {
-        console.log("Service Worker state changed:", newWorker.state);
+        //console.log("Service Worker state changed:", newWorker.state);
       });
     });
   });
