@@ -1,5 +1,9 @@
 // import ../src/url-parameter.js
 
+const driverSeatMaximum = {
+  "normal": 3, // 일반좌석
+  "wheel": 1 // 휠체어좌석
+};
 const reqData = queryToObject();
 
 $(document).ready(function () {
@@ -11,7 +15,8 @@ $(document).ready(function () {
     reqData["arrival"],
     reqData["name"],
     reqData["phoneNumber"],
-    reqData["email"]
+    reqData["email"],
+    reqData["isWheelchairSeat"],
   );
   $("#accept").on("click", function () {
     $.ajax({
@@ -26,16 +31,20 @@ $(document).ready(function () {
         window.location.href = "map.html";
       },
       success: function (data, status, xhr) {
-        if (data.studentid) {
-          sessionStorage.setItem("driverStatus", "working");
-          urlChangeWithQuery("map.html", {
+        if (data["studentid"]) {
+          refreshDriverStatus(reqData["isWheelchairSeat"]);
+          let callData = JSON.parse(sessionStorage.getItem("callData"));
+          callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
             studentid: data["studentid"],
             departure: reqData["departure"],
             arrival: reqData["arrival"],
             name: reqData["name"],
             phoneNumber: reqData["phoneNumber"],
-          });
+            isWheelchairSeat: reqData["isWheelchairSeat"],
+          }
+          sessionStorage.setItem("callData", JSON.stringify(callData));
+          urlChangeWithQuery("map.html", {});
         } else {
           alert("콜에 문제가 생겼습니다. 원래 화면으로 돌아갑니다.");
           console.error(data["errorMessage"]);
@@ -46,12 +55,12 @@ $(document).ready(function () {
   });
   $("#reject").on("click", function () {
     let ignoreList = sessionStorage.getItem("ignoreList");
-    sessionStorage.setItem("ignoreList",ignoreList + " " + reqData.callNo);
-    urlChangeWithQuery("./map.html",{});
+    sessionStorage.setItem("ignoreList", ignoreList + " " + reqData.callNo);
+    urlChangeWithQuery("map.html",{});
   });
 });
 
-function printData(date, dep, arr, name, phone, email) {
+function printData(date, dep, arr, name, phone, email, wheel) {
   var td = $("#student-detail td");
   td[0].append(timezoneChange(date));
   td[1].append(dep);
@@ -59,6 +68,7 @@ function printData(date, dep, arr, name, phone, email) {
   td[3].append(name);
   td[4].append(phone);
   td[5].append(email);
+  td[6].append(wheel);
 }
 
 function timezoneChange(time) {
@@ -68,4 +78,20 @@ function timezoneChange(time) {
   });
   var newTime = dateString.toString();
   return newTime;
+}
+
+function refreshDriverStatus(isWheel) {
+  let normalSeatUsed = sessionStorage.getItem("normalSeat");
+  let wheelSeatUsed = sessionStorage.getItem("wheelSeat");
+
+  if (isWheel) {
+    wheelSeatUsed += 1;
+  } else {
+    normalSeatUsed += 1;
+  }
+
+  const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
+  const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
+
+  sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
 }
