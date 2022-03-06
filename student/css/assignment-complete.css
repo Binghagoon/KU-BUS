@@ -21,7 +21,7 @@
 }
 
 #real-time-information,
-#Cancel_Reservation {
+#cancel-call {
   width: 315px;
   display: flex;
   flex-direction: column;

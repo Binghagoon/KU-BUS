@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
-    <title>call</title>
+    <title>차량 호출중</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,27 +15,31 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/doing-call.css" />
     <link rel="stylesheet" type="text/css" href="../css/header.css" />
-    <link rel="stylesheet" type="text/css" href="css/reservation-common.css" />
+    <link rel="stylesheet" type="text/css" href="css/call-common.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
-    <link
-      media="screen"
-      rel="stylesheet"
-      type="text/css"
-      href="css/call-reservation.css"
-    />
     <script src="../src/jquery.js"></script>
     <script src="../src/url-parameter.js"></script>
     <script src="../src/navigator.js"></script>
-    <script src="../src/url-parameter.js"></script>
-    <script src="src/call-reservation.js"></script>
+    <script src="src/doing-call.js"></script>
   </head>
   <body>
-    <div id="header">예약 정보 확인하기</div>
-    <div id="reservation-information">
-      <h3>선택된 위치 정보</h3>
-      <button type="submit" id="submit">예약 신청</button><br />
-      <button type="cancel" id="cancel">뒤로 가기</button>
+    <div id="header">호출 신청 완료</div>
+    <div class="contents">
+      <p>호출 신청이 완료되었습니다.</p>
+      <div class="loading-container">
+        <div class="loading"></div>
+        <div id="loading-text">loading</div>
+      </div>
+      <p>
+        호출이 수락되면<br />
+        알림 메시지를 보내드립니다.
+      </p>
+      <div class="buttons">
+        <button id="cancel-call" class="cancel" type="Cancel">호출 취소</button>
+        <button id="back-home" class="goback">홈으로</button>
+      </div>
     </div>
   </body>
 </html>

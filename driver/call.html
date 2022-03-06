@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/call.css" />
+    <script src="../src/jquery.js"></script>
+    <script src="../src/url-parameter.js"></script>
+    <script src="src/call.js"></script>
+  </head>
+  <body>
+    <div id="call-list">
+      <table id="call-request">
+        <tr id="caller-template">
+          <td id="caller-id">
+            <div id="profile-image"></div>
+            <div id="caller_id">요청자 id:</div>
+            <div id="caller-pp">
+              <button id="caller-position-button" href="#">위치:</button>
+              <button id="caller-phone-button" href="#">전화:</button>
+            </div>
+          </td>
+          <td>
+            <table id="caller-detail">
+              <tr>
+                <td id="res-time">호출 예약 시간:</td>
+              </tr>
+              <tr>
+                <td id="res-position">탑승위치:</td>
+              </tr>
+              <tr>
+                <td id="destination">목적지:</td>
+              </tr>
+              <tr>
+                <td id="car-full">동승자 유무:</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

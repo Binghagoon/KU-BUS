@@ -32,7 +32,7 @@ $(document).ready(function () {
       alert(korean[orderStat[statnum]] + "를 선택해주십시오");
     }
     if (statnum == 2) {
-      goToCallReservation();
+      goToCallConfirm();
     }
   });
 
@@ -56,12 +56,12 @@ function prefixModify() {
   $("#prefix").html(korean[orderStat[statnum]]);
 }
 
-function goToCallReservation() {
+function goToCallConfirm() {
   var query = {
     fromName: from.name,
     fromNo: from.no,
     toName: to.name,
     toNo: to.no,
   };
-  urlChangeWithQuery("call-reservation.html", query);
+  urlChangeWithQuery("call-confirm.html", query);
 }

@@ -32,6 +32,7 @@ function startMap(callback = null) {
       .catch(function (error) {
         console.log(error.message);
         alert("현재 위치를 가져올 수 없습니다.");
+        window.location.href = "../location-permission.html";
       });
   } else {
     alert("현재 브라우저에서 위치정보를 지원하지 않습니다.");

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>위치 정보 허가 요청</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/header.css" />
+    <script src="./src/jquery.js"></script>
+    <style>
+      button {
+        width: 146px;
+        height: 48px;
+        box-shadow: 0px 2px 7px darkgray;
+        margin: 20px;
+        font-size: 16px;
+        border-radius: 1px;
+        background-color: #8c0000;
+        color: white;
+        border: none;
+      }
+      .example {
+        border: 2px solid grey;
+        border-radius: 20px;
+        width: 300px;
+      }
+    </style>
+    <script>
+      $(function () {
+        $(".example").on("click", alertExample);
+        $("#ok").on("click", moveBack);
+      });
+
+      function alertExample() {
+        window.alert(
+          "해당 이미지는 예시입니다. 하단의 확인 버튼을 누르신 후 실제 페이지에서 위치 정보 액세스를 허용해 주시기 바랍니다."
+        );
+      }
+
+      function moveBack() {
+        window.history.back();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="header">위치 정보 허가 요청</div>
+    <div>
+      <h2>위치 정보 액세스를 허용해 주세요.</h2>
+      <h3>Android</h3>
+      <img class="example" src="src/img/location-permission-android.png" />
+      <h3>iOS</h3>
+      <img class="example" src="src/img/location-permission-ios.png" />
+    </div>
+    <button id="ok">확인</button>
+  </body>
+</html>

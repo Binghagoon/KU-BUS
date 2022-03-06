@@ -18,11 +18,11 @@ window.onbeforeunload = () => {
 };
 
 $(document).ready(function () {
-  if(sessionStorage.getItem("ignoreList") == null)
-  sessionStorage.setItem("ignoreList","");
+  if (sessionStorage.getItem("ignoreList") == null)
+    sessionStorage.setItem("ignoreList", "");
 
   startMap(() => {
-    driverLocation.awakeInterval(1000, pos => pinUpdate(pos, "DRIVER"));
+    driverLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "DRIVER"));
   });
 
   if (!sessionStorage.getItem("driverStatus")) {
@@ -42,6 +42,13 @@ $(document).ready(function () {
     Object.keys(callData).forEach(element => {
       traceAnother(callData[element]["studentid"], "STUDENT");
     });
+    setTimeout(checkCall, 1000); // 1초마다 새 콜이 오는지 확인
+  }
+  if (sessionStorage.getItem("driverStatus") === "working") {
+    showOnlyEx(3);
+    $("#ex3").append(printData(reqData));
+
+    traceAnother(reqData["studentid"], "STUDENT");
   }
 
   if (debugging) {
@@ -68,7 +75,7 @@ function checkWaitingCall() {
     url: "../node/no-driver-call",
     type: "GET",
     error: function (jqxhr, textStatus, errorThrown) {
-      console.log("Reservation Get Error");
+      console.log("Call Get Error");
     },
     success: function (data, textStatus, jqxhr) {
       for(const val of data){
@@ -81,7 +88,7 @@ function checkWaitingCall() {
           urlChangeWithQuery("new-alarm.html", val);
         }
       }
-      checkWaitingCallTimeoutId = setTimeout(checkWaitingCall, 1000);
+      checkWaitingCallTimeoutId = setTimeout(checkWaitingCall, 1000);   //if error use setTimeout(checkCall, 1000);
     },
   });
 }
