@@ -22,6 +22,7 @@ $(() => {
         data: {
           departureNo: query.fromNo,
           arrivalNo: query.toNo,
+          isWheelchairSeat: query.isWheelchairSeat,
           id: sessionStorage.getItem("kubus_member_id"),
         },
         error: function (jqXHR, textStatus, errorThrown) {
