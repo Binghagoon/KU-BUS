@@ -80,7 +80,7 @@ function checkWaitingCall() {
           continue;
         }
         console.log("Move to new-alarm");
-        if (checkSeatLeft(val["isWheelchairSeat"])) {
+        if (checkSeatLeft(val["isWheelchairSeat"] > 0)) {
           urlChangeWithQuery("new-alarm.html", val);
         }
       }
