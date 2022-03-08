@@ -34,6 +34,9 @@ $(document).ready(function () {
 
   refreshHeader();
 
+  if (sessionStorage.getItem("driverStatus") !== "full") {
+    checkWaitingCallTimeoutId = setTimeout(checkWaitingCall, 1000); // 1초마다 새 콜이 오는지 확인
+  }
   if (sessionStorage.getItem("driverStatus") !== "waiting") {
     const callData = JSON.parse(sessionStorage.getItem("callData"));
     // { callNo : { studentid, callNo, name, departure, arrival, phoneNumber, isWheelchairSeat }, ... }
@@ -42,13 +45,6 @@ $(document).ready(function () {
     Object.keys(callData).forEach(element => {
       traceAnother(callData[element]["studentid"], "STUDENT");
     });
-    setTimeout(checkCall, 1000); // 1초마다 새 콜이 오는지 확인
-  }
-  if (sessionStorage.getItem("driverStatus") === "working") {
-    showOnlyEx(3);
-    $("#ex3").append(printData(reqData));
-
-    traceAnother(reqData["studentid"], "STUDENT");
   }
 
   if (debugging) {
@@ -84,7 +80,7 @@ function checkWaitingCall() {
           continue;
         }
         console.log("Move to new-alarm");
-        if (checkSeatLeft(val["isWheelchairSeat"])) {
+        if (checkSeatLeft(val["isWheelchairSeat"] > 0)) {
           urlChangeWithQuery("new-alarm.html", val);
         }
       }
@@ -128,7 +124,6 @@ function refreshHeader() {
       일반${driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat")}/
       휠체어${driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat")})
       <br>`);
-      checkWaitingCallTimeoutId = setTimeout(checkWaitingCall, 1000); // 1초마다 새 콜이 오는지 확인
   } else {
     $("#ex1").html(`자리가 모두 찼습니다.`);
   }

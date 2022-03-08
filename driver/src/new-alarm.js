@@ -16,7 +16,7 @@ $(document).ready(function () {
     reqData["name"],
     reqData["phoneNumber"],
     reqData["email"],
-    reqData["isWheelchairSeat"],
+    reqData["isWheelchairSeat"] > 0,
   );
   $("#accept").on("click", function () {
     $.ajax({
@@ -41,7 +41,7 @@ $(document).ready(function () {
             arrival: reqData["arrival"],
             name: reqData["name"],
             phoneNumber: reqData["phoneNumber"],
-            isWheelchairSeat: reqData["isWheelchairSeat"],
+            isWheelchairSeat: reqData["isWheelchairSeat"] > 0,
           }
           sessionStorage.setItem("callData", JSON.stringify(callData));
           urlChangeWithQuery("map.html", {});
@@ -94,4 +94,6 @@ function refreshDriverStatus(isWheel) {
   const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
 
   sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
+  sessionStorage.setItem("normalSeat", wheelSeatUsed);
+  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }

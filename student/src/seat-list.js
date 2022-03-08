@@ -37,7 +37,7 @@ $(document).ready(function () {
       return;
     }
     urlChangeWithQuery("map.html", {
-      seatnum: seatnum,
+      isWheelchairSeat: seatnum === 6,
     });
   });
 });

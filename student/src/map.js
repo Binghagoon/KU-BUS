@@ -10,15 +10,8 @@ let statnum = 0;
 let lat = 37.586232954034564;
 let lng = 127.02928291766814; //Anam Stn.
 
-// not used
 let arg = queryToObject();
-let seatnum;
-if ($(arg).empty()) {
-  //default setting
-  seatnum = 0;
-} else {
-  seatnum = arg.seatnum;
-}
+let isWheelchairSeat = arg.isWheelchairSeat? arg.isWheelchairSeat : false;
 
 $(document).ready(function () {
   $("#next").click(function () {
@@ -62,6 +55,7 @@ function goToCallConfirm() {
     fromNo: from.no,
     toName: to.name,
     toNo: to.no,
+    isWheelchairSeat: isWheelchairSeat,
   };
   urlChangeWithQuery("call-confirm.html", query);
 }
