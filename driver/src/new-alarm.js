@@ -94,4 +94,6 @@ function refreshDriverStatus(isWheel) {
   const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
 
   sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
+  sessionStorage.setItem("normalSeat", wheelSeatUsed);
+  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }
