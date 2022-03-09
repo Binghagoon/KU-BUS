@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <script src="../src/jquery.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
@@ -35,17 +35,19 @@
             top.args["requestid"] = data.insertId;
             top.args["from"] = from;
             top.args["to"] = to;
-            console.log("move to DoingReservation.html");
-            window.location.href = "../student/doing-reservation.html";
+            console.log("move to doing-call.html");
+            window.location.href = "../student/doing-call.html";
           },
         });
       }
 
       $(document).ready(function () {
         $("button#student").click(function () {
+          sessionStorage.setItem("kubus_member_role", "STUDENT");
           window.location.href = "../student/first-page.html" + location.search;
         });
         $("button#driver").click(function () {
+          sessionStorage.setItem("kubus_member_role", "DRIVER");
           window.location.href = "../driver/map.html" + location.search;
         });
         $("button#calling").click(function () {
@@ -60,9 +62,9 @@
             window.location.origin + "/administrator/user-session.html";
         });
         $("button#logout").click(function () {
-          Kakao.Auth.logout(function() {
-            alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
-          })
+          Kakao.Auth.logout(function () {
+            alert("logout ok\naccess token -> " + Kakao.Auth.getAccessToken());
+          });
           window.location.href =
             window.location.origin + "/kakao-login/login.html";
         });
@@ -75,7 +77,7 @@
     <button id="calling">호출 해보기</button>
     <button id="user-setting">사용자 세팅</button>
     <button id="user-session">사용자 세션</button>
-    <br>
+    <br />
     <button id="logout">로그아웃</button>
   </body>
 </html>

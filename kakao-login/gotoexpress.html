@@ -1,8 +1,31 @@
 <html>
     <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/url-parameter.js"></script>
         <script>
-            let ser = new URLSearchParams(location.search);
-            location.href = location.origin + "/node-test/example" + location.search;
+            let query = queryToObject();
+            $.ajax({
+                url: window.location.origin + "/node-test/set-token",
+                type: "POST",
+                data: query,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    debugger;
+                },
+                success: function (data, status, xhr) {
+                    console.log(data);
+                },
+            });
+            $.ajax({
+                url: window.location.origin + "/node/set-token",
+                type: "POST",
+                data: query,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    debugger;
+                },
+                success: function (data, status, xhr) {
+                    console.log(data);
+                },
+            });
         </script>
     </head>
 </html>

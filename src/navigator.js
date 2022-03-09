@@ -1,4 +1,4 @@
-function makeNavigator() {
+function makeNavigator(role) {
   const navigator = $("<nav></nav>");
   navigator.attr("id", "sticky-nav");
 
@@ -6,14 +6,22 @@ function makeNavigator() {
   mapBtn.attr("id", "map-home");
   mapBtn.text("홈");
   mapBtn.on("click", () => {
-    location.href = "./first-page.html";
+    if (role === "DRIVER") {
+      location.href = "./map.html";
+    } else if (role === "STUDENT") {
+      location.href = "./first-page.html";
+    }
   });
   const reservationBtn = $("<button></button>");
   reservationBtn.attr("id", "reservation-home");
   reservationBtn.text("예약내역");
-  /*reservationBtn.on("click", () => {
-    location.href = "./first-page.html";
-  });*/
+  reservationBtn.on("click", () => {
+    if (role === "DRIVER") {
+      location.href = "./call-list.html";
+    } else if (role === "STUDENT") {
+      alert("미구현입니다.");
+    }
+  });
   const noticeBtn = $("<button></button>");
   noticeBtn.attr("id", "notice-home");
   noticeBtn.text("알림");
@@ -32,5 +40,7 @@ function makeNavigator() {
 }
 
 $(function () {
-  makeNavigator();
+  const role = sessionStorage.getItem("kubus_member_role");
+
+  makeNavigator(role);
 });

@@ -22,6 +22,7 @@ $(() => {
         data: {
           departureNo: query.fromNo,
           arrivalNo: query.toNo,
+          isWheelchairSeat: query.isWheelchairSeat ? 1 : 0,
           id: sessionStorage.getItem("kubus_member_id"),
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -29,8 +30,8 @@ $(() => {
           //console.error(`${textStatus}\n${errorThrown}`);
         },
         success: function (data, status, xhr) {
-          console.log("move to doing-reservation.html");
-          urlChangeWithQuery("doing-reservation.html", {
+          console.log("move to doing-call.html");
+          urlChangeWithQuery("doing-call.html", {
             fromName: query.fromName,
             toName: query.toName,
             callNo: data.callNo,
@@ -38,8 +39,8 @@ $(() => {
         },
       });
     } else {
-      console.log("on debugging mode, move to doing-reservation.html");
-      urlChangeWithQuery("doing-reservation.html", {
+      console.log("on debugging mode, move to doing-call.html");
+      urlChangeWithQuery("doing-call.html", {
         fromName: query.fromName,
         toName: query.toName,
         callNo: 10,

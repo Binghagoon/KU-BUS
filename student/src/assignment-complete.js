@@ -1,7 +1,9 @@
 // import ../src/url-parameter.js
 
 const query = queryToObject();
-const studentLocation = new UserLocation(sessionStorage.getItem("kubus_member_id"));
+const studentLocation = new UserLocation(
+  sessionStorage.getItem("kubus_member_id")
+);
 let driverID = query["driverid"];
 let studentID = sessionStorage.getItem("kubus_member_id");
 
@@ -11,12 +13,12 @@ $(document).ready(function () {
   window.onbeforeunload = cancelCall;
 
   startMap(() => {
-    studentLocation.awakeInterval(1000, pos => pinUpdate(pos, "STUDENT"));
+    studentLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "STUDENT"));
   });
 
   traceAnother(driverID, "DRIVER");
 
-  $("#cancel-reservation").on("click", cancelCall);
+  $("#cancel-call").on("click", cancelCall);
   $("#send-message").on("click", function (e) {
     //for use debug
     //e.preventDefault();

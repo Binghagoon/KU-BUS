@@ -10,15 +10,8 @@ let statnum = 0;
 let lat = 37.586232954034564;
 let lng = 127.02928291766814; //Anam Stn.
 
-// not used
 let arg = queryToObject();
-let seatnum;
-if ($(arg).empty()) {
-  //default setting
-  seatnum = 0;
-} else {
-  seatnum = arg.seatnum;
-}
+let isWheelchairSeat = arg.isWheelchairSeat? arg.isWheelchairSeat : false;
 
 $(document).ready(function () {
   $("#next").click(function () {
@@ -32,7 +25,7 @@ $(document).ready(function () {
       alert(korean[orderStat[statnum]] + "를 선택해주십시오");
     }
     if (statnum == 2) {
-      goToCallReservation();
+      goToCallConfirm();
     }
   });
 
@@ -56,12 +49,13 @@ function prefixModify() {
   $("#prefix").html(korean[orderStat[statnum]]);
 }
 
-function goToCallReservation() {
+function goToCallConfirm() {
   var query = {
     fromName: from.name,
     fromNo: from.no,
     toName: to.name,
     toNo: to.no,
+    isWheelchairSeat: isWheelchairSeat,
   };
-  urlChangeWithQuery("call-reservation.html", query);
+  urlChangeWithQuery("call-confirm.html", query);
 }
