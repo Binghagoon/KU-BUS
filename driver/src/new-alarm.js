@@ -42,6 +42,7 @@ $(document).ready(function () {
             name: reqData["name"],
             phoneNumber: reqData["phoneNumber"],
             isWheelchairSeat: reqData["isWheelchairSeat"] > 0,
+            isRiding: false,
           }
           sessionStorage.setItem("callData", JSON.stringify(callData));
           urlChangeWithQuery("map.html", {});
