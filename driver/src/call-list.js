@@ -64,7 +64,7 @@ function updateCallStatus(callNo, nextCallStatus) {
       type: "POST",
       data: {
         callNo: callNo,
-        nextCallStatus: nextCallStatus
+        callStatus: nextCallStatus
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error("Error in update call status");
