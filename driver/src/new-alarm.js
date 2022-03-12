@@ -36,13 +36,13 @@ $(document).ready(function () {
           let callData = JSON.parse(sessionStorage.getItem("callData"));
           callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
+            callStatus: 2,
             studentid: data["studentid"],
             departure: reqData["departure"],
             arrival: reqData["arrival"],
             name: reqData["name"],
             phoneNumber: reqData["phoneNumber"],
             isWheelchairSeat: reqData["isWheelchairSeat"] > 0,
-            isRiding: false,
           }
           sessionStorage.setItem("callData", JSON.stringify(callData));
           urlChangeWithQuery("map.html", {});

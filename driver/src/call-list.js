@@ -31,41 +31,69 @@ function createCallBlock(parentEle, data) {
         <td id="destination">목적지: ${data.arrival}</td>
       </tr>
       <tr>
-        <td id="wheelchair">휠체어 좌석 여부: ${data.isWheelchairSeat}</td>
+        <td id="wheelchair">휠체어 좌석 여부: ${data.isWheelchairSeat ? "예" : "아니오"}</td>
       </tr>
       </table>
     </td>
   </tr>`).appendTo(parentEle);
   const rideInBtn = newEle.find("#caller-ridein");
+
+  if (callData[data.callNo].callStatus == 2) {
+    rideInBtn.html("탑승 완료");
+  } else if (callData[data.callNo].callStatus == 3) {
+    rideInBtn.html("운행 완료");
+  }
+
   rideInBtn.on("click", () => {
-    if (callData[data.callNo].isRiding) {
-      updateCallStatus(data.callNo, 2);
-      rideInBtn.html("탑승 완료");
-    } else {
+    if (callData[data.callNo].callStatus == 2) {
       updateCallStatus(data.callNo, 3);
-      rideInBtn.html("탑승 취소");
+      rideInBtn.html("운행 완료");
+    } else if (callData[data.callNo].callStatus == 3) {
+      updateCallStatus(data.callNo, 4);
+      rideInBtn.html("완료");
+      rideInBtn.attr("disabled", "true");
     }
   });
 }
 
 function updateCallStatus(callNo, nextCallStatus) {
   // nextCallStatus = 0 | 1 | 2 | 3 | 4  =>  취소됨 | 미할당 | 이동중 | 운행중 | 운행완료
-  $.ajax({
-    url: "/node/call-status",
-    type: "POST",
-    data: {
-      callNo: callNo,
-      nextCallStatus: nextCallStatus
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.error("Error in update call status");
-    },
-    success: function (data, textStatus, jqXHR) {
-      if (data.status !== "success") {
-        console.error(data.errorMessage);
+  if (nextCallStatus <= 3) {
+    $.ajax({
+      url: "/node/call-status",
+      type: "POST",
+      data: {
+        callNo: callNo,
+        nextCallStatus: nextCallStatus
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("Error in update call status");
+      },
+      success: function (data, textStatus, jqXHR) {
+        if (data.status !== "success") {
+          console.error(data.errorMessage);
+        }
+        callData[data.callNo].callStatus = nextCallStatus;
+        sessionStorage.setItem("callData", JSON.stringify(callData));
       }
-      callData[data.callNo].isRiding = nextCallStatus > 2;
-      sessionStorage.setItem("callData", JSON.stringify(callData));
-    }
-  })
+    });
+  } else if (nextCallStatus == 4) {
+    $.ajax({
+      url: "/node/call-end",
+      type: "POST",
+      data: {
+        callNo: callNo,
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("Error in update call status");
+      },
+      success: function (data, textStatus, jqXHR) {
+        if (data.status !== "success") {
+          console.error(data.errorMessage);
+        }
+        callData[data.callNo] = undefined;
+        sessionStorage.setItem("callData", JSON.stringify(callData));
+      }
+    });
+  }
 }
