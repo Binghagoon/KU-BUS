@@ -1,10 +1,9 @@
 var sp;
 function register() {
   var data = {};
-  data["name"] = $("#user-name").val();
-  data["id"] = sp.get("id");
+  data["username"] = sp.get("id");
+  data["realname"] = $("#user-name").val();
   data["email"] = $("#user-email-address").val();
-  data["role"] = sp.get("role");
   data["mp"] = $("#user-phone-number").val();
   $.ajax({
     url: window.location.origin + "/node/sign-up",
