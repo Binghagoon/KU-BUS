@@ -11,7 +11,7 @@ $(document).ready(function () {
   });
   $("#logout").click(() =>
     Kakao.Auth.logout(function () {
-      alert("logout");
+      alert("카카오 로그아웃에 성공했습니다.");
     })
   );
 
