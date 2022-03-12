@@ -70,11 +70,12 @@ function updateCallStatus(callNo, nextCallStatus) {
         console.error("Error in update call status");
       },
       success: function (data, textStatus, jqXHR) {
-        if (data.status !== "success") {
+        if (data.status != "success") {
           console.error(data.errorMessage);
+        } else {
+          callData[callNo].callStatus = nextCallStatus;
+          sessionStorage.setItem("callData", JSON.stringify(callData));
         }
-        callData[data.callNo].callStatus = nextCallStatus;
-        sessionStorage.setItem("callData", JSON.stringify(callData));
       }
     });
   } else if (nextCallStatus == "finish") {
