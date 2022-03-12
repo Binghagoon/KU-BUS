@@ -60,7 +60,7 @@ function updateCallStatus(callNo, nextCallStatus) {
   // nextCallStatus = “canceled“ | “waiting” | “allocated” | “moving” | “finish”  =>  취소됨 | 미할당 | 이동중 | 운행중 | 운행완료
   if (nextCallStatus == "moving") {
     $.ajax({
-      url: "/node/call-status",
+      url: "/node/change-call-status",
       type: "POST",
       data: {
         callNo: callNo,
