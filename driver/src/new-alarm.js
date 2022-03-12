@@ -36,6 +36,7 @@ $(document).ready(function () {
           let callData = JSON.parse(sessionStorage.getItem("callData"));
           callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
+            callStatus: "allocated",
             studentid: data["studentid"],
             departure: reqData["departure"],
             arrival: reqData["arrival"],
