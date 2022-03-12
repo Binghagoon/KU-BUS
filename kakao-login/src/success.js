@@ -45,9 +45,6 @@ function KUBUSSignin(response) {
 
 function KUBUSSignup(data) {
   var sp = new URLSearchParams();
-  sp.append("role", "STUDENT");
-  sp.append("email", data["kakao_account"]["email"]);
-  sp.append("nickname", data["properties"]["nickname"]);
   sp.append("id", data["id"]);
   alert("KUBUS서비스를 처음이용하시는것 같네요! 회원가입을 하셔야 됩니다!");
   window.location.href =
