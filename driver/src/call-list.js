@@ -38,18 +38,18 @@ function createCallBlock(parentEle, data) {
   </tr>`).appendTo(parentEle);
   const rideInBtn = newEle.find("#caller-ridein");
 
-  if (callData[data.callNo].callStatus == 2) {
+  if (callData[data.callNo].callStatus == "allocated") {
     rideInBtn.html("탑승 완료");
-  } else if (callData[data.callNo].callStatus == 3) {
+  } else if (callData[data.callNo].callStatus == "moving") {
     rideInBtn.html("운행 완료");
   }
 
   rideInBtn.on("click", () => {
-    if (callData[data.callNo].callStatus == 2) {
-      updateCallStatus(data.callNo, 3);
+    if (callData[data.callNo].callStatus == "allocated") {
+      updateCallStatus(data.callNo, "moving");
       rideInBtn.html("운행 완료");
-    } else if (callData[data.callNo].callStatus == 3) {
-      updateCallStatus(data.callNo, 4);
+    } else if (callData[data.callNo].callStatus == "moving") {
+      updateCallStatus(data.callNo, "finish");
       rideInBtn.html("완료");
       rideInBtn.attr("disabled", "true");
     }
@@ -57,8 +57,8 @@ function createCallBlock(parentEle, data) {
 }
 
 function updateCallStatus(callNo, nextCallStatus) {
-  // nextCallStatus = 0 | 1 | 2 | 3 | 4  =>  취소됨 | 미할당 | 이동중 | 운행중 | 운행완료
-  if (nextCallStatus <= 3) {
+  // nextCallStatus = “canceled“ | “waiting” | “allocated” | “moving” | “finish”  =>  취소됨 | 미할당 | 이동중 | 운행중 | 운행완료
+  if (nextCallStatus == "moving") {
     $.ajax({
       url: "/node/call-status",
       type: "POST",
@@ -77,7 +77,7 @@ function updateCallStatus(callNo, nextCallStatus) {
         sessionStorage.setItem("callData", JSON.stringify(callData));
       }
     });
-  } else if (nextCallStatus == 4) {
+  } else if (nextCallStatus == "finish") {
     $.ajax({
       url: "/node/call-end",
       type: "POST",
