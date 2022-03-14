@@ -17,6 +17,7 @@ $(document).ready(function () {
     studentLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "STUDENT"));
   });
 
+  getDriverInformation();
   traceAnother(driverID, "DRIVER");
 
   checkCallStatusIntervalId = setInterval(checkCallStatus, 3000);
@@ -93,6 +94,23 @@ function checkCallStatus() {
           window.location.href = "first-page.html";
         }, 5000);
       }
+    }
+  });
+}
+
+function getDriverInformation() {
+  $.ajax({
+    url: "/node/get-driver-info",
+    type: "GET",
+    data: {
+      id: driverID
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error("Error in get driver inform");
+    },
+    success: function (data, textStatus, jqXHR) {
+      $("#name").html(data["carid"] + "호차");
+      $("#car-information").html(data["licence"] + " / " + data["carname"]);
     }
   });
 }
