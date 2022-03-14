@@ -34,15 +34,15 @@ function checkCall() {
         alert("failed on check reservation");
       },
       success: function (data, status, xhr) {
-        if (data.status && data.status == "error") {
-          alert("배차에 실패했습니다. 잠시 후 다시 시도해주세요.");
-          console.error(data.message);
+        if (data["status"] && data["status"] == "error") {
           cancelCall();
+          console.error(data["message"]) + " on " + query["callNo"];
+          alert("배차에 실패했습니다. 잠시 후 다시 시도해주세요.");
           return;
         }
-        if (data.callStatus) {
-          if (data.callSuccess && data.driverid) {
-            query["driverid"] = data.driverid;
+        if (data["callStatus"]) {
+          if (data["callSuccess"] && data["driverid"]) {
+            query["driverid"] = data["driverid"];
             clearInterval(checkIntervalId);
             successCall();
           } else {
