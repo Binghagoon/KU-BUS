@@ -5,6 +5,7 @@ const driverSeatMaximum = {
   "wheel": 1 // 휠체어좌석
 };
 const reqData = queryToObject();
+reqData["isWheelchairSeat"] = parseInt(reqData["isWheelchairSeat"]);
 
 $(document).ready(function () {
   //printData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
