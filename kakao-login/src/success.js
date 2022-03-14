@@ -28,20 +28,20 @@ function KUBUSSignin(response) {
       username: response.id,
     },
     error: function (jqXHR, textstatus, errorthrown) {
-      alert("Error on sign in");
+      jqXHR.done(data => {
+        if (data.status == "fail") {
+          //If user are not regisetered, sign up.
+          KUBUSSignup(response);
+        } else if (data.status == "notAllowed") {
+          alert("아직 가입 승인이 안되었습니다.\n센터에 문의해주세요.");
+          console.log("Move to Login Page");
+          window.location.href =
+            window.location.origin + "/kakao-login/login.html";
+        }
+      });
     },
     success: function (data, status, xhr) {
-      if (data.status == "fail") {
-        //If user are not regisetered, sign up.
-        KUBUSSignup(response);
-      } else if (data.status == "notAllowed") {
-        alert("아직 가입 승인이 안되었습니다.\n센터에 문의해주세요.");
-        console.log("Move to Login Page");
-        window.location.href =
-          window.location.origin + "/kakao-login/login.html";
-      } else {
-        SigninAfter(data);
-      }
+      SigninAfter(data);
     },
   });
 }
