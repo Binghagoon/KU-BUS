@@ -15,13 +15,6 @@ $(() => {
   );
 
   $("#submit").on("click", () => {
-    console.log({
-      id: sessionStorage.getItem("kubus_member_id"),
-      departureNo: query.fromNo,
-      arrivalNo: query.toNo,
-      isWheelchairSeat: query.isWheelchairSeat ? 1 : 0,
-    });
-
     if (!(sessionStorage.getItem("debugging") === "true")) {
       $.ajax({
         url: "../node/call-request",

@@ -32,7 +32,7 @@ $(document).ready(function () {
       },
       success: function (data, status, xhr) {
         if (data["studentid"]) {
-          refreshDriverStatus(reqData["isWheelchairSeat"] > 0);
+          refreshDriverStatus(parseInt(reqData["isWheelchairSeat"]) > 0);
           let callData = JSON.parse(sessionStorage.getItem("callData"));
           callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
@@ -95,6 +95,6 @@ function refreshDriverStatus(isWheel) {
   const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
 
   sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
-  sessionStorage.setItem("normalSeat", wheelSeatUsed);
+  sessionStorage.setItem("normalSeat", normalSeatUsed);
   sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }
