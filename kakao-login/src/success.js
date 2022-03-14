@@ -29,6 +29,7 @@ function KUBUSSignin(response) {
     },
     error: function (jqXHR, textstatus, errorthrown) {
       jqXHR.done(data => {
+        console.log(data);
         if (data.status == "fail") {
           //If user are not regisetered, sign up.
           KUBUSSignup(response);
