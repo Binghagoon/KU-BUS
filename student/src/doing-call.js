@@ -2,7 +2,7 @@ let parse;
 let checkIntervalId;
 const query = queryToObject();
 
-window.onbeforeunload = cancelCall;
+window.onunload = window.onbeforeunload = cancelCall;
 
 $(function () {
   printData(query["fromName"], query["toName"]);
@@ -59,7 +59,7 @@ function checkCall() {
 function successCall() {
   query["status"] = "waiting";
   // To be add argument
-  window.onbeforeunload = () => {};
+  window.onunload = window.onbeforeunload = () => {};
   //alert("예약이 완료되었습니다!");
 
   urlChangeWithQuery("assignment-complete.html", query);

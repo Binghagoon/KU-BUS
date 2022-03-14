@@ -11,7 +11,7 @@ let clicked = 0;
 let checkCallStatusIntervalId = -1;
 
 $(document).ready(function () {
-  window.onbeforeunload = cancelCall;
+  window.onunload = window.onbeforeunload = cancelCall;
 
   startMap(() => {
     studentLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "STUDENT"));
