@@ -82,8 +82,8 @@ function timezoneChange(time) {
 }
 
 function refreshDriverStatus(isWheel) {
-  let normalSeatUsed = sessionStorage.getItem("normalSeat");
-  let wheelSeatUsed = sessionStorage.getItem("wheelSeat");
+  let normalSeatUsed = parseInt(sessionStorage.getItem("normalSeat"));
+  let wheelSeatUsed = parseInt(sessionStorage.getItem("wheelSeat"));
 
   if (isWheel) {
     wheelSeatUsed += 1;

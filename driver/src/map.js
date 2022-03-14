@@ -134,8 +134,8 @@ function refreshHeader() {
 }
 
 function checkSeatLeft(isWheel) {
-  const normalSeatLeft = driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat");
-  const wheelSeatLeft = driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat");
+  const normalSeatLeft = driverSeatMaximum["normal"] - parseInt(sessionStorage.getItem("normalSeat"));
+  const wheelSeatLeft = driverSeatMaximum["wheel"] - parseInt(sessionStorage.getItem("wheelSeat"));
 
   return isWheel ? wheelSeatLeft > 0 : normalSeatLeft > 0;
 }
