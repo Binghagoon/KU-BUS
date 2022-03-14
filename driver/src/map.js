@@ -125,8 +125,8 @@ function printData(data, prefix) {
 function refreshHeader() {
   if (sessionStorage.getItem("driverStatus") !== "full") {
     $("#ex1").html(`콜을 받는 중입니다...(남은자리 
-      일반${driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat")}/
-      휠체어${driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat")})
+      일반${driverSeatMaximum["normal"] - parseInt(sessionStorage.getItem("normalSeat"))}/
+      휠체어${driverSeatMaximum["wheel"] - parseInt(sessionStorage.getItem("wheelSeat"))})
       <br>`);
   } else {
     $("#ex1").html(`자리가 모두 찼습니다.`);
@@ -144,17 +144,14 @@ function removeCall(callNo, message) {
   const callData = JSON.parse(sessionStorage.getItem("callData"));
 
   let isWheel = callData[callNo]["isWheelchairSeat"];
-  let normalSeatUsed = sessionStorage.getItem("normalSeat");
-  let wheelSeatUsed = sessionStorage.getItem("wheelSeat");
+  let normalSeatUsed = parseInt(sessionStorage.getItem("normalSeat"));
+  let wheelSeatUsed = parseInt(sessionStorage.getItem("wheelSeat"));
 
   if (isWheel) {
     wheelSeatUsed -= 1;
   } else {
     normalSeatUsed -= 1;
   }
-
-  const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
-  const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
 
   callData[callNo] = undefined;
 
@@ -164,6 +161,9 @@ function removeCall(callNo, message) {
     sessionStorage.setItem("driverStatus", "working");
   }
   sessionStorage.setItem("callData", JSON.stringify(callData));
+  sessionStorage.setItem("normalSeat", normalSeatUsed);
+  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 
+  refreshHeader();
   alert(`${callNo}번 콜이 취소되었습니다.${message ? "\n" + message : ""}`)
 }
