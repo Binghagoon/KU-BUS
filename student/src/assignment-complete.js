@@ -87,9 +87,9 @@ function checkCallStatus() {
     },
     success: function (data, textStatus, jqXHR) {
       if (data.callStatus == "moving") { // 운행중
-        $("#minute-left").html("<h4>운행중입니다.</h4>");
+        $("#minute-left").html("<p>운행중입니다.</p>");
       } else if (data.callStatus == "finish") { // 운행완료
-        $("#minute-left").html("<h4>운행이 완료되었습니다.</h4>");
+        $("#minute-left").html("<p>운행이 완료되었습니다.</p>");
         window.onbeforeunload = () => {};
         setTimeout(() => {
           window.location.href = "first-page.html";

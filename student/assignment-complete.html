@@ -15,7 +15,7 @@
     />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
-    <link rel="stylesheet" type="text/css" href="css/assignment-complete.css?v=1" />
+    <link rel="stylesheet" type="text/css" href="css/assignment-complete.css?v=2" />
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2481bf8dd089370ad295dd73d94a65a"
@@ -26,21 +26,20 @@
     <script src="../src/map.js?v=1"></script>
     <script src="../src/marker.js?v=1"></script>
     <script src="../src/location.js?v=1"></script>
-    <script src="src/assignment-complete.js?v=2"></script>
+    <script src="src/assignment-complete.js?v=3"></script>
   </head>
   <body>
     <div id="map"></div>
     <div id="after-assigning-driver">
       <div id="real-time-information">
-        <div id="minute-left">
-          <h4>기사님께서 이동 중입니다.<br>함부로 창을 끄지 말아주세요.</h4>
-        </div>
-
         <div id="profile-image"></div>
-
-        <div id="name"></div>
-
-        <div id="car-information"></div>
+        <div id="informs">
+          <div id="minute-left">
+            <h4>기사님께서 이동 중입니다.<br>함부로 창을 끄지 말아주세요.</h4>
+          </div>
+          <div id="name"></div>
+          <div id="car-information"></div>
+        </div>
       </div>
 
       <div id="control">

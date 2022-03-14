@@ -144,14 +144,8 @@ function checkSeatLeft(isWheel) {
 
 function removeCall(callNo, message) {
   const callData = JSON.parse(sessionStorage.getItem("callData"));
-
   callData[callNo] = undefined;
 
-  if (normalSeatUsed + wheelSeatUsed === 0) {
-    sessionStorage.setItem("driverStatus", "waiting");
-  } else {
-    sessionStorage.setItem("driverStatus", "working");
-  }
   sessionStorage.setItem("callData", JSON.stringify(callData));
 
   refreshSeatLeft();
