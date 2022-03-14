@@ -91,8 +91,9 @@ function updateCallStatus(callNo, nextCallStatus) {
       success: function (data, textStatus, jqXHR) {
         if (data.status !== "success") {
           console.error(data.errorMessage);
+          return;
         }
-        callData[data.callNo] = undefined;
+        callData[callNo] = undefined;
         sessionStorage.setItem("callData", JSON.stringify(callData));
       }
     });

@@ -32,7 +32,7 @@ $(document).ready(function () {
       },
       success: function (data, status, xhr) {
         if (data["studentid"]) {
-          refreshDriverStatus(reqData["isWheelchairSeat"]);
+          refreshDriverStatus(reqData["isWheelchairSeat"] > 0);
           let callData = JSON.parse(sessionStorage.getItem("callData"));
           callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
