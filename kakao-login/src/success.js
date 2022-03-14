@@ -28,6 +28,7 @@ function KUBUSSignin(response) {
       username: response.id,
     },
     error: function (jqXHR, textstatus, errorthrown) {
+      console.log(jqXHR);
       jqXHR.done(data => {
         console.log(data);
         if (data.status == "fail") {
