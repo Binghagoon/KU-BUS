@@ -10,6 +10,7 @@ const id = sessionStorage.getItem("kubus_member_id");
 const driverLocation = new UserLocation(id);
 
 let checkWaitingTimeoutId = -1;
+let checkAllocatedIntervalId = {};
 
 window.onbeforeunload = () => {
   if (checkWaitingCallTimeoutId >= 0) {
@@ -44,9 +45,11 @@ $(document).ready(function () {
     
     Object.keys(callData).forEach(element => {
       traceAnother(callData[element]["studentid"], "STUDENT");
+      checkAllocatedIntervalId[element] = setInterval(() => { checkAllocatedCall(element) }, 1000);
     });
   }
 
+  /* unused
   if (debugging) {
     console.log("In debugging mode");
     $("#debugging").show();
@@ -62,8 +65,8 @@ $(document).ready(function () {
       });
     });
   } else {
-    $("#debugging").hide();
-  }
+  } */
+  $("#debugging").hide();
 });
 
 function checkWaitingCall() {
@@ -102,6 +105,7 @@ function checkAllocatedCall(callNo) {
     success: function (data, textStatus, jqxhr) {
       if (data["callStatus"] === "canceled") {
         removeCall(callNo, "사용자가 취소했습니다.");
+        clearInterval(checkAllocatedIntervalId[callNo]);
       }
     }
   })
