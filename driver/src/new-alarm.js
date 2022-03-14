@@ -32,7 +32,6 @@ $(document).ready(function () {
       },
       success: function (data, status, xhr) {
         if (data["studentid"]) {
-          refreshDriverStatus(parseInt(reqData["isWheelchairSeat"]) > 0);
           let callData = JSON.parse(sessionStorage.getItem("callData"));
           callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
@@ -79,22 +78,4 @@ function timezoneChange(time) {
   });
   var newTime = dateString.toString();
   return newTime;
-}
-
-function refreshDriverStatus(isWheel) {
-  let normalSeatUsed = parseInt(sessionStorage.getItem("normalSeat"));
-  let wheelSeatUsed = parseInt(sessionStorage.getItem("wheelSeat"));
-
-  if (isWheel) {
-    wheelSeatUsed += 1;
-  } else {
-    normalSeatUsed += 1;
-  }
-
-  const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
-  const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
-
-  sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
-  sessionStorage.setItem("normalSeat", normalSeatUsed);
-  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }

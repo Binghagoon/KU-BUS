@@ -168,6 +168,10 @@ function refreshSeatLeft() {
     callData[e].isWheelchairSeat ? wheelSeatUsed++ : normalSeatUsed++;
   });
 
+  const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
+  const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
+
+  sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
   sessionStorage.setItem("normalSeat", normalSeatUsed);
   sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }

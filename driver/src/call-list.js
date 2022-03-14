@@ -93,11 +93,6 @@ function updateCallStatus(callNo, nextCallStatus) {
           console.error(data.errorMessage);
           return;
         }
-        const endCall = callData[callNo];
-
-        let seatSetting = endCall.isWheelchairSeat ? "wheelSeat" : "normalSeat";
-        sessionStorage.setItem(seatSetting, parseInt(sessionStorage.getItem(seatSetting)) + 1);
-
         callData[callNo] = undefined;
         sessionStorage.setItem("callData", JSON.stringify(callData));
       }
