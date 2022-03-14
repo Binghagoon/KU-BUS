@@ -23,7 +23,10 @@ function KUBUSSignin(response) {
   $.ajax({
     url: window.location.origin + "/node/sign-in",
     type: "GET",
-    data: response,
+    data: {
+      ...response,
+      username: response.id,
+    },
     error: function (jqXHR, textstatus, errorthrown) {
       alert("Error on sign in");
     },
