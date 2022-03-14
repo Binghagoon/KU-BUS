@@ -9,6 +9,8 @@
   height: 11em;
 
   text-align: center;
+  flex-direction: column;
+  /*div를 가운데 위치로 오게하는 역할*/
 
   display: flex;
   margin: auto;
@@ -30,12 +32,14 @@
 
 #profile-image {
   width: 11em;
+  background: gray;
 }
 
 #real-time-information,
 #cancel-call {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
 
   border: solid gray;
@@ -43,11 +47,11 @@
   height: 85%;
 }
 
-#real-time-information > p {
+#informs > p {
   font-weight: bold;
 }
 
-#real-time-information > div {
+#informs > div {
   width: fit-content;
   /*height: 55px;
   padding: 5px 10px;*/
