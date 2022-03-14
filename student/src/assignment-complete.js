@@ -88,6 +88,7 @@ function checkCallStatus() {
         $("#minute-left").html("<h4>운행중입니다.</h4>");
       } else if (data.callStatus == "finish") { // 운행완료
         $("#minute-left").html("<h4>운행이 완료되었습니다.</h4>");
+        window.onbeforeunload = () => {};
         setTimeout(() => {
           window.location.href = "first-page.html";
         }, 5000);

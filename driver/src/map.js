@@ -34,6 +34,7 @@ $(document).ready(function () {
     sessionStorage.setItem("callData", JSON.stringify({}));
   }
 
+  refreshSeatLeft();
   refreshHeader();
 
   if (sessionStorage.getItem("driverStatus") !== "full") {
@@ -144,16 +145,6 @@ function checkSeatLeft(isWheel) {
 function removeCall(callNo, message) {
   const callData = JSON.parse(sessionStorage.getItem("callData"));
 
-  let isWheel = callData[callNo]["isWheelchairSeat"];
-  let normalSeatUsed = parseInt(sessionStorage.getItem("normalSeat"));
-  let wheelSeatUsed = parseInt(sessionStorage.getItem("wheelSeat"));
-
-  if (isWheel) {
-    wheelSeatUsed -= 1;
-  } else {
-    normalSeatUsed -= 1;
-  }
-
   callData[callNo] = undefined;
 
   if (normalSeatUsed + wheelSeatUsed === 0) {
@@ -162,9 +153,21 @@ function removeCall(callNo, message) {
     sessionStorage.setItem("driverStatus", "working");
   }
   sessionStorage.setItem("callData", JSON.stringify(callData));
-  sessionStorage.setItem("normalSeat", normalSeatUsed);
-  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 
+  refreshSeatLeft();
   refreshHeader();
   alert(`${callNo}번 콜이 취소되었습니다.${message ? "\n" + message : ""}`)
+}
+
+function refreshSeatLeft() {
+  const callData = JSON.parse(sessionStorage.getItem("callData"));
+  let normalSeatUsed = 0;
+  let wheelSeatUsed = 0;
+
+  Object.keys(callData).forEach(e => {
+    callData[e].isWheelchairSeat ? wheelSeatUsed++ : normalSeatUsed++;
+  });
+
+  sessionStorage.setItem("normalSeat", normalSeatUsed);
+  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }
