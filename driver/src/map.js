@@ -12,7 +12,8 @@ const driverLocation = new UserLocation(id);
 let checkWaitingTimeoutId = -1;
 let checkAllocatedIntervalId = {};
 
-window.onunload = window.onbeforeunload = () => {
+window.onbeforeunload = (e) => {
+  e.preventDefault();
   if (checkWaitingCallTimeoutId >= 0) {
     clearTimeout(checkWaitingCallTimeoutId);
   }

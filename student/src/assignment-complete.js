@@ -11,7 +11,7 @@ let clicked = 0;
 let checkCallStatusIntervalId = -1;
 
 $(document).ready(function () {
-  window.onunload = window.onbeforeunload = cancelCall;
+  window.onbeforeunload = cancelCall;
 
   startMap(() => {
     studentLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "STUDENT"));
@@ -29,7 +29,8 @@ $(document).ready(function () {
   });
 });
 
-function cancelCall() {
+function cancelCall(e) {
+  e.preventDefault();
   $.ajax({
     url: "/node/call-cancel",
     type: "POST",

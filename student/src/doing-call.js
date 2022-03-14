@@ -2,7 +2,7 @@ let parse;
 let checkIntervalId;
 const query = queryToObject();
 
-window.onunload = window.onbeforeunload = cancelCall;
+window.onbeforeunload = cancelCall;
 
 $(function () {
   printData(query["fromName"], query["toName"]);
@@ -59,14 +59,15 @@ function checkCall() {
 function successCall() {
   query["status"] = "waiting";
   // To be add argument
-  window.onunload = window.onbeforeunload = () => {};
+  window.onbeforeunload = () => {};
   //alert("예약이 완료되었습니다!");
 
   urlChangeWithQuery("assignment-complete.html", query);
 }
 
 // first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
-function cancelCall() {
+function cancelCall(e) {
+  e.preventDefault();
   if (sessionStorage.getItem("debugging") === "true") {
     window.location.href = "first-page.html";
   }
