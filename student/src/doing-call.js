@@ -65,7 +65,6 @@ function successCall() {
   urlChangeWithQuery("assignment-complete.html", query);
 }
 
-// first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
 function cancelCall(e) {
   e.preventDefault();
   if (sessionStorage.getItem("debugging") === "true") {
@@ -83,6 +82,9 @@ function cancelCall(e) {
     },
     success: function (data, textStatus, jqXHR) {
       console.log("Move to first page");
+      clearInterval(checkIntervalId);
+      window.onbeforeunload = () => {};
+      alert("취소가 완료되었습니다.");
       window.location.href = "first-page.html";
     },
   });
