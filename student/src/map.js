@@ -52,9 +52,9 @@ function prefixModify() {
 function goToCallConfirm() {
   var query = {
     fromName: from.name,
-    fromNo: from.no,
+    fromNo: from.id,
     toName: to.name,
-    toNo: to.no,
+    toNo: to.id,
     isWheelchairSeat: isWheelchairSeat,
   };
   urlChangeWithQuery("call-confirm.html", query);
