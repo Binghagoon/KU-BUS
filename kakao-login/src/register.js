@@ -14,10 +14,11 @@ function register() {
       alert("Error on sign up");
     },
     success: function (data, status, xhr) {
-      console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
-      window.location.href = window.location.origin + "/kakao-login/login.html";
     },
   });
+  
+  console.log("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
+  window.location.href = window.location.origin + "/kakao-login/login.html";
 }
 $(document).ready(function () {
   sp = new URLSearchParams(window.location.search);
