@@ -31,7 +31,8 @@
 }
 
 #profile-image {
-  width: 11em;
+  width: 10em;
+  height: 10em;
   background: gray;
 }
 

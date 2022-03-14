@@ -23,7 +23,7 @@ $(() => {
           id: sessionStorage.getItem("kubus_member_id"),
           departureNo: query.fromNo,
           arrivalNo: query.toNo,
-          isWheelchairSeat: query.isWheelchairSeat ? 1 : 0,
+          isWheelchairSeat: query.isWheelchairSeat === "true" ? 1 : 0,
         },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("failed to call");
