@@ -4,7 +4,7 @@ function register() {
   data["username"] = sp.get("id");
   data["realname"] = $("#user-name").val();
   data["email"] = $("#user-email-address").val();
-  data["mp"] = $("#user-phone-number").val();
+  data["phone"] = $("#user-phone-number").val();
   $.ajax({
     url: window.location.origin + "/node/sign-up",
     type: "POST",
