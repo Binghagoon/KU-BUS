@@ -11,10 +11,10 @@ function register() {
     data: data,
     error: function (jqXHR, textstatus, errorthrown) {
       console.log("Error Sign up, " + textstatus);
-      alert("Error on sign up");
+      alert("회원가입이 실패했습니다. 관리자에게 문의해주세요.");
     },
     success: function (data, status, xhr) {
-      alert("회원가입이 완료 되었습니다. 승인 후 로그인 해주세요");
+      alert("회원가입이 완료 되었습니다. 관리자의 승인 후 로그인 해주세요");
     },
     complete: function (jqXHR, textStatus) {
       window.location.href = window.location.origin + "/kakao-login/login.html";
