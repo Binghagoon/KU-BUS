@@ -1,6 +1,6 @@
 const _version = "v1";
-const cacheName = "v2";
-const cacheList = ["/kubus.webmanifest"];
+const cacheName = "v1";
+const cacheList = ["/manifest.json"];
 
 const enableLog = false;
 

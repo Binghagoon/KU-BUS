@@ -4,14 +4,20 @@
     "description": "KoreaUniv. Moving Assist for Disabled",
     "icons": [
         {
-            "src": "korea-univ-logo/emblem/emblem_01.png",
+            "src": "korea-univ-logo/pwa/emblem_01.png",
             "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "korea-univ-logo/pwa/emblem_01_192.png",
+            "sizes": "192x192",
             "type": "image/png"
         }
     ],
     "start_url": "/kakao-login/login.html",
-    "display": "fullscreen",
+    "display": "standalone",
     "theme_color": "white",
     "background_color": "white",
+    "orientation": "portrait",
     "scope": "/"
 }

@@ -24,10 +24,12 @@ function register() {
 }
 $(document).ready(function () {
   sp = new URLSearchParams(window.location.search);
-  $("#submit").click(function () {
+  $("#submit").click(function (e) {
+    e.preventDefault();
     register();
   });
-  $("#cancel").click(function () {
+  $("#cancel").click(function (e) {
+    e.preventDefault();
     window.location.href = "/kakao-login/login.html";
   });
 });
