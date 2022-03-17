@@ -15,13 +15,23 @@ $(document).ready(function () {
     })
   );
 
+  // Checks if should display install popup notification in ios:
+  if (isIos() && !isInStandaloneMode()) {
+    let topHelpBanner = $("#ios-pwa-help");
+    topHelpBanner.css("display", "block");
+    $("#ios-pwa-help-closeBtn").on("click", e => {
+      e.preventDefault();
+      topHelpBanner.css("display", "none");
+    })
+  }
+
   /// PWA button actions
   let deferredPrompt;
   const addBtn = $("#installpwa");
-  addBtn.css("display", "none");
 
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
+    if (isInStandaloneMode()) return;
     deferredPrompt = e;
     addBtn.css("display", "inline-block");
 
@@ -39,3 +49,14 @@ $(document).ready(function () {
     });
   });
 });
+
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+// Detects if device is on iOS 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent ) ||
+  ((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) &&
+  !window.MSStream);
+}

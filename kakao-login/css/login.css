@@ -60,3 +60,24 @@
   display: block;
   margin: auto;
 }
+
+#ios-pwa-help {
+  position: absolute;
+  bottom: 1em;
+  right: 10%;
+  left: 10%;
+  background: #ccc2a37a;
+  padding: 3px;
+  font-size: small;
+  border-radius: 10px;
+}
+
+#ios-pwa-help > #ios-pwa-help-closeBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 0.2em;
+  font-size: small;
+  background: #ccc2a3;
+  border-radius: 5px;
+}
