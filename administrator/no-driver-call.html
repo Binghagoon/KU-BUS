@@ -58,11 +58,10 @@
     <section class="u-align-center u-clearfix u-section-1" id="sec-0075">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-form u-form-1">
-          <form action="#" method="POST" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px" source="email">
+          <form class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px">
             <div class="u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style"><span class="u-file-icon u-icon"><img src="images/560463.png" alt=""></span>&nbsp;가져오기<br>
+              <a id="refreshBtn" class="u-btn u-btn-submit u-button-style"><span class="u-file-icon u-icon"><img src="images/560463.png" alt=""></span>&nbsp;가져오기<br>
               </a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
             <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
             <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
@@ -92,8 +91,8 @@
                 <th class="u-border-1 u-border-grey-50 u-table-cell">arr</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
-              <tr style="height: 75px;">
+            <tbody id="call-list-body" class="u-table-body">
+              <tr style="height: 76px;">
                 <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">0</td>
                 <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">03/18 17:25</td>
                 <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">STUDENT</td>
@@ -141,5 +140,51 @@
         <span>Live HTML editor</span>
       </a>. 
     </section>
+    <script>
+      $(function() {
+        const listBody = $("#call-list-body");
+
+        $("#refreshBtn").on("click", e => {
+          e.preventDefault();
+          refreshNoDriverCallList();
+        });
+
+        function refreshNoDriverCallList() {
+          $.ajax({
+            url: "/node/no-driver-call",
+            type: "GET",
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error(errorThrown + " " + textStatus)
+              alert(errorThrown + " " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+              listBody.html("");
+              data.forEach(element => {
+                listBody.append(createListElement(
+                  element.callNo, element.time, element.studentName, element.isWheelchairSeat, element.studentid, element.departure, element.arrival,
+                  element
+                ));
+              });
+            }
+          })
+        }
+
+        function createListElement(callNo, time, studentName, isWheelchair, studentid, dep, arr, fulljson) {
+          return $(`
+            <tr style="height: 76px;">
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${callNo}</td>
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${(new Date(time)).toString()}</td>
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${studentName}</td>
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${parseInt(isWheelchair) > 0}</td>
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${studentid}</td>
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${dep}</td>
+              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${arr}</td>
+            </tr>
+          `).on("click", () => {
+            alert(JSON.stringify(fulljson, null, 2));
+          })
+        };
+      })
+    </script>
   </body>
 </html>

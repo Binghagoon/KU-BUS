@@ -186,7 +186,7 @@
               <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">${email}</td>
             </tr>
           `).on("click", () => {
-            alert(fulljson.toString());
+            alert((JSON.stringify(fulljson, null, 2)));
           })
         };
       })
