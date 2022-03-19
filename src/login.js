@@ -10,7 +10,7 @@ const firstPage = {
   undefined: "/student/first-page.html",
   STUDENT: "/student/first-page.html",
   DRIVER: "/driver/map.html",
-  ADMINISTRATOR: "/administrator/first-page.html",
+  ADMINISTRATOR: "/administrator/front-page.html",
 };
 
 function IDSubmit(id, pw) {
