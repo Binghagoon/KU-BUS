@@ -14,6 +14,10 @@ $(document).ready(function () {
       alert("카카오 로그아웃에 성공했습니다.");
     })
   );
+  $("#give-token").click(function () {
+    sessionStorage.setItem("give-token","1");
+    $("#give-token").html("O");
+  });
 
   // Checks if should display install popup notification in ios:
   if (isIos() && !isInStandaloneMode()) {
