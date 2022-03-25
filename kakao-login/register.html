@@ -18,16 +18,16 @@
     <link rel="stylesheet" type="text/css" href="../css/header.css" />
     <link rel="stylesheet" type="text/css" href="css/register.css" />
     <script src="../src/jquery.js"></script>
-    <script src="src/register.js"></script>
+    <script src="src/register.js?v=2"></script>
   </head>
   <body>
     <div id="header">회원 가입</div>
     <div id="container">
-      <form id="details" action="">
+      <div id="details">
         <fieldset>
           <legend>세부 정보 입력란</legend>
           <div>
-            <label for="user-name">사용자명:</label>
+            <label for="user-name">이름:</label>
             <input
               type="text"
               id="user-name"
@@ -55,11 +55,11 @@
             />
           </div>
           <div id="button-container">
-            <button type="submit" id="submit">가입</button>
-            <button type="cancel" id="cancel">뒤로 가기</button>
+            <button id="submit">가입</button>
+            <button id="cancel">뒤로 가기</button>
           </div>
         </fieldset>
-      </form>
+      </div>
     </div>
   </body>
 </html>

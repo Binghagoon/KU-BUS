@@ -5,6 +5,7 @@ const driverSeatMaximum = {
   "wheel": 1 // 휠체어좌석
 };
 const reqData = queryToObject();
+reqData["isWheelchairSeat"] = parseInt(reqData["isWheelchairSeat"]);
 
 $(document).ready(function () {
   //printData("asdf", "2021-09-20", "아산이학관", "하나스퀘어");
@@ -32,10 +33,10 @@ $(document).ready(function () {
       },
       success: function (data, status, xhr) {
         if (data["studentid"]) {
-          refreshDriverStatus(reqData["isWheelchairSeat"]);
           let callData = JSON.parse(sessionStorage.getItem("callData"));
           callData[reqData["callNo"]] = {
             callNo: reqData["callNo"],
+            callStatus: "allocated",
             studentid: data["studentid"],
             departure: reqData["departure"],
             arrival: reqData["arrival"],
@@ -78,22 +79,4 @@ function timezoneChange(time) {
   });
   var newTime = dateString.toString();
   return newTime;
-}
-
-function refreshDriverStatus(isWheel) {
-  let normalSeatUsed = sessionStorage.getItem("normalSeat");
-  let wheelSeatUsed = sessionStorage.getItem("wheelSeat");
-
-  if (isWheel) {
-    wheelSeatUsed += 1;
-  } else {
-    normalSeatUsed += 1;
-  }
-
-  const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
-  const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
-
-  sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
-  sessionStorage.setItem("normalSeat", wheelSeatUsed);
-  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }

@@ -10,7 +10,7 @@ const firstPage = {
   undefined: "/student/first-page.html",
   STUDENT: "/student/first-page.html",
   DRIVER: "/driver/map.html",
-  ADMINISTRATOR: "/administrator/first-page.html",
+  ADMINISTRATOR: "/administrator/front-page.html",
 };
 
 function IDSubmit(id, pw) {
@@ -61,7 +61,7 @@ function SigninAfter(data) {
   console.log(data);
 
   sessionStorage.clear();
-  sessionStorage.setItem("kubus_member_id", data["no"]);
+  sessionStorage.setItem("kubus_member_id", data["id"]);
   sessionStorage.setItem("kubus_member_name", data["name"]);
   sessionStorage.setItem("kubus_member_role", data["role"]); // "DRIVER" || "STUDENT"
   sessionStorage.setItem("debugging", debugging);

@@ -34,15 +34,19 @@ function checkCall() {
         alert("failed on check reservation");
       },
       success: function (data, status, xhr) {
-        if (data == undefined) return;
-        if (data.callSuccess != false) {
-          if (data.callSuccess) {
-            query["driverid"] = data.driverID;
+        if (data["status"] && data["status"] == "error") {
+          cancelCall();
+          console.error(data["message"]) + " on " + query["callNo"];
+          alert("배차에 실패했습니다. 잠시 후 다시 시도해주세요.");
+          return;
+        }
+        if (data["callStatus"]) {
+          if (data["callSuccess"] && data["driverid"]) {
+            query["driverid"] = data["driverid"];
             clearInterval(checkIntervalId);
             successCall();
           } else {
-            alert("배차에 실패했습니다. 잠시 후 다시 시도해주세요.");
-            cancelCall();
+            return;
           }
         }
       },
@@ -61,8 +65,8 @@ function successCall() {
   urlChangeWithQuery("assignment-complete.html", query);
 }
 
-// first-page에서 쓰는 query들을 다시 가져와야되는데 이건 어카지
-function cancelCall() {
+function cancelCall(e) {
+  e.preventDefault();
   if (sessionStorage.getItem("debugging") === "true") {
     window.location.href = "first-page.html";
   }
@@ -78,6 +82,9 @@ function cancelCall() {
     },
     success: function (data, textStatus, jqXHR) {
       console.log("Move to first page");
+      clearInterval(checkIntervalId);
+      window.onbeforeunload = () => {};
+      alert("취소가 완료되었습니다.");
       window.location.href = "first-page.html";
     },
   });

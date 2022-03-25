@@ -1,49 +1,41 @@
-// SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
 Kakao.init("d2481bf8dd089370ad295dd73d94a65a");
+
 let debugging;
 sessionStorage.removeItem("give-token");
+
 $(document).ready(function () {
-  $("#embed-login").click(function () {
-    console.log("goto embed login");
-    window.location.href = "../login-page.html";
-  });
-  $("#debug").click(function () {
-    debugging = !debugging;
-    if (debugging) {
-      $("#debug").html("Debugging");
-      $("#class").show();
-      $("#give-token").show();
-    } else {
-      $("#debug").html("Not Debugging");
-      $("#class").hide();
-      $("#give-token").hide();
-    }
-  });
-  $("#logout").click(() =>
-    Kakao.Auth.logout(function () {
-      alert("logout");
-    })
-  );
-  $("#class").click(function () {
-    isStudent = !isStudent;
-    $("#class").html(isStudent ? "학생" : "기사");
-  });
-  $("#give-token").click(function () {
-    sessionStorage.setItem("give-token","1");
-    $("#give-token").html("O");
-  });
   $("#login-with-kakao").click(function () {
     Kakao.Auth.authorize({
       redirectUri: window.location.origin + "/kakao-login/auth.html",
     });
   });
+  $("#logout").click(() =>
+    Kakao.Auth.logout(function () {
+      alert("카카오 로그아웃에 성공했습니다.");
+    })
+  );
+  $("#give-token").click(function () {
+    sessionStorage.setItem("give-token","1");
+    $("#give-token").html("O");
+  });
 
+  // Checks if should display install popup notification in ios:
+  if (isIos() && !isInStandaloneMode()) {
+    let topHelpBanner = $("#ios-pwa-help");
+    topHelpBanner.css("display", "block");
+    $("#ios-pwa-help-closeBtn").on("click", e => {
+      e.preventDefault();
+      topHelpBanner.css("display", "none");
+    })
+  }
+
+  /// PWA button actions
   let deferredPrompt;
   const addBtn = $("#installpwa");
-  addBtn.css("display", "none");
 
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
+    if (isInStandaloneMode()) return;
     deferredPrompt = e;
     addBtn.css("display", "inline-block");
 
@@ -61,3 +53,14 @@ $(document).ready(function () {
     });
   });
 });
+
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+// Detects if device is on iOS 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent ) ||
+  ((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) &&
+  !window.MSStream);
+}

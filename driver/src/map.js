@@ -10,12 +10,16 @@ const id = sessionStorage.getItem("kubus_member_id");
 const driverLocation = new UserLocation(id);
 
 let checkWaitingTimeoutId = -1;
+let checkAllocatedIntervalId = {};
 
-window.onbeforeunload = () => {
+window.onbeforeunload = (e) => {
+  e.preventDefault();
   if (checkWaitingCallTimeoutId >= 0) {
     clearTimeout(checkWaitingCallTimeoutId);
   }
 };
+
+let importantErrorMsg = "";
 
 $(document).ready(function () {
   if (sessionStorage.getItem("ignoreList") == null)
@@ -32,6 +36,7 @@ $(document).ready(function () {
     sessionStorage.setItem("callData", JSON.stringify({}));
   }
 
+  refreshSeatLeft();
   refreshHeader();
 
   if (sessionStorage.getItem("driverStatus") !== "full") {
@@ -44,9 +49,11 @@ $(document).ready(function () {
     
     Object.keys(callData).forEach(element => {
       traceAnother(callData[element]["studentid"], "STUDENT");
+      checkAllocatedIntervalId[element] = setInterval(() => { checkAllocatedCall(element) }, 1000);
     });
   }
 
+  /* unused
   if (debugging) {
     console.log("In debugging mode");
     $("#debugging").show();
@@ -62,8 +69,8 @@ $(document).ready(function () {
       });
     });
   } else {
-    $("#debugging").hide();
-  }
+  } */
+  $("#debugging").hide();
 });
 
 function checkWaitingCall() {
@@ -72,6 +79,7 @@ function checkWaitingCall() {
     type: "GET",
     error: function (jqxhr, textStatus, errorThrown) {
       console.log("Call Get Error");
+      importantErrorMsg = "호출을 받는데 에러가 발생했습니다. 관리자에게 문의해주세요.";
     },
     success: function (data, textStatus, jqxhr) {
       for(const val of data){
@@ -80,7 +88,7 @@ function checkWaitingCall() {
           continue;
         }
         console.log("Move to new-alarm");
-        if (checkSeatLeft(val["isWheelchairSeat"] > 0)) {
+        if (checkSeatLeft(parseInt(val["isWheelchairSeat"]) > 0)) {
           urlChangeWithQuery("new-alarm.html", val);
         }
       }
@@ -102,6 +110,7 @@ function checkAllocatedCall(callNo) {
     success: function (data, textStatus, jqxhr) {
       if (data["callStatus"] === "canceled") {
         removeCall(callNo, "사용자가 취소했습니다.");
+        clearInterval(checkAllocatedIntervalId[callNo]);
       }
     }
   })
@@ -119,10 +128,14 @@ function printData(data, prefix) {
 }
 
 function refreshHeader() {
+  if (importantErrorMsg !== "") {
+    $("#ex1").html(importantErrorMsg);
+    return;
+  }
   if (sessionStorage.getItem("driverStatus") !== "full") {
     $("#ex1").html(`콜을 받는 중입니다...(남은자리 
-      일반${driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat")}/
-      휠체어${driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat")})
+      일반${driverSeatMaximum["normal"] - parseInt(sessionStorage.getItem("normalSeat"))}/
+      휠체어${driverSeatMaximum["wheel"] - parseInt(sessionStorage.getItem("wheelSeat"))})
       <br>`);
   } else {
     $("#ex1").html(`자리가 모두 찼습니다.`);
@@ -130,36 +143,36 @@ function refreshHeader() {
 }
 
 function checkSeatLeft(isWheel) {
-  const normalSeatLeft = driverSeatMaximum["normal"] - sessionStorage.getItem("normalSeat");
-  const wheelSeatLeft = driverSeatMaximum["wheel"] - sessionStorage.getItem("wheelSeat");
+  const normalSeatLeft = driverSeatMaximum["normal"] - parseInt(sessionStorage.getItem("normalSeat"));
+  const wheelSeatLeft = driverSeatMaximum["wheel"] - parseInt(sessionStorage.getItem("wheelSeat"));
 
   return isWheel ? wheelSeatLeft > 0 : normalSeatLeft > 0;
 }
 
 function removeCall(callNo, message) {
   const callData = JSON.parse(sessionStorage.getItem("callData"));
+  callData[callNo] = undefined;
 
-  let isWheel = callData[callNo]["isWheelchairSeat"];
-  let normalSeatUsed = sessionStorage.getItem("normalSeat");
-  let wheelSeatUsed = sessionStorage.getItem("wheelSeat");
+  sessionStorage.setItem("callData", JSON.stringify(callData));
 
-  if (isWheel) {
-    wheelSeatUsed -= 1;
-  } else {
-    normalSeatUsed -= 1;
-  }
+  refreshSeatLeft();
+  refreshHeader();
+  alert(`${callNo}번 콜이 취소되었습니다.${message ? "\n" + message : ""}`)
+}
+
+function refreshSeatLeft() {
+  const callData = JSON.parse(sessionStorage.getItem("callData"));
+  let normalSeatUsed = 0;
+  let wheelSeatUsed = 0;
+
+  Object.keys(callData).forEach(e => {
+    callData[e].isWheelchairSeat ? wheelSeatUsed++ : normalSeatUsed++;
+  });
 
   const normalSeatLeft = driverSeatMaximum["normal"] - normalSeatUsed;
   const wheelSeatLeft = driverSeatMaximum["wheel"] - wheelSeatUsed;
 
-  callData[callNo] = undefined;
-
-  if (normalSeatUsed + wheelSeatUsed === 0) {
-    sessionStorage.setItem("driverStatus", "waiting");
-  } else {
-    sessionStorage.setItem("driverStatus", "working");
-  }
-  sessionStorage.setItem("callData", JSON.stringify(callData));
-
-  alert(`${callNo}번 콜이 취소되었습니다.${message ? "\n" + message : ""}`)
+  sessionStorage.setItem("driverStatus", normalSeatLeft <= 0 && wheelSeatLeft <= 0 ? "full" : "working");
+  sessionStorage.setItem("normalSeat", normalSeatUsed);
+  sessionStorage.setItem("wheelSeat", wheelSeatUsed);
 }
