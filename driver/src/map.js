@@ -19,6 +19,8 @@ window.onbeforeunload = (e) => {
   }
 };
 
+let importantErrorMsg = "";
+
 $(document).ready(function () {
   if (sessionStorage.getItem("ignoreList") == null)
     sessionStorage.setItem("ignoreList", "");
@@ -77,6 +79,7 @@ function checkWaitingCall() {
     type: "GET",
     error: function (jqxhr, textStatus, errorThrown) {
       console.log("Call Get Error");
+      importantErrorMsg = "호출을 받는데 에러가 발생했습니다. 관리자에게 문의해주세요.";
     },
     success: function (data, textStatus, jqxhr) {
       for(const val of data){
@@ -125,6 +128,10 @@ function printData(data, prefix) {
 }
 
 function refreshHeader() {
+  if (importantErrorMsg !== "") {
+    $("#ex1").html(importantErrorMsg);
+    return;
+  }
   if (sessionStorage.getItem("driverStatus") !== "full") {
     $("#ex1").html(`콜을 받는 중입니다...(남은자리 
       일반${driverSeatMaximum["normal"] - parseInt(sessionStorage.getItem("normalSeat"))}/
