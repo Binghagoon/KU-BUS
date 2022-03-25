@@ -148,8 +148,10 @@ function mapPinWithRecord(data) {
 
   recordList.forEach(function (value, index) {
     let marker = markerCreate(value, "STAR", value.name, map);
-    kakao.maps.event.addListener(marker, "click", () =>
-      markerClickEvent(value, marker, imageSize)
+    kakao.maps.event.addListener(marker, "click", () => {
+        let imageSize = new kakao.maps.Size(24, 35);
+        markerClickEvent(value, marker, imageSize);
+      }
     );
   });
 }

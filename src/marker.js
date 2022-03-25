@@ -4,7 +4,6 @@ var userMarker = {
 };
 var starMarkerSrc =
   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-var imageSize = new kakao.maps.Size(24, 35);
 //var orderStat = ["from", "to", "reserve"];
 //var statnum = 0;
 var imgChangedMarker = null;
@@ -59,6 +58,7 @@ function markerImageChange(what, marker) {
     what == "star"
       ? starMarkerSrc
       : "https://t1.daumcdn.net/mapjsapi/images/marker.png";
+  var imageSize = new kakao.maps.Size(24, 35);
   marker.setImage(new kakao.maps.MarkerImage(imgsrc, imageSize));
   imgChangedMarker = marker;
 }
