@@ -110,8 +110,12 @@ function getDriverInformation() {
       console.error("Error in get driver inform");
     },
     success: function (data, textStatus, jqXHR) {
-      $("#name").html(data["carid"] + "호차");
+      $("#name").html(data["carId"] + "호차");
       $("#car-information").html(data["license"] + " / " + data["carname"]);
+      $("#make-call > h3").html(data["phoneNumber"]).on("click", (e) => {
+        e.preventDefault();
+        document.location.href = 'tel:' + data["phoneNumber"];
+      });
     }
   });
 }
