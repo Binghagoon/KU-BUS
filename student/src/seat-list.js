@@ -1,10 +1,8 @@
 // import ../src/url-parameter.js
 
 const par = {
-  three: 3,
-  four: 4,
-  five: 5,
-  six: 6,
+  normal: 1,
+  wheel: 2,
 };
 let seatnum = 0;
 let pre = null;
@@ -37,7 +35,7 @@ $(document).ready(function () {
       return;
     }
     urlChangeWithQuery("map.html", {
-      isWheelchairSeat: seatnum === 6,
+      isWheelchairSeat: seatnum > 1,
     });
   });
 });
