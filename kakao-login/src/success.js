@@ -48,7 +48,7 @@ function KUBUSSignin(response) {
 function KUBUSSignup(data) {
   var sp = new URLSearchParams();
   sp.append("id", data["id"]);
-  alert("KUBUS서비스를 처음이용하시는것 같네요! 회원가입을 하셔야 됩니다!");
+  alert("KUBUS서비스를 처음 이용하시는것 같네요! 회원가입을 하셔야 됩니다!");
   window.location.href =
-    window.location.origin + "/kakao-login/register.html?" + sp.toString();
+    window.location.origin + "/kakao-login/agreements.html?" + sp.toString();
 }
