@@ -36,6 +36,10 @@ function createCallBlock(parentEle, data) {
       </table>
     </td>
   </tr>`).appendTo(parentEle);
+  $(`#caller-template=${data.callNo} > #caller-phone-button`).on("click", (e) => {
+    e.preventDefault();
+    window.open('tel:' + data["phoneNumber"]);
+  })
   const rideInBtn = newEle.find("#caller-ridein");
 
   if (callData[data.callNo].callStatus == "allocated") {
