@@ -24,9 +24,7 @@ $(document).ready(function () {
 
   $("#cancel-call").on("click", cancelCall);
   $("#send-message").on("click", function (e) {
-    //for use debug
-    //e.preventDefault();
-    clicked = clicked + 1;
+    alert("미구현입니다.");
   });
 });
 
@@ -110,8 +108,12 @@ function getDriverInformation() {
       console.error("Error in get driver inform");
     },
     success: function (data, textStatus, jqXHR) {
-      $("#name").html(data["carid"] + "호차");
-      $("#car-information").html(data["licence"] + " / " + data["carname"]);
+      $("#name").html(data["carId"] + "호차");
+      $("#car-information").html(data["license"] + " / " + data["carname"]);
+      $("#make-call > h3").html(data["phoneNumber"]).on("click", (e) => {
+        e.preventDefault();
+        document.location.href = 'tel:' + data["phoneNumber"];
+      });
     }
   });
 }
