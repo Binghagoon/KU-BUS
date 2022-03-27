@@ -112,7 +112,7 @@ function getDriverInformation() {
       $("#car-information").html(data["license"] + " / " + data["carname"]);
       $("#make-call > h3").html(data["phoneNumber"]).on("click", (e) => {
         e.preventDefault();
-        document.location.href = 'tel:' + data["phoneNumber"];
+        window.open('tel:' + data["phoneNumber"]);
       });
     }
   });
