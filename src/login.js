@@ -20,7 +20,7 @@ function IDSubmit(id, pw) {
       url: "../node/sign-in",
       type: "GET",
       data: {
-        id: id,
+        username: id,
         pw: pw,
       },
       error: function (jqXHR, textStatus, errorThrown) {
