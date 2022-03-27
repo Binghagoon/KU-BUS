@@ -111,7 +111,7 @@ function getDriverInformation() {
     },
     success: function (data, textStatus, jqXHR) {
       $("#name").html(data["carid"] + "호차");
-      $("#car-information").html(data["licence"] + " / " + data["carname"]);
+      $("#car-information").html(data["license"] + " / " + data["carname"]);
     }
   });
 }

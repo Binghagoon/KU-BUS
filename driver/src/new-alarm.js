@@ -14,7 +14,7 @@ $(document).ready(function () {
     reqData["time"],
     reqData["departure"],
     reqData["arrival"],
-    reqData["name"],
+    reqData["studentName"],
     reqData["phoneNumber"],
     reqData["email"],
     reqData["isWheelchairSeat"] > 0,
@@ -40,7 +40,7 @@ $(document).ready(function () {
             studentid: data["studentid"],
             departure: reqData["departure"],
             arrival: reqData["arrival"],
-            name: reqData["name"],
+            name: reqData["studentName"],
             phoneNumber: reqData["phoneNumber"],
             isWheelchairSeat: reqData["isWheelchairSeat"] > 0,
           }
@@ -68,8 +68,8 @@ function printData(date, dep, arr, name, phone, email, wheel) {
   td[2].append(arr);
   td[3].append(name);
   td[4].append(phone);
-  td[5].append(email);
-  td[6].append(wheel);
+  //td[5].append(email);
+  td[5].append(wheel);
 }
 
 function timezoneChange(time) {
