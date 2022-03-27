@@ -20,7 +20,7 @@ function IDSubmit(id, pw) {
       url: "../node/sign-in",
       type: "GET",
       data: {
-        id: id,
+        username: id,
         pw: pw,
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -62,7 +62,7 @@ function SigninAfter(data) {
 
   sessionStorage.clear();
   sessionStorage.setItem("kubus_member_id", data["id"]);
-  sessionStorage.setItem("kubus_member_name", data["name"]);
+  sessionStorage.setItem("kubus_member_name", data["realname"]);
   sessionStorage.setItem("kubus_member_role", data["role"]); // "DRIVER" || "STUDENT"
   sessionStorage.setItem("debugging", debugging);
 
