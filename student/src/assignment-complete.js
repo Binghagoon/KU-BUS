@@ -24,9 +24,7 @@ $(document).ready(function () {
 
   $("#cancel-call").on("click", cancelCall);
   $("#send-message").on("click", function (e) {
-    //for use debug
-    //e.preventDefault();
-    clicked = clicked + 1;
+    alert("미구현입니다.");
   });
 });
 
