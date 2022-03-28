@@ -8,7 +8,7 @@ $(function () {
 
 function createCallBlock(parentEle, data) {
   const newEle = $(`
-  <tr id="caller-template=${data.callNo}">
+  <tr id="caller-template-${data.callNo}">
     <td id="caller-id">
       <div id="profile-image"></div>
       <div id="call_no">콜 번호: ${data.callNo}</div>
@@ -36,12 +36,12 @@ function createCallBlock(parentEle, data) {
       </table>
     </td>
   </tr>`).appendTo(parentEle);
-  $(`#caller-template=${data.callNo} > #caller-phone-button`).on("click", (e) => {
+  newEle.find("#caller-phone-button").on("click", (e) => {
     e.preventDefault();
     window.open('tel:' + data["phoneNumber"]);
-  })
-  const rideInBtn = newEle.find("#caller-ridein");
+  });
 
+  const rideInBtn = newEle.find("#caller-ridein");
   if (callData[data.callNo].callStatus == "allocated") {
     rideInBtn.html("탑승 완료");
   } else if (callData[data.callNo].callStatus == "moving") {
