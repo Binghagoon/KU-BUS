@@ -15,11 +15,7 @@ window.addEventListener('beforeunload', function (e) {
   return e.returnValue = "현재 콜이 취소됩니다. 정말 나가시겠습니까?";
 }, {capture: true});
 
-document.addEventListener("visibilitychange", function() {
-  if (document.visibilityState === "hidden") {
-    cancelCall();
-  }
-});
+document.addEventListener("unload", cancelCall);
 
 $(document).ready(function () {
   startMap(() => {
