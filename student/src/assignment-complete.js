@@ -10,9 +10,18 @@ let studentID = sessionStorage.getItem("kubus_member_id");
 let clicked = 0;
 let checkCallStatusIntervalId = -1;
 
-$(document).ready(function () {
-  window.onbeforeunload = cancelCall;
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  return e.returnValue = "현재 콜이 취소됩니다. 정말 나가시겠습니까?";
+}, {capture: true});
 
+document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "hidden") {
+    cancelCall();
+  }
+});
+
+$(document).ready(function () {
   startMap(() => {
     studentLocation.awakeInterval(1000, (pos) => pinUpdate(pos, "STUDENT"));
   });
@@ -28,8 +37,7 @@ $(document).ready(function () {
   });
 });
 
-function cancelCall(e) {
-  e.preventDefault();
+function cancelCall() {
   $.ajax({
     url: "/node/call-cancel",
     type: "POST",
