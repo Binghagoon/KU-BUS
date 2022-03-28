@@ -8,7 +8,7 @@ $(function () {
 
 function createCallBlock(parentEle, data) {
   const newEle = $(`
-  <tr id="caller-template=${data.callNo}}">
+  <tr id="caller-template=${data.callNo}">
     <td id="caller-id">
       <div id="profile-image"></div>
       <div id="call_no">콜 번호: ${data.callNo}</div>
