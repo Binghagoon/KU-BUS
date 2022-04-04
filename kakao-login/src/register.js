@@ -30,6 +30,8 @@ $(document).ready(function () {
   });
   $("#cancel").click(function (e) {
     e.preventDefault();
-    window.location.href = "/kakao-login/login.html";
+    if (window.confirm("처음 화면으로 돌아가시겠습니까?")) {
+      window.location.href = "/kakao-login/login.html";
+    }
   });
 });
