@@ -84,3 +84,23 @@
     margin-right: 0;
   }
 }
+
+/* custom fields */
+
+#user-accept-modal {
+  background: #efefef;
+  position: absolute;
+  top: 10%;
+  bottom: 40%;
+  left: 35%;
+  right: 35%;
+  outline: solid black 2px;
+  padding: 20px;
+}
+
+#user-accept-modal-closeBtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: larger;
+}
