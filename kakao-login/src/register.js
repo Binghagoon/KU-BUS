@@ -6,7 +6,7 @@ function register() {
   data["email"] = $("#user-email-address").val();
   data["phone"] = $("#user-phone-number").val();
   $.ajax({
-    url: window.location.origin + "/node/sign-up",
+    url: window.location.origin + "/node/users",
     type: "POST",
     data: data,
     error: function (jqXHR, textstatus, errorthrown) {

@@ -21,7 +21,7 @@ if (Kakao.isInitialized()) {
 
 function KUBUSSignin(response) {
   $.ajax({
-    url: window.location.origin + "/node/sign-in",
+    url: window.location.origin + "/node/auth/users",
     type: "GET",
     data: {
       ...response,
