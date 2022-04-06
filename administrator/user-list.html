@@ -183,12 +183,46 @@
           alert("WIP");
         })
 
+        function acceptUser() {
+          const userid = $("#user-accept-modal-id").val();
+          const usertype = $(':radio[name="usertype"]:checked').val();
+
+          let userData = {
+            type: usertype,
+            id: userid,
+          };
+
+          if (usertype === "STUDENT") {
+            userData.studentNumber = $("#user-accept-modal-firstval").val();
+            userData.major = $("#user-accept-modal-secval").val();
+          } else if (usertype === "DRIVER") {
+            userData.license = $("#user-accept-modal-firstval").val();
+            userData.carname = $("#user-accept-modal-secval").val();
+          } else {
+            alert("invalid user type");
+            return;
+          }
+
+          $.ajax({
+            url: "/node/users/" + userid,
+            type: "PUT",
+            data: userData,
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error(errorThrown + " " + textStatus)
+              alert(errorThrown + " " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+              alert("승인이 완료되었습니다.");
+            }
+          });
+        }
+
         function refreshUserList() {
           $.ajax({
             url: "/node/all-users",
             type: "GET",
             data: {
-              password: $("#getpassword").val()
+              key: $("#getpassword").val()
             },
             error: function (jqXHR, textStatus, errorThrown) {
               console.error(errorThrown + " " + textStatus)
