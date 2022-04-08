@@ -139,6 +139,30 @@
         <span>Website Builder Software</span>
       </a>. 
     </section>
+
+    <section id="user-accept-modal">
+      <div id="user-accept-modal-closeBtn">❌</div>
+
+      <div id="user-accept-modal-header"><h3>유저 승인</h3></div>
+
+      <div id="user-accept-modal-content">
+        <input type="radio" id="user-accept-modal-student" name="usertype" value="STUDENT">
+        <label for="user-accept-modal-student">STUDENT</label><br>
+        <input type="radio" id="user-accept-modal-driver" name="usertype" value="DRIVER">
+        <label for="user-accept-modal-driver">DRIVER</label><br>
+  
+        ID:<br>
+        <input id="user-accept-modal-id" disabled><br>
+        학번 / 차번호:<br>
+        <input id="user-accept-modal-firstval" type="text" name="firstvalue"><br>
+        전공 / 차종:<br>
+        <input id="user-accept-modal-secval" type="text" name="secondvalue"><br>
+  
+        <input type="checkbox" id="user-accept-modal-force" value="true">force?<br>
+
+        <button id="user-accept-modal-submit">승인하기</button>
+      </div>
+    </section>
     <script>
       $(function() {
         const listBody = $("#user-list-body");
@@ -149,12 +173,56 @@
           refreshUserList();
         });
 
+        $("#user-accept-modal").css("display", "none");
+        $("#user-accept-modal-closeBtn").on("click", () => {
+          $("#user-accept-modal").css("display", "none");
+        });
+
+        $("#user-accept-modal-submit").on("click", (e) => {
+          e.preventDefault();
+          alert("WIP");
+        })
+
+        function acceptUser() {
+          const userid = $("#user-accept-modal-id").val();
+          const usertype = $(':radio[name="usertype"]:checked').val();
+
+          let userData = {
+            type: usertype,
+            id: userid,
+          };
+
+          if (usertype === "STUDENT") {
+            userData.studentNumber = $("#user-accept-modal-firstval").val();
+            userData.major = $("#user-accept-modal-secval").val();
+          } else if (usertype === "DRIVER") {
+            userData.license = $("#user-accept-modal-firstval").val();
+            userData.carname = $("#user-accept-modal-secval").val();
+          } else {
+            alert("invalid user type");
+            return;
+          }
+
+          $.ajax({
+            url: "/node/users/" + userid,
+            type: "PUT",
+            data: userData,
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error(errorThrown + " " + textStatus)
+              alert(errorThrown + " " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+              alert("승인이 완료되었습니다.");
+            }
+          });
+        }
+
         function refreshUserList() {
           $.ajax({
             url: "/node/all-users",
             type: "GET",
             data: {
-              password: $("#getpassword").val()
+              key: $("#getpassword").val()
             },
             error: function (jqXHR, textStatus, errorThrown) {
               console.error(errorThrown + " " + textStatus)
@@ -187,6 +255,8 @@
             </tr>
           `).on("click", () => {
             alert((JSON.stringify(fulljson, null, 2)));
+            $("#user-accept-modal").css("display", "block");
+            $("#user-accept-modal-id").val(id);
           })
         };
       })
