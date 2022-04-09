@@ -180,7 +180,7 @@
 
         $("#user-accept-modal-submit").on("click", (e) => {
           e.preventDefault();
-          alert("WIP");
+          acceptUser();
         })
 
         function acceptUser() {
@@ -203,6 +203,8 @@
             return;
           }
 
+          console.log(userData);
+
           $.ajax({
             url: "/node/users/" + userid,
             type: "PUT",
@@ -213,6 +215,7 @@
             },
             success: function (data, textStatus, jqXHR) {
               alert("승인이 완료되었습니다.");
+              $("#user-accept-modal").css("display", "none");
             }
           });
         }
