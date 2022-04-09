@@ -188,7 +188,7 @@
           const usertype = $(':radio[name="usertype"]:checked').val();
 
           let userData = {
-            type: usertype,
+            type: usertype.toLowerCase(),
             id: userid,
           };
 
