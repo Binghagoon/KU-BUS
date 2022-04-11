@@ -20,53 +20,55 @@
     <link rel="stylesheet" type="text/css" href="./css/my-page.css" />
     <script type="text/javascript" src="../src/jquery.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script src="src/my-page.js?v=1"></script>
-    <script src="../src/navigator.js?v=1"></script>
+    <script src="../src/navigator.js"></script>
+    <script src="src/my-page.js"></script>
   </head>
   <body style="text-align: left">
     <div id="header">내정보</div>
+    <div id="content">
     <div class="greeting">
       <span id="name">홍길동 </span>님, 안녕하세요!<br />
-      언제나 감사드립니다:)
-    </div>
-    <div class="backboard">
-      <button class="logout">Logout ></button>
-      <table class="user-department">
-        <tr>
-          <th>학부/학과</th>
-        </tr>
-        <tr>
-          <td id="academic-information">00학부 00학과</td>
-        </tr>
-      </table>
-      <table class="user-student-number">
-        <tr>
-          <th>학번</th>
-        </tr>
-        <tr>
-          <td id="student-number">2022000000</td>
-        </tr>
-      </table>
-      <table class="phone">
-        <tr>
-          <th>연락처(모바일)</th>
-        </tr>
-        <tr>
-          <td id="phone-number">010-0000-0000</td>
-        </tr>
-      </table>
-      <table class="email">
-        <tr>
-          <th>이메일</th>
-        </tr>
-        <tr>
-          <td id="email-address">00@00.00</td>
-        </tr>
-      </table>
-      <ul>
-        <li>이용 내역</li>
-        <li>Application Information</li>
-      </ul>
+        언제나 감사드립니다:)
+      </div>
+      <div class="backboard">
+        <button id="logout" class="logout">Logout ></button>
+        <table class="user-department">
+          <tr>
+            <th>학부/학과</th>
+          </tr>
+          <tr>
+            <td id="academic-information">00학부 00학과</td>
+          </tr>
+        </table>
+        <table class="user-student-number">
+          <tr>
+            <th>학번</th>
+          </tr>
+          <tr>
+            <td id="student-number">2022000000</td>
+          </tr>
+        </table>
+        <table class="phone">
+          <tr>
+            <th>연락처(모바일)</th>
+          </tr>
+          <tr>
+            <td id="phone-number">010-0000-0000</td>
+          </tr>
+        </table>
+        <table class="email">
+          <tr>
+            <th>이메일</th>
+          </tr>
+          <tr>
+            <td id="email-address">00@00.00</td>
+          </tr>
+        </table>
+        <ul>
+          <li>이용 내역</li>
+          <li>Application Information</li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
