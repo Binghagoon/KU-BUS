@@ -1,43 +1,31 @@
-$.ajax({
-  url: "../node/get-user-info",
-  type: "GET",
-  data: {
-    id: localStorage.getItem("kubus-member-id"),
-  },
-  success: function (data) {
-    userInformation(
-      data["realname"],
-      null,
-      null,
-      null,
-      data["phone_number"],
-      data["email"]
-    );
-  },
-  error: function () {
-    alert("Error");
-  },
-});
+$(function() {
+  $.ajax({
+    url: "../node/users/" + sessionStorage.getItem("kubus-member-id"),
+    type: "GET",
+    data: {
+      id: sessionStorage.getItem("kubus-member-id"),
+    },
+    success: function (data) {
+      userInformation(
+        data["realname"],
+        null,
+        data["major"],
+        data["student_number"],
+        data["phone"],
+        data["email"]
+      );
+    },
+    error: function () {
+      alert("Error");
+    },
+  });
 
-$.ajax({
-  url: "../node/get-student-info",
-  type: "GET",
-  data: {
-    id: localStorage.getItem("kubus-member-id"),
-  },
-  success: function (data) {
-    userInformation(
-      null,
-      null,
-      data["major"],
-      data["student_number"],
-      null,
-      null
-    );
-  },
-  error: function () {
-    alert("Error");
-  },
+  $("#logout").on("click", (e) => {
+    e.preventDefault();
+
+    sessionStorage.clear();
+    location.replace("/kakao-login/login.html");
+  });
 });
 
 function userInformation(
@@ -48,10 +36,10 @@ function userInformation(
   userPhoneNumber,
   userEmailAddress
 ) {
-  userName && $("#user-name").prepend(userName);
-  userImage && $("#user-image").append(userImage);
-  userDepartment && $("#user-department").append(userDepartment);
-  userStudentNumber && $("#user-student-number").append(userStudentNumber);
-  userPhoneNumber && $("#user-student-number").append(userPhoneNumber);
-  userEmailAddress && $("#user-email-address").append(userEmailAddress);
+  $("#name").html(userName)
+  //userImage && $("#user-image").append(userImage);
+  $("#academic-information").html(userDepartment);
+  $("#student-number").html(userStudentNumber);
+  $("#phone-number").html(userPhoneNumber);
+  $("#email-address").html(userEmailAddress);
 }
