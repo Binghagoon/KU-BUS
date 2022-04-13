@@ -15,37 +15,49 @@ $(() => {
   );
 
   $("#submit").on("click", () => {
-    if (!(sessionStorage.getItem("debugging") === "true")) {
-      $.ajax({
-        url: "../node/call-request",
-        type: "POST",
-        data: {
-          id: sessionStorage.getItem("kubus_member_id"),
-          departureNo: query.fromNo,
-          arrivalNo: query.toNo,
-          isWheelchairSeat: query.isWheelchairSeat === "true" ? 1 : 0,
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          alert("failed to call");
-          //console.error(`${textStatus}\n${errorThrown}`);
-        },
-        success: function (data, status, xhr) {
-          console.log("move to doing-call.html");
-          urlChangeWithQuery("doing-call.html", {
-            fromName: query.fromName,
-            toName: query.toName,
-            callNo: data.callNo,
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    
+    $.ajax({
+      url: "../node/allow-times/check",
+      type: "GET",
+      data: {
+        minute: minutes,
+      },
+      success: function (timedata) {
+        if (timedata["status"]) {
+          // ajax call request
+          $.ajax({
+            url: "../node/call-request",
+            type: "POST",
+            data: {
+              id: sessionStorage.getItem("kubus_member_id"),
+              departureNo: query.fromNo,
+              arrivalNo: query.toNo,
+              isWheelchairSeat: query.isWheelchairSeat === "true" ? 1 : 0,
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              alert("failed to call");
+              //console.error(`${textStatus}\n${errorThrown}`);
+            },
+            success: function (data, status, xhr) {
+              console.log("move to doing-call.html");
+              urlChangeWithQuery("doing-call.html", {
+                fromName: query.fromName,
+                toName: query.toName,
+                callNo: data.callNo,
+              });
+            },
           });
-        },
-      });
-    } else {
-      console.log("on debugging mode, move to doing-call.html");
-      urlChangeWithQuery("doing-call.html", {
-        fromName: query.fromName,
-        toName: query.toName,
-        callNo: 10,
-      });
-    }
+        } else {
+          alert("콜 가능 시간이 아닙니다.");
+        }
+      },
+      error: function () {
+        alert("Allow time check error");
+      },
+    });
+
     return false;
   });
   $("button#cancel").on("click", () => {
