@@ -1,33 +1,47 @@
-$(document).ready(function () {
-  $("#toggle > input[type='checkbox']").click(function () {
-    $("#condition-message").toggle();
-  });
+$(function() {
   $.ajax({
-    url: "../php/driver-info-sample.php",
-    type: "POST",
+    url: "../node/users/" + sessionStorage.getItem("kubus-member-id"),
+    type: "GET",
     data: {
-      id: id,
+      id: sessionStorage.getItem("kubus-member-id"),
     },
-    error: function (jqXHR, textstatus, errorthrown) {
+    success: function (data) {
+      userInformation(
+        data["realname"],
+        null,
+        data["license"],
+        data["carname"],
+        data["phone"],
+        data["email"],
+        data["carId"]
+      );
+    },
+    error: function () {
       alert("Error");
     },
-    success: function (data, status, xhr) {
-      editProfile(data.name, data.carInfo);
-    },
   });
-  editProfile("장기사", "123가4567 카니발");
+
+  $("#logout").on("click", (e) => {
+    e.preventDefault();
+
+    sessionStorage.clear();
+    location.replace("/kakao-login/login.html");
+  });
 });
 
-// 버튼 클릭 시 연결할 링크는 추후에 결정
-function editProfile(name, carInfo) {
-  $("#car-info").text(carInfo);
-  $("#name").text(name + " 기사님");
-}
-
-function showHistory() {
-  window.open("");
-}
-
-function signOut() {
-  window.open("");
+function userInformation(
+  userName,
+  userImage,
+  license,
+  carname,
+  userPhoneNumber,
+  userEmailAddress,
+  carid
+) {
+  $("#name").html(`${userName} (${carid})`)
+  //userImage && $("#user-image").append(userImage);
+  $("#license").html(license);
+  $("#carname").html(carname);
+  $("#phone-number").html(userPhoneNumber);
+  $("#email-address").html(userEmailAddress);
 }

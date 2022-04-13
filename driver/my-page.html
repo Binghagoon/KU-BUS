@@ -20,23 +20,23 @@
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
     <script src="../src/jquery.js"></script>
     <script src="../src/navigator.js?v=1"></script>
-    <!--<script src="src/my-page.js"></script>-->
+    <script src="./src/my-page.js"></script>
   </head>
 
   <body style="text-align: left">
     <div id="header">내정보</div>
     <div class="greeting">
-      <span class="name">홍길동 </span>님, 안녕하세요!<br />
+      <span id="name" class="name">홍길동 </span>님, 안녕하세요!<br />
       언제나 감사드립니다:)
     </div>
     <div class="backboard">
       <button class="logout">Logout ></button>
       <table class="car_number">
         <tr>
-          <th>호차</th>
+          <th>차종</th>
         </tr>
         <tr>
-          <td>1호차</td>
+          <td id="carname">1호차</td>
         </tr>
       </table>
       <table class="license_number">
@@ -44,7 +44,7 @@
           <th>차량 번호</th>
         </tr>
         <tr>
-          <td>서울05 아2345</td>
+          <td id="license">서울05 아2345</td>
         </tr>
       </table>
       <table class="phone">
@@ -52,7 +52,7 @@
           <th>연락처(모바일)</th>
         </tr>
         <tr>
-          <td>010-0000-0000</td>
+          <td id="phone-number">010-0000-0000</td>
         </tr>
       </table>
       <table class="email">
@@ -60,7 +60,7 @@
           <th>이메일</th>
         </tr>
         <tr>
-          <td>address1004@korea.ac.kr</td>
+          <td id="email-address">address1004@korea.ac.kr</td>
         </tr>
       </table>
       <ul>
