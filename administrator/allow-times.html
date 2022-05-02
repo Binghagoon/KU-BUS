@@ -6,11 +6,10 @@
     <meta name="keywords" content="KU-BUS">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>front-page</title>
+    <title>allow-times</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-    <link rel="stylesheet" href="front-page.css" media="screen">
-    <script src="../src/jquery.js"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<link rel="stylesheet" href="allow-times.css" media="screen">
+<script src="../src/jquery.js"></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.6.5, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -22,7 +21,7 @@
 		"name": ""
 }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="front-page">
+    <meta property="og:title" content="allow-times">
     <meta property="og:type" content="website">
   </head>
   <body class="u-body u-xl-mode"><header class="u-clearfix u-header u-header" id="sec-81c6"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -58,38 +57,39 @@
           </div>
         </nav>
       </div></header>
-    <section class="u-clearfix u-section-1" id="sec-2cd1">
+    <section class="u-align-center u-clearfix u-section-1" id="sec-ef7b">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-large-text u-text u-text-default u-text-variant u-text-1">PC환경에 최적화되어있습니다.</p>
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-align-left u-container-style u-layout-cell u-size-20 u-layout-cell-1">
-                <div class="u-container-layout u-container-layout-1">
-                  <a id="student" href="../student/first-page.html" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-1">학생 역할 해보기<br>
-                  </a>
-                  <a id="driver" href="../driver/map.html" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2">기사 역할 해보기<br>
-                  </a>
-                </div>
-              </div>
-              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-2">
-                <div class="u-container-layout u-container-layout-2">
-                  <a href="user-list.html" data-page-id="137283340" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-3">모든 유저 확인<br>
-                  </a>
-                </div>
-              </div>
-              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-3">
-                <div class="u-container-layout u-valign-top u-container-layout-3">
-                  <a href="no-driver-call.html" data-page-id="235118421" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-4">미할당 콜 확인<br>
-                  </a>
-                  <a href="allow-times.html" data-page-id="52682667" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-5">호출 가능 시간</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a id="logout" href="https://nicepage.me" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-2-light-1 u-palette-2-base u-radius-6 u-btn-6">로그아웃<br>
+        <a id="refreshBtn" class="u-btn u-button-style u-btn-1"><span class="u-file-icon u-icon"><img src="images/5456611.png" alt=""></span>&nbsp;새로고침
         </a>
+        <a id="addBtn" class="u-btn u-button-style u-btn-2"><span class="u-file-icon u-icon"><img src="images/1828925.png" alt=""></span>&nbsp;추가하기 
+        </a>
+        <p class="u-text u-text-default u-text-1">id를 클릭해서 수정/삭제가 가능합니다</p>
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+          <table class="u-table-entity u-table-entity-1">
+            <colgroup>
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+            </colgroup>
+            <thead class="u-black u-table-header u-table-header-1">
+              <tr style="height: 45px;">
+                <th class="u-table-cell">id (구분번호)</th>
+                <th class="u-table-cell">start (시작시간)</th>
+                <th class="u-table-cell">end (종료시간)</th>
+                <th class="u-table-cell">comment (설명)</th>
+              </tr>
+            </thead>
+            <tbody class="u-table-alt-palette-1-light-3 u-table-body">
+              <tr style="height: 65px;">
+                <td class="u-table-cell">구분번호</td>
+                <td class="u-table-cell">시작시간</td>
+                <td class="u-table-cell">종료시간</td>
+                <td class="u-table-cell">설명</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
     
@@ -109,20 +109,8 @@
       </a>. 
     </section>
     <script>
-      $(function () {
-        $("a#student").on("click", function () {
-          sessionStorage.setItem("kubus_member_role", "STUDENT");
-        });
-        $("a#driver").on("click", function () {
-          sessionStorage.setItem("kubus_member_role", "DRIVER");
-        });
-        $("a#logout").click(function () {
-          Kakao.Auth.logout(function () {
-            alert("logout ok\naccess token -> " + Kakao.Auth.getAccessToken());
-          });
-          window.location.href =
-            window.location.origin + "/kakao-login/login.html";
-        });
+      $(function() {
+        console.log("end load");
       })
     </script>
   </body>
