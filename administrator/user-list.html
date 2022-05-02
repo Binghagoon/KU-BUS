@@ -180,6 +180,8 @@
 
         $("#user-accept-modal-submit").on("click", (e) => {
           e.preventDefault();
+          const usertype = $(':radio[name="usertype"]:checked').val();
+          if (typeof usertype != "string") alert("학생 타입을 체크해주세요.");
           acceptUser();
         })
 
@@ -220,6 +222,8 @@
           });
         }
 
+        const sortIndex = [null, "ADMINISTRATOR", "DRIVER", "STUDENT"];
+
         function refreshUserList() {
           $.ajax({
             url: "/node/all-users",
@@ -233,7 +237,7 @@
             },
             success: function (data, textStatus, jqXHR) {
               listBody.html("");
-              userList = data.sort((a, b) => a.id - b.id);
+              userList = data.sort((a, b) => sortIndex.findIndex(a.role) - sortIndex.findIndex(b.role));
             },
             complete: function (jqXHR, textStatus) {
               userList.forEach(element => {
