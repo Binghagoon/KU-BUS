@@ -39,6 +39,7 @@
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="front-page.html" style="padding: 10px 20px;">front-page</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="user-list.html" style="padding: 10px 20px;">user-list</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="no-driver-call.html" style="padding: 10px 20px;">no-driver-call</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="allow-times.html" style="padding: 10px 20px;">allow-times</a>
 </li></ul>
           </div>
           <div class="u-nav-container-collapse">
@@ -48,6 +49,7 @@
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="front-page.html">front-page</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="user-list.html">user-list</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="no-driver-call.html">no-driver-call</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="allow-times.html">allow-times</a>
 </li></ul>
               </div>
             </div>
@@ -180,6 +182,8 @@
 
         $("#user-accept-modal-submit").on("click", (e) => {
           e.preventDefault();
+          const usertype = $(':radio[name="usertype"]:checked').val();
+          if (typeof usertype != "string") alert("학생 타입을 체크해주세요.");
           acceptUser();
         })
 
@@ -220,6 +224,8 @@
           });
         }
 
+        const sortIndex = [null, "ADMINISTRATOR", "DRIVER", "STUDENT"];
+
         function refreshUserList() {
           $.ajax({
             url: "/node/all-users",
@@ -233,7 +239,7 @@
             },
             success: function (data, textStatus, jqXHR) {
               listBody.html("");
-              userList = data.sort((a, b) => a.id - b.id);
+              userList = data.sort((a, b) => sortIndex.findIndex(a.role) - sortIndex.findIndex(b.role));
             },
             complete: function (jqXHR, textStatus) {
               userList.forEach(element => {

@@ -89,7 +89,7 @@
 
 #user-accept-modal {
   background: #efefef;
-  position: absolute;
+  position: fixed;
   top: 10%;
   bottom: 40%;
   left: 35%;
